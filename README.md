@@ -6,3 +6,5 @@ Scripts are organized into the following groups
 - pre-Download for Files _00
 - Data Processing for ERA5 _01
 - Flux Data Merging
+
+*scripts are provided for both python and R.
