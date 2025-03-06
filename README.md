@@ -12,5 +12,14 @@ Scripts are organized into the following groups
 - 01_ERA5_API (use ecmwfr pacakge with df.sitemetadata)
 3. Data Processing for ERA5 _02
 4. Flux Data Merging
+- one function titled Merge_ERA5_FLUX
+  - input variables (character): filename_FLUX, filename_ERA5
+  - input variables (vector of character): varname_FLUX, varname_ERA5
+  - input variables (vector of character): blending_rules
+  - output variables: adding new columns to the FLUX file
+- requirement of these input variables
+  - varname_FLUX and varname_ERA5 should have the same length. These names of the same row should be matched.
+  - blending_rules should have the same length with varname_FLUX and varname_ERA5. users should give rules for each variable.
+  - options for blending_rules: "replace", "lm_ERA5", "lm_FLUX", "lm_ERA5_no_intercept", "lm_FLUX_no_intercept"
 
 *scripts are provided for both python and R.
