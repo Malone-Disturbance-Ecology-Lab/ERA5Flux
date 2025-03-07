@@ -10,8 +10,11 @@ Scripts are organized into the following groups
 - 01_lat_lon_UTC_offset (add UTC offest to df.sitemetadata)
 - 01_point_sample_check (pull land-sea_mask for one day)
 - 01_ERA5_API (use ecmwfr pacakge with df.sitemetadata)
+  
+# ***DATA is Downloaded***
+
 # 3. Data Processing for ERA5 _02
-# 4. Flux Data Merging
+# 4. Flux Data Merging_03
 - one function titled Merge_ERA5_FLUX
   - input variables (character): filename_FLUX, filename_ERA5
   - input variables (vector of character): varname_FLUX, varname_ERA5
