@@ -72,8 +72,8 @@ utc_offset <- function(lat, lon) {
   }
   
   # Get the current time in UTC
-  #time_utc <- now(tz = "UTC")  # No DST
-  time_utc <- as.POSIXct("2025-01-21 12:00:00", tz = "UTC") ## WITH DST
+  time_utc <- now(tz = "UTC")  # No DST
+  #time_utc <- as.POSIXct("2025-06-21 12:00:00", tz = "UTC") ## WITH DST
   print(time_utc)
   
   # Convert UTC time to local time with proper timezone
