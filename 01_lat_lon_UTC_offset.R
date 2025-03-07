@@ -74,20 +74,20 @@ utc_offset <- function(lat, lon) {
   # Get the current time in UTC
   time_utc <- now(tz = "UTC")  # No DST
   #time_utc <- as.POSIXct("2025-06-21 12:00:00", tz = "UTC") ## WITH DST
-  print(time_utc)
+  #print(time_utc)
   
   # Convert UTC time to local time with proper timezone
   local_time_result <- with_tz(time_utc, tzone = timezone)  # Keeps time zone
-  print(local_time_result)
+  #print(local_time_result)
   
   # Check if the current time is in Daylight Saving Time (DST)
   result <- check_DST(lat, lon, local_time_result)
-  print(paste("Is it DST? ", result$is_DST))
-  print(paste("Standard time (if not in DST):", result$standard_time))
+  #print(paste("Is it DST? ", result$is_DST))
+  #print(paste("Standard time (if not in DST):", result$standard_time))
   local_revised <- result$standard_time
   
   conversion <- force_tz(local_revised, "UTC")
-  print(conversion)
+  #print(conversion)
   # Calculate the difference in hours, respecting time zones
   offset_hours <- as.numeric(difftime(conversion, time_utc, units = "hours"))
   
