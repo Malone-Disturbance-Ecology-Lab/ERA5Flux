@@ -10,61 +10,43 @@ import datetime
 import os
 
 
-# Set the API credentials as environment variables
-os.environ['CDSAPI_URL'] = 'https://cds.climate.copernicus.eu/api'
-os.environ['CDSAPI_KEY'] = '0a2b0eec-ed62-4a42-8fb8-83ca726ef382' # get that key from your CDS account 
-# defining save directory does not work for ERA5 data download
-# Initialize CDS API client
-client = cdsapi.Client()
+def fetch_cds_data(area, year_range, month_range, day_range, time_range, output_file):
+    # Set the API credentials as environment variables
+    os.environ['CDSAPI_URL'] = 'https://cds.climate.copernicus.eu/api'
+    os.environ['CDSAPI_KEY'] = '0a2b0eec-ed62-4a42-8fb8-83ca726ef382'  # Replace with your actual CDS API key
+    
+    # Initialize CDS API client
+    client = cdsapi.Client()
+    
+    dataset = "reanalysis-era5-single-levels"
+    request = {
+        "product_type": ["reanalysis"],
+        "variable": [
+            "2m_dewpoint_temperature",
+            "2m_temperature",
+            "surface_solar_radiation_downwards"
+        ],
+        "year": [str(year) for year in range(year_range[0], year_range[1] + 1)],
+        "month": [f"{month:02d}" for month in range(month_range[0], month_range[1] + 1)],
+        "day": [f"{day:02d}" for day in range(day_range[0], day_range[1] + 1)],
+        "time": [f"{hour:02d}:00" for hour in range(time_range[0], time_range[1] + 1)],
+        "data_format": "netcdf",
+        "download_format": "unarchived",
+        "area": area
+    }
+    
+    client.retrieve(dataset, request).download(target=output_file)
+    print(f"Data downloaded successfully to {output_file}")
 
-dataset = "reanalysis-era5-single-levels"
-request = {
-    "product_type": ["reanalysis"],
-    "variable": [
-        "2m_dewpoint_temperature",
-        "2m_temperature",
-        "surface_solar_radiation_downwards"
-    ],
-    "year": [
-        "2004", "2005", "2006",
-        "2007"
-    ],
-    "month": [
-        "01", "02", "03",
-        "04", "05", "06",
-        "07", "08", "09",
-        "10", "11", "12"
-    ],
-    "day": [
-        "01", "02", "03",
-        "04", "05", "06",
-        "07", "08", "09",
-        "10", "11", "12",
-        "13", "14", "15",
-        "16", "17", "18",
-        "19", "20", "21",
-        "22", "23", "24",
-        "25", "26", "27",
-        "28", "29", "30",
-        "31"
-    ],
-    "time": [
-        "00:00", "01:00", "02:00",
-        "03:00", "04:00", "05:00",
-        "06:00", "07:00", "08:00",
-        "09:00", "10:00", "11:00",
-        "12:00", "13:00", "14:00",
-        "15:00", "16:00", "17:00",
-        "18:00", "19:00", "20:00",
-        "21:00", "22:00", "23:00"
-    ],
-    "data_format": "netcdf",
-    "download_format": "unarchived",
-    "area": [25.36, -81.1, 25.35, -81.01]
-}
-
-client = cdsapi.Client()
-client.retrieve(dataset, request).download(target=output_file)
+# Example usage
+fetch_cds_data(
+    area=[25.36, -81.1, 25.35, -81.01], # bigger absolute value of lat and long should come first
+    year_range=(2004, 2007), # range of years
+    month_range=(1, 12), # range of months
+    day_range=(1, 31), # range of days
+    time_range=(0, 23),
+    output_file="output.nc"
+)
 
 
 ##########################################################################################################
