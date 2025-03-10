@@ -9,27 +9,13 @@ import cdsapi
 import datetime
 import os
 
+
 # Set the API credentials as environment variables
 os.environ['CDSAPI_URL'] = 'https://cds.climate.copernicus.eu/api'
 os.environ['CDSAPI_KEY'] = '0a2b0eec-ed62-4a42-8fb8-83ca726ef382' # get that key from your CDS account 
-
-download_dir = "\\corellia.environment.yale.edu\MaloneLab\Research\era5_data"  # Change this to your desired directory
-
-# Ensure the directory exists
-os.makedirs(download_dir, exist_ok=True)
-
-# Define the output file path
-output_file = os.path.join(download_dir, "US-Skr.nc")  # Change the filename if needed
-
+# defining save directory does not work for ERA5 data download
 # Initialize CDS API client
 client = cdsapi.Client()
-
-# Ensure the directory exists
-os.makedirs(download_dir, exist_ok=True)
-
-# Define the output file path
-output_file = os.path.join(download_dir, "US-skr.nc")  # Change the filename if needed
-
 
 dataset = "reanalysis-era5-single-levels"
 request = {
@@ -79,6 +65,7 @@ request = {
 
 client = cdsapi.Client()
 client.retrieve(dataset, request).download(target=output_file)
+
 
 ##########################################################################################################
 
