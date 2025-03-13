@@ -32,7 +32,7 @@ get_land_proportion <- function(nc_file, lat, lon) {
 }
 
 # Example usage
-nc_file <- "/Users/bz294/Documents/Proposals/GPP/Code/ERA5_FLUX/lsm_1279l4_0.1x0.1.grb_v4_unpack.nc"  # Your NetCDF file
+nc_file <- "/Volumes/Malonelab/Research/ERA5_FLUX/Data/lsm_1279l4_0.1x0.1.grb_v4_unpack.nc"  # Your NetCDF file
 latitude <- 25.76   # Example latitude
 longitude <- -80.19 # Example longitude (Miami, FL)
 longitude <- -61 ## somewhere in the ocean
