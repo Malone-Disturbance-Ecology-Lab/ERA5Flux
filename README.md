@@ -15,7 +15,8 @@ Scripts are organized into the following groups
 
 # 3. Data Processing for ERA5 _02
  notes for sam. 
-- please name ERA data timestamp column (valid_time) as "time"
+- please provide the data in CSV file for a point 
+- Name ERA data timestamp column (valid_time) as "time"
 - format of time columne (that include both date and time) is 202001010000  so without any slashes 
 - please provide the data in same units as ameriflux data. Here are the desired solar radiation(ssrd) in wm-2, air temp (t2m) in celsius, precip in mm
 
