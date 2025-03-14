@@ -76,12 +76,43 @@ merge_ERA5_FLUX <- function(filename_FLUX, filename_ERA5,
   }
   # we will use data_ERA5_intp in the following. 
   
+  # Merge the variables using different rules
+  df_merge_ERA5_FLUX <- data_BASE  # Start with base dataset
   
+  for (i in 1:length(varname_FLUX)) {
+    flux_var <- varname_FLUX[i]
+    era_var <- varname_ERA5[i]
+    
+    if (blending_rules == "replace") {
+      df_merge_ERA5_FLUX[[paste0(flux_var, "_replace")]] <- data_ERA5_intp[[era_var]]
+    }
+    
+    if (blending_rules == "lm") {
+      lm_model <- lm(data_ERA5_intp[[era_var]] ~ df_merge_ERA5_FLUX[[flux_var]])
+      df_merge_ERA5_FLUX[[paste0(flux_var, "_lm")]] <- predict(lm_model, newdata = df_merge_ERA5_FLUX)
+    }
+    
+    if (blending_rules == "lm_no_intercept") {
+      lm_no_intercept_model <- lm(data_ERA5_intp[[era_var]] ~ df_merge_ERA5_FLUX[[flux_var]] - 1)
+      df_merge_ERA5_FLUX[[paste0(flux_var, "_lm_no_intercept")]] <- predict(lm_no_intercept_model, newdata = df_merge_ERA5_FLUX)
+    }
+    
+    if (blending_rules == "automatic") {
+      lm_auto <- lm(data_ERA5_intp[[era_var]] ~ df_merge_ERA5_FLUX[[flux_var]])
+      predicted_values <- predict(lm_auto, newdata = df_merge_ERA5_FLUX)
+      filled_values <- ifelse(is.na(df_merge_ERA5_FLUX[[flux_var]]), predicted_values, df_merge_ERA5_FLUX[[flux_var]])
+      df_merge_ERA5_FLUX[[paste0(flux_var, "_automatic")]] <- filled_values
+    }
+  }
   
-  # merge the variables using different rules
-  # rule linear, replacement, 
-  
-  
-  
-  
+  return(df_merge_ERA5_FLUX)
 }
+
+
+
+df_result <- merge_ERA5_FLUX('data_merge/AMF_BR-Sa1_BASE-BADM_5-5.zip',
+                             'data_merge/BR-Sa1_tp_2002_2011.csv',
+                             c('P'),
+                             c('tp'),
+                             "lm")
+print(head(df_result))
