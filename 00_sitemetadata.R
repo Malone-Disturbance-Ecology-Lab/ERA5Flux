@@ -18,9 +18,10 @@ library(tidyverse)
 ##
 rm(list=ls())
 
-setwd('/Volumes/Malonelab/Research/ERA5_FLUX/data_flux')
+## code for mac machines with server mapped to Z drive
+#setwd('/Volumes/Malonelab/Research/ERA5_FLUX/data_flux')
 ## code for windows machines with server mapped to Z drive
-#setwd('z:/Research/ERA5_FLUX/data_flux')
+setwd('z:/Research/ERA5_FLUX/data_flux')
 
 
 manifest.file <- list.files( pattern="requested_files_manifest")
@@ -40,7 +41,7 @@ for(i in 1:length(site_codes)){
   #print(site_codes[i]) 
 
   
-  flux.folder <- dir(".", pattern= site_codes[1])
+  flux.folder <- dir(".", pattern= site_codes[i])
   flux.file <- list.files(path=paste(flux.folder,'/', sep=""), pattern="BASE")
   bif.file <- list.files(path=paste(flux.folder,'/', sep=""), pattern="BIF")
   
