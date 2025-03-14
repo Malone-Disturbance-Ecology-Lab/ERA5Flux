@@ -14,6 +14,10 @@ Scripts are organized into the following groups
 # ***DATA is Downloaded***
 
 # 3. Data Processing for ERA5 _02
+ notes for sam. 
+ a- please name ERA data timestamp column (valid_time) as "time"
+ b- format of time columne (that include both date and time) is 202001010000  so without any slashes 
+
 # 4. Flux Data Merging_03
 - one function titled Merge_ERA5_FLUX
   - input variables (character): filename_FLUX, filename_ERA5
