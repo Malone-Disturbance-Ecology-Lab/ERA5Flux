@@ -5,6 +5,7 @@ Created on Fri Feb 21 14:30:27 2025
 @author: ammara
 """
 
+
 import cdsapi
 import datetime
 import os
@@ -41,7 +42,7 @@ def fetch_cds_data(area, year_range, month_range, day_range, time_range, output_
 # Example usage
 fetch_cds_data(
     area=[25.36, -81.1, 25.35, -81.01], # bigger absolute value of lat and long should come first
-    year_range=(2004, 2007), # range of years
+    year_range=(2004, 2007), # range of years # if you want exact lat long like ameriflux then make your middel lat long as close to ameri as possible 
     month_range=(1, 12), # range of months
     day_range=(1, 31), # range of days
     time_range=(0, 23),

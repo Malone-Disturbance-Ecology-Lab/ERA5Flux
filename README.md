@@ -14,6 +14,16 @@ Scripts are organized into the following groups
 # ***DATA is Downloaded***
 
 # 3. Data Processing for ERA5 _02
+ notes for sam. 
+- please arrange all the data including multiple variables and multiple years about one site into a CSV file, with the file name format: siteID_startYear_endYear_variableName.csv For example, US-Ho1_2001_2020_tp_t2m.csv
+- please name ERA data timestamp column (valid_time) as "time"
+- please use the variable name from ERA5 file to name the variable name (don't change ERA variable name)
+- please find the siteID for each data based on longitude and latitude in the nc file and metadata from step 1. 
+- please provide the data in same units as ameriflux data. Here are the desired unites: solar radiation(ssrd) in wm-2, air temp (t2m) in celsius, precip in mm
+- please convert the time from UTC timezone to local timezone (no daylight saving). You can use the function in the repo from step 1. 
+- please gap-fill the first few rows if the time is shifted afterward, or gap-fill the last few rows if the time is shifted ahead. Please ensure that each csv file starts from the first hour of a year (e.g., 2000-01-01 00:00) and ends with the last hour of a year (e.g., 2020-12-31 23:00). 
+- when outputting csv files, please format the time column (that include both date and time) as numbers such as 202001010000  so without any slashes. 
+
 # 4. Flux Data Merging_03
 - one function titled Merge_ERA5_FLUX
   - input variables (character): filename_FLUX, filename_ERA5
