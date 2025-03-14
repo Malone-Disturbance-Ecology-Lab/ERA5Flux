@@ -53,7 +53,7 @@ merge_ERA5_FLUX <- function(filename_FLUX, filename_ERA5,
   }
   
   # merge the variables using different rules
-  
+  # rule linear, replacement, 
   
   
   
