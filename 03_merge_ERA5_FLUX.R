@@ -9,10 +9,20 @@
 ## the last time step of ERA5. 
 
 #########
+library(librarian)
+shelf('amerifluxr', 'tidyr', 'lubridate')
 
 merge_ERA5_FLUX <- function(filename_FLUX, filename_ERA5,
                             varname_FLUX, varname_ERA5,
                             blending_rules) {
+  
+  ########testing the code
+  filename_FLUX <- 'data_merge/AMF_BR-Sa1_BASE-BADM_5-5.zip'
+  filename_ERA5 <- 'data_merge/BR-Sa1_tp_2002_2011.csv'
+  varname_FLUX <- c('P')
+  varname_ERA5 <- c('tp')
+  blending_rules <- c('replace')
+  #
   #
   if (length(filename_FLUX) > 1 | length(filename_ERA5) > 1) {
     stop('this function works for one site each time.')
@@ -20,7 +30,11 @@ merge_ERA5_FLUX <- function(filename_FLUX, filename_ERA5,
   #
   if (length(varname_FLUX) != length(varname_ERA5)) {
     stop('to-be-merged varname of FLUX should correspond to to-be-merged varname of ERA5')
-  }  
+  } 
+  #
+  # we also need to make sure varname_ERA5 is the same in the climate data center welsite. 
+  
+  
   #
   # read amf
   data_BASE <- amf_read_base(filename_FLUX, parse_timestamp=TRUE, unzip = T)
@@ -31,9 +45,10 @@ merge_ERA5_FLUX <- function(filename_FLUX, filename_ERA5,
   data_ERA5 <- read.csv(filename_ERA5)
   
   # check if variable names are in the data
-  if (! varname_FLUX %in% colnames(data_BASE)) {
-    stop('wrong varnames were given for FLUX data')
-  }
+  # it could be no such variables in the data
+  # if (! varname_FLUX %in% colnames(data_BASE)) {
+  #   stop('wrong varnames were given for FLUX data')
+  # }
   #
   if (! varname_ERA5 %in% colnames(data_ERA5)) {
     stop('wrong varnames were given for ERA5 data')
@@ -42,15 +57,26 @@ merge_ERA5_FLUX <- function(filename_FLUX, filename_ERA5,
   # find the Ameriflux time step
   dt <- as.numeric(difftime(ymd_hm(data_BASE$TIMESTAMP_END[2]), ymd_hm(data_BASE$TIMESTAMP_END[1]), units=c('hours')))
   
+  # convert time column to real time
+  data_ERA5$time <- ymd_hm(data_ERA5$time)
+  
   # interpolate ERA5 to half hourly
   if (dt == 0.5) {
-    data_ERA5_intp <- data.frame(time=seq(data_ERA5$time[1], data_ERA5$time[nrow(data_ERA5)], by = "30 min"))
+    data_ERA5_intp <- data.frame(time=seq(data_ERA5$time[1], data_ERA5$time[nrow(data_ERA5)] + 30*60, by = "30 min"))
     # this is related to variables. 
-    
-    
-    
-    
+    for (i in 1:length(varname_ERA5)) {
+      if (varname_ERA5[i] == 'tp') {
+        data_ERA5_intp[, i+1] <- rep(data_ERA5[, varname_ERA5[i]], each=2)
+      } else {
+        data_ERA5_intp[, i+1] <- approx(data_ERA5$time, data_ERA5[, varname_ERA5[i]], data_ERA5_intp$time, method = "linear")
+      }
+    }
+  } else {
+    data_ERA5_intp <- data_ERA5
   }
+  # we will use data_ERA5_intp in the following. 
+  
+  
   
   # merge the variables using different rules
   # rule linear, replacement, 
