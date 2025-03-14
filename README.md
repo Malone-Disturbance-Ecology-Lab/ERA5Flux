@@ -23,6 +23,6 @@ Scripts are organized into the following groups
 - requirement of these input variables
   - varname_FLUX and varname_ERA5 should have the same length. These names of the same row should be matched.
   - blending_rules should have the same length with varname_FLUX and varname_ERA5. users should give rules for each variable.
-  - options for blending_rules: "replace", "lm_ERA5", "lm_FLUX", "lm_ERA5_no_intercept", "lm_FLUX_no_intercept"
+  - options for blending_rules: "replace", "lm", "lm_no_intercept", "automatic"
 
 *scripts are provided for both python and R.
