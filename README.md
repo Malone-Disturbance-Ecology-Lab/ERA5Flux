@@ -17,7 +17,7 @@ Scripts are organized into the following groups
  notes for sam. 
 - please arrange all the data including multiple variables and multiple years about one site into a CSV file, with the file name format: siteID_startYear_endYear_variableName.csv For example, US-Ho1_2001_2020_tp_t2m.csv
 - please name ERA data timestamp column (valid_time) as "time"
-- please use the variable name from ERA5 file to name the variable name
+- please use the variable name from ERA5 file to name the variable name (don't change ERA variable name)
 - please find the siteID for each data based on longitude and latitude in the nc file and metadata from step 1. 
 - please provide the data in same units as ameriflux data. Here are the desired unites: solar radiation(ssrd) in wm-2, air temp (t2m) in celsius, precip in mm
 - please convert the time from UTC timezone to local timezone (no daylight saving). You can use the function in the repo from step 1. 
