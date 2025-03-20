@@ -21,23 +21,7 @@ varname_ERA5 <- c('ssrd')
 
 
 merge_ERA5_FLUX <- function(filename_FLUX, filename_ERA5,
-                            varname_FLUX, varname_ERA5,
-                            blending_rules) {
-  
-  ########testing the code
-  # filename_FLUX <- 'data_merge/AMF_BR-Sa1_BASE-BADM_5-5.zip'
-  # filename_ERA5 <- 'data_merge/BR-Sa1_tp_2002_2011.csv'
-  # varname_FLUX <- c('P')
-  # varname_ERA5 <- c('tp')
-  # blending_rules <- c('replace')
-  #
-  filename_FLUX <- 'data_merge/AMF_US-EvM_BASE-BADM_2-5.zip'
-  filename_ERA5 <- 'data_merge/US-EvM_ERA_2020_2023_hr.csv'
-  varname_FLUX <- c('TA')
-  varname_ERA5 <- c('t2m')
-  blending_rules <- c('replace')
-  #
-  #
+                            varname_FLUX, varname_ERA5) {
   if (length(filename_FLUX) > 1 | length(filename_ERA5) > 1) {
     stop('This function works for one site each time.')
   }
