@@ -154,7 +154,7 @@ blend_ERA5_FLUX <- function(merged_data, varname_FLUX, varname_ERA5, blending_ru
 
 merg_blend <- blend_ERA5_FLUX(merged_data, varname_FLUX, varname_ERA5, blending_rule)
 
-# I think our final result should be adding more columns to AMF data. 
+# I think our final result should be adding more columns to AMF data, Junna 
 write.csv(merg_blend , "merg_blend.csv", row.names = FALSE)
 
 
