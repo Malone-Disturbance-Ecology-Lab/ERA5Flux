@@ -21,9 +21,6 @@ varname_ERA5 <- c('ssrd')
 
 
 merge_ERA5_FLUX <- function(filename_FLUX, filename_ERA5,
-<<<<<<< HEAD
-                            varname_FLUX, varname_ERA5) {
-=======
                             varname_FLUX, varname_ERA5,
                             blending_rules) {
   
@@ -41,7 +38,6 @@ merge_ERA5_FLUX <- function(filename_FLUX, filename_ERA5,
   blending_rules <- c('replace')
   #
   #
->>>>>>> cd4f00c04b66f6ef2b2962f1ea15156b32c896bd
   if (length(filename_FLUX) > 1 | length(filename_ERA5) > 1) {
     stop('This function works for one site each time.')
   }
