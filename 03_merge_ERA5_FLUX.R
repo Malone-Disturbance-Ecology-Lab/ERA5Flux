@@ -30,7 +30,7 @@ merge_ERA5_FLUX <- function(filename_FLUX, filename_ERA5,
   # Read ERA5 data
   data_ERA5 <- read.csv(filename_ERA5)
   
-  if (!varname_ERA5 %in% colnames(data_ERA5)) {
+  if (any(!varname_ERA5 %in% colnames(data_ERA5))) {
     stop('Wrong varnames were given for ERA5 data')
   }
   
@@ -77,10 +77,10 @@ merge_ERA5_FLUX <- function(filename_FLUX, filename_ERA5,
 }
 
 # Example function call
-filename_FLUX <- "data_merge/AMF_BR-Sa1_BASE-BADM_5-5.zip"   # 'data_merge/AMF_US-EvM_BASE-BADM_2-5.zip'
-filename_ERA5 <- "data_merge/BR-Sa1_tp_2002_2011.csv"        # 'data_merge/US-EvM_ERA_2020_2023_hr.csv'
-varname_FLUX <- "P"   # c('SW_IN')
-varname_ERA5 <- "tp"  # c('ssrd')
+filename_FLUX <- 'data_merge/AMF_US-EvM_BASE-BADM_2-5.zip'   # 'data_merge/AMF_US-EvM_BASE-BADM_2-5.zip', "data_merge/AMF_BR-Sa1_BASE-BADM_5-5.zip"
+filename_ERA5 <- 'data_merge/US-EvM_ERA_2020_2023_hr.csv'    # 'data_merge/US-EvM_ERA_2020_2023_hr.csv', "data_merge/BR-Sa1_tp_2002_2011.csv"
+varname_FLUX <- c('SW_IN', 'TA')  # c('SW_IN'), "P"
+varname_ERA5 <- c('ssrd', 't2m')  # c('ssrd'), "tp"
 blending_rule <- 'replace'
 #
 merged_data <- merge_ERA5_FLUX(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
@@ -95,7 +95,7 @@ blend_ERA5_FLUX <- function(merged_data, varname_FLUX, varname_ERA5, blending_ru
   
   if (blending_rule == "lm") {
     complete_cases <- merged_data[!is.na(merged_data[[varname_FLUX]]) & !is.na(merged_data[[varname_ERA5]]), ]
-    # we may need to switch the variable name here, Junna
+    # we may need to switch the variable name here, Junna. Do we want to have the formula "varname_FLUX ~ varname_ERA5"?
     if (nrow(complete_cases) > 1) {  
       formula_str <- paste(varname_ERA5, "~", varname_FLUX)
       message("Fitting linear model with formula: ", formula_str)
