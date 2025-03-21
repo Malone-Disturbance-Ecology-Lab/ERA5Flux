@@ -96,16 +96,17 @@ blend_ERA5_FLUX <- function(merged_data, varname_FLUX, varname_ERA5, blending_ru
   if (blending_rule == "lm") {
     complete_cases <- merged_data[!is.na(merged_data[[varname_FLUX]]) & !is.na(merged_data[[varname_ERA5]]), ]
     # we may need to switch the variable name here, Junna. Do we want to have the formula "varname_FLUX ~ varname_ERA5"?
+    # ammara: yes we can do that I am fine with it. I just changed it in the code
     if (nrow(complete_cases) > 1) {  
-      formula_str <- paste(varname_ERA5, "~", varname_FLUX)
+      formula_str <- paste(varname_FLUX, "~", varname_ERA5)
       message("Fitting linear model with formula: ", formula_str)
       lm_model <- lm(as.formula(formula_str), data = complete_cases)
-      
+      # ammara I also switched the variable in line below
       merged_data[[paste0(varname_FLUX, "_lm")]] <- predict(lm_model, 
-                                                            newdata = setNames(data.frame(merged_data[[varname_FLUX]]), varname_FLUX))
-      
+                                                            newdata = setNames(data.frame(merged_data[[varname_ERA5]]), varname_ERA5))
+
       merged_data[[paste0(varname_FLUX, "_lm")]][is.na(merged_data[[paste0(varname_FLUX, "_lm")]])] <- 
-        predict(lm_model, newdata = setNames(data.frame(mean(complete_cases[[varname_FLUX]], na.rm = TRUE)), varname_FLUX))
+        predict(lm_model, newdata = setNames(data.frame(mean(complete_cases[[varname_ERA5]], na.rm = TRUE)), varname_ERA5))# ammara made a change here
     } else {
       ## if there is no enough FLUX data to do linear regrassion
       ## Should we use varname_ERA5? because not enough of FLUX data? Junna
@@ -117,18 +118,19 @@ blend_ERA5_FLUX <- function(merged_data, varname_FLUX, varname_ERA5, blending_ru
     complete_cases <- merged_data[!is.na(merged_data[[varname_FLUX]]) & !is.na(merged_data[[varname_ERA5]]), ]
     
     if (nrow(complete_cases) > 1) {  
-      formula_str <- paste(varname_ERA5, "~", varname_FLUX, "+ 0")
+      formula_str <- paste(varname_FLUX, "~", varname_ERA5, "+ 0")
       message("Fitting linear model without intercept with formula: ", formula_str)
       lm_model_no_intercept <- lm(as.formula(formula_str), data = complete_cases)
       
       merged_data[[paste0(varname_FLUX, "_lm_no_intercept")]] <- predict(lm_model_no_intercept, 
-                                                                         newdata = setNames(data.frame(merged_data[[varname_FLUX]]), varname_FLUX))
+                                                                         newdata = setNames(data.frame(merged_data[[varname_ERA5]]), varname_ERA5)) # ammara changed to varname_ERA5
       
       merged_data[[paste0(varname_FLUX, "_lm_no_intercept")]][is.na(merged_data[[paste0(varname_FLUX, "_lm_no_intercept")]])] <- 
-        predict(lm_model_no_intercept, newdata = setNames(data.frame(mean(complete_cases[[varname_FLUX]], na.rm = TRUE)), varname_FLUX))
+        predict(lm_model_no_intercept, newdata = setNames(data.frame(mean(complete_cases[[varname_ERA5]], na.rm = TRUE)), varname_ERA5)) # ammara changed to varname_ERA5
     } else {
-      ## Should we use varname_ERA5? because not enough of FLUX data? Junna
+      ## Should we use varname_ERA5? because not enough of FLUX data? Junna # ammara yes I made that change above
       merged_data[[paste0(varname_FLUX, "_lm_no_intercept")]] <- merged_data[[varname_FLUX]]
+      
     }
   }
   
@@ -140,7 +142,7 @@ blend_ERA5_FLUX <- function(merged_data, varname_FLUX, varname_ERA5, blending_ru
     na_subset[[varname_FLUX]] <- mean_FLUX
     
     if (exists("lm_model")) {  # Ensure lm_model exists
-      predicted_values <- predict(lm_model, newdata = setNames(data.frame(na_subset[[varname_FLUX]]), varname_FLUX))
+      predicted_values <- predict(lm_model, newdata = setNames(data.frame(na_subset[[varname_ERA5]]), varname_ERA5))# ammara changed to varname_ERA5
       merged_data[[paste0(varname_FLUX, "_automatic")]] <- merged_data[[varname_FLUX]]
       merged_data[[paste0(varname_FLUX, "_automatic")]][na_rows] <- predicted_values
     } else {
