@@ -25,7 +25,9 @@ Scripts are organized into the following groups
 - when outputting csv files, please format the time column (that include both date and time) as numbers such as 202001010000  so without any slashes. 
 
 # 4. Flux Data Merging_03
-- one function titled Merge_ERA5_FLUX
+- two functions titled Merge_ERA5_FLUX
+  - 
+- Input variables of the two functions
   - input variables (character): filename_FLUX, filename_ERA5
   - input variables (vector of character): varname_FLUX, varname_ERA5
   - input variables (vector of character): blending_rules
