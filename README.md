@@ -25,14 +25,15 @@ Scripts are organized into the following groups
 - when outputting csv files, please format the time column (that include both date and time) as numbers such as 202001010000  so without any slashes. 
 
 # 4. Flux Data Merging_03
-- two functions titled Merge_ERA5_FLUX
-  - 
+- Two functions titled Merge_ERA5_FLUX
+  - Merge_ERA5_FLUX: do interpolation of ERA5 data to ensure ERA5 and FLUX datasets share the same timestamp.  
+  - Blend_ERA5_FLUX: blending ERA5 and FLUX datasets according to blending rules.
 - Input variables of the two functions
   - input variables (character): filename_FLUX, filename_ERA5
   - input variables (vector of character): varname_FLUX, varname_ERA5
   - input variables (vector of character): blending_rules
   - output variables: adding new columns to the FLUX file
-- requirement of these input variables
+- Requirement of these input variables
   - varname_FLUX and varname_ERA5 should have the same length. These names of the same row should be matched.
   - blending_rules should have the same length with varname_FLUX and varname_ERA5. users should give rules for each variable.
   - options for blending_rules: "replace", "lm", "lm_no_intercept", "automatic"
