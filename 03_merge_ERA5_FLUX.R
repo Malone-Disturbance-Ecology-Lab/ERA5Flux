@@ -48,7 +48,7 @@ merge_ERA5_FLUX <- function(filename_FLUX, filename_ERA5,
       if (varname_ERA5[i] == 'tp') {
         data_ERA5_intp[, i + 1] <- rep(data_ERA5[, varname_ERA5[i]], each = 2)
       } else {
-        data_ERA5_intp[, i + 1] <- approx(data_ERA5$time, data_ERA5[, varname_ERA5[i]], data_ERA5_intp$time, method = "linear")$y
+        data_ERA5_intp[, i + 1] <- approx(data_ERA5$time, data_ERA5[, varname_ERA5[i]], data_ERA5_intp$time, method = "linear", rule=2)$y
       }
       colnames(data_ERA5_intp)[i+1] <- varname_ERA5[i]
     }
@@ -79,8 +79,8 @@ merge_ERA5_FLUX <- function(filename_FLUX, filename_ERA5,
 # Example function call
 filename_FLUX <- 'data_merge/AMF_US-EvM_BASE-BADM_2-5.zip'   # 'data_merge/AMF_US-EvM_BASE-BADM_2-5.zip', "data_merge/AMF_BR-Sa1_BASE-BADM_5-5.zip"
 filename_ERA5 <- 'data_merge/US-EvM_ERA_2020_2023_hr.csv'    # 'data_merge/US-EvM_ERA_2020_2023_hr.csv', "data_merge/BR-Sa1_tp_2002_2011.csv"
-varname_FLUX <- c('SW_IN', 'TA')  # c('SW_IN'), "P"
-varname_ERA5 <- c('ssrd', 't2m')  # c('ssrd'), "tp"
+varname_FLUX <- c('SW_IN', 'TA')  # c('SW_IN', 'TA'), "P"
+varname_ERA5 <- c('ssrd', 't2m')  #c('ssrd', 't2m'), "tp"
 blending_rule <- 'replace'
 #
 merged_data <- merge_ERA5_FLUX(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
