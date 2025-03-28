@@ -25,9 +25,9 @@ Scripts are organized into the following groups
 - when outputting csv files, please format the time column (that include both date and time) as numbers such as 202001010000  so without any slashes. 
 
 # 4. Flux Data Merging_03
-- Two functions
+- Two functions to merge and blend ERA5 and FLUX data
   - 03_01_merge_ERA5_FLUX: do interpolation of ERA5 data to ensure ERA5 and FLUX datasets share the same timestamp.  
-  - 03_02_blend_ERA5_FLUX: blending ERA5 and FLUX datasets according to blending rules.
+  - 03_02_blend_ERA5_FLUX: blend ERA5 and FLUX datasets according to blending rules.
 - Input variables of the two functions
   - input variables (character): filename_FLUX, filename_ERA5
   - input variables (vector of character): varname_FLUX, varname_ERA5
