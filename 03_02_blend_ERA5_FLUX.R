@@ -15,69 +15,102 @@ shelf('amerifluxr', 'tidyr', 'lubridate')
 
 ### apply blending function on merged data 
 blend_ERA5_FLUX <- function(merged_data, varname_FLUX, varname_ERA5, blending_rule) {
-  message("Using columns: ", varname_FLUX, " and ", varname_ERA5)
-  
-  if (blending_rule == "replace") {
-    merged_data[[paste0(varname_FLUX, "_replace")]] <- merged_data[[varname_ERA5]]
-  }
-  
-  if (blending_rule == "lm") {
-    complete_cases <- merged_data[!is.na(merged_data[[varname_FLUX]]) & !is.na(merged_data[[varname_ERA5]]), ]
-    # we may need to switch the variable name here, Junna. Do we want to have the formula "varname_FLUX ~ varname_ERA5"?
-    # ammara: yes we can do that I am fine with it. I just changed it in the code
-    if (nrow(complete_cases) > 1) {  
-      formula_str <- paste(varname_FLUX, "~", varname_ERA5)
-      message("Fitting linear model with formula: ", formula_str)
-      lm_model <- lm(as.formula(formula_str), data = complete_cases)
-      # ammara I also switched the variable in line below
-      merged_data[[paste0(varname_FLUX, "_lm")]] <- predict(lm_model, 
-                                                            newdata = setNames(data.frame(merged_data[[varname_ERA5]]), varname_ERA5))
+  for (i in seq_along(varname_FLUX)) {
+    flux_var <- varname_FLUX[i]
+    era5_var <- varname_ERA5[i]
+    rule <- blending_rule[i]  # Extract corresponding rule for the variable
+    
+    message("Processing: ", flux_var, " using rule: ", rule)
+    
+    # Initialize the new "_f" column with the original flux_var values
+    merged_data[[paste0(flux_var, "_f")]] <- merged_data[[flux_var]]
+    
+    if (rule == "replace") {
+      # Replace the whole flux variable with ERA5 (copy ERA5 values to new column)
+      merged_data[[paste0(flux_var, "_f")]] <- merged_data[[era5_var]]
+    }
+    
+    if (rule == "lm") {
+      # Remove rows with NA in either varname_FLUX or varname_ERA5
+      complete_cases <- merged_data[!is.na(merged_data[[flux_var]]) & !is.na(merged_data[[era5_var]]), ]
       
-      merged_data[[paste0(varname_FLUX, "_lm")]][is.na(merged_data[[paste0(varname_FLUX, "_lm")]])] <- 
-        predict(lm_model, newdata = setNames(data.frame(mean(complete_cases[[varname_ERA5]], na.rm = TRUE)), varname_ERA5))# ammara made a change here
-    } else {
-      ## if there is no enough FLUX data to do linear regrassion
-      ## Should we use varname_ERA5? because not enough of FLUX data? Junna
-      merged_data[[paste0(varname_FLUX, "_lm")]] <- merged_data[[varname_FLUX]]
+      if (nrow(complete_cases) > 1) {  
+        formula_str <- paste(flux_var, "~", era5_var)
+        message("Fitting linear model with formula: ", formula_str)
+        
+        lm_model <- lm(as.formula(formula_str), data = complete_cases)
+        
+        # Only use model predictions to fill missing values in flux_var
+        missing_flux_idx <- which(is.na(merged_data[[flux_var]]))  # Identify all missing flux_var entries
+        
+        if (length(missing_flux_idx) > 0) {
+          # Predict missing flux values based on ERA5 data and fill them
+          predictions <- predict(lm_model, 
+                                 newdata = setNames(data.frame(merged_data[[era5_var]][missing_flux_idx]), era5_var))
+          
+          # Ensure the predictions fill only the missing values in the new "_f" column
+          merged_data[[paste0(flux_var, "_f")]][missing_flux_idx] <- predictions
+        }
+      }
+    }
+    
+    if (rule == "lm_no_intercept") {
+      complete_cases <- merged_data[!is.na(merged_data[[flux_var]]) & !is.na(merged_data[[era5_var]]), ]
+      
+      if (nrow(complete_cases) > 1) {  
+        formula_str <- paste(flux_var, "~", era5_var, "+ 0")  # Linear model without intercept
+        message("Fitting linear model without intercept with formula: ", formula_str)
+        
+        lm_model_no_intercept <- lm(as.formula(formula_str), data = complete_cases)
+        
+        # Only use model predictions to fill missing values in flux_var
+        missing_flux_idx <- which(is.na(merged_data[[flux_var]]))  # Identify all missing flux_var entries
+        
+        if (length(missing_flux_idx) > 0) {
+          # Predict missing flux values based on ERA5 data and fill them
+          predictions <- predict(lm_model_no_intercept, 
+                                 newdata = setNames(data.frame(merged_data[[era5_var]][missing_flux_idx]), era5_var))
+          
+          # Ensure the predictions fill only the missing values in the new "_f" column
+          merged_data[[paste0(flux_var, "_f")]][missing_flux_idx] <- predictions
+        }
+      }
+    }
+    
+    if (rule == "automatic") {
+      total_count <- nrow(merged_data)
+      non_na_count <- sum(!is.na(merged_data[[flux_var]]))
+      
+      if ((non_na_count / total_count) >= 0.5) {
+        # Remove rows with NA in either varname_FLUX or varname_ERA5
+        complete_cases <- merged_data[!is.na(merged_data[[flux_var]]) & !is.na(merged_data[[era5_var]]), ]
+        
+        if (nrow(complete_cases) > 1) {  
+          formula_str <- paste(flux_var, "~", era5_var)
+          message("Fitting linear model with formula: ", formula_str)
+          
+          lm_model <- lm(as.formula(formula_str), data = complete_cases)
+          
+          # Only use model predictions to fill missing values in flux_var
+          missing_flux_idx <- which(is.na(merged_data[[flux_var]]))  # Identify all missing flux_var entries
+          
+          if (length(missing_flux_idx) > 0) {
+            # Predict missing flux values based on ERA5 data and fill them
+            predictions <- predict(lm_model, 
+                                   newdata = setNames(data.frame(merged_data[[era5_var]][missing_flux_idx]), era5_var))
+            
+            # Ensure the predictions fill only the missing values in the new "_f" column
+            merged_data[[paste0(flux_var, "_f")]][missing_flux_idx] <- predictions
+          }
+        }
+      } else {
+        message("More than 50% missing in ", flux_var, ", replacing with ", era5_var)
+        # If more than 50% of FLUX data is missing, replace the entire FLUX variable with ERA5
+        merged_data[[paste0(flux_var, "_f")]] <- merged_data[[era5_var]]
+      }
     }
   }
   
-  if (blending_rule == "lm_no_intercept") {
-    complete_cases <- merged_data[!is.na(merged_data[[varname_FLUX]]) & !is.na(merged_data[[varname_ERA5]]), ]
-    
-    if (nrow(complete_cases) > 1) {  
-      formula_str <- paste(varname_FLUX, "~", varname_ERA5, "+ 0")
-      message("Fitting linear model without intercept with formula: ", formula_str)
-      lm_model_no_intercept <- lm(as.formula(formula_str), data = complete_cases)
-      
-      merged_data[[paste0(varname_FLUX, "_lm_no_intercept")]] <- predict(lm_model_no_intercept, 
-                                                                         newdata = setNames(data.frame(merged_data[[varname_ERA5]]), varname_ERA5)) # ammara changed to varname_ERA5
-      
-      merged_data[[paste0(varname_FLUX, "_lm_no_intercept")]][is.na(merged_data[[paste0(varname_FLUX, "_lm_no_intercept")]])] <- 
-        predict(lm_model_no_intercept, newdata = setNames(data.frame(mean(complete_cases[[varname_ERA5]], na.rm = TRUE)), varname_ERA5)) # ammara changed to varname_ERA5
-    } else {
-      ## Should we use varname_ERA5? because not enough of FLUX data? Junna # ammara yes I made that change above
-      merged_data[[paste0(varname_FLUX, "_lm_no_intercept")]] <- merged_data[[varname_FLUX]]
-      
-    }
-  }
-  
-  if (blending_rule == "automatic") {
-    na_rows <- is.na(merged_data[[varname_FLUX]])
-    mean_FLUX <- mean(merged_data[[varname_FLUX]], na.rm = TRUE)
-    
-    na_subset <- merged_data[na_rows, ]
-    na_subset[[varname_FLUX]] <- mean_FLUX
-    
-    if (exists("lm_model")) {  # Ensure lm_model exists
-      predicted_values <- predict(lm_model, newdata = setNames(data.frame(na_subset[[varname_ERA5]]), varname_ERA5))# ammara changed to varname_ERA5
-      merged_data[[paste0(varname_FLUX, "_automatic")]] <- merged_data[[varname_FLUX]]
-      merged_data[[paste0(varname_FLUX, "_automatic")]][na_rows] <- predicted_values
-    } else {
-      message("Linear model not available for 'automatic' blending. Keeping original values.")
-      merged_data[[paste0(varname_FLUX, "_automatic")]] <- merged_data[[varname_FLUX]]
-    }
-  }
   return(merged_data)
 }
 
@@ -89,7 +122,7 @@ filename_FLUX <- 'data_merge/AMF_US-EvM_BASE-BADM_2-5.zip'   # 'data_merge/AMF_U
 filename_ERA5 <- 'data_merge/US-EvM_ERA_2020_2023_hr.csv'    # 'data_merge/US-EvM_ERA_2020_2023_hr.csv', "data_merge/BR-Sa1_tp_2002_2011.csv"
 varname_FLUX <- c('SW_IN', 'TA')                             # c('SW_IN', 'TA'), "P"
 varname_ERA5 <- c('ssrd', 't2m')                             # c('ssrd', 't2m'), "tp"
-blending_rule <- c('lm_no_intercept', 'lm')                  # c('lm_no_intercept', 'lm'), 'replace'
+blending_rule <- c('lm_no_intercept', 'lm')                  # c('lm_no_intercept', 'lm'),  other rules # automatic, # lm_no_intercept
 
 # call the merge function
 merged_data <- merge_ERA5_FLUX(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
