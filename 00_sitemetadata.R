@@ -33,7 +33,26 @@ site_codes <-unique(fluxmanifest$SITE_ID)
 lat <- NaN
 lon <- NaN
 startdate <- NaN
-enddata <- NaN
+enddate <- NaN
+varibles <- NaN
+
+
+
+
+
+## hard coding in varibles
+variableselect <- c(
+  "2m_temperature",
+  "total_precipitation",
+  "surface_solar_radiation_downwards")
+
+paste(variableselect, collapse = ", ") 
+
+print("variables selected:")
+print(paste(variableselect, collapse = ", ") )
+
+
+
 
 ## need to make loop for all sites
 for(i in 1:length(site_codes)){
@@ -61,9 +80,10 @@ for(i in 1:length(site_codes)){
   fluxdata <- read_csv(paste(flux.folder,'/',flux.file, sep=""), skip = 2, col_select =  1) 
   
   startdate[i] <- fluxdata$TIMESTAMP_START[1]
-  enddata[i] <- fluxdata$TIMESTAMP_START[length(fluxdata$TIMESTAMP_START)]
+  enddate[i] <- fluxdata$TIMESTAMP_START[length(fluxdata$TIMESTAMP_START)]
   
-  
+  variables[i] <- paste(variableselect, collapse = ", ")
+
   rm( flux.folder, flux.file, flux.bif , fluxdata)
 
 
@@ -73,14 +93,22 @@ rm (fluxmanifest)
 
 
 
-
 df.sitemetadata <- data.frame(
   site_codes,
   lat,
   lon,
   startdate,
-  enddata
+  enddate,
+  variables
 )
 
 
+
+
+
+
+
+
+
+df.sitemetadata
 

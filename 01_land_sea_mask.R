@@ -27,13 +27,14 @@ get_land_proportion <- function(nc_file, lat, lon) {
     stop("Error: Failed to read the NetCDF file.")
   }
   land_value <- extract(land_sea_mask, cbind(lon_nearest, lat_nearest))
-  print(land_value)
+  #print(land_value)
   return(land_value)
 }
 
 # Example usage
-nc_file <- "/Volumes/Malonelab/Research/ERA5_FLUX/Data/lsm_1279l4_0.1x0.1.grb_v4_unpack.nc"  # Your NetCDF file
-latitude <- 25.76   # Example latitude
-longitude <- -80.19 # Example longitude (Miami, FL)
-longitude <- -61 ## somewhere in the ocean
-land_cover <- get_land_proportion(nc_file, latitude,longitude)
+#nc_file <- "/Volumes/Malonelab/Research/ERA5_FLUX/Data/lsm_1279l4_0.1x0.1.grb_v4_unpack.nc"  # Your NetCDF file
+#nc_file <- "z:/Research/ERA5_FLUX/Data/lsm_1279l4_0.1x0.1.grb_v4_unpack.nc"  
+#latitude <- 25.76   # Example latitude
+#longitude <- -80.19 # Example longitude (Miami, FL)
+#longitude <- -61 ## somewhere in the ocean
+#land_cover <- get_land_proportion(nc_file, latitude,longitude)
