@@ -1,4 +1,3 @@
-rm(list = ls())  # Removes all objects from the environment
 ########################################
 ## this script is used to merge data from AmeriFlux and data from ERA5 together
 ## Authors: Ammara Talib and Junna Wang
