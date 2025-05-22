@@ -19,80 +19,47 @@ library(tidyverse)
 rm(list=ls())
 
 ## code for mac machines with server mapped to Z drive
-#setwd('/Volumes/Malonelab/Research/ERA5_FLUX/data_flux')
+setwd('/Volumes/Malonelab/Research/ERA5_FLUX/data_flux')
 ## code for windows machines with server mapped to Z drive
-setwd('z:/Research/ERA5_FLUX/data_flux')
+#setwd('z:/Research/ERA5_FLUX/data_flux')
 
 
 manifest.file <- list.files( pattern="requested_files_manifest")
 
 fluxmanifest  <- read.csv(paste(manifest.file, sep=""), skip = 3, header = TRUE)
 
+site_codes <- unique(fluxmanifest$SITE_ID)
 
-site_codes <-unique(fluxmanifest$SITE_ID)
-lat <- NaN
-lon <- NaN
-startdate <- NaN
-enddate <- NaN
-varibles <- NaN
+# Proper initialization
+lat <- rep(NA, length(site_codes))
+lon <- rep(NA, length(site_codes))
+startdate <- rep(NA, length(site_codes))
+enddate <- rep(NA, length(site_codes))
+variables <- rep(NA, length(site_codes))
 
-
-
-
-
-## hard coding in varibles
-variableselect <- c(
-  "2m_temperature",
-  "total_precipitation",
-  "surface_solar_radiation_downwards")
-
-paste(variableselect, collapse = ", ") 
-
+# Hard coding in variables
+variableselect <- c("2m_temperature", "total_precipitation", "surface_solar_radiation_downwards")
 print("variables selected:")
-print(paste(variableselect, collapse = ", ") )
+print(paste(variableselect, collapse = ", "))
 
-
-
-
-## need to make loop for all sites
-for(i in 1:length(site_codes)){
-  
-  #print(site_codes[i]) 
-
-  
+# Loop over all sites
+for(i in 1:length(site_codes)) {
   flux.folder <- dir(".", pattern= site_codes[i])
-  flux.file <- list.files(path=paste(flux.folder,'/', sep=""), pattern="BASE")
-  bif.file <- list.files(path=paste(flux.folder,'/', sep=""), pattern="BIF")
+  flux.file <- list.files(path=paste0(flux.folder, '/'), pattern="BASE")
+  bif.file <- list.files(path=paste0(flux.folder, '/'), pattern="BIF")
   
-  
-  flux.bif  <- read_excel(paste(flux.folder,'/',bif.file, sep=""))
-  
-  
-  
-  
+  flux.bif  <- read_excel(paste0(flux.folder,'/',bif.file))
   lat[i] <- flux.bif$DATAVALUE[which(flux.bif$VARIABLE=="LOCATION_LAT")]
-  lon[i]  <- flux.bif$DATAVALUE[which(flux.bif$VARIABLE=="LOCATION_LONG")]
+  lon[i] <- flux.bif$DATAVALUE[which(flux.bif$VARIABLE=="LOCATION_LONG")]
   
-  
-  
-  
-  
-  fluxdata <- read_csv(paste(flux.folder,'/',flux.file, sep=""), skip = 2, col_select =  1) 
-  
+  fluxdata <- read_csv(paste0(flux.folder,'/',flux.file), skip = 2, col_select = 1)
   startdate[i] <- fluxdata$TIMESTAMP_START[1]
   enddate[i] <- fluxdata$TIMESTAMP_START[length(fluxdata$TIMESTAMP_START)]
   
   variables[i] <- paste(variableselect, collapse = ", ")
-
-  rm( flux.folder, flux.file, flux.bif , fluxdata)
-
-
 }
 
-rm (fluxmanifest)
-
-
-
+# Create the metadata dataframe
 df.sitemetadata <- data.frame(
   site_codes,
   lat,
@@ -101,8 +68,6 @@ df.sitemetadata <- data.frame(
   enddate,
   variables
 )
-
-
 
 
 
