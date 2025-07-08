@@ -45,3 +45,19 @@ Scripts are organized into the following groups
   - options for blending_rules: "replace", "lm", "lm_no_intercept", "automatic"
 
 *scripts are provided for both python and R.
+
+## Function Documentation
+
+**Step 1:** Click to anywhere inside your function.
+
+![](images/funct_doc1.png)
+
+**Step 2:** Go to Code -> Insert Roxygen Skeleton. This will populate your script with some template roxygen comments.
+
+![](images/funct_doc2.png)
+
+**Step 3:** Fill out the template roxygen comments. You can learn more about what to write in these comments [here](https://r-pkgs.org/man.html). Or you can view the [function documentation in CarbonExchangeParameters](https://github.com/Malone-Disturbance-Ecology-Lab/CarbonExchangeParameters/tree/main/R) as an example. Do not put anything under "\@export".
+
+![](images/funct_doc3.png)
+
+**Step 4:** Done! Normally you would render the documentation into an actual help page for the function using `devtools::document()` but this repo does not have the required package infrastructure yet, so `devtools::document()` will error out. 
