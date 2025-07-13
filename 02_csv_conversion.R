@@ -15,7 +15,8 @@ library(readr)
 #' 
 #' Datetime stamp column named "time".
 #' UTC timezones converted to local time.
-#' Time column formatted as yyyyMMddHHmm
+#' SiteID is determined from lat and lon coordinates in df.sitemetadata.
+#' Time column formatted as yyyyMMddHHmm, time zone determined using coordinates
 #' Variables names from ERA5 dataset maintained
 #' ERA5 units converted to Ameriflux units:
 #' 
@@ -25,8 +26,7 @@ library(readr)
 #' 
 #' Total precipitation (tp) from meters to millimeters.
 #' 
-#' Output file name format: siteID_startYear_endYear_variableName.csv For example, US-Ho1_2001_2020_tp_t2m.csv
-#' SiteID is determined from lat and lon coordinates in df.sitemetadata.
+
 
 
 #' @examples
@@ -95,7 +95,7 @@ netcdf_df_formatter <- function(nc_file_path) {
 #' 
 #' @note This function requires netcdf_df_formatter to work.
 #' 
-#' @return .csv file of netcdf data within site folder of the characteristics described in the netcdf_df_formatter() function. The .csv file is located within the site_folder
+#' @return .csv file of netcdf data within site folder of the characteristics described in the netcdf_df_formatter() function. The .csv file is located within the site_folder and has the file name format: siteID_startYear_endYear_variableName.csv For example, US-Ho1_2001_2020_tp_t2m.csv
 #' 
 #' @note This function grabs each netcdf file and runs netcdf_df_formatter on it. It builds a list of variables across all dataframes in the folder and joins data by time, filtering to return only full years of data.
 #' 
