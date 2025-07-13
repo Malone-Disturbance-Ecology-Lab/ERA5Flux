@@ -17,10 +17,9 @@ Scripts are organized into the following groups
 
 02_csv_conversion: Takes directory as an argument and reformats ERA4 .nc data into csv format with the following characteristics.
 - Uses two functions to reformat netcdf data:
-  
-  netcdf_df_formatter(nc_file_path)
-       - Input: (character) file path to a folder containing the netcdf files of one site.
-       - Output: (dataframe) of the characteristics:
+    - netcdf_df_formatter(nc_file_path)
+        - Input: (character) file path to a folder containing the netcdf files of one site.
+        - Output: (dataframe) of the characteristics:
           - Datetime stamp column named "time".
           - UTC timezones convetered to local time.
           - Time column formatted as yyyyMMddHHmm
