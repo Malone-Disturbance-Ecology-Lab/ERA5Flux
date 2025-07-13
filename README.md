@@ -21,14 +21,14 @@ Scripts are organized into the following groups
   netcdf_df_formatter(nc_file_path)
        - Input: (character) file path to a folder containing the netcdf files of one site.
        - Output: (dataframe) of the characteristics:
-  - Datetime stamp column named "time".
-  - UTC timezones convetered to local time.
-  - Time column formatted as yyyyMMddHHmm
-  - Variables names from ERA5 dataset maintained
-  - ERA5 units converted to Ameriflux units:
-    - Solar radiation (ssrd) from Jm-2 to Wm-2.
-    - Air Temperature (t2m) from Kelvin to celsius.
-    - Total precipitation (tp) from meters to millimeters.
+          - Datetime stamp column named "time".
+          - UTC timezones convetered to local time.
+          - Time column formatted as yyyyMMddHHmm
+          - Variables names from ERA5 dataset maintained
+          - ERA5 units converted to Ameriflux units:
+          - Solar radiation (ssrd) from Jm-2 to Wm-2.
+          - Air Temperature (t2m) from Kelvin to celsius.
+          - Total precipitation (tp) from meters to millimeters.
   
     netcdf_to_csv(site_folder)
        - Input: (character) file path to a folder containing the netcdf files of one site.
