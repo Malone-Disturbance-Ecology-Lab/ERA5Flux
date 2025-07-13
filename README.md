@@ -16,18 +16,25 @@ Scripts are organized into the following groups
 # 3. Data Processing for ERA5 _02
 
 02_csv_conversion: Takes directory as an argument and reformats ERA4 .nc data into csv format with the following characteristics.
-
-- Datetime stamp column named "time".
-- UTC timezones convetered to local time.
-- Time column formatted as yyyyMMddHHmm
-- Variables names from ERA5 dataset maintained
-- ERA5 units converted to Ameriflux units:
-  - Solar radiation (ssrd) from Jm-2 to Wm-2.
-  - Air Temperature (t2m) from Kelvin to celsius.
-  - Total precipitation (tp) from meters to millimeters.
-- Output file name format: siteID_startYear_endYear_variableName.csv For example, US-Ho1_2001_2020_tp_t2m.csv
-- SiteID is deetermined from lat and lon coordinates in df.sitemetadata.
-- Each csv file starts from the first hour of a year (e.g., 2000-01-01 00:00) and ends with the last hour of a year (e.g., 2020-12-31 23:00). 
+- Uses two functions to reformat netcdf data:
+    - netcdf_df_formatter(nc_file_path)
+        - Input: (character) file path to a folder containing the netcdf files of one site.
+        - Output: (dataframe) of the characteristics:
+          - Datetime stamp column named "time".
+          - UTC timezones convetered to local time.
+          - Time column formatted as yyyyMMddHHmm
+          - Variables names from ERA5 dataset maintained
+          - ERA5 units converted to Ameriflux units:
+          - Solar radiation (ssrd) from Jm-2 to Wm-2.
+          - Air Temperature (t2m) from Kelvin to celsius.
+          - Total precipitation (tp) from meters to millimeters.
+  
+    - netcdf_to_csv(site_folder)
+        - Input: (character) file path to a folder containing the netcdf files of one site.
+        - Output: .csv file of netcdf data within site_folder.
+            - The .csv file is located within the site_folder and has the file name format: siteID_startYear_endYear_variableName.csv For example, US-Ho1_2001_2020_tp_t2m.csv
+            - SiteID is deetermined from lat and lon coordinates in df.sitemetadata.
+            - Each csv file starts from the first hour of a year (e.g., 2000-01-01 00:00) and ends with the last hour of a year (e.g., 2020-12-31 23:00). 
 
 
 # 4. Flux Data Merging_03
