@@ -29,12 +29,12 @@ Scripts are organized into the following groups
           - Air Temperature (t2m) from Kelvin to celsius.
           - Total precipitation (tp) from meters to millimeters.
   
-    netcdf_to_csv(site_folder)
-       - Input: (character) file path to a folder containing the netcdf files of one site.
-       - Output: .csv file of netcdf data within site_folder.
-           - The .csv file is located within the site_folder and has the file name format: siteID_startYear_endYear_variableName.csv For example, US-Ho1_2001_2020_tp_t2m.csv
-           - SiteID is deetermined from lat and lon coordinates in df.sitemetadata.
-           - Each csv file starts from the first hour of a year (e.g., 2000-01-01 00:00) and ends with the last hour of a year (e.g., 2020-12-31 23:00). 
+    - netcdf_to_csv(site_folder)
+        - Input: (character) file path to a folder containing the netcdf files of one site.
+        - Output: .csv file of netcdf data within site_folder.
+            - The .csv file is located within the site_folder and has the file name format: siteID_startYear_endYear_variableName.csv For example, US-Ho1_2001_2020_tp_t2m.csv
+            - SiteID is deetermined from lat and lon coordinates in df.sitemetadata.
+            - Each csv file starts from the first hour of a year (e.g., 2000-01-01 00:00) and ends with the last hour of a year (e.g., 2020-12-31 23:00). 
 
 
 # 4. Flux Data Merging_03
