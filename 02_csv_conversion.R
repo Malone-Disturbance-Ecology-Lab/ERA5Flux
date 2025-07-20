@@ -9,7 +9,7 @@ library(readr)
 
 #' netcdf_df_formatter
 #'
-#' @param nc_file_path file path to a folder containing the netcdf files of one site. The netcdf files can be of different varaibles and if different years so long as it is for one site.
+#' @param nc_file_path file path to ERA5 netcdf file
 #'
 #' @return dataframe if the following characteristics:
 #' 
@@ -31,8 +31,8 @@ library(readr)
 
 #' @examples
 #' 
-#' nc_file_path <- "/ERA5_FLUX"
-#' netcdf_df_formatter(nc_file_path)
+nc_file_path <- "~/ERA5_flux/data_US-TaS/data_stream-oper_stepType-accum1.nc"
+netcdf_df_formatter(nc_file_path)
 #' 
 netcdf_df_formatter <- function(nc_file_path) {
   nc <- nc_open(nc_file_path)
@@ -91,8 +91,10 @@ netcdf_df_formatter <- function(nc_file_path) {
 
 #' netcdf_to_csv
 #'
-#' @param site_folder - a folder for one site with netcdf data. The netcdf files can be of different variables and if different years so long as it is for one site.
-#' 
+#' @param site_folder - (character) a folder for one site with netcdf data. The netcdf files can be of different variables and if different years so long as it is for one site.
+#' @param output_filepath - (character) filepath to where the output csv should be written
+#' @param site_name - (character) name of the site that will be concantenated onto csv filename (e.g. Us_TaS)
+
 #' @note This function requires netcdf_df_formatter to work.
 #' 
 #' @return .csv file of netcdf data within site folder of the characteristics described in the netcdf_df_formatter() function. The .csv file is located within the site_folder and has the file name format: siteID_startYear_endYear_variableName.csv For example, US-Ho1_2001_2020_tp_t2m.csv
@@ -102,15 +104,20 @@ netcdf_df_formatter <- function(nc_file_path) {
 #' @export
 #'
 #' @examples
-#'site_folder <- "/ERA5_FLUX"
-#'netcdf_to_csv(site_folder)
+#' 
+#' 
+#' 
+#' USE THIS WAY: nc_path <- system.file("data_US-TaS", "example.nc", package = "ERA5.FLUX")
+site_folder <- "~/ERA5_FLUX/data_US-TaS/"
+site_name <- "US_TaS"
+netcdf_to_csv(site_folder,output_filepath,"US_TaS")
 #'
-#'US_TaS_2017_2019_d2m_ssrd_t2m <- read_csv("data_US-TaS/US-TaS_2017_2019_d2m_ssrd_t2m.csv")
-#'View(US_TaS_2017_2019_d2m_ssrd_t2m)
 #'
 #'@note Each csv file starts from the first hour of a year (e.g., 2000-01-01 00:00) and ends with the last hour of a year (e.g., 2020-12-31 23:00).
 #'
-netcdf_to_csv <- function(site_folder){
+
+
+netcdf_to_csv <- function(site_folder,output_filepath, site_name){
   # Get list of .nc files
   nc_files <- list.files(site_folder, pattern = "\\.nc$", full.names = TRUE)
   
@@ -169,9 +176,9 @@ netcdf_to_csv <- function(site_folder){
     
     # Create filename and save
     var_suffix <- paste(sort(found_vars), collapse = "_")
-    filename <- paste0("US-TaS_", start_year, "_", end_year, "_", var_suffix, ".csv")
+    filename <- paste0(site_name, start_year, "_", end_year, "_", var_suffix, ".csv")
     
-    write.csv(final_df, file = file.path(site_folder, filename), row.names = FALSE)
+    write.csv(final_df, file = file.path(output_filepath, filename), row.names = FALSE)
     cat("Saved:", filename, "\n")
   } else {
     cat("No valid NetCDF data found.\n")
