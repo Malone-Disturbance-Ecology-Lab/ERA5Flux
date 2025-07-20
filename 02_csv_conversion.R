@@ -31,7 +31,7 @@ library(readr)
 
 #' @examples
 #' 
-nc_file_path <- "~/ERA5_flux/data_US-TaS/data_stream-oper_stepType-accum1.nc"
+nc_file_path <- system.file("data_stream-oper_stepType-accum1.nc", package = "ERA5_FLUX")
 netcdf_df_formatter(nc_file_path)
 #' 
 netcdf_df_formatter <- function(nc_file_path) {
