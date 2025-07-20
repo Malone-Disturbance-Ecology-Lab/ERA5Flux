@@ -31,45 +31,55 @@ library(readr)
 
 #' @examples
 #' 
-nc_file_path <- system.file("data_stream-oper_stepType-accum1.nc", package = "ERA5_FLUX")
-netcdf_df_formatter(nc_file_path)
+#'nc_file_path <- system.file("extdata","data_stream-oper_stepType-accum1.nc", package = "ERA5_FLUX")
+#'netcdf_df_formatter(nc_file_path)
 #' 
 netcdf_df_formatter <- function(nc_file_path) {
-  nc <- nc_open(nc_file_path)
   
+  #Open netcdf file
+  nc <- netcdf4::nc_open(nc_file_path)
+  
+  #Get all variable names, excluding metadata fields
   all_vars <- names(nc$var)
   data_vars <- setdiff(all_vars, c("number", "expver"))
   
-  valid_time <- ncvar_get(nc, "valid_time")
+  #extract time variable
+  valid_time <- netcdf4::ncvar_get(nc, "valid_time")
   if (length(valid_time) == 0) {
-    nc_close(nc)
+    netcdf4::nc_close(nc)
     return(data.frame())
   }
   
-  time_units <- ncatt_get(nc, "valid_time", "units")$value
+  #Convert netcdf time to POSIXct in UTC
+  time_units <- netcdf4::ncatt_get(nc, "valid_time", "units")$value
   time_origin <- sub("seconds since ", "", time_units)
   utc_time <- as.POSIXct(valid_time, origin = time_origin, tz = "UTC")
   
-  lat <- ncvar_get(nc, "latitude")
-  lon <- ncvar_get(nc, "longitude")
+  #Get coordinates and determine local time zone
+  lat <- netcdf4::ncvar_get(nc, "latitude")
+  lon <- netcdf4::ncvar_get(nc, "longitude")
   tz_name <- lutz::tz_lookup_coords(lat, lon, method = "accurate")
-  local_time <- with_tz(utc_time, tz_name)
+  local_time <- lubridate::with_tz(utc_time, tz_name)
   
+  #Format timestamp as YYYYMMDDHHMM
   formatted_time <- format(local_time, "%Y%m%d%H%M")
   df <- data.frame(time = formatted_time)
   
+  #calculate time interval in seconds
   time_diff_sec <- if (length(utc_time) > 1) {
     as.numeric(difftime(utc_time[2], utc_time[1], units = "secs"))
   } else {
     3600
   }
   
+  #loop through each variable and format as vector
   for (varname in data_vars) {
-    var_data <- ncvar_get(nc, varname)
+    var_data <- netcdf4::ncvar_get(nc, varname)
     if (length(dim(var_data)) > 1) {
       var_data <- as.vector(var_data)
     }
     
+    #Apply unit conversions
     if (varname == "t2m") {
       var_data <- var_data - 273.15
     } else if (varname == "ssrd") {
@@ -80,10 +90,12 @@ netcdf_df_formatter <- function(nc_file_path) {
       var_data <- var_data - 273.15
     }
     
+    #add variable to data frame
     df[[varname]] <- var_data
   }
   
-  nc_close(nc)
+  #Close netcdf file and return data frame
+  netcdf4::nc_close(nc)
   return(df)
 }
 
@@ -105,12 +117,10 @@ netcdf_df_formatter <- function(nc_file_path) {
 #'
 #' @examples
 #' 
-#' 
-#' 
-#' USE THIS WAY: nc_path <- system.file("data_US-TaS", "example.nc", package = "ERA5.FLUX")
-site_folder <- "~/ERA5_FLUX/data_US-TaS/"
-site_name <- "US_TaS"
-netcdf_to_csv(site_folder,output_filepath,"US_TaS")
+#'site_folder <- folder_path <- system.file("extdata", package = "ERA5_FLUX")
+#'site_name <- "US_TaS"
+#'output_filepath <- "your/filepath/here"
+#'netcdf_to_csv(site_folder,output_filepath,"US_TaS")
 #'
 #'
 #'@note Each csv file starts from the first hour of a year (e.g., 2000-01-01 00:00) and ends with the last hour of a year (e.g., 2020-12-31 23:00).
@@ -118,12 +128,14 @@ netcdf_to_csv(site_folder,output_filepath,"US_TaS")
 
 
 netcdf_to_csv <- function(site_folder,output_filepath, site_name){
-  # Get list of .nc files
+  
+  # Get list of .nc files in site_folder
   nc_files <- list.files(site_folder, pattern = "\\.nc$", full.names = TRUE)
   
-  df_list <- list()
-  found_vars <- c()
+  df_list <- list() #to store dataframes from each file
+  found_vars <- c() #track all unique variables excluding time
   
+  #loop through each netcdf file and process
   for (f in nc_files) {
     df_part <- tryCatch({
       netcdf_df_formatter(f)
@@ -132,22 +144,26 @@ netcdf_to_csv <- function(site_folder,output_filepath, site_name){
       return(NULL)
     })
     
+    #only keep valid non-empty data frames
     if (!is.null(df_part) && is.data.frame(df_part) && nrow(df_part) > 0) {
       df_list[[length(df_list) + 1]] <- df_part
       found_vars <- union(found_vars, setdiff(names(df_part), "time"))
     }
   }
   
-  # Merge all data frames by time
+  # Merge all data frames by time column
   if (length(df_list) > 0) {
     df_all <- reduce(df_list, full_join, by = "time")
     
     # Deduplicate columns (e.g., t2m.x, t2m.y)
-    final_df <- df_all["time"]  # Start with time column only
+    final_df <- purrr::df_all["time"]  # Start with time column only
+    
     for (v in found_vars) {
       matching_cols <- grep(paste0("^", v, "($|\\.)"), names(df_all), value = TRUE)
+      
       if (length(matching_cols) == 1) {
         final_df[[v]] <- df_all[[matching_cols]]
+        
       } else {
         # Prioritize first non-NA value across duplicated columns
         stacked <- df_all[, matching_cols]
@@ -158,6 +174,7 @@ netcdf_to_csv <- function(site_folder,output_filepath, site_name){
       }
     }
     
+    #remove duplicate lines and sort
     final_df <- final_df[!duplicated(final_df$time), ]
     final_df <- final_df[order(final_df$time), ]
     
@@ -170,11 +187,12 @@ netcdf_to_csv <- function(site_folder,output_filepath, site_name){
     start_bound <- as.POSIXct(paste0(start_year, "-01-01 00:00"))
     end_bound <- as.POSIXct(paste0(end_year, "-12-31 23:00"))
     
+    #restore time column formatting and remove helper column
     final_df <- final_df[final_df$time_dt >= start_bound & final_df$time_dt <= end_bound, ]
     final_df$time <- format(final_df$time_dt, "%Y%m%d%H%M")
     final_df$time_dt <- NULL
     
-    # Create filename and save
+    # Create file name and save
     var_suffix <- paste(sort(found_vars), collapse = "_")
     filename <- paste0(site_name, start_year, "_", end_year, "_", var_suffix, ".csv")
     
