@@ -1,8 +1,36 @@
 Package: ERA5Flux
-Title: What the Package Does (One Line, Title Case)
+Title: Improve the Utility of ERA5 Data at Flux Site Locations
 Version: 0.0.0.9000
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
+Authors@R: c(
+  person(given = "Angel", family = "Chen",
+         email = "angel777chen@gmail.com",
+         comment = "angelchen7.github.io",
+         role = c("aut", "cre")),
+  person(given = "Sam", family = "Jurado", 
+         email = "sam.jurado@yale.edu",
+         comment = c(ORCID = "0009-0005-1902-4066"),
+         role = "aut"),
+  person(given = "David E", family = "Reed", 
+         email = "david.e.reed@yale.edu",
+         comment = c(ORCID = "0000-0002-8892-1423"),
+         role = "aut"),
+  person(given = "Ammara", family = "Talib", 
+         email = "ammara.talib@yale.edu",
+         comment = c(ORCID = "0000-0003-3259-0220"),
+         role = "aut"),         
+  person(given = "Junna", family = "Wang", 
+         email = "junna.wang@yale.edu",
+         comment = c(ORCID = "0000-0003-3885-846X"),
+         role = "aut"),
+  person(given = "Boya", family = "Zhang", 
+         email = "boya.zhang@yale.edu",
+         comment = c(ORCID = "0000-0002-6860-2054"),
+         role = "aut"),
+  person(given = "Sparkle L", family = "Malone", 
+         email = "sparkle.malone@yale.edu",
+         comment = c(ORCID = "0000-0001-9034-1076"),
+         role = "aut")
+         )
 Description: What the package does (one paragraph).
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
