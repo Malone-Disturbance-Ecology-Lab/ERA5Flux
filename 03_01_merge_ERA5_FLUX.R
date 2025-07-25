@@ -102,16 +102,3 @@ merge_ERA5_FLUX <- function(filename_FLUX, filename_ERA5,
   # Return the merged data
   return(df_result)
 }
-
-filename_FLUX <- system.file("extdata", "AMF_BR-Sa1_BASE-BADM_5-5.zip", package = "ERA5Flux")
-filename_ERA5 <- system.file("extdata", "BR-Sa1_tp_2002_2011.csv", package = "ERA5Flux")
-varname_FLUX <- c("P")
-varname_ERA5 <- c("tp")
-merged_data <- merge_ERA5_FLUX(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
-#'
-#' # second example
-#' filename_FLUX <- system.file("extdata", "AMF_US-EvM_BASE-BADM_2-5.zip", package = "ERA5Flux")
-#' filename_ERA5 <- system.file("extdata", "US-EvM_ERA_2020_2023_hr.csv", package = "ERA5Flux")
-#' varname_FLUX <- c('SW_IN', 'TA')
-#' varname_ERA5 <- c('ssrd', 't2m')
-#' merged_data <- merge_ERA5_FLUX(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
