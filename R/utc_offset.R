@@ -10,7 +10,8 @@
 ##' @title date_conversion, this function will produce a converted time, either utc -> local, or local -> utc
 ##' @param input lat, lon, time (string format), flag (flag == 0 local to utc, flag == 1 utc to local)
 ##' @note IT TAKES INTO ACCOUNT Daylight Saving Time!!
-##' 
+##' @example 
+##' utc_result_winter <- date_conversion(25.2, -80.4, "2018-01-16 22:02:37", 0)
 ##' @author Boya ("Paul") Zhang
 ##' 
 
