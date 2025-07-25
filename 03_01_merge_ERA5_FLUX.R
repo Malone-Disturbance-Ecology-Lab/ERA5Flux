@@ -1,14 +1,7 @@
-########################################
-## this script is used to merge data from AmeriFlux and data from ERA5 together
-## Authors: Ammara Talib and Junna Wang
-## 3/13/2025
-########################################
-## we assume ERA5 is hourly data, with the current time zone corrected and full dates.
 
 # Required packages
 library(librarian)
 shelf('amerifluxr', 'tidyr', 'lubridate')
-
 
 #' @title merge_ERA5_FLUX
 #'
@@ -46,7 +39,6 @@ shelf('amerifluxr', 'tidyr', 'lubridate')
 #' varname_FLUX <- c('SW_IN', 'TA')
 #' varname_ERA5 <- c('ssrd', 't2m')
 #' merged_data <- merge_ERA5_FLUX(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
-#'
 #'
 
 merge_ERA5_FLUX <- function(filename_FLUX, filename_ERA5,
