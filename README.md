@@ -6,9 +6,9 @@ Scripts are organized into the following groups
 # 1. create df.sitemetadata file 00_sitemetadata
 - df that contains site meta data (site code, lat, lon, start date, end data, variables needed)
 # 2. pre-Download for Files _01
-- 01_start_end_time_padding (add 1 day to start and end dates for future time zone offset issues)
-- 01_lat_lon_UTC_offset (add UTC offset to df.sitemetadata)
-- 01_point_sample_check (pull land-sea_mask for one day)
+- day_padding (add 1 day to start and end dates for future time zone offset issues)
+- utc_offset (add UTC offset to df.sitemetadata)
+- get_land_proportion (pull land-sea_mask for one day)
 - 01_ERA5_API (use ecmwfr package with df.sitemetadata)
   
 # ***DATA is Downloaded***
