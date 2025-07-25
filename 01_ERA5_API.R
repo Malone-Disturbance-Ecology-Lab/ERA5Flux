@@ -6,37 +6,26 @@ library(ecmwfr)
 library(terra)
 library(lubridate)
 
-
-
-
 rm(list=ls())
-
-
-
 
 ##### THIS IS DAVID'S KEY, PLEASE CHANGE!
 
 wf_set_key("8938d21f-2336-42c4-8fe5-5783996193b0")
 
-
-
-
 ### call 01_lat_lon_UTC_offset
 
-source('~/ERA5_FLUX/01_lat_lon_UTC_offset.R')
-
+#source('~/ERA5_FLUX/utc_offset.R')
+source('/Users/bz294/Documents/ERA5Flux/utc_offset.R')
 for(i in 1:nrow(df.sitemetadata)){
   
   df.sitemetadata$UTC_offset[i] <- utc_offset(as.numeric(df.sitemetadata$lat[i]), as.numeric(df.sitemetadata$lon[i])) 
   
 }
 
-
-
 ### call 01_land_sea_mask
 
-source('~/ERA5_FLUX/01_land_sea_mask.R')
-
+#source('~/ERA5_FLUX/get_land_proportion.R')
+source('/Users/bz294/Documents/ERA5Flux/get_land_proportion.R')
 #nc_file <- "/Volumes/Malonelab/Research/ERA5_FLUX/Data/lsm_1279l4_0.1x0.1.grb_v4_unpack.nc"  # Your NetCDF file
 nc_file <- "z:/Research/ERA5_FLUX/Data/lsm_1279l4_0.1x0.1.grb_v4_unpack.nc"   # Your NetCDF file
 
@@ -48,12 +37,6 @@ for(i in 1:nrow(df.sitemetadata)){
   print(paste("The proporation of land at site",df.sitemetadata$site_codes[i],"is:",land_cover$lsm))
   
 }
-
-
-
-
-
-
 
 ####### start of API code
 
