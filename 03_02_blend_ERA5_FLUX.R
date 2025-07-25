@@ -14,7 +14,7 @@ library(librarian)
 shelf('amerifluxr', 'tidyr', 'lubridate')
 
 ### apply blending function on merged data 
-blend_ERA5_AmeriFlux <- function(merged_data, varname_FLUX, varname_ERA5, blending_rule) {
+blend_ERA5_Flux <- function(merged_data, varname_FLUX, varname_ERA5, blending_rule) {
   for (i in seq_along(varname_FLUX)) {
     flux_var <- varname_FLUX[i]
     era5_var <- varname_ERA5[i]
@@ -125,10 +125,10 @@ varname_ERA5 <- c('ssrd', 't2m')                             # c('ssrd', 't2m'),
 blending_rule <- c('lm_no_intercept', 'lm')                  # c('lm_no_intercept', 'lm'),  other rules # automatic, # lm_no_intercept
 
 # call the merge function
-merged_data <- merge_ERA5_AmeriFlux(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
+merged_data <- merge_ERA5_Flux(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
 
 # call the blending function
-merg_blend <- blend_ERA5_AmeriFlux(merged_data, varname_FLUX, varname_ERA5, blending_rule)
+merg_blend <- blend_ERA5_Flux(merged_data, varname_FLUX, varname_ERA5, blending_rule)
 
 # 
 write.csv(merg_blend , "merg_blend.csv", row.names = FALSE)
