@@ -69,6 +69,8 @@ Scripts are organized into the following groups
 
 ![](images/funct_doc3.png)
 
-**Step 4:** Render the documentation into an actual help page for the function using `devtools::document()`. This will generate a .Rd file inside the "man" folder. This becomes your function's help page.
+Notes: If you have sample data that you would like to use in your function examples, you can put them under `inst/extdata/`. Then you can reference your sample data with something like `system.file("extdata", "your-file.nc", package = "ERA5Flux")`.
+
+**Step 4:** Make sure your updated function script is under the "R" folder. Now render the documentation into an actual help page for the function using `devtools::document()`. This will generate a .Rd file inside the "man" folder. This becomes your function's help page and you can now access it by typing `?your-function-name`.
 
 **Step 5:** Always remember to push your commits to GitHub!
