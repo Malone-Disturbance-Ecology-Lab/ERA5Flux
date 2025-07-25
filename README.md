@@ -55,6 +55,8 @@ Scripts are organized into the following groups
 
 ## Function Documentation
 
+**Step 0:** Enter into developer mode by running `library(devtools)` and then `devtools::load_all()` to make your functions available for developing. 
+
 **Step 1:** Click to anywhere inside your function.
 
 ![](images/funct_doc1.png)
@@ -67,4 +69,6 @@ Scripts are organized into the following groups
 
 ![](images/funct_doc3.png)
 
-**Step 4:** Done! Normally you would render the documentation into an actual help page for the function using `devtools::document()` but this repo does not have the required package infrastructure yet, so `devtools::document()` will error out. 
+**Step 4:** Render the documentation into an actual help page for the function using `devtools::document()`. This will generate a .Rd file inside the "man" folder. This becomes your function's help page.
+
+**Step 5:** Always remember to push your commits to GitHub!
