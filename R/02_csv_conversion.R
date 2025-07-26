@@ -26,9 +26,8 @@ library(readr)
 #'
 #' Total precipitation (tp) from meters to millimeters.
 #'
-
-
-
+#' @export
+#'
 #' @examples
 #'
 #'nc_file_path <- system.file("extdata","data_stream-oper_stepType-accum1.nc", package = "ERA5Flux")

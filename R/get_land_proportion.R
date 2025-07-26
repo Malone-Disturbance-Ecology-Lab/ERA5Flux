@@ -3,6 +3,8 @@
 #' @title get_land_proportion, this function will return land proportion.
 #' @param input lat, lon
 #' @return land proportion
+#' @export
+#'
 #' @example
 #' land_proportion <- get_land_proportion("file_path_to_the_nc_file", 25.2, -80.3)
 #'

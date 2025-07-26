@@ -3,6 +3,7 @@
 #' @title day_padding, this function will produce a new starting and ending day.
 #' @param input start and end day
 #' @return new start and end day
+#' @export
 #'
 #' @example
 #' result <- day_padding("2024-01-01", "2025-12-31")
