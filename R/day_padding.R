@@ -5,7 +5,7 @@
 #' @return new start and end day
 #' @export
 #'
-#' @example
+#' @examples
 #' result <- day_padding("2024-01-01", "2025-12-31")
 #' @author Boya ("Paul") Zhang
 #'

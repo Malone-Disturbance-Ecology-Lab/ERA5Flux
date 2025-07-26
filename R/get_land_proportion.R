@@ -5,7 +5,7 @@
 #' @return land proportion
 #' @export
 #'
-#' @example
+#' @examples
 #' land_proportion <- get_land_proportion("file_path_to_the_nc_file", 25.2, -80.3)
 #'
 #' @note In cycles of the ECMWF Integrated Forecasting System (IFS) from CY41R1 (introduced in May 2015) onwards, grid boxes where this parameter has a value above 0.5 can be comprised of a mixture of land and inland water but not ocean. Grid boxes with a value of 0.5 and below can only be comprised of a water surface. In the latter case, the lake cover is used to determine how much of the water surface is ocean or inland water.

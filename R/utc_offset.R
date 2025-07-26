@@ -6,7 +6,7 @@
 #' @note Offset is the difference between UTC and local time without considering Daylight Saving Time
 #' @export
 #'
-#' @example
+#' @examples
 #' offset <- utc_offset(25.4, -80.5)
 #'
 #' @title date_conversion, this function will produce a converted time, either utc -> local, or local -> utc
@@ -14,7 +14,7 @@
 #' @note IT TAKES INTO ACCOUNT Daylight Saving Time!!
 #' @export
 #'
-#' @example
+#' @examples
 #' utc_result_winter <- date_conversion(25.2, -80.4, "2018-01-16 22:02:37", 0)
 #' @author Boya ("Paul") Zhang
 #'
