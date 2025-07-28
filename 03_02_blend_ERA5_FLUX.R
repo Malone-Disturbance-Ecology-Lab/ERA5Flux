@@ -1,13 +1,45 @@
-rm(list = ls())  # Removes all objects from the environment
-########################################
-## this script is used to merge data from AmeriFlux and data from ERA5 by adding new columns to AmeriFlux file
-## Authors: Ammara Talib and Junna Wang
-## 3/13/2025
-########################################
-## need to discuss: filename_FLUX, zip file?
-## how to know one variable is a vector or a value? the variable name part. 
-## we assume ERA5 is hourly data, with the current time zone correction and full dates. 
-## the last time step of ERA5. 
+
+# Required packages
+library(librarian)
+shelf('amerifluxr', 'tidyr', 'lubridate')
+
+#' @title blend_ERA5_FLUX
+#'
+#' @author Ammara Talib and Junna Wang
+#'
+#' @description
+#' this function is used to blend data from AmeriFlux and data from ERA5, ensuring they have the same start and end of timestamp and timestep with AmeriFlux data
+#'
+#' @param
+#' filename_FLUX: the file name of AmeriFlux BASE data downloaded from https://ameriflux.lbl.gov/
+#' filename_ERA5: a csv file of meterological data downloaded from ERA5 https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels?tab=overview
+#'                please note that the original ERA5 files are in .nc format. You may want to convert these files into csv format using the function 02_csv_conversion.R
+#' varname_FLUX: variable names in AmeriFlux BASE data to be blended with ERA5 data
+#' varname_ERA5: variable names in ERA5 data to be blended with AmeriFlux BASE data
+#'               please note that the length of varname_FLUX must be the same as the length of varname_ERA5; at the same location, varname_FLUX and varname_ERA5 should refer to the same variable despite AmeriFlux and ERA5 may use different names for the same variable. For example, for incoming shortwave radiation, ERA5 uses ssrd, but AmeriFlux uses SW_IN.
+#'
+#' @return dataframe with the following characteristics:
+#'
+#' Datetime stamp column named "time" with the format: "%Y-%m-%d %H:%M:%S";
+#' time step of the "time" column is the same with that of AmeriFlux file;
+#' It also includes the columns of varname_FLUX, the columns of varname_ERA5
+#'
+#' @examples
+#'
+#' # first example
+#' filename_FLUX <- system.file("extdata", "AMF_BR-Sa1_BASE-BADM_5-5.zip", package = "ERA5Flux")
+#' filename_ERA5 <- system.file("extdata", "BR-Sa1_tp_2002_2011.csv", package = "ERA5Flux")
+#' varname_FLUX <- c("P")
+#' varname_ERA5 <- c("tp")
+#' merged_data <- merge_ERA5_FLUX(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
+#'
+#' # second example
+#' filename_FLUX <- system.file("extdata", "AMF_US-EvM_BASE-BADM_2-5.zip", package = "ERA5Flux")
+#' filename_ERA5 <- system.file("extdata", "US-EvM_ERA_2020_2023_hr.csv", package = "ERA5Flux")
+#' varname_FLUX <- c('SW_IN', 'TA')
+#' varname_ERA5 <- c('ssrd', 't2m')
+#' merged_data <- merge_ERA5_FLUX(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
+#'
 
 #########
 library(librarian)
