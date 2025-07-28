@@ -69,7 +69,7 @@ Scripts are organized into the following groups
 
 ![](images/funct_doc3.png)
 
-Notes: If you have sample data that you would like to use in your function examples, you can put them under `inst/extdata/`. Then you can reference your sample data with something like `system.file("extdata", "your-file.nc", package = "ERA5Flux")`.
+Notes: If you have sample data that you would like to use in your function examples, you can put them under `inst/extdata/`. Then you can reference your sample data with something like `system.file("extdata", "your-file.nc", package = "ERA5Flux")`. For functions that export a file, you will need to make sure to have a function argument that lets the user specify where they would like to export the file output. Then in the function example, you can just make the example export to a temporary folder with tempdir() . This is because CRAN does not allow functions that export something without letting the user decide where it goes. See `netcdf_to_csv()` for an example.
 
 **Step 4:** Make sure your updated function script is under the "R" folder. Now render the documentation into an actual help page for the function using `devtools::document()`. This will generate a .Rd file inside the "man" folder. This becomes your function's help page and you can now access it by typing `?your-function-name`.
 
