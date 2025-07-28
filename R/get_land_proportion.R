@@ -14,10 +14,6 @@
 #' @author Boya ("Paul") Zhang
 #'
 
-
-library(terra)
-library(ecmwfr)
-
 get_land_proportion <- function(nc_file, lat, lon) {
 
   if (lon < 0) {
