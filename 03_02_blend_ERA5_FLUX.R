@@ -37,37 +37,27 @@ shelf('amerifluxr', 'tidyr', 'lubridate')
 #'
 #' time step of the "time" column is the same with that of AmeriFlux file;
 #' It also includes the columns of varname_FLUX, the columns of varname_ERA5
+#' variable column with applying blending rule applied on it. name of blended column is simialr to Ameriflux column name but with addition of "_f"
 #'
 #' @examples
 #'
-#' # first example
+#' first example
 #' Please first make sure to run the merge function (03_01_merge_ERA5_FLUX.R) first, because output of merge function will be used as input of this blending function
 #' merged_data <- merge_ERA5_FLUX(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
-#' merged_data <- c("P")
-#' varname_FLUX <- c("P")
-#' varname_ERA5 <- c("tp")
-
-#' varname_FLUX <- c('SW_IN', 'TA', 'P')                             # c('SW_IN', 'TA'), "P"
-#' varname_ERA5 <- c('ssrd', 't2m', 'tp')                             # c('ssrd', 't2m'), "tp"
-blending_rule <- c('lm_no_intercept', 'lm')                  # c('lm_no_intercept', 'lm'),  other rules # automatic, # lm_no_intercept
-
-
-
-
+#' varname_FLUX <- c('SW_IN', 'TA', 'P')                            
+#' varname_ERA5 <- c('ssrd', 't2m', 'tp')                          
+#' blending_rule <- c('lm_no_intercept', 'lm')                 
 #' merg_blend <- blend_ERA5_Flux(merged_data, varname_FLUX, varname_ERA5, blending_rule)
-#' # second example
-#' filename_FLUX <- system.file("extdata", "AMF_US-EvM_BASE-BADM_2-5.zip", package = "ERA5Flux")
-#' filename_ERA5 <- system.file("extdata", "US-EvM_ERA_2020_2023_hr.csv", package = "ERA5Flux")
-#' varname_FLUX <- c('SW_IN', 'TA')
-#' varname_ERA5 <- c('ssrd', 't2m')
+#'
+#'  2nd example
+#' Please first make sure to run the merge function (03_01_merge_ERA5_FLUX.R) first, because output of merge function will be used as input of this blending function
 #' merged_data <- merge_ERA5_FLUX(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
+#' varname_FLUX <- c('SW_IN', 'TA', 'P')                            
+#' varname_ERA5 <- c('ssrd', 't2m', 'tp')                          
+#' blending_rule <- c('replace', 'automatic')                 
+#' merg_blend <- blend_ERA5_Flux(merged_data, varname_FLUX, varname_ERA5, blending_rule)
 #'
 
-#########
-library(librarian)
-shelf('amerifluxr', 'tidyr', 'lubridate')
-
-### apply blending function on merged data 
 blend_ERA5_Flux <- function(merged_data, varname_FLUX, varname_ERA5, blending_rule) {
   for (i in seq_along(varname_FLUX)) {
     flux_var <- varname_FLUX[i]
@@ -168,21 +158,3 @@ blend_ERA5_Flux <- function(merged_data, varname_FLUX, varname_ERA5, blending_ru
   return(merged_data)
 }
 
-# source merge function
-source("03_01_merge_ERA5_FLUX.R")
-
-# define your own FLUX and ERA5 dataset and variables to merge
-filename_FLUX <- 'data_merge/AMF_US-EvM_BASE-BADM_2-5.zip'   # 'data_merge/AMF_US-EvM_BASE-BADM_2-5.zip', "data_merge/AMF_BR-Sa1_BASE-BADM_5-5.zip"
-filename_ERA5 <- 'data_merge/US-EvM_ERA_2020_2023_hr.csv'    # 'data_merge/US-EvM_ERA_2020_2023_hr.csv', "data_merge/BR-Sa1_tp_2002_2011.csv"
-varname_FLUX <- c('SW_IN', 'TA')                             # c('SW_IN', 'TA'), "P"
-varname_ERA5 <- c('ssrd', 't2m')                             # c('ssrd', 't2m'), "tp"
-blending_rule <- c('lm_no_intercept', 'lm')                  # c('lm_no_intercept', 'lm'),  other rules # automatic, # lm_no_intercept
-
-# call the merge function
-merged_data <- merge_ERA5_Flux(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
-
-# call the blending function
-merg_blend <- blend_ERA5_Flux(merged_data, varname_FLUX, varname_ERA5, blending_rule)
-
-# 
-write.csv(merg_blend , "merg_blend.csv", row.names = FALSE)
