@@ -116,9 +116,9 @@ netcdf_df_formatter <- function(nc_file_path) {
 #'
 #' @examples
 #'
-#'site_folder <- folder_path <- system.file("extdata", package = "ERA5Flux")
+#'site_folder <- system.file("extdata", package = "ERA5Flux")
 #'site_name <- "US_TaS"
-#'output_filepath <- "your/filepath/here"
+#'output_filepath <- tempdir()
 #'netcdf_to_csv(site_folder,output_filepath,"US_TaS")
 #'
 #'
