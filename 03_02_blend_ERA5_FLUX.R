@@ -43,17 +43,20 @@ shelf('amerifluxr', 'tidyr', 'lubridate')
 #'
 #' first example
 #' Please first make sure to run the merge function (03_01_merge_ERA5_FLUX.R) first, because output of merge function will be used as input of this blending function
-#' merged_data <- merge_ERA5_FLUX(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
-#' varname_FLUX <- c('SW_IN', 'TA', 'P')                            
-#' varname_ERA5 <- c('ssrd', 't2m', 'tp')                          
-#' blending_rule <- c('lm_no_intercept', 'lm')                 
+#' filename_FLUX <- system.file("extdata", "AMF_BR-Sa1_BASE-BADM_5-5.zip", package = "ERA5Flux")
+#' filename_ERA5 <- system.file("extdata", "BR-Sa1_tp_2002_2011.csv", package = "ERA5Flux")
+#' varname_FLUX <- c("P")
+#' varname_ERA5 <- c("tp")
+#' merged_data <- merge_ERA5_FLUX(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)                    
+#' blending_rule <- c('lm_no_intercept')                 
 #' merg_blend <- blend_ERA5_Flux(merged_data, varname_FLUX, varname_ERA5, blending_rule)
 #'
-#'  2nd example
-#' Please first make sure to run the merge function (03_01_merge_ERA5_FLUX.R) first, because output of merge function will be used as input of this blending function
-#' merged_data <- merge_ERA5_FLUX(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
-#' varname_FLUX <- c('SW_IN', 'TA', 'P')                            
-#' varname_ERA5 <- c('ssrd', 't2m', 'tp')                          
+#' second example
+#' filename_FLUX <- system.file("extdata", "AMF_US-EvM_BASE-BADM_2-5.zip", package = "ERA5Flux")
+#' filename_ERA5 <- system.file("extdata", "US-EvM_ERA_2020_2023_hr.csv", package = "ERA5Flux")
+#' varname_FLUX <- c('SW_IN', 'TA')
+#' varname_ERA5 <- c('ssrd', 't2m')
+#' merged_data <- merge_ERA5_FLUX(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)                   
 #' blending_rule <- c('replace', 'automatic')                 
 #' merg_blend <- blend_ERA5_Flux(merged_data, varname_FLUX, varname_ERA5, blending_rule)
 #'
