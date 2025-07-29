@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 #' .. this function is designed to calculate UTC offset given a local time . ..
 #'
 #' @title utc_offset, this function will produce a hour offset number converting local to UTC.
@@ -18,6 +19,33 @@
 #' utc_result_winter <- date_conversion(25.2, -80.4, "2018-01-16 22:02:37", 0)
 #' @author Boya ("Paul") Zhang
 #'
+=======
+##' .. this function is designed to calculate UTC offset given a local time . ..
+##'
+##' @title check_DST()
+##' @param lat, lon, and timepoint
+##' @return DST status
+##' @note Check if the given time point is in Daylight Saving Time
+##' @example 
+##' timepoint <- now()  # This will get the current time
+##' is_DST <- check_DST(lat, lon, timepoint)
+
+##' @title utc_offset, this function will produce a hour offset number converting local to UTC.
+##' @param input lat, lon
+##' @return UTC offset
+##' @note Offset is the difference between UTC and local time without considering Daylight Saving Time
+##' @example 
+##' offset <- utc_offset(25.4, -80.5)
+##' 
+##' @title date_conversion, this function will produce a converted time, either utc -> local, or local -> utc
+##' @param input lat, lon, time (string format), flag (flag == 0 local to utc, flag == 1 utc to local)
+##' @note IT TAKES INTO ACCOUNT Daylight Saving Time!!
+##' @example 
+##' utc_result_winter <- date_conversion(25.2, -80.4, "2018-01-16 22:02:37", 0)
+##' local_result <- date_conversion(lat, lon, "2018-01-16 22:02:37", 1)
+##' @author Boya ("Paul") Zhang
+##' 
+>>>>>>> Stashed changes
 
 library(lutz)
 library(lubridate)
@@ -29,6 +57,7 @@ library(data.table)
 #library(timechange)
 #library(purrr)
 
+<<<<<<< Updated upstream
 #rm(list = ls())
 dt <- data.table(
   local_time = c("2018-01-16 22:02:37"),
@@ -42,6 +71,8 @@ lon <- -80.1918
 time <- "2018-01-16 22:02:37"
 flag <- 0 ### local to utc
 
+=======
+>>>>>>> Stashed changes
 check_DST <- function(lat, lon, timepoint) {
   # Get the timezone based on lat, lon
   timezone <- tz_lookup_coords(lat = lat, lon = lon, method = "accurate")
@@ -64,11 +95,6 @@ check_DST <- function(lat, lon, timepoint) {
   # Return a list with DST status and the standard time if DST is in effect
   return(list(is_DST = is_DST, standard_time = standard_time))
 }
-
-timepoint <- now()  # This will get the current time
-
-# Check if the current time is DST
-is_DST <- check_DST(lat, lon, timepoint)
 
 utc_offset <- function(lat, lon) {
   # Get timezone for the given coordinates
@@ -102,11 +128,6 @@ utc_offset <- function(lat, lon) {
   return(offset_hours)
 }
 
-
-
-offset <- utc_offset(lat, lon)
-
-
 date_conversion <- function(lat, lon, time, flag) {
 
   # Get timezone for the given coordinates
@@ -127,15 +148,10 @@ date_conversion <- function(lat, lon, time, flag) {
   }
 }
 
-utc_result_winter <- date_conversion(lat, lon, "2018-01-16 22:02:37", 0)
-utc_result_summer <- date_conversion(lat, lon, "2018-07-16 22:02:37", 0)
 
-local_result <- date_conversion(lat, lon, "2018-01-16 22:02:37", 1)
 
-####################### Block below used for dataframe with multiple rows ###########
-############### converting utc to local ########
-dt[, utc_time := as.POSIXct(utc_time, format = "%Y-%m-%d %H:%M:%S", tz = "UTC")]
 
+<<<<<<< Updated upstream
 # Get timezone for each coordinate
 dt[, timezone := tz_lookup_coords(lat = lat, lon = long, method = "accurate")]
 
@@ -148,4 +164,6 @@ dt[, timezone := tz_lookup_coords(lat = lat, lon = long, method = "accurate")]
 dt[, local_time := as.POSIXct(local_time, format = "%Y-%m-%d %H:%M:%S", tz = timezone)]
 
 dt[, utc_time_result := with_tz(local_time, "UTC")]
+=======
+>>>>>>> Stashed changes
 
