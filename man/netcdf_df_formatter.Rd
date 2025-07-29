@@ -2,35 +2,36 @@
 % Please edit documentation in R/02_csv_conversion.R
 \name{netcdf_df_formatter}
 \alias{netcdf_df_formatter}
-\title{netcdf_df_formatter}
+\title{NetCDF Reformatter}
 \usage{
-netcdf_df_formatter(nc_file_path)
+netcdf_df_formatter(nc_file_path = NULL)
 }
 \arguments{
-\item{nc_file_path}{file path to ERA5 netcdf file}
+\item{nc_file_path}{(character) File path to ERA5 NetCDF file.}
 }
 \value{
-dataframe if the following characteristics:
-
-Datetime stamp column named "time".
-UTC timezones converted to local time.
-SiteID is determined from lat and lon coordinates in df.sitemetadata.
-Time column formatted as yyyyMMddHHmm, time zone determined using coordinates
-Variables names from ERA5 dataset maintained
-ERA5 units converted to Ameriflux units:
-
-Solar radiation (ssrd) from Jm-2 to Wm-2.
-
-Air Temperature (t2m) from Kelvin to celsius.
-
-Total precipitation (tp) from meters to millimeters.
+(data.frame) Data frame of the following characteristics:
+\itemize{
+\item Datetime stamp column named "time".
+\item UTC timezones converted to local time.
+\item SiteID is determined from lat and lon coordinates in df.sitemetadata.
+\item Time column formatted as yyyyMMddHHmm, time zone determined using coordinates.
+\item Variables names from ERA5 dataset maintained.
+\item ERA5 units converted to Ameriflux units:
+\itemize{
+\item Solar radiation (ssrd) from Jm-2 to Wm-2.
+\item Air Temperature (t2m) from Kelvin to Celsius.
+\item Total precipitation (tp) from meters to millimeters.
+}
+}
 }
 \description{
-netcdf_df_formatter
+Reformats ERA5 .nc data into a data frame.
 }
 \examples{
-
+# Point to a NetCDF file
 nc_file_path <- system.file("extdata","data_stream-oper_stepType-accum1.nc", package = "ERA5Flux")
+# Reformat the NetCDF
 netcdf_df_formatter(nc_file_path)
 
 }
