@@ -2,21 +2,25 @@
 % Please edit documentation in R/day_padding.R
 \name{day_padding}
 \alias{day_padding}
-\title{day_padding, this function will produce a new starting and ending day.}
+\title{Pad Dates by 1 Day}
 \usage{
-day_padding(start_day, end_day)
+day_padding(start_day = NULL, end_day = NULL)
 }
 \arguments{
-\item{input}{start and end day}
+\item{start_day}{(character) Start date in either \%Y-\%m-\%d or \%Y/\%m/\%d format.}
+
+\item{end_day}{(character) End date in either \%Y-\%m-\%d or \%Y/\%m/\%d format.}
 }
 \value{
-new start and end day
+(character) New start and end dates in either \%Y-\%m-\%d or \%Y/\%m/\%d format, padded by 1 day each.
 }
 \description{
-.. this function is designed to pad 1 day for the beginning and ending day. ..
+This function is designed to pad 1 day for the beginning and ending days. It will add 1 day to start and end dates for future time zone offset issues.
 }
 \examples{
+# Pad starting and ending dates by 1 day
 result <- day_padding("2024-01-01", "2025-12-31")
+
 }
 \author{
 Boya ("Paul") Zhang
