@@ -57,22 +57,6 @@ library(data.table)
 #library(timechange)
 #library(purrr)
 
-<<<<<<< Updated upstream
-#rm(list = ls())
-dt <- data.table(
-  local_time = c("2018-01-16 22:02:37"),
-  utc_time =c("2018-01-16 22:02:37"),
-  lat = c(25.0433),
-  long = c(-80.1918)
-)
-
-lat <- 25.0433
-lon <- -80.1918
-time <- "2018-01-16 22:02:37"
-flag <- 0 ### local to utc
-
-=======
->>>>>>> Stashed changes
 check_DST <- function(lat, lon, timepoint) {
   # Get the timezone based on lat, lon
   timezone <- tz_lookup_coords(lat = lat, lon = lon, method = "accurate")
@@ -151,19 +135,5 @@ date_conversion <- function(lat, lon, time, flag) {
 
 
 
-<<<<<<< Updated upstream
-# Get timezone for each coordinate
-dt[, timezone := tz_lookup_coords(lat = lat, lon = long, method = "accurate")]
 
-# Convert UTC time to local time using the determined timezone
-dt[, local_time_result := with_tz(utc_time, timezone)]
-
-####### converting local to utc #####
-dt[, timezone := tz_lookup_coords(lat = lat, lon = long, method = "accurate")]
-
-dt[, local_time := as.POSIXct(local_time, format = "%Y-%m-%d %H:%M:%S", tz = timezone)]
-
-dt[, utc_time_result := with_tz(local_time, "UTC")]
-=======
->>>>>>> Stashed changes
 
