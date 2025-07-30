@@ -7,13 +7,12 @@
 #'
 #' @param filename_FLUX (character) The file path to AmeriFlux BASE data downloaded from https://ameriflux.lbl.gov/.
 #' @param filename_ERA5 (character) The file path to a CSV file of meterological data downloaded from ERA5 https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels?tab=overview. Please note that the original ERA5 files are in .nc format. You may want to convert these files into CSV format using the function `netcdf_to_csv()`.
-#' @param varname_FLUX (character) Variable names in AmeriFlux BASE data to be merged with ERA5 data.
-#' @param varname_ERA5 (character) Variable names in ERA5 data to be merged with AmeriFlux BASE data.
+#' @param varname_FLUX (character) A vector of variable names in AmeriFlux BASE data to be merged with ERA5 data.
+#' @param varname_ERA5 (character) A vector of variable names in ERA5 data to be merged with AmeriFlux BASE data.
 #'
-#' @note Please note that the length of `varname_FLUX` must be the same as the length of `varname_ERA5`; at the same location, `varname_FLUX` and `varname_ERA5` should refer to the same variable despite the fact that AmeriFlux and ERA5 may use different names for the same variable. For example, for incoming shortwave radiation, ERA5 uses ssrd, but AmeriFlux uses SW_IN.
+#' @note Please note that the length of `varname_FLUX` must be the same as the length of `varname_ERA5`; at the same location, `varname_FLUX` and `varname_ERA5` should refer to the same variable despite the fact that AmeriFlux and ERA5 may use different names for the same variable. For example, for incoming shortwave radiation, ERA5 uses "ssrd", but AmeriFlux uses "SW_IN".
 #'
 #' @return (data.frame) A data frame with the following characteristics:
-#'
 #' - Datetime stamp column named "time" with the format: "%Y-%m-%d %H:%M:%S".
 #' - Time step of the "time" column is the same with that of AmeriFlux file.
 #' - It also includes the columns of `varname_FLUX`, the columns of `varname_ERA5`.
@@ -25,9 +24,9 @@
 #' filename_FLUX <- system.file("extdata", "AMF_BR-Sa1_BASE-BADM_5-5.zip", package = "ERA5Flux")
 #' # Point to ERA5 data
 #' filename_ERA5 <- system.file("extdata", "BR-Sa1_tp_2002_2011.csv", package = "ERA5Flux")
-#' # List AmeriFlux variables to be merged with ERA5
+#' # List AmeriFlux variable(s) to be merged with ERA5
 #' varname_FLUX <- c("P")
-#' # List ERA5 variables to be merged with AmeriFlux
+#' # List ERA5 variable(s) to be merged with AmeriFlux
 #' varname_ERA5 <- c("tp")
 #' # Merge AmeriFlux and ERA5 data together
 #' merged_data <- merge_ERA5_FLUX(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
@@ -37,9 +36,9 @@
 #' filename_FLUX <- system.file("extdata", "AMF_US-EvM_BASE-BADM_2-5.zip", package = "ERA5Flux")
 #' # Point to ERA5 data
 #' filename_ERA5 <- system.file("extdata", "US-EvM_ERA_2020_2023_hr.csv", package = "ERA5Flux")
-#' # List AmeriFlux variables to be merged with ERA5
+#' # List AmeriFlux variable(s) to be merged with ERA5
 #' varname_FLUX <- c('SW_IN', 'TA')
-#' # List ERA5 variables to be merged with AmeriFlux
+#' # List ERA5 variable(s) to be merged with AmeriFlux
 #' varname_ERA5 <- c('ssrd', 't2m')
 #' # Merge AmeriFlux and ERA5 data together
 #' merged_data <- merge_ERA5_FLUX(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
