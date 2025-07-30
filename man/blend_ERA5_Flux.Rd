@@ -2,63 +2,77 @@
 % Please edit documentation in R/03_02_blend_ERA5_FLUX.R
 \name{blend_ERA5_Flux}
 \alias{blend_ERA5_Flux}
-\title{blend_ERA5_FLUX}
+\title{Blend ERA5 and AmeriFlux Data}
 \usage{
-blend_ERA5_Flux(merged_data, varname_FLUX, varname_ERA5, blending_rule)
+blend_ERA5_Flux(
+  merged_data = NULL,
+  varname_FLUX = NULL,
+  varname_ERA5 = NULL,
+  blending_rule = NULL
+)
 }
 \arguments{
-\item{merged_data:}{merged_data <- merge_ERA5_FLUX(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
-this dataframe has Datetime stamp column named "time" with the format: "\%Y-\%m-\%d \%H:\%M:\%S"
-time step of the "time" column is the same with that of AmeriFlux file
-It also includes the columns of varname_FLUX, the columns of varname_ERA5
-varname_FLUX: variable names in AmeriFlux BASE data to be blended with ERA5 data
-varname_ERA5: variable names in ERA5 data to be blended with AmeriFlux BASE data
-please note that the length of varname_FLUX must be the same as the length of varname_ERA5; at the same location, varname_FLUX and varname_ERA5 should refer to the same variable despite AmeriFlux and ERA5 may use different names for the same variable. For example, for incoming shortwave radiation, ERA5 uses ssrd, but AmeriFlux uses SW_IN.
-blending_rule: There are four types of blending rules that can be used to blend AmeriFlux and ERA5 variables
+\item{merged_data}{(data.frame) A data frame that has a datetime stamp column named "time" with the format: "\%Y-\%m-\%d \%H:\%M:\%S". The time step of the "time" column is the same with that of AmeriFlux file. It also includes the columns of AmeriFlux and ERA5 data that were merged together.}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{           'lm': linear regression with slope
-                 Fits a linear model with slope: FLUX ~ ERA5, then Only fills missing values in FLUX with predicted values from ERA5.
+\item{varname_FLUX}{(character) A vector of variable names in AmeriFlux BASE data to be blended with ERA5 data.}
 
-           'lm_no_intercept': linear regression without slope
-                              Fits a linear model with slope: FLUX ~ ERA5, then Only fills missing values in FLUX with predicted values from ERA5.   
+\item{varname_ERA5}{(character) A vector of variable names in ERA5 data to be blended with AmeriFlux BASE data.}
 
-           'replace' : replace Ameriflux variable with ERA5 variable
-
-           'automatic' : Checks for non-missing FLUX values
-                          If ≥50\% present then uses "lm" approach
-                          If <50\% present then fallback to "replace"
-}\if{html}{\out{</div>}}}
+\item{blending_rule}{(character) There are four types of blending rules that can be used to blend AmeriFlux and ERA5 variables:
+\itemize{
+\item "lm": Linear regression with slope. Fits a linear model with slope, FLUX ~ ERA5, then only fills missing values in FLUX with predicted values from ERA5.
+\item "lm_no_intercept": Linear regression without slope. Fits a linear model without slope, FLUX ~ ERA5, then only fills missing values in FLUX with predicted values from ERA5.
+\item "replace": Replace Ameriflux variable with ERA5 variable.
+\item "automatic": Checks for non-missing FLUX values. If ≥50\% present then uses "lm" approach. If <50\% present then fallback to "replace".
+}}
 }
 \value{
-dataframe with the following characteristics:
-
-time step of the "time" column is the same with that of AmeriFlux file;
-It also includes the columns of varname_FLUX, the columns of varname_ERA5
-variable column with applying blending rule applied on it. name of blended column is simialr to Ameriflux column name but with addition of "_f"
+(data.frame) A data frame with the following characteristics:
+\itemize{
+\item Time step of the "time" column is the same with that of AmeriFlux file.
+\item It also includes the columns of \code{varname_FLUX}, the columns of \code{varname_ERA5}.
+\item Variable column with the blending rule applied on it. Name of the blended column is similar to AmeriFlux column name but with addition of "_f".
+}
 }
 \description{
-this function is used to blend data from AmeriFlux and data from ERA5, ensuring they have the same start and end of timestamp and timestep with AmeriFlux data
-Please first make sure to run the merge function (03_01_merge_ERA5_FLUX.R) first, because output of merge function will be used as input of this blending function
+This function is used to blend data from AmeriFlux and data from ERA5, ensuring they both have the same start and end timestamps. Please first make sure to run the merge function (\code{merge_ERA5_FLUX()}) first, because output of merge function will be used as input of this blending function.
+}
+\note{
+Please note that the length of \code{varname_FLUX} must be the same as the length of \code{varname_ERA5}; at the same location, \code{varname_FLUX} and \code{varname_ERA5} should refer to the same variable despite the fact that AmeriFlux and ERA5 may use different names for the same variable. For example, for incoming shortwave radiation, ERA5 uses "ssrd", but AmeriFlux uses "SW_IN".
 }
 \examples{
 
-first example
-Please first make sure to run the merge function (03_01_merge_ERA5_FLUX.R) first, because output of merge function will be used as input of this blending function
+# First example
+# Please first make sure to run the merge function (`merge_ERA5_FLUX()`) first, because output of merge function will be used as input of this blending function
+# Point to AmeriFlux data
 filename_FLUX <- system.file("extdata", "AMF_BR-Sa1_BASE-BADM_5-5.zip", package = "ERA5Flux")
+# Point to ERA5 data
 filename_ERA5 <- system.file("extdata", "BR-Sa1_tp_2002_2011.csv", package = "ERA5Flux")
+# List AmeriFlux variable(s) to be merged with ERA5
 varname_FLUX <- c("P")
+# List ERA5 variable(s) to be merged with AmeriFlux
 varname_ERA5 <- c("tp")
-merged_data <- merge_ERA5_FLUX(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)                    
-blending_rule <- c('lm_no_intercept')                 
+# Merge AmeriFlux and ERA5 data together
+merged_data <- merge_ERA5_FLUX(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
+# Specify the blending rule(s)
+blending_rule <- c('lm_no_intercept')
+# Blend AmeriFlux and ERA5 data together
 merg_blend <- blend_ERA5_Flux(merged_data, varname_FLUX, varname_ERA5, blending_rule)
 
-second example
+# Second example
+# Point to AmeriFlux data
 filename_FLUX <- system.file("extdata", "AMF_US-EvM_BASE-BADM_2-5.zip", package = "ERA5Flux")
+# Point to ERA5 data
 filename_ERA5 <- system.file("extdata", "US-EvM_ERA_2020_2023_hr.csv", package = "ERA5Flux")
+# List AmeriFlux variable(s) to be merged with ERA5
 varname_FLUX <- c('SW_IN', 'TA')
+# List ERA5 variable(s) to be merged with AmeriFlux
 varname_ERA5 <- c('ssrd', 't2m')
-merged_data <- merge_ERA5_FLUX(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)                   
-blending_rule <- c('replace', 'automatic')                 
+# Merge AmeriFlux and ERA5 data together
+merged_data <- merge_ERA5_FLUX(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
+# Specify the blending rule(s)
+blending_rule <- c('replace', 'automatic')
+# Blend AmeriFlux and ERA5 data together
 merg_blend <- blend_ERA5_Flux(merged_data, varname_FLUX, varname_ERA5, blending_rule)
 
 }
