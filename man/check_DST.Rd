@@ -21,7 +21,7 @@ This function will check if a given time point is in Daylight Saving Time (DST).
 }
 \examples{
 # This will get the current time
-timepoint <- now()
+timepoint <- lubridate::now()
 # Check whether the time is in DST at latitude 25.4, longitude -80.5 and get the standard time if so
 is_DST <- check_DST(lat = 25.4, lon = -80.5, timepoint)
 
