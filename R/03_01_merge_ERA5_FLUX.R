@@ -12,6 +12,8 @@
 #'
 #' @note Please note that the length of `varname_FLUX` must be the same as the length of `varname_ERA5`; at the same location, `varname_FLUX` and `varname_ERA5` should refer to the same variable despite the fact that AmeriFlux and ERA5 may use different names for the same variable. For example, for incoming shortwave radiation, ERA5 uses "ssrd", but AmeriFlux uses "SW_IN".
 #'
+#' @export
+#'
 #' @return (data.frame) A data frame with the following characteristics:
 #' - Datetime stamp column named "time" with the format: "%Y-%m-%d %H:%M:%S".
 #' - Time step of the "time" column is the same with that of AmeriFlux file.
