@@ -88,12 +88,12 @@ developing.
 
 **Step 1:** Click to anywhere inside your function.
 
-![](images/funct_doc1.png)
+![](man/figures/funct_doc1.png)
 
 **Step 2:** Go to Code -\> Insert Roxygen Skeleton. This will populate
 your script with some template roxygen comments.
 
-![](images/funct_doc2.png)
+![](man/figures/funct_doc2.png)
 
 **Step 3:** Fill out the template roxygen comments. You can learn more
 about what to write in these comments
@@ -102,7 +102,7 @@ documentation in
 CarbonExchangeParameters](https://github.com/Malone-Disturbance-Ecology-Lab/CarbonExchangeParameters/tree/main/R)
 as an example. Do not put anything under “@export”.
 
-![](images/funct_doc3.png)
+![](man/figures/funct_doc3.png)
 
 Notes: If you have sample data that you would like to use in your
 function examples, you can put them under `inst/extdata/`. Then you can

@@ -80,15 +80,15 @@ Scripts are organized into the following groups
 
 **Step 1:** Click to anywhere inside your function.
 
-![](images/funct_doc1.png)
+![](man/figures/funct_doc1.png)
 
 **Step 2:** Go to Code -> Insert Roxygen Skeleton. This will populate your script with some template roxygen comments.
 
-![](images/funct_doc2.png)
+![](man/figures/funct_doc2.png)
 
 **Step 3:** Fill out the template roxygen comments. You can learn more about what to write in these comments [here](https://r-pkgs.org/man.html). Or you can view the [function documentation in CarbonExchangeParameters](https://github.com/Malone-Disturbance-Ecology-Lab/CarbonExchangeParameters/tree/main/R) as an example. Do not put anything under "\@export".
 
-![](images/funct_doc3.png)
+![](man/figures/funct_doc3.png)
 
 Notes: If you have sample data that you would like to use in your function examples, you can put them under `inst/extdata/`. Then you can reference your sample data with something like `system.file("extdata", "your-file.nc", package = "ERA5Flux")`. For functions that export a file, you will need to make sure to have a function argument that lets the user specify where they would like to export the file output. Then in the function example, you can just make the example export to a temporary folder with `tempdir()`. This is because CRAN does not allow functions that export something without letting the user decide where it goes. See `netcdf_to_csv()` for an example.
 
