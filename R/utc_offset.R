@@ -67,7 +67,6 @@ check_DST <- function(lat = NULL,
 #' @examples
 #' # Get the UTC offset at latitude 25.4, longitude -80.5
 #' offset <- utc_offset(lat = 25.4, lon = -80.5)
-#' offset
 #'
 utc_offset <- function(lat = NULL,
                        lon = NULL) {
