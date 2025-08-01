@@ -31,7 +31,7 @@ output_filepath <- tempdir()
 netcdf_to_csv(site_folder, output_filepath, "US_TaS")
 
 # Read the CSV back in
-data <- read.csv(list.files(output_filepath, pattern = "US_TaS", full.names = T))
+data <- read.csv(list.files(output_filepath, pattern = "US_TaS", full.names = TRUE))
 head(data)
 
 }

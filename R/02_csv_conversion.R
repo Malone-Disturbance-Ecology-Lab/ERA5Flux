@@ -118,7 +118,7 @@ netcdf_df_formatter <- function(nc_file_path = NULL) {
 #' netcdf_to_csv(site_folder, output_filepath, "US_TaS")
 #'
 #' # Read the CSV back in
-#' data <- read.csv(list.files(output_filepath, pattern = "US_TaS", full.names = T))
+#' data <- read.csv(list.files(output_filepath, pattern = "US_TaS", full.names = TRUE))
 #' head(data)
 #'
 netcdf_to_csv <- function(site_folder = NULL,
