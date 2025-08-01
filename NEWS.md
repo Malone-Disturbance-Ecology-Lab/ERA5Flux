@@ -1,3 +1,3 @@
-# ERA5Flux (development version)
+# ERA5Flux 0.0.0.9000
 
-* Initial CRAN submission.
+* This package is currently in development.
