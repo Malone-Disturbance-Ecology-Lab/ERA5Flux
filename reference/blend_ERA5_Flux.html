@@ -106,6 +106,14 @@
 <span class="r-in"><span><span class="co"># Blend AmeriFlux and ERA5 data together</span></span></span>
 <span class="r-in"><span><span class="va">merg_blend</span> <span class="op">&lt;-</span> <span class="fu">blend_ERA5_Flux</span><span class="op">(</span><span class="va">merged_data</span>, <span class="va">varname_FLUX</span>, <span class="va">varname_ERA5</span>, <span class="va">blending_rule</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: P using rule: lm_no_intercept</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">merg_blend</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  time        tp  P P_f</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 2002-01-01 00:00:00 0.2252227 NA  NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2002-01-01 01:00:00 0.4244113 NA  NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 2002-01-01 02:00:00 0.3902548 NA  NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 2002-01-01 03:00:00 0.6315456 NA  NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 2002-01-01 04:00:00 0.2987110 NA  NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 2002-01-01 05:00:00 0.3121161 NA  NA</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Second example</span></span></span>
 <span class="r-in"><span><span class="co"># Point to AmeriFlux data</span></span></span>
@@ -125,6 +133,14 @@
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: SW_IN using rule: replace</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: TA using rule: automatic</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Fitting linear model with formula: TA ~ t2m</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">merg_blend</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  time ssrd      t2m SW_IN TA SW_IN_f     TA_f</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 2020-01-01 00:00:00    0 22.04965    NA NA       0 21.24062</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2020-01-01 00:30:00    0 21.83630    NA NA       0 20.95910</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 2020-01-01 01:00:00    0 21.62295    NA NA       0 20.67757</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 2020-01-01 01:30:00    0 21.40405    NA NA       0 20.38873</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 2020-01-01 02:00:00    0 21.18514    NA NA       0 20.09988</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 2020-01-01 02:30:00    0 20.99367    NA NA       0 19.84723</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

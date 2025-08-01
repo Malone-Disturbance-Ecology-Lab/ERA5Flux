@@ -80,9 +80,14 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Convert local to UTC</span></span></span>
 <span class="r-in"><span><span class="va">utc_result_winter</span> <span class="op">&lt;-</span> <span class="fu">date_conversion</span><span class="op">(</span><span class="fl">25.2</span>, <span class="op">-</span><span class="fl">80.4</span>, <span class="st">"2018-01-16 22:02:37"</span>, <span class="fl">0</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "America/New_York"</span>
+<span class="r-in"><span><span class="va">utc_result_winter</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2018-01-16 22:02:37 UTC"</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Convert UTC to local</span></span></span>
 <span class="r-in"><span><span class="va">local_result</span> <span class="op">&lt;-</span> <span class="fu">date_conversion</span><span class="op">(</span><span class="fl">25.2</span>, <span class="op">-</span><span class="fl">80.4</span>, <span class="st">"2018-01-16 22:02:37"</span>, <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "America/New_York"</span>
+<span class="r-in"><span><span class="va">local_result</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2018-01-16 17:02:37 EST"</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
