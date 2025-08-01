@@ -90,7 +90,6 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># First example</span></span></span>
-<span class="r-in"><span><span class="co"># Please first make sure to run the merge function (`merge_ERA5_FLUX()`) first, because output of merge function will be used as input of this blending function</span></span></span>
 <span class="r-in"><span><span class="co"># Point to AmeriFlux data</span></span></span>
 <span class="r-in"><span><span class="va">filename_FLUX</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"AMF_BR-Sa1_BASE-BADM_5-5.zip"</span>, package <span class="op">=</span> <span class="st">"ERA5Flux"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># Point to ERA5 data</span></span></span>
@@ -99,6 +98,7 @@
 <span class="r-in"><span><span class="va">varname_FLUX</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"P"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># List ERA5 variable(s) to be merged with AmeriFlux</span></span></span>
 <span class="r-in"><span><span class="va">varname_ERA5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tp"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Run the merge function first, because its output will be used as input for this blending function</span></span></span>
 <span class="r-in"><span><span class="co"># Merge AmeriFlux and ERA5 data together</span></span></span>
 <span class="r-in"><span><span class="va">merged_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="merge_ERA5_FLUX.html">merge_ERA5_FLUX</a></span><span class="op">(</span><span class="va">filename_FLUX</span>, <span class="va">filename_ERA5</span>, <span class="va">varname_FLUX</span>, <span class="va">varname_ERA5</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># Specify the blending rule(s)</span></span></span>
