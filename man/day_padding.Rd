@@ -20,6 +20,7 @@ This function is designed to pad 1 day for the beginning and ending days. It wil
 \examples{
 # Pad starting and ending dates by 1 day
 result <- day_padding("2024-01-01", "2025-12-31")
+result
 
 }
 \author{

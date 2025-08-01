@@ -16,6 +16,7 @@
 #' timepoint <- lubridate::now()
 #' # Check whether the time is in DST at latitude 25.4, longitude -80.5 and get the standard time if so
 #' is_DST <- check_DST(lat = 25.4, lon = -80.5, timepoint)
+#' is_DST
 #'
 check_DST <- function(lat = NULL,
                       lon = NULL,
@@ -41,7 +42,7 @@ check_DST <- function(lat = NULL,
   # If it is in DST, adjust the time to the standard (non-DST) time
   if (is_DST) {
     # Subtract the DST offset to get standard time (non-DST)
-    standard_time <- timepoint - hours(1)
+    standard_time <- timepoint - lubridate::hours(1)
   } else {
     # If not in DST, no adjustment is needed
     standard_time <- timepoint
@@ -66,6 +67,7 @@ check_DST <- function(lat = NULL,
 #' @examples
 #' # Get the UTC offset at latitude 25.4, longitude -80.5
 #' offset <- utc_offset(lat = 25.4, lon = -80.5)
+#' offset
 #'
 utc_offset <- function(lat = NULL,
                        lon = NULL) {
@@ -125,8 +127,11 @@ utc_offset <- function(lat = NULL,
 #' @examples
 #' # Convert local to UTC
 #' utc_result_winter <- date_conversion(25.2, -80.4, "2018-01-16 22:02:37", 0)
+#' utc_result_winter
+#'
 #' # Convert UTC to local
 #' local_result <- date_conversion(25.2, -80.4, "2018-01-16 22:02:37", 1)
+#' local_result
 #'
 #' @author Boya ("Paul") Zhang
 #'

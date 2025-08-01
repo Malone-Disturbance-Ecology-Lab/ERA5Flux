@@ -27,8 +27,11 @@ IT TAKES INTO ACCOUNT Daylight Saving Time!!
 \examples{
 # Convert local to UTC
 utc_result_winter <- date_conversion(25.2, -80.4, "2018-01-16 22:02:37", 0)
+utc_result_winter
+
 # Convert UTC to local
 local_result <- date_conversion(25.2, -80.4, "2018-01-16 22:02:37", 1)
+local_result
 
 }
 \author{

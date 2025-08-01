@@ -23,7 +23,8 @@
 #' # Point to a NetCDF file
 #' nc_file_path <- system.file("extdata","data_stream-oper_stepType-accum1.nc", package = "ERA5Flux")
 #' # Reformat the NetCDF
-#' netcdf_df_formatter(nc_file_path)
+#' result <- netcdf_df_formatter(nc_file_path)
+#' head(result)
 #'
 netcdf_df_formatter <- function(nc_file_path = NULL) {
   # Error out if no file path is provided
@@ -118,6 +119,7 @@ netcdf_df_formatter <- function(nc_file_path = NULL) {
 #'
 #' # Read the CSV back in
 #' data <- read.csv(list.files(output_filepath, pattern = "US_TaS", full.names = T))
+#' head(data)
 #'
 netcdf_to_csv <- function(site_folder = NULL,
                           output_filepath = NULL,

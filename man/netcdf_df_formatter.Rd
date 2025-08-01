@@ -32,6 +32,7 @@ Reformats ERA5 .nc data into a data frame.
 # Point to a NetCDF file
 nc_file_path <- system.file("extdata","data_stream-oper_stepType-accum1.nc", package = "ERA5Flux")
 # Reformat the NetCDF
-netcdf_df_formatter(nc_file_path)
+result <- netcdf_df_formatter(nc_file_path)
+head(result)
 
 }

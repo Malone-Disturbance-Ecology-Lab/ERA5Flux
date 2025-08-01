@@ -58,6 +58,7 @@ merged_data <- merge_ERA5_FLUX(filename_FLUX, filename_ERA5, varname_FLUX, varna
 blending_rule <- c('lm_no_intercept')
 # Blend AmeriFlux and ERA5 data together
 merg_blend <- blend_ERA5_Flux(merged_data, varname_FLUX, varname_ERA5, blending_rule)
+head(merg_blend)
 
 # Second example
 # Point to AmeriFlux data
@@ -74,6 +75,7 @@ merged_data <- merge_ERA5_FLUX(filename_FLUX, filename_ERA5, varname_FLUX, varna
 blending_rule <- c('replace', 'automatic')
 # Blend AmeriFlux and ERA5 data together
 merg_blend <- blend_ERA5_Flux(merged_data, varname_FLUX, varname_ERA5, blending_rule)
+head(merg_blend)
 
 }
 \author{

@@ -12,6 +12,7 @@
 #' @examples
 #' # Pad starting and ending dates by 1 day
 #' result <- day_padding("2024-01-01", "2025-12-31")
+#' result
 #'
 #' @author Boya ("Paul") Zhang
 #'

@@ -32,6 +32,7 @@
 #' varname_ERA5 <- c("tp")
 #' # Merge AmeriFlux and ERA5 data together
 #' merged_data <- merge_ERA5_FLUX(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
+#' head(merged_data)
 #'
 #' # Second example
 #' # Point to AmeriFlux data
@@ -44,6 +45,7 @@
 #' varname_ERA5 <- c('ssrd', 't2m')
 #' # Merge AmeriFlux and ERA5 data together
 #' merged_data <- merge_ERA5_FLUX(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
+#' head(merged_data)
 #'
 merge_ERA5_FLUX <- function(filename_FLUX = NULL,
                             filename_ERA5 = NULL,

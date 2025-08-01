@@ -41,6 +41,7 @@
 #' blending_rule <- c('lm_no_intercept')
 #' # Blend AmeriFlux and ERA5 data together
 #' merg_blend <- blend_ERA5_Flux(merged_data, varname_FLUX, varname_ERA5, blending_rule)
+#' head(merg_blend)
 #'
 #' # Second example
 #' # Point to AmeriFlux data
@@ -57,6 +58,7 @@
 #' blending_rule <- c('replace', 'automatic')
 #' # Blend AmeriFlux and ERA5 data together
 #' merg_blend <- blend_ERA5_Flux(merged_data, varname_FLUX, varname_ERA5, blending_rule)
+#' head(merg_blend)
 #'
 blend_ERA5_Flux <- function(merged_data = NULL,
                             varname_FLUX = NULL,
