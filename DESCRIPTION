@@ -48,4 +48,5 @@ Imports:
     sf,
     terra,
     tidyr
-URL: https://malone-disturbance-ecology-lab.github.io/ERA5Flux/
+URL: https://github.com/Malone-Disturbance-Ecology-Lab/ERA5Flux, https://malone-disturbance-ecology-lab.github.io/ERA5Flux/
+BugReports: https://github.com/Malone-Disturbance-Ecology-Lab/ERA5Flux/issues
