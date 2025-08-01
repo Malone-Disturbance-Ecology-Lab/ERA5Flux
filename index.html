@@ -148,11 +148,11 @@
 </h2>
 <p><strong>Step 0:</strong> Enter into developer mode by running <code><a href="https://devtools.r-lib.org/" class="external-link">library(devtools)</a></code> and then <code>devtools::load_all()</code> to make your functions available for developing.</p>
 <p><strong>Step 1:</strong> Click to anywhere inside your function.</p>
-<p><img src="images/funct_doc1.png"></p>
+<p><img src="reference/figures/funct_doc1.png"></p>
 <p><strong>Step 2:</strong> Go to Code -&gt; Insert Roxygen Skeleton. This will populate your script with some template roxygen comments.</p>
-<p><img src="images/funct_doc2.png"></p>
+<p><img src="reference/figures/funct_doc2.png"></p>
 <p><strong>Step 3:</strong> Fill out the template roxygen comments. You can learn more about what to write in these comments <a href="https://r-pkgs.org/man.html" class="external-link">here</a>. Or you can view the <a href="https://github.com/Malone-Disturbance-Ecology-Lab/CarbonExchangeParameters/tree/main/R" class="external-link">function documentation in CarbonExchangeParameters</a> as an example. Do not put anything under “@export”.</p>
-<p><img src="images/funct_doc3.png"></p>
+<p><img src="reference/figures/funct_doc3.png"></p>
 <p>Notes: If you have sample data that you would like to use in your function examples, you can put them under <code>inst/extdata/</code>. Then you can reference your sample data with something like <code>system.file("extdata", "your-file.nc", package = "ERA5Flux")</code>. For functions that export a file, you will need to make sure to have a function argument that lets the user specify where they would like to export the file output. Then in the function example, you can just make the example export to a temporary folder with <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>. This is because CRAN does not allow functions that export something without letting the user decide where it goes. See <code><a href="reference/netcdf_to_csv.html">netcdf_to_csv()</a></code> for an example.</p>
 <p><strong>Step 4:</strong> Make sure your updated function script is under the “R” folder. Now render the documentation into an actual help page for the function using <code>devtools::document()</code>. This will generate a .Rd file inside the “man” folder. This becomes your function’s help page and you can now access it by typing <code>?your-function-name</code>.</p>
 <p><strong>Step 5:</strong> Always remember to push your commits to GitHub!</p>
