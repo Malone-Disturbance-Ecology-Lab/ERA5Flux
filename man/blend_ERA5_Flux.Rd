@@ -43,7 +43,6 @@ Please note that the length of \code{varname_FLUX} must be the same as the lengt
 \examples{
 
 # First example
-# Please first make sure to run the merge function (`merge_ERA5_FLUX()`) first, because output of merge function will be used as input of this blending function
 # Point to AmeriFlux data
 filename_FLUX <- system.file("extdata", "AMF_BR-Sa1_BASE-BADM_5-5.zip", package = "ERA5Flux")
 # Point to ERA5 data
@@ -52,6 +51,7 @@ filename_ERA5 <- system.file("extdata", "BR-Sa1_tp_2002_2011.csv", package = "ER
 varname_FLUX <- c("P")
 # List ERA5 variable(s) to be merged with AmeriFlux
 varname_ERA5 <- c("tp")
+# Run the merge function first, because its output will be used as input for this blending function
 # Merge AmeriFlux and ERA5 data together
 merged_data <- merge_ERA5_FLUX(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
 # Specify the blending rule(s)
