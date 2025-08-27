@@ -30,7 +30,7 @@ get_site_metadata <- function(folder = NULL,
   if (base::is.null(selected_variables)) stop("No variable provided")
 
   # Point to the "requested_files_manifest" file
-  manifest.file <- base::list.files(pattern = "requested_files_manifest")
+  manifest.file <- base::list.files(folder, pattern = "requested_files_manifest")
 
   # Read it in
   fluxmanifest  <- utils::read.csv(paste(manifest.file, sep = ""), skip = 3, header = TRUE)
