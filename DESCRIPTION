@@ -45,6 +45,7 @@ Imports:
     ncdf4,
     purrr,
     readr,
+    readxl,
     sf,
     terra,
     tidyr
