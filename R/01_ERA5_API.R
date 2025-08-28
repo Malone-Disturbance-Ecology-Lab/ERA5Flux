@@ -14,12 +14,20 @@
 #'
 #' @examples
 #' \dontrun{
+#' # Specify your variables
+#' my_variables <- c("2m_temperature", "total_precipitation", "surface_solar_radiation_downwards")
+#' # Create the AmeriFlux site metadata
+#' site_metadata <- get_site_metadata(folder = "path_to_data_folder",
+#'                                    selected_variables = my_variables)
+#'
 #' # Download the corresponding ERA5 data
 #' download_ERA5(my_token = "my_ECMWF_token",
-#'               site_metadata = site_metadata
+#'               site_metadata = site_metadata,
 #'               mask = "path_to_ERA5_land_sea_mask",
 #'               download_path = "path_to_ERA5_download_folder")
 #' }
+#'
+#' @author David Reed
 #'
 download_ERA5 <- function(my_token = NULL,
                           site_metadata = NULL,

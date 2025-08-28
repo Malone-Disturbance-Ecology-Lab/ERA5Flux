@@ -6,19 +6,20 @@
 \usage{
 download_ERA5(
   my_token = NULL,
-  site_metadata = NULL,
-  mask = NULL,
+  my_folder = NULL,
+  my_variables = NULL,
+  my_nc_file = NULL,
   download_path = NULL
 )
 }
 \arguments{
 \item{my_token}{(character) A secret ECMWF token.}
 
+\item{download_path}{(character) Path to the folder where the ERA5 data will get downloaded to.}
+
 \item{site_metadata}{(data.frame) A data frame that has the AmeriFlux site metadata. Create the metadata with \code{get_site_metadata()}.}
 
 \item{mask}{(character) File path to the ERA5 land-sea mask. Get the mask with \code{get_land_sea_mask()}.}
-
-\item{download_path}{(character) Path to the folder where the ERA5 data will get downloaded to.}
 }
 \value{
 (character) Paths to the downloaded files.
@@ -28,11 +29,20 @@ This function uses the \code{ecmwfr} package to download ERA5 data for each site
 }
 \examples{
 \dontrun{
+# Specify your variables
+my_variables <- c("2m_temperature", "total_precipitation", "surface_solar_radiation_downwards")
+# Create the AmeriFlux site metadata
+site_metadata <- get_site_metadata(folder = "path_to_data_folder",
+                                   selected_variables = my_variables)
+
 # Download the corresponding ERA5 data
 download_ERA5(my_token = "my_ECMWF_token",
-              site_metadata = site_metadata
+              site_metadata = site_metadata,
               mask = "path_to_ERA5_land_sea_mask",
               download_path = "path_to_ERA5_download_folder")
 }
 
+}
+\author{
+David Reed
 }
