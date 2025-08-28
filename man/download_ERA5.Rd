@@ -28,7 +28,6 @@ This function uses the \code{ecmwfr} package to download ERA5 data for each site
 }
 \examples{
 \dontrun{
-
 # Specify your variables
 my_variables <- c("2m_temperature", "total_precipitation", "surface_solar_radiation_downwards")
 # Create the AmeriFlux site metadata

@@ -14,7 +14,6 @@
 #'
 #' @examples
 #' \dontrun{
-#'
 #' # Specify your variables
 #' my_variables <- c("2m_temperature", "total_precipitation", "surface_solar_radiation_downwards")
 #' # Create the AmeriFlux site metadata
