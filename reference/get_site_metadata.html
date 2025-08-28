@@ -69,7 +69,9 @@ When downloading AmeriFlux data, select sites, download data and "requested_file
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span><span class="co"># Specify your variables</span></span></span>
 <span class="r-in"><span><span class="va">my_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2m_temperature"</span>, <span class="st">"total_precipitation"</span>, <span class="st">"surface_solar_radiation_downwards"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Create the AmeriFlux site metadata</span></span></span>
 <span class="r-in"><span><span class="va">site_metadata</span> <span class="op">&lt;-</span> <span class="fu">get_site_metadata</span><span class="op">(</span>folder <span class="op">=</span> <span class="st">"path_to_data_folder"</span>,</span></span>
 <span class="r-in"><span>                                   selected_variables <span class="op">=</span> <span class="va">my_variables</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
