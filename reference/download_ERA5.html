@@ -41,8 +41,9 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">download_ERA5</span><span class="op">(</span></span>
 <span>  my_token <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  site_metadata <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  mask <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  my_folder <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  my_variables <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  my_nc_file <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  download_path <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -55,6 +56,10 @@
 <dd><p>(character) A secret ECMWF token.</p></dd>
 
 
+<dt id="arg-download-path">download_path<a class="anchor" aria-label="anchor" href="#arg-download-path"></a></dt>
+<dd><p>(character) Path to the folder where the ERA5 data will get downloaded to.</p></dd>
+
+
 <dt id="arg-site-metadata">site_metadata<a class="anchor" aria-label="anchor" href="#arg-site-metadata"></a></dt>
 <dd><p>(data.frame) A data frame that has the AmeriFlux site metadata. Create the metadata with <code><a href="get_site_metadata.html">get_site_metadata()</a></code>.</p></dd>
 
@@ -62,19 +67,33 @@
 <dt id="arg-mask">mask<a class="anchor" aria-label="anchor" href="#arg-mask"></a></dt>
 <dd><p>(character) File path to the ERA5 land-sea mask. Get the mask with <code><a href="get_land_sea_mask.html">get_land_sea_mask()</a></code>.</p></dd>
 
-
-<dt id="arg-download-path">download_path<a class="anchor" aria-label="anchor" href="#arg-download-path"></a></dt>
-<dd><p>(character) Path to the folder where the ERA5 data will get downloaded to.</p></dd>
-
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>(character) Paths to the downloaded files.</p>
     </div>
+    <div class="section level2">
+    <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
+    <p>David Reed</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span><span class="co"># Specify your variables</span></span></span>
+<span class="r-in"><span><span class="va">my_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2m_temperature"</span>, <span class="st">"total_precipitation"</span>, <span class="st">"surface_solar_radiation_downwards"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Create the AmeriFlux site metadata</span></span></span>
+<span class="r-in"><span><span class="va">site_metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_site_metadata.html">get_site_metadata</a></span><span class="op">(</span>folder <span class="op">=</span> <span class="st">"path_to_data_folder"</span>,</span></span>
+<span class="r-in"><span>                                   selected_variables <span class="op">=</span> <span class="va">my_variables</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Download the corresponding ERA5 data</span></span></span>
+<span class="r-in"><span><span class="fu">download_ERA5</span><span class="op">(</span>my_token <span class="op">=</span> <span class="st">"my_ECMWF_token"</span>,</span></span>
+<span class="r-in"><span>              site_metadata <span class="op">=</span> <span class="va">site_metadata</span>,</span></span>
+<span class="r-in"><span>              mask <span class="op">=</span> <span class="st">"path_to_ERA5_land_sea_mask"</span>,</span></span>
+<span class="r-in"><span>              download_path <span class="op">=</span> <span class="st">"path_to_ERA5_download_folder"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
