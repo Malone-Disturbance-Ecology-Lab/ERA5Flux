@@ -33,9 +33,12 @@ get_site_metadata <- function(folder = NULL,
 
   # Point to the "requested_files_manifest" file
   manifest.file <- base::list.files(folder, pattern = "requested_files_manifest")
+  if(length(manifest.file) == 0){
+    stop("'requested_files_manifest' file not found")
+  }
 
   # Read it in
-  fluxmanifest  <- utils::read.csv(paste(manifest.file, sep = ""), skip = 3, header = TRUE)
+  fluxmanifest <- utils::read.csv(file.path(folder, manifest.file), skip = 3, header = TRUE)
 
   # Get the site codes
   site_codes <- base::unique(fluxmanifest$SITE_ID)
@@ -56,30 +59,30 @@ get_site_metadata <- function(folder = NULL,
 
     # Point to the site folder
     flux.folder <- base::dir(folder, pattern = site_codes[i])
-    if(methods::is(object = flux.folder, class2 = "character") != TRUE){
-      stop("AmeriFlux site folder for", site_codes[i], "not found")
+    if(length(flux.folder) == 0){
+      stop("AmeriFlux site folder for ", site_codes[i], " not found")
     }
 
     # Point to the BASE file
-    flux.file <- base::list.files(path = flux.folder, pattern = "BASE")
-    if(methods::is(object = flux.file, class2 = "character") != TRUE){
+    flux.file <- base::list.files(path = file.path(folder, flux.folder), pattern = "BASE")
+    if(length(flux.file) == 0){
       stop("BASE file not found")
     }
 
     # Point to the BIF file
-    bif.file <- base::list.files(path = flux.folder, pattern = "BIF")
-    if(methods::is(object = bif.file, class2 = "character") != TRUE){
+    bif.file <- base::list.files(path = file.path(folder, flux.folder), pattern = "BIF")
+    if(length(bif.file) == 0){
       stop("BIF file not found")
     }
 
     # Read in the BIF file
-    flux.bif  <- readxl::read_excel(base::file.path(flux.folder, bif.file))
+    flux.bif  <- readxl::read_excel(base::file.path(folder, flux.folder, bif.file))
     # Get the lat, lon
     lat[i] <- flux.bif$DATAVALUE[which(flux.bif$VARIABLE=="LOCATION_LAT")]
     lon[i] <- flux.bif$DATAVALUE[which(flux.bif$VARIABLE=="LOCATION_LONG")]
 
     # Read in the BASE file
-    fluxdata <- readr::read_csv(base::file.path(flux.folder, flux.file), skip = 2, col_select = 1)
+    fluxdata <- readr::read_csv(base::file.path(folder, flux.folder, flux.file), skip = 2, col_select = 1)
     # Get the start, end dates
     startdate[i] <- fluxdata$TIMESTAMP_START[1]
     enddate[i] <- fluxdata$TIMESTAMP_START[base::length(fluxdata$TIMESTAMP_START)]
