@@ -19,7 +19,6 @@
 #' # Create the AmeriFlux site metadata
 #' site_metadata <- get_site_metadata(folder = "path_to_data_folder",
 #'                                    selected_variables = my_variables)
-#'
 #' # Download the corresponding ERA5 data
 #' download_ERA5(my_token = "my_ECMWF_token",
 #'               site_metadata = site_metadata
