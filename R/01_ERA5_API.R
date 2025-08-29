@@ -136,7 +136,7 @@ download_ERA5 <- function(my_token = NULL,
 
       ### third loop that re-tries API request if it fails
 
-      while(!base::file.exists(base::paste(download_path, target, sep = ""))){
+      while(!base::file.exists(base::file.path(download_path, target))){
         try(
           file <- ecmwfr::wf_request(
             request  = request, # the request
