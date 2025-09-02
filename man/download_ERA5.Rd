@@ -6,26 +6,28 @@
 \usage{
 download_ERA5(
   my_token = NULL,
-  my_folder = NULL,
-  my_variables = NULL,
-  my_nc_file = NULL,
+  site_metadata = NULL,
+  mask = NULL,
   download_path = NULL
 )
 }
 \arguments{
 \item{my_token}{(character) A secret ECMWF token.}
 
-\item{download_path}{(character) Path to the folder where the ERA5 data will get downloaded to.}
-
 \item{site_metadata}{(data.frame) A data frame that has the AmeriFlux site metadata. Create the metadata with \code{get_site_metadata()}.}
 
 \item{mask}{(character) File path to the ERA5 land-sea mask. Get the mask with \code{get_land_sea_mask()}.}
+
+\item{download_path}{(character) Path to the folder where the ERA5 data will get downloaded to.}
 }
 \value{
 (character) Paths to the downloaded files.
 }
 \description{
 This function uses the \code{ecmwfr} package to download ERA5 data for each site specified in the AmeriFlux site metadata dataframe. The temporal and geographical coverage of the downloaded data will match the AmeriFlux site metadata dataframe.
+}
+\note{
+If you haven't done so already, you may need to accept the data license agreement first before you can download the data. Visit the Copernicus Climate Data Store User Profile page at https://cds.climate.copernicus.eu/profile to accept the appropriate license(s).
 }
 \examples{
 \dontrun{

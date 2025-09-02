@@ -8,6 +8,10 @@
 #' @param mask (character) File path to the ERA5 land-sea mask. Get the mask with `get_land_sea_mask()`.
 #' @param download_path (character) Path to the folder where the ERA5 data will get downloaded to.
 #'
+#' @note If you haven't done so already, you may need to accept the data license agreement first before you can download the data. Visit the Copernicus Climate Data Store User Profile page at https://cds.climate.copernicus.eu/profile to accept the appropriate license(s).
+#'
+#' @importFrom lubridate %m+%
+#'
 #' @return (character) Paths to the downloaded files.
 #'
 #' @export
