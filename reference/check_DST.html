@@ -69,13 +69,10 @@
 <span class="r-in"><span><span class="va">timepoint</span> <span class="op">&lt;-</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html" class="external-link">now</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># Check whether the time is in DST at latitude 25.4, longitude -80.5 and get the standard time if so</span></span></span>
 <span class="r-in"><span><span class="va">is_DST</span> <span class="op">&lt;-</span> <span class="fu">check_DST</span><span class="op">(</span>lat <span class="op">=</span> <span class="fl">25.4</span>, lon <span class="op">=</span> <span class="op">-</span><span class="fl">80.5</span>, <span class="va">timepoint</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in dyn.load(file, DLLpath = DLLpath, ...):</span> unable to load shared object '/home/runner/work/_temp/Library/units/libs/units.so':</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span>   libudunits2.so.0: cannot open shared object file: No such file or directory</span>
 <span class="r-in"><span><span class="va">is_DST</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $is_DST</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $standard_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2025-09-02 13:00:57 EDT"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'is_DST' not found</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
