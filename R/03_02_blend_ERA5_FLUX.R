@@ -100,7 +100,7 @@ blend_ERA5_Flux <- function(merged_data = NULL,
         formula_str <- base::paste(flux_var, "~", era5_var)
         base::message("Fitting linear model with formula: ", formula_str)
 
-        lm_model <- stats::lm(as.formula(formula_str), data = complete_cases)
+        lm_model <- stats::lm(stats::as.formula(formula_str), data = complete_cases)
 
         # Only use model predictions to fill missing values in flux_var
         missing_flux_idx <- base::which(base::is.na(merged_data[[flux_var]]))  # Identify all missing flux_var entries
@@ -108,7 +108,7 @@ blend_ERA5_Flux <- function(merged_data = NULL,
         if (base::length(missing_flux_idx) > 0) {
           # Predict missing flux values based on ERA5 data and fill them
           predictions <- stats::predict(lm_model,
-                                        newdata = setNames(data.frame(merged_data[[era5_var]][missing_flux_idx]), era5_var))
+                                        newdata = stats::setNames(base::data.frame(merged_data[[era5_var]][missing_flux_idx]), era5_var))
 
           # Ensure the predictions fill only the missing values in the new "_f" column
           merged_data[[base::paste0(flux_var, "_f")]][missing_flux_idx] <- predictions
@@ -123,7 +123,7 @@ blend_ERA5_Flux <- function(merged_data = NULL,
         formula_str <- base::paste(flux_var, "~", era5_var, "+ 0")  # Linear model without intercept
         base::message("Fitting linear model without intercept with formula: ", formula_str)
 
-        lm_model_no_intercept <- stats::lm(as.formula(formula_str), data = complete_cases)
+        lm_model_no_intercept <- stats::lm(stats::as.formula(formula_str), data = complete_cases)
 
         # Only use model predictions to fill missing values in flux_var
         missing_flux_idx <- base::which(base::is.na(merged_data[[flux_var]]))  # Identify all missing flux_var entries
@@ -131,7 +131,7 @@ blend_ERA5_Flux <- function(merged_data = NULL,
         if (base::length(missing_flux_idx) > 0) {
           # Predict missing flux values based on ERA5 data and fill them
           predictions <- stats::predict(lm_model_no_intercept,
-                                        newdata = setNames(data.frame(merged_data[[era5_var]][missing_flux_idx]), era5_var))
+                                        newdata = stats::setNames(base::data.frame(merged_data[[era5_var]][missing_flux_idx]), era5_var))
 
           # Ensure the predictions fill only the missing values in the new "_f" column
           merged_data[[base::paste0(flux_var, "_f")]][missing_flux_idx] <- predictions
@@ -151,7 +151,7 @@ blend_ERA5_Flux <- function(merged_data = NULL,
           formula_str <- base::paste(flux_var, "~", era5_var)
           base::message("Fitting linear model with formula: ", formula_str)
 
-          lm_model <- stats::lm(as.formula(formula_str), data = complete_cases)
+          lm_model <- stats::lm(stats::as.formula(formula_str), data = complete_cases)
 
           # Only use model predictions to fill missing values in flux_var
           missing_flux_idx <- base::which(base::is.na(merged_data[[flux_var]]))  # Identify all missing flux_var entries
@@ -159,7 +159,7 @@ blend_ERA5_Flux <- function(merged_data = NULL,
           if (base::length(missing_flux_idx) > 0) {
             # Predict missing flux values based on ERA5 data and fill them
             predictions <- stats::predict(lm_model,
-                                          newdata = setNames(data.frame(merged_data[[era5_var]][missing_flux_idx]), era5_var))
+                                          newdata = stats::setNames(base::data.frame(merged_data[[era5_var]][missing_flux_idx]), era5_var))
 
             # Ensure the predictions fill only the missing values in the new "_f" column
             merged_data[[base::paste0(flux_var, "_f")]][missing_flux_idx] <- predictions

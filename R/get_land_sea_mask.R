@@ -27,5 +27,5 @@ get_land_sea_mask <- function(download_path = "lsm_1279l4_0.1x0.1.grb_v4_unpack.
   data_url <- "https://confluence.ecmwf.int/download/attachments/140385202/lsm_1279l4_0.1x0.1.grb_v4_unpack.nc?version=1&modificationDate=1591983422208&api=v2&download=true"
 
   # Download the file
-  download.file(url = data_url, destfile = download_path)
+  utils::download.file(url = data_url, destfile = download_path)
 }
