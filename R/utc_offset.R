@@ -5,7 +5,7 @@
 #'
 #' @param lat (numeric) Latitude coordinate in decimal degrees.
 #' @param lon (numeric) Longitude coordinate in decimal degrees.
-#' @param timepoint (character) Time point in either %Y-%m-%d or %Y/%m/%d format.
+#' @param timepoint (character) Time point in either %Y-%m-%d HH:MM:SS or %Y/%m/%d HH:MM:SS format.
 #'
 #' @return (list) A list containing a boolean representing the DST status and the standard time if DST is in effect.
 #'

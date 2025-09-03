@@ -11,7 +11,7 @@ check_DST(lat = NULL, lon = NULL, timepoint = NULL)
 
 \item{lon}{(numeric) Longitude coordinate in decimal degrees.}
 
-\item{timepoint}{(character) Time point in either \%Y-\%m-\%d or \%Y/\%m/\%d format.}
+\item{timepoint}{(character) Time point in either \%Y-\%m-\%d HH:MM:SS or \%Y/\%m/\%d HH:MM:SS format.}
 }
 \value{
 (list) A list containing a boolean representing the DST status and the standard time if DST is in effect.
