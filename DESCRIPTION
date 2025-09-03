@@ -50,5 +50,7 @@ Imports:
     terra,
     utils,
     withr
+Suggests:
+    sf
 URL: https://github.com/Malone-Disturbance-Ecology-Lab/ERA5Flux, https://malone-disturbance-ecology-lab.github.io/ERA5Flux/
 BugReports: https://github.com/Malone-Disturbance-Ecology-Lab/ERA5Flux/issues
