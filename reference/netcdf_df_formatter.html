@@ -69,10 +69,14 @@
 <span class="r-in"><span><span class="va">nc_file_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,<span class="st">"data_stream-oper_stepType-accum1.nc"</span>, package <span class="op">=</span> <span class="st">"ERA5Flux"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># Reformat the NetCDF</span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">netcdf_df_formatter</span><span class="op">(</span><span class="va">nc_file_path</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in dyn.load(file, DLLpath = DLLpath, ...):</span> unable to load shared object '/home/runner/work/_temp/Library/units/libs/units.so':</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   libudunits2.so.0: cannot open shared object file: No such file or directory</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'result' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           time ssrd</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 201612311900    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 201612312000    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 201612312100    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 201612312200    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 201612312300    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 201701010000    0</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
