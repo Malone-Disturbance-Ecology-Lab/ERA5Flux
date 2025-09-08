@@ -6,3 +6,4 @@
 *.Rproj
 .RDataTmp
 docs
+inst/doc
