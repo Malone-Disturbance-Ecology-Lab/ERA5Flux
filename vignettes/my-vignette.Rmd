@@ -14,6 +14,31 @@ knitr::opts_chunk$set(
 )
 ```
 
+## Intro 
+
+Explain ERA5Flux purpose, what is ERA5 and AmeriFlux, why is this package useful, what is the main purpose etc.
+
+Here is how to use the core functions in `ERA5Flux` in your entire workflow.
+
+## Workflow 
+
+Step 0: get site metadata
 ```{r setup}
+# Load the package
 library(ERA5Flux)
+
+# Explain how to use this
+# get_site_metadata()
 ```
+
+Here is more text explaining. Make sure to elaborate to make this like a article or blog post or guide.
+
+```{r}
+# More code
+# Explain the next function that is supposed to be next
+
+```
+
+
+
+
