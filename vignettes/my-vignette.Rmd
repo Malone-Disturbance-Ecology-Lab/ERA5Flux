@@ -14,6 +14,10 @@ knitr::opts_chunk$set(
 )
 ```
 
+```{r}
+# NOTE: run devtools::build_rmd("vignettes/my-vignette.Rmd") to render this vignette
+```
+
 ## Intro 
 
 Explain ERA5Flux purpose, what is ERA5 and AmeriFlux, why is this package useful, what is the main purpose etc.
@@ -22,23 +26,85 @@ Here is how to use the core functions in `ERA5Flux` in your entire workflow.
 
 ## Workflow 
 
-Step 0: get site metadata
+### Step 0: Get AmeriFlux site metadata
+
+First we will need the AmeriFlux site metadata etc. It would be helpful to explain why we need the site metadata to begin with, explain the rationale.
+
 ```{r setup}
 # Load the package
 library(ERA5Flux)
 
-# Explain how to use this
-# get_site_metadata()
+# Show how to use this
+# my_site_metadata <- get_site_metadata()
 ```
 
-Here is more text explaining. Make sure to elaborate to make this like a article or blog post or guide.
+Here is more text explaining. Make sure to elaborate to make this like a article or blog post or guide. Think about how you want to show off your function's use. 
+
+### Step 1: Download ERA5 Data
+
+After you get the AmeriFlux site metadata, you can now go ahead and download ERA5 data etc etc. 
+
+But before that, there are a few steps you need to do.
+
+First, make sure you create an account at the [Climate Data Store](https://cds.climate.copernicus.eu/) if you haven't done so already. You may need to accept the data license agreement first before you can download the data. Visit the [Copernicus Climate Data Store User Profile page](https://cds.climate.copernicus.eu/profile) to accept the appropriate license(s). 
+
+Then, `download_ERA5()` requires a land-sea mask so you must download that first with `get_land_sea_mask()`. This function will download the land-sea mask from [here](https://confluence.ecmwf.int/pages/viewpage.action?pageId=140385202#ERA5Land:datadocumentation-parameterlistingParameterlistings)
+
+```{r, eval = F}
+# NOTE: you can use "eval = F" in the chunk header to indicate that the code will not be run
+
+# Every time you render the vignette Rmd file, the code chunks will run.
+# This means that if you have code that downloads data, it will actually download it.
+
+# If you don't want to actually run the code to download the data, you can set "eval = F" in the chunk header.
+# This will allow you to show the code, but not actually run the code. 
+
+# I set eval = F because I don't want to download the large land-sea mask every time I render the vignette
+get_land_sea_mask()
+```
+
+Now you are ready to download ERA5 data. Copy and paste your Climate Data Store API token into the `my_token` argument. Provide the AmeriFlux site metadata in `site_metadata`, and set the file path to your land-sea mask as well. Finally, specify a folder path to where you want to download your ERA5 data to.  
+
+```{r, eval = F}
+# NOTE: it's highly likely we will want to set "eval = F" because the function requires a secret token
+# but it's okay because we can still demonstrate what using the function is supposed to look like
+
+# Set the path to your land-sea mask
+path_to_mask <- "lsm_1279l4_0.1x0.1.grb_v4_unpack.nc"
+
+# Download the ERA5 data
+download_ERA5(my_token = "my_ECMWF_token",
+              site_metadata = my_site_metadata,
+              mask = path_to_mask,
+              download_path = "path_to_ERA5_download_folder")
+```
+
+### Step 2: Data Processing
+
+After you downloaded the ERA5 data, you can begin the processing etc. It would be helpful to explain why we need to process ERA5 data. 
 
 ```{r}
-# More code
-# Explain the next function that is supposed to be next
-
+# Show how to use this
+# netcdf_df_formatter() / netcdf_to_csv()
 ```
 
+### Step 3: Merging and Blending AmeriFlux with ERA5 Data
 
+After you processed the ERA5, you can merge ERA5 and AmeriFlux together.
 
+```{r}
+# Show how to use this
+# merge_ERA5_FLUX()
+```
+
+After merging, you can blend them together. Maybe helpful to explain the difference between merging and blending ?
+
+Final result will look like this: 
+
+```{r}
+# Show how to use this
+# blend_ERA5_Flux()
+```
+
+Maybe explain how researchers can use these results in their work. 
 
