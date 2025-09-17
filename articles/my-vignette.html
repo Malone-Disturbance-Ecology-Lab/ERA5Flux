@@ -79,26 +79,87 @@ your entire workflow.</p>
 <h2 id="workflow">Workflow<a class="anchor" aria-label="anchor" href="#workflow"></a>
 </h2>
 <div class="section level3">
-<h3 id="step-0-get-ameriflux-site-metadata">Step 0: Get AmeriFlux site metadata<a class="anchor" aria-label="anchor" href="#step-0-get-ameriflux-site-metadata"></a>
+<h3 id="step-0-get-ameriflux-data-and-site-metadata">Step 0: Get AmeriFlux data and site metadata<a class="anchor" aria-label="anchor" href="#step-0-get-ameriflux-data-and-site-metadata"></a>
 </h3>
-<p>First we will need the AmeriFlux site metadata etc. It would be
-helpful to explain why we need the site metadata to begin with, explain
-the rationale.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<p>First we will need to download AmeriFlux data. Navigate to <a href="https://ameriflux.lbl.gov/" class="external-link">AmeriFlux</a> and login to your
+account. Once you’re logged in, you can download data at the <a href="https://ameriflux.lbl.gov/data/download-data/" class="external-link">Download
+page</a>.</p>
+<p>You will be presented with options on the types of data products you
+would like to download. Select <strong>AmeriFlux BASE</strong> then
+select <strong>CC-BY-4.0</strong> as the data use policy that you will
+follow. At the next step, pick the sites that you would like, then write
+a short description of your intended use for this data and agree to the
+license.</p>
+<p>Finally, you will be presented with a data download page that has
+download links for the requested sites. Click on those download links to
+get a zip file for each site. You will also need to click on the
+“Requested_Files” download link to get the metadata text file for your
+request. This will download as
+“requested_files_manifest_YYYYMMDD.txt”.</p>
+<p>After you’ve downloaded everything, unzip the site zip files. To
+ensure that the rest of the workflow runs smoothly, we recommend that
+you arrange your files like so:</p>
+<pre><code>your-working-directory/
+├── unzipped_data/          
+│   ├── unzipped_site1_folder/  
+│   │   ├── *.csv
+│   │   └── *.xlsx
+│   │
+│   ├── unzipped_site2_folder/
+│   │   ├── *.csv
+│   │   └── *.xlsx
+│   │
+│   ├── unzipped_site3_folder/
+│   │   ├── *.csv
+│   │   └── *.xlsx
+│   │
+│   └── requested_files_manifest_YYYYMMDD.txt
+│
+├── site1_data.zip  
+├── site2_data.zip 
+├── site3_data.zip 
+│
+└── more stuff/               
+    ├── ...   
+    └── ...</code></pre>
+<p>After arranging the files, you can now generate the AmeriFlux site
+metadata.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load the package</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Malone-Disturbance-Ecology-Lab/ERA5Flux" class="external-link">ERA5Flux</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Show how to use this</span></span>
-<span><span class="co"># my_site_metadata &lt;- get_site_metadata()</span></span></code></pre></div>
-<p>Here is more text explaining. Make sure to elaborate to make this
-like a article or blog post or guide. Think about how you want to show
-off your function’s use.</p>
+<span><span class="co"># Specify the ERA5 variables you want to get</span></span>
+<span><span class="va">my_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"total_precipitation"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Point to the folder containing the unzipped site folders and requested files manifest</span></span>
+<span><span class="va">my_folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"get_metadata_example"</span>, package <span class="op">=</span> <span class="st">"ERA5Flux"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Generate the AmeriFlux site metadata file</span></span>
+<span><span class="va">my_site_metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_site_metadata.html">get_site_metadata</a></span><span class="op">(</span>folder <span class="op">=</span> <span class="va">my_folder</span>,</span>
+<span>                                      selected_variables <span class="op">=</span> <span class="va">my_variables</span><span class="op">)</span></span>
+<span><span class="co">#&gt; selected variables: total_precipitation</span></span>
+<span><span class="co">#&gt; Now checking: US-GL2</span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">7248</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">1</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (1): TIMESTAMP_START</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span>
+<span></span>
+<span><span class="va">my_site_metadata</span></span>
+<span><span class="co">#&gt;   site_codes     lat      lon   startdate      enddate           variables</span></span>
+<span><span class="co">#&gt; 1     US-GL2 46.7167 -87.4000 2.02501e+11 202505312330 total_precipitation</span></span></code></pre></div>
+<p>The metadata dataframe will have 5 columns: <code>site_codes</code>,
+<code>lat</code>, <code>lon</code>, <code>startdate</code>,
+<code>enddate</code>, and <code>variables</code>. We will need this
+metadata in order to build our ERA5 data requests.</p>
 </div>
 <div class="section level3">
 <h3 id="step-1-download-era5-data">Step 1: Download ERA5 Data<a class="anchor" aria-label="anchor" href="#step-1-download-era5-data"></a>
 </h3>
 <p>After you get the AmeriFlux site metadata, you can now go ahead and
-download ERA5 data etc etc.</p>
+download ERA5 data.</p>
 <p>But before that, there are a few steps you need to do.</p>
 <p>First, make sure you create an account at the <a href="https://cds.climate.copernicus.eu/" class="external-link">Climate Data Store</a> if you
 haven’t done so already. You may need to accept the data license
@@ -107,41 +168,36 @@ Store User Profile page</a> to accept the appropriate license(s).</p>
 <p>Then, <code><a href="../reference/download_ERA5.html">download_ERA5()</a></code> requires a land-sea mask so you
 must download that first with <code><a href="../reference/get_land_sea_mask.html">get_land_sea_mask()</a></code>. This
 function will download the land-sea mask from <a href="https://confluence.ecmwf.int/pages/viewpage.action?pageId=140385202#ERA5Land:datadocumentation-parameterlistingParameterlistings" class="external-link">here</a></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># NOTE: you can use "eval = F" in the chunk header to indicate that the code will not be run</span></span>
-<span></span>
-<span><span class="co"># Every time you render the vignette Rmd file, the code chunks will run.</span></span>
-<span><span class="co"># This means that if you have code that downloads data, it will actually download it.</span></span>
-<span></span>
-<span><span class="co"># If you don't want to actually run the code to download the data, you can set "eval = F" in the chunk header.</span></span>
-<span><span class="co"># This will allow you to show the code, but not actually run the code. </span></span>
-<span></span>
-<span><span class="co"># I set eval = F because I don't want to download the large land-sea mask every time I render the vignette</span></span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Download the land-sea mask if you haven't done so already</span></span>
 <span><span class="fu"><a href="../reference/get_land_sea_mask.html">get_land_sea_mask</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Now you are ready to download ERA5 data. Copy and paste your Climate
 Data Store API token into the <code>my_token</code> argument. Provide
 the AmeriFlux site metadata in <code>site_metadata</code>, and set the
 file path to your land-sea mask as well. Finally, specify a folder path
 to where you want to download your ERA5 data to.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># NOTE: it's highly likely we will want to set "eval = F" because the function requires a secret token</span></span>
-<span><span class="co"># but it's okay because we can still demonstrate what using the function is supposed to look like</span></span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Paste your token </span></span>
+<span><span class="va">my_token</span> <span class="op">&lt;-</span> <span class="st">"my_ECMWF_token"</span></span>
 <span></span>
 <span><span class="co"># Set the path to your land-sea mask</span></span>
 <span><span class="va">path_to_mask</span> <span class="op">&lt;-</span> <span class="st">"lsm_1279l4_0.1x0.1.grb_v4_unpack.nc"</span></span>
 <span></span>
+<span><span class="co"># Point to the folder where you want the ERA5 data to download to</span></span>
+<span><span class="va">my_download_path</span> <span class="op">&lt;-</span> <span class="st">"path_to_ERA5_download_folder"</span></span>
+<span></span>
 <span><span class="co"># Download the ERA5 data</span></span>
-<span><span class="fu"><a href="../reference/download_ERA5.html">download_ERA5</a></span><span class="op">(</span>my_token <span class="op">=</span> <span class="st">"my_ECMWF_token"</span>,</span>
+<span><span class="fu"><a href="../reference/download_ERA5.html">download_ERA5</a></span><span class="op">(</span>my_token <span class="op">=</span> <span class="va">my_token</span>,</span>
 <span>              site_metadata <span class="op">=</span> <span class="va">my_site_metadata</span>,</span>
 <span>              mask <span class="op">=</span> <span class="va">path_to_mask</span>,</span>
-<span>              download_path <span class="op">=</span> <span class="st">"path_to_ERA5_download_folder"</span><span class="op">)</span></span></code></pre></div>
+<span>              download_path <span class="op">=</span> <span class="va">my_download_path</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="step-2-data-processing">Step 2: Data Processing<a class="anchor" aria-label="anchor" href="#step-2-data-processing"></a>
 </h3>
 <p>After you downloaded the ERA5 data, you can begin the processing etc.
 It would be helpful to explain why we need to process ERA5 data.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Show how to use this</span></span>
 <span><span class="co"># netcdf_df_formatter() / netcdf_to_csv()</span></span></code></pre></div>
 </div>
@@ -150,13 +206,13 @@ It would be helpful to explain why we need to process ERA5 data.</p>
 </h3>
 <p>After you processed the ERA5, you can merge ERA5 and AmeriFlux
 together.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Show how to use this</span></span>
 <span><span class="co"># merge_ERA5_FLUX()</span></span></code></pre></div>
 <p>After merging, you can blend them together. Maybe helpful to explain
 the difference between merging and blending ?</p>
 <p>Final result will look like this:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Show how to use this</span></span>
 <span><span class="co"># blend_ERA5_Flux()</span></span></code></pre></div>
 <p>Maybe explain how researchers can use these results in their
