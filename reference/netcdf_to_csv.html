@@ -78,18 +78,18 @@
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Convert NetCDF data to a CSV file</span></span></span>
 <span class="r-in"><span><span class="fu">netcdf_to_csv</span><span class="op">(</span><span class="va">site_folder</span>, <span class="va">output_filepath</span>, <span class="st">"US_TaS"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Saved: US_TaS2017_2019_d2m_ssrd_t2m.csv </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Saved: US_TaS1999_2019_d2m_ssrd_t2m_tp.csv </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Read the CSV back in</span></span></span>
 <span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">output_filepath</span>, pattern <span class="op">=</span> <span class="st">"US_TaS"</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          time ssrd      d2m      t2m</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 2.01701e+11    0 16.88320 23.95596</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2.01701e+11    0 16.95254 24.11782</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 2.01701e+11    0 17.30703 24.22744</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 2.01701e+11    0 17.74941 24.02017</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 2.01701e+11    0 18.20376 23.94253</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 2.01701e+11    0 18.32949 23.63198</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          time       t2m        tp ssrd d2m</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 1.99901e+11 -6.443945 0.5652029    0  NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 1.99901e+11 -6.616797 0.7439672    0  NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 1.99901e+11 -6.615088 1.0270646    0  NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 1.99901e+11 -6.391699 1.3348162    0  NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 1.99901e+11 -6.494482 1.7978630    0  NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 1.99901e+11 -6.566992 2.2600656    0  NA</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
