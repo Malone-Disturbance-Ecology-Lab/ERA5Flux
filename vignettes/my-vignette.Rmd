@@ -26,23 +26,65 @@ Here is how to use the core functions in `ERA5Flux` in your entire workflow.
 
 ## Workflow 
 
-### Step 0: Get AmeriFlux site metadata
+### Step 0: Get AmeriFlux data and site metadata
 
-First we will need the AmeriFlux site metadata etc. It would be helpful to explain why we need the site metadata to begin with, explain the rationale.
+First we will need to download AmeriFlux data. Navigate to [AmeriFlux](https://ameriflux.lbl.gov/) and login to your account. Once you're logged in, you can download data at the [Download page](https://ameriflux.lbl.gov/data/download-data/).
+
+You will be presented with options on the types of data products you would like to download. Select **AmeriFlux BASE** then select **CC-BY-4.0** as the data use policy that you will follow. At the next step, pick the sites that you would like, then write a short description of your intended use for this data and agree to the license. 
+
+Finally, you will be presented with a data download page that has download links for the requested sites. Click on those download links to get a zip file for each site. You will also need to click on the "Requested_Files" download link to get the metadata text file for your request. This will download as "requested_files_manifest_YYYYMMDD.txt". 
+
+After you've downloaded everything, unzip the site zip files. To ensure that the rest of the workflow runs smoothly, we recommend that you arrange your files like so:
+
+```
+your-working-directory/
+├── unzipped_data/          
+│   ├── unzipped_site1_folder/  
+│   │   ├── *.csv
+│   │   └── *.xlsx
+│   │
+│   ├── unzipped_site2_folder/
+│   │   ├── *.csv
+│   │   └── *.xlsx
+│   │
+│   ├── unzipped_site3_folder/
+│   │   ├── *.csv
+│   │   └── *.xlsx
+│   │
+│   └── requested_files_manifest_YYYYMMDD.txt
+│
+├── site1_data.zip  
+├── site2_data.zip 
+├── site3_data.zip 
+│
+└── more stuff/               
+    ├── ...   
+    └── ...
+```
+After arranging the files, you can now generate the AmeriFlux site metadata.
 
 ```{r setup}
 # Load the package
 library(ERA5Flux)
 
-# Show how to use this
-# my_site_metadata <- get_site_metadata()
+# Specify the ERA5 variables you want to get
+my_variables <- c("total_precipitation")
+
+# Point to the folder containing the unzipped site folders and requested files manifest
+my_folder <- system.file("extdata", "get_metadata_example", package = "ERA5Flux")
+
+# Generate the AmeriFlux site metadata file
+my_site_metadata <- get_site_metadata(folder = my_folder,
+                                      selected_variables = my_variables)
+
+my_site_metadata
 ```
 
-Here is more text explaining. Make sure to elaborate to make this like a article or blog post or guide. Think about how you want to show off your function's use. 
+The metadata dataframe will have 5 columns: `site_codes`, `lat`, `lon`, `startdate`, `enddate`, and `variables`. We will need this metadata in order to build our ERA5 data requests. 
 
 ### Step 1: Download ERA5 Data
 
-After you get the AmeriFlux site metadata, you can now go ahead and download ERA5 data etc etc. 
+After you get the AmeriFlux site metadata, you can now go ahead and download ERA5 data.
 
 But before that, there are a few steps you need to do.
 
@@ -51,32 +93,27 @@ First, make sure you create an account at the [Climate Data Store](https://cds.c
 Then, `download_ERA5()` requires a land-sea mask so you must download that first with `get_land_sea_mask()`. This function will download the land-sea mask from [here](https://confluence.ecmwf.int/pages/viewpage.action?pageId=140385202#ERA5Land:datadocumentation-parameterlistingParameterlistings)
 
 ```{r, eval = F}
-# NOTE: you can use "eval = F" in the chunk header to indicate that the code will not be run
-
-# Every time you render the vignette Rmd file, the code chunks will run.
-# This means that if you have code that downloads data, it will actually download it.
-
-# If you don't want to actually run the code to download the data, you can set "eval = F" in the chunk header.
-# This will allow you to show the code, but not actually run the code. 
-
-# I set eval = F because I don't want to download the large land-sea mask every time I render the vignette
+# Download the land-sea mask if you haven't done so already
 get_land_sea_mask()
 ```
 
 Now you are ready to download ERA5 data. Copy and paste your Climate Data Store API token into the `my_token` argument. Provide the AmeriFlux site metadata in `site_metadata`, and set the file path to your land-sea mask as well. Finally, specify a folder path to where you want to download your ERA5 data to.  
 
 ```{r, eval = F}
-# NOTE: it's highly likely we will want to set "eval = F" because the function requires a secret token
-# but it's okay because we can still demonstrate what using the function is supposed to look like
+# Paste your token 
+my_token <- "my_ECMWF_token"
 
 # Set the path to your land-sea mask
 path_to_mask <- "lsm_1279l4_0.1x0.1.grb_v4_unpack.nc"
 
+# Point to the folder where you want the ERA5 data to download to
+my_download_path <- "path_to_ERA5_download_folder"
+
 # Download the ERA5 data
-download_ERA5(my_token = "my_ECMWF_token",
+download_ERA5(my_token = my_token,
               site_metadata = my_site_metadata,
               mask = path_to_mask,
-              download_path = "path_to_ERA5_download_folder")
+              download_path = my_download_path)
 ```
 
 ### Step 2: Data Processing
