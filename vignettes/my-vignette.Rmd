@@ -71,7 +71,7 @@ library(ERA5Flux)
 my_variables <- c("total_precipitation")
 
 # Point to the folder containing the unzipped site folders and requested files manifest
-my_folder <- system.file("extdata", "get_metadata_example", package = "ERA5Flux")
+my_folder <- system.file("extdata", "unzipped_data", package = "ERA5Flux")
 
 # Generate the AmeriFlux site metadata file
 my_site_metadata <- get_site_metadata(folder = my_folder,
