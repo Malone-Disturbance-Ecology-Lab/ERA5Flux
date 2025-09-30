@@ -118,12 +118,37 @@ download_ERA5(my_token = my_token,
 
 ### Step 2: Data Processing
 
-After you downloaded the ERA5 data, you can begin the processing etc. It would be helpful to explain why we need to process ERA5 data. 
+After downloading the ERA5 .nc files, we convert them into CSV files formatted 
+to match AmeriFlux standards, enabling easy merging with existing datasets. This 
+conversion is handled by `netcdf_df_formatter()`, which adjusts ERA5 timestamps 
+from UTC to local time (yyyyMMddHHmm) based on each site’s coordinates and 
+converts solar radiation (ssrd), air temperature (t2m), and total precipitation 
+(tp) to AmeriFlux units. The `netcdf_to_csv()` function then calls 
+`netcdf_df_formatter()` for each site folder, merging all relevant data by site 
+and year so that each output CSV contains one site’s data for one year. If 
+full_year == TRUE, the function will only return full years that begin with the
+first hour of theyear and end with the last. For the purposes of this example,
+set full_year == FALSE.
 
 ```{r}
-# Show how to use this
-# netcdf_df_formatter() / netcdf_to_csv()
+# Point to a folder containing ERA5 .nc files
+site_folder <- system.file("02_csv_conversion_ex", package = "ERA5_FLUX")
+#' # Specify a site name
+site_name <- "US_Gl2"
+#' # Create a temporary directory to export our output to
+output_filepath <- tempdir()
+#'
+#' # Convert NetCDF data to a CSV file
+netcdf_to_csv(site_folder, output_filepath, "US_Gl2", full_year = FALSE)
+#'
+#' # Read the CSV back in
+data <- read.csv(list.files(output_filepath, pattern = "US_Gl2", full.names = TRUE))
+head(data)
+
 ```
+
+
+
 
 ### Step 3: Merging and Blending AmeriFlux with ERA5 Data
 
