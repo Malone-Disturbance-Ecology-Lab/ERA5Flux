@@ -5,22 +5,21 @@
 \title{Get Land-Sea Mask from ERA5}
 \usage{
 get_land_sea_mask(
-  download_path = "lsm_1279l4_0.1x0.1.grb_v4_unpack.nc",
-  timeout = 120
+  file_name = "lsm_1279l4_0.1x0.1.grb_v4_unpack.nc",
+  download_path = getwd()
 )
 }
 \arguments{
-\item{download_path}{(character) Path to the folder where the land-sea mask will get downloaded to. The default location is the current working directory.}
+\item{file_name}{(character) Name of the land-sea mask. The default name is "lsm_1279l4_0.1x0.1.grb_v4_unpack.nc".}
 
-\item{timeout}{(numeric) Number of seconds until the download times out. Default is 120 seconds but can be set higher to allow for more time to download.}
+\item{download_path}{(character) Path to an existing folder where the land-sea mask will get downloaded to. The default location is the current working directory.}
 }
 \value{
-(integer) An integer code where 0 = success and non-zero = failure to download.
+Path to the downloaded land-sea mask (invisibly).
 }
 \description{
 This function downloads the netCDF land-sea mask from ERA5. The mask is needed in order to run \code{download_ERA5()}. The mask can be found online here:
 https://confluence.ecmwf.int/pages/viewpage.action?pageId=140385202#ERA5Land:datadocumentation-parameterlistingParameterlistings.
-If more than 120 seconds is needed to download the file, adjust the \code{timeout} parameter accordingly.
 }
 \examples{
 \dontrun{
