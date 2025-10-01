@@ -20,7 +20,7 @@ it is for one site.}
 be written.}
 
 \item{site_name}{(character) Name of the site that will be concatenated onto
-CSV file name (e.g. Us_TaS).}
+CSV file name (e.g. US_GL2).}
 
 \item{full_year}{(bool) Filter to include only complete years, such that the
 data will star with the first hour of year and ends with the last hour of a
@@ -49,7 +49,7 @@ site_name <- "US_GL2"
 output_filepath <- tempdir()
 
 # Convert NetCDF data to a CSV file
-netcdf_to_csv(site_folder, output_filepath, "US_GL2", full_year = FALSE)
+netcdf_to_csv(site_folder, output_filepath, site_name, full_year = FALSE)
 
 # Read the CSV back in
 data <- read.csv(list.files(output_filepath, pattern = "US_GL2", full.names = TRUE))
