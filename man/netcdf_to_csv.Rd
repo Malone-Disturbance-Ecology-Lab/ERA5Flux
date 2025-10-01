@@ -4,34 +4,55 @@
 \alias{netcdf_to_csv}
 \title{Export NetCDF to CSV}
 \usage{
-netcdf_to_csv(site_folder = NULL, output_filepath = NULL, site_name = NULL)
+netcdf_to_csv(
+  site_folder = NULL,
+  output_filepath = NULL,
+  site_name = NULL,
+  full_year = FALSE
+)
 }
 \arguments{
-\item{site_folder}{(character) A folder for one site with NetCDF data. The NetCDF files can be of different variables and of different years so long as it is for one site.}
+\item{site_folder}{(character) A folder for one site with NetCDF data. The
+NetCDF files can be of different variables and of different years so long as
+it is for one site.}
 
-\item{output_filepath}{(character) File path to where the output CSV should be written.}
+\item{output_filepath}{(character) File path to where the output CSV should
+be written.}
 
-\item{site_name}{(character) Name of the site that will be concatenated onto CSV file name (e.g. Us_TaS).}
+\item{site_name}{(character) Name of the site that will be concatenated onto
+CSV file name (e.g. Us_TaS).}
+
+\item{full_year}{(bool) Filter to include only complete years, such that the
+data will star with the first hour of year and ends with the last hour of a
+year. Otherwise, return data as is.}
 }
 \value{
-.csv file of NetCDF data within the site folder. The .csv file has the file name format: siteID_startYear_endYear_variableName.csv. For example, US-Ho1_2001_2020_tp_t2m.csv. SiteID is determined from lat and lon coordinates in df.sitemetadata. Each CSV file starts from the first hour of a year (e.g., 2000-01-01 00:00) and ends with the last hour of a year (e.g., 2020-12-31 23:00).
+.csv file of NetCDF data within the site folder. The .csv file has
+the file name format: siteID_startYear_endYear_variableName.csv. For example,
+US-Ho1_2001_2020_tp_t2m.csv. SiteID is determined from lat and lon
+coordinates in df.sitemetadata. Each CSV file starts from the first hour of
+a year (e.g., 2000-01-01 00:00) and ends with the last hour of a year
+(e.g., 2020-12-31 23:00) if full_year == TRUE.
 }
 \description{
-Takes a directory of ERA5 .nc data as an argument and exports the data in CSV format. This function grabs each NetCDF file and runs \code{netcdf_df_formatter()} on it. It builds a list of variables across all data frames in the folder and joins data by time, filtering to return only full years of data.
+Takes a directory of ERA5 .nc data as an argument and exports the data in CSV
+format. This function grabs each NetCDF file and runs \code{netcdf_df_formatter()}
+on it. It builds a list of variables across all data frames in the folder
+and joins data by time, filtering to return only full years of data.
 }
 \examples{
 # Point to a folder containing ERA5 .nc files
-site_folder <- system.file("extdata", package = "ERA5Flux")
+site_folder <- system.file("extdata", "02_csv_conversion_ex", package = "ERA5Flux")
 # Specify a site name
-site_name <- "US_TaS"
+site_name <- "US_GL2"
 # Create a temporary directory to export our output to
 output_filepath <- tempdir()
 
 # Convert NetCDF data to a CSV file
-netcdf_to_csv(site_folder, output_filepath, "US_TaS")
+netcdf_to_csv(site_folder, output_filepath, "US_GL2", full_year = FALSE)
 
 # Read the CSV back in
-data <- read.csv(list.files(output_filepath, pattern = "US_TaS", full.names = TRUE))
+data <- read.csv(list.files(output_filepath, pattern = "US_GL2", full.names = TRUE))
 head(data)
 
 }
