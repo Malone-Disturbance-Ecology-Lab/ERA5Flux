@@ -195,11 +195,44 @@ to where you want to download your ERA5 data to.</p>
 <div class="section level3">
 <h3 id="step-2-data-processing">Step 2: Data Processing<a class="anchor" aria-label="anchor" href="#step-2-data-processing"></a>
 </h3>
-<p>After you downloaded the ERA5 data, you can begin the processing etc.
-It would be helpful to explain why we need to process ERA5 data.</p>
+<p>After downloading the ERA5 .nc files, we convert them into CSV files
+formatted to match AmeriFlux standards, enabling easy merging with
+existing datasets. This conversion is handled by
+<code><a href="../reference/netcdf_df_formatter.html">netcdf_df_formatter()</a></code>, which adjusts ERA5 timestamps from
+UTC to local time (yyyyMMddHHmm) based on each site’s coordinates and
+converts solar radiation (ssrd), air temperature (t2m), and total
+precipitation (tp) to AmeriFlux units. The <code><a href="../reference/netcdf_to_csv.html">netcdf_to_csv()</a></code>
+function then calls <code><a href="../reference/netcdf_df_formatter.html">netcdf_df_formatter()</a></code> for each site
+folder, merging all relevant data by site and year so that each output
+CSV contains one site’s data for one year. If full_year == TRUE, the
+function will only return full years that begin with the first hour of
+theyear and end with the last. For the purposes of this example, set
+full_year == FALSE.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Show how to use this</span></span>
-<span><span class="co"># netcdf_df_formatter() / netcdf_to_csv()</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Point to a folder containing ERA5 .nc files</span></span>
+<span><span class="va">site_folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"02_csv_conversion_ex"</span>, package <span class="op">=</span> <span class="st">"ERA5Flux"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Specify a site name</span></span>
+<span><span class="va">site_name</span> <span class="op">&lt;-</span> <span class="st">"US_GL2"</span></span>
+<span></span>
+<span><span class="co"># Create a temporary directory to export our output to</span></span>
+<span><span class="va">output_filepath</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Convert NetCDF data to a CSV file</span></span>
+<span><span class="fu"><a href="../reference/netcdf_to_csv.html">netcdf_to_csv</a></span><span class="op">(</span><span class="va">site_folder</span>, <span class="va">output_filepath</span>, <span class="va">site_name</span>, full_year <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Saved: US_GL2_2024_2025_tp.csv</span></span>
+<span></span>
+<span><span class="co"># Read the CSV back in</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">output_filepath</span>, pattern <span class="op">=</span> <span class="st">"US_GL2"</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
+<span><span class="co">#&gt;           time         tp</span></span>
+<span><span class="co">#&gt; 1 202412311900 0.40247058</span></span>
+<span><span class="co">#&gt; 2 202412312000 0.03797992</span></span>
+<span><span class="co">#&gt; 3 202412312100 0.07184656</span></span>
+<span><span class="co">#&gt; 4 202412312200 0.10609820</span></span>
+<span><span class="co">#&gt; 5 202412312300 0.12701539</span></span>
+<span><span class="co">#&gt; 6 202501010000 0.15275138</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="step-3-merging-and-blending-ameriflux-with-era5-data">Step 3: Merging and Blending AmeriFlux with ERA5 Data<a class="anchor" aria-label="anchor" href="#step-3-merging-and-blending-ameriflux-with-era5-data"></a>
