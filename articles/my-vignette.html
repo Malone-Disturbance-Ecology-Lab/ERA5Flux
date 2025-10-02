@@ -100,7 +100,7 @@ request. This will download as
 ensure that the rest of the workflow runs smoothly, we recommend that
 you arrange your files like so:</p>
 <pre><code>your-working-directory/
-├── unzipped_data/          
+├── unzipped_AmeriFlux_data/          
 │   ├── unzipped_site1_folder/  
 │   │   ├── *.csv
 │   │   └── *.xlsx
@@ -123,8 +123,9 @@ you arrange your files like so:</p>
     ├── ...   
     └── ...</code></pre>
 <p>After arranging the files, you can now generate the AmeriFlux site
-metadata. In this example, the folder called <code>unzipped_data</code>
-contains the unzipped site folders and requested files manifest.</p>
+metadata. In this example, the folder called
+<code>unzipped_AmeriFlux_data</code> contains the unzipped site folders
+and requested files manifest.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load the package</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Malone-Disturbance-Ecology-Lab/ERA5Flux" class="external-link">ERA5Flux</a></span><span class="op">)</span></span>
@@ -133,7 +134,7 @@ contains the unzipped site folders and requested files manifest.</p>
 <span><span class="va">my_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"total_precipitation"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Point to the folder containing the unzipped site folders and requested files manifest</span></span>
-<span><span class="va">my_folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"unzipped_data"</span>, package <span class="op">=</span> <span class="st">"ERA5Flux"</span><span class="op">)</span></span>
+<span><span class="va">my_folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"unzipped_AmeriFlux_data"</span>, package <span class="op">=</span> <span class="st">"ERA5Flux"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Generate the AmeriFlux site metadata file</span></span>
 <span><span class="va">my_site_metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_site_metadata.html">get_site_metadata</a></span><span class="op">(</span>folder <span class="op">=</span> <span class="va">my_folder</span>,</span>
