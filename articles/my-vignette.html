@@ -123,7 +123,8 @@ you arrange your files like so:</p>
     ├── ...   
     └── ...</code></pre>
 <p>After arranging the files, you can now generate the AmeriFlux site
-metadata.</p>
+metadata. In this example, the folder called <code>unzipped_data</code>
+contains the unzipped site folders and requested files manifest.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load the package</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Malone-Disturbance-Ecology-Lab/ERA5Flux" class="external-link">ERA5Flux</a></span><span class="op">)</span></span>
@@ -161,10 +162,11 @@ metadata in order to build our ERA5 data requests.</p>
 <p>After you get the AmeriFlux site metadata, you can now go ahead and
 download ERA5 data.</p>
 <p>But before that, there are a few steps you need to do.</p>
-<p>First, make sure you create an account at the <a href="https://cds.climate.copernicus.eu/" class="external-link">Climate Data Store</a> if you
-haven’t done so already. You may need to accept the data license
-agreement first before you can download the data. Visit the <a href="https://cds.climate.copernicus.eu/profile" class="external-link">Copernicus Climate Data
-Store User Profile page</a> to accept the appropriate license(s).</p>
+<p>First, make sure you create an account at the <a href="https://cds.climate.copernicus.eu/" class="external-link">Copernicus Climate Data
+Store</a> if you haven’t done so already. You may need to accept the
+data license agreement first before you can download the data. Visit the
+<a href="https://cds.climate.copernicus.eu/profile" class="external-link">Climate Data Store
+User Profile page</a> to accept the appropriate license(s).</p>
 <p>Then, <code><a href="../reference/download_ERA5.html">download_ERA5()</a></code> requires a land-sea mask so you
 must download that first with <code><a href="../reference/get_land_sea_mask.html">get_land_sea_mask()</a></code>. This
 function will download the land-sea mask from <a href="https://confluence.ecmwf.int/pages/viewpage.action?pageId=140385202#ERA5Land:datadocumentation-parameterlistingParameterlistings" class="external-link">here</a></p>
@@ -204,13 +206,13 @@ converts solar radiation (ssrd), air temperature (t2m), and total
 precipitation (tp) to AmeriFlux units. The <code><a href="../reference/netcdf_to_csv.html">netcdf_to_csv()</a></code>
 function then calls <code><a href="../reference/netcdf_df_formatter.html">netcdf_df_formatter()</a></code> for each site
 folder, merging all relevant data by site and year so that each output
-CSV contains one site’s data for one year. If full_year == TRUE, the
-function will only return full years that begin with the first hour of
-theyear and end with the last. For the purposes of this example, set
-full_year == FALSE.</p>
+CSV contains one site’s data for one year. If
+<code>full_year = TRUE</code>, the function will only return full years
+that begin with the first hour of theyear and end with the last. For the
+purposes of this example, set <code>full_year = FALSE</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Point to a folder containing ERA5 .nc files</span></span>
-<span><span class="va">site_folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"02_csv_conversion_ex"</span>, package <span class="op">=</span> <span class="st">"ERA5Flux"</span><span class="op">)</span></span>
+<span><span class="va">site_folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"path_to_ERA5_download_folder"</span>, package <span class="op">=</span> <span class="st">"ERA5Flux"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Specify a site name</span></span>
 <span><span class="va">site_name</span> <span class="op">&lt;-</span> <span class="st">"US_GL2"</span></span>
