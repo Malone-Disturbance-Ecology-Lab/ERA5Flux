@@ -73,14 +73,9 @@
 <span class="r-in"><span><span class="va">nc_file_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"ERA5-US-GL2-2025-1.nc"</span>, package <span class="op">=</span> <span class="st">"ERA5Flux"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># Reformat the NetCDF</span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">netcdf_df_formatter</span><span class="op">(</span><span class="va">nc_file_path</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in ncdf4::nc_open(nc_file_path):</span> Passed a filename that is NOT a string of characters!</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           time         tp</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 202412311900 0.40247058</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 202412312000 0.03797992</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 202412312100 0.07184656</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 202412312200 0.10609820</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 202412312300 0.12701539</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 202501010000 0.15275138</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'result' not found</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
