@@ -61,7 +61,7 @@ your-working-directory/
     ├── ...   
     └── ...
 ```
-After arranging the files, you can now generate the AmeriFlux site metadata.
+After arranging the files, you can now generate the AmeriFlux site metadata. In this example, the folder called `unzipped_data` contains the unzipped site folders and requested files manifest. 
 
 ```{r setup}
 # Load the package
@@ -88,7 +88,7 @@ After you get the AmeriFlux site metadata, you can now go ahead and download ERA
 
 But before that, there are a few steps you need to do.
 
-First, make sure you create an account at the [Climate Data Store](https://cds.climate.copernicus.eu/) if you haven't done so already. You may need to accept the data license agreement first before you can download the data. Visit the [Copernicus Climate Data Store User Profile page](https://cds.climate.copernicus.eu/profile) to accept the appropriate license(s). 
+First, make sure you create an account at the [Copernicus Climate Data Store](https://cds.climate.copernicus.eu/) if you haven't done so already. You may need to accept the data license agreement first before you can download the data. Visit the [Climate Data Store User Profile page](https://cds.climate.copernicus.eu/profile) to accept the appropriate license(s). 
 
 Then, `download_ERA5()` requires a land-sea mask so you must download that first with `get_land_sea_mask()`. This function will download the land-sea mask from [here](https://confluence.ecmwf.int/pages/viewpage.action?pageId=140385202#ERA5Land:datadocumentation-parameterlistingParameterlistings)
 
@@ -126,9 +126,9 @@ converts solar radiation (ssrd), air temperature (t2m), and total precipitation
 (tp) to AmeriFlux units. The `netcdf_to_csv()` function then calls 
 `netcdf_df_formatter()` for each site folder, merging all relevant data by site 
 and year so that each output CSV contains one site’s data for one year. If 
-full_year == TRUE, the function will only return full years that begin with the
+`full_year = TRUE`, the function will only return full years that begin with the
 first hour of theyear and end with the last. For the purposes of this example,
-set full_year == FALSE.
+set `full_year = FALSE`.
 
 ```{r}
 # Point to a folder containing ERA5 .nc files
