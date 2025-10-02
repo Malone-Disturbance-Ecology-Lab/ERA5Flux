@@ -21,7 +21,7 @@
 #'
 #' @examples
 #' # Point to a NetCDF file
-#' nc_file_path <- system.file("extdata", "ERA5-US-GL2-2025-1.nc", package = "ERA5Flux")
+#' nc_file_path <- system.file("extdata", "path_to_ERA5_download_folder", "ERA5-US-GL2-2025-1.nc", package = "ERA5Flux")
 #' # Reformat the NetCDF
 #' result <- netcdf_df_formatter(nc_file_path)
 #' head(result)
