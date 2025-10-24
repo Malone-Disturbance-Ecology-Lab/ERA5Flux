@@ -131,7 +131,7 @@ and requested files manifest.</p>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Malone-Disturbance-Ecology-Lab/ERA5Flux" class="external-link">ERA5Flux</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Specify the ERA5 variables you want to get</span></span>
-<span><span class="va">my_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"total_precipitation"</span><span class="op">)</span></span>
+<span><span class="va">my_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"surface_solar_radiation_downwards"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Point to the folder containing the unzipped site folders and requested files manifest</span></span>
 <span><span class="va">my_folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"unzipped_AmeriFlux_data"</span>, package <span class="op">=</span> <span class="st">"ERA5Flux"</span><span class="op">)</span></span>
@@ -139,7 +139,7 @@ and requested files manifest.</p>
 <span><span class="co"># Generate the AmeriFlux site metadata file</span></span>
 <span><span class="va">my_site_metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_site_metadata.html">get_site_metadata</a></span><span class="op">(</span>folder <span class="op">=</span> <span class="va">my_folder</span>,</span>
 <span>                                      selected_variables <span class="op">=</span> <span class="va">my_variables</span><span class="op">)</span></span>
-<span><span class="co">#&gt; selected variables: total_precipitation</span></span>
+<span><span class="co">#&gt; selected variables: surface_solar_radiation_downwards</span></span>
 <span><span class="co">#&gt; Now checking: US-GL2</span></span>
 <span><span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">7248</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">1</span></span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span></span>
@@ -150,8 +150,10 @@ and requested files manifest.</p>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span>
 <span></span>
 <span><span class="va">my_site_metadata</span></span>
-<span><span class="co">#&gt;   site_codes     lat      lon   startdate      enddate           variables</span></span>
-<span><span class="co">#&gt; 1     US-GL2 46.7167 -87.4000 2.02501e+11 202505312330 total_precipitation</span></span></code></pre></div>
+<span><span class="co">#&gt;   site_codes     lat      lon   startdate      enddate</span></span>
+<span><span class="co">#&gt; 1     US-GL2 46.7167 -87.4000 2.02501e+11 202505312330</span></span>
+<span><span class="co">#&gt;                           variables</span></span>
+<span><span class="co">#&gt; 1 surface_solar_radiation_downwards</span></span></code></pre></div>
 <p>The metadata dataframe will have 5 columns: <code>site_codes</code>,
 <code>lat</code>, <code>lon</code>, <code>startdate</code>,
 <code>enddate</code>, and <code>variables</code>. We will need this
@@ -243,14 +245,80 @@ purposes of this example, set <code>full_year = FALSE</code>.</p>
 <p>After you processed the ERA5, you can merge ERA5 and AmeriFlux
 together.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Show how to use this</span></span>
-<span><span class="co"># merge_ERA5_FLUX()</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Point to AmeriFlux data</span></span>
+<span><span class="va">ameriflux_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"AMF_US-GL2_BASE-BADM_1-5.zip"</span>, package <span class="op">=</span> <span class="st">"ERA5Flux"</span><span class="op">)</span></span>
+<span><span class="co"># Point to ERA5 data</span></span>
+<span><span class="va">era5_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">output_filepath</span>, pattern <span class="op">=</span> <span class="st">"US_GL2"</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># List AmeriFlux variable(s) to be merged </span></span>
+<span><span class="va">ameriflux_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SW_IN"</span><span class="op">)</span></span>
+<span><span class="co"># List ERA5 variable(s) to be merged </span></span>
+<span><span class="va">era5_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ssrd"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Merge them together</span></span>
+<span><span class="va">merged_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/merge_ERA5_FLUX.html">merge_ERA5_FLUX</a></span><span class="op">(</span>filename_FLUX <span class="op">=</span> <span class="va">ameriflux_file</span>,</span>
+<span>                               filename_ERA5 <span class="op">=</span> <span class="va">era5_file</span>,</span>
+<span>                               varname_FLUX <span class="op">=</span> <span class="va">ameriflux_var</span>,</span>
+<span>                               varname_ERA5 <span class="op">=</span> <span class="va">era5_var</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">merged_data</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">20</span>,<span class="op">]</span></span>
+<span><span class="co">#&gt;                   time     ssrd SW_IN</span></span>
+<span><span class="co">#&gt; 1  2024-12-31 19:00:00 663.4275    NA</span></span>
+<span><span class="co">#&gt; 2  2024-12-31 19:30:00 331.7138    NA</span></span>
+<span><span class="co">#&gt; 3  2024-12-31 20:00:00   0.0000    NA</span></span>
+<span><span class="co">#&gt; 4  2024-12-31 20:30:00   0.0000    NA</span></span>
+<span><span class="co">#&gt; 5  2024-12-31 21:00:00   0.0000    NA</span></span>
+<span><span class="co">#&gt; 6  2024-12-31 21:30:00   0.0000    NA</span></span>
+<span><span class="co">#&gt; 7  2024-12-31 22:00:00   0.0000    NA</span></span>
+<span><span class="co">#&gt; 8  2024-12-31 22:30:00   0.0000    NA</span></span>
+<span><span class="co">#&gt; 9  2024-12-31 23:00:00   0.0000    NA</span></span>
+<span><span class="co">#&gt; 10 2024-12-31 23:30:00   0.0000    NA</span></span>
+<span><span class="co">#&gt; 11 2025-01-01 00:00:00   0.0000 0.483</span></span>
+<span><span class="co">#&gt; 12 2025-01-01 00:30:00   0.0000 0.518</span></span>
+<span><span class="co">#&gt; 13 2025-01-01 01:00:00   0.0000 0.541</span></span>
+<span><span class="co">#&gt; 14 2025-01-01 01:30:00   0.0000 0.476</span></span>
+<span><span class="co">#&gt; 15 2025-01-01 02:00:00   0.0000 0.442</span></span>
+<span><span class="co">#&gt; 16 2025-01-01 02:30:00   0.0000 0.438</span></span>
+<span><span class="co">#&gt; 17 2025-01-01 03:00:00   0.0000 0.500</span></span>
+<span><span class="co">#&gt; 18 2025-01-01 03:30:00   0.0000 0.449</span></span>
+<span><span class="co">#&gt; 19 2025-01-01 04:00:00   0.0000 0.502</span></span>
+<span><span class="co">#&gt; 20 2025-01-01 04:30:00   0.0000 0.478</span></span></code></pre></div>
 <p>After merging, you can blend them together. Maybe helpful to explain
 the difference between merging and blending ?</p>
 <p>Final result will look like this:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Show how to use this</span></span>
-<span><span class="co"># blend_ERA5_Flux()</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Specify the blending rule(s)</span></span>
+<span><span class="va">blending_rule</span> <span class="op">&lt;-</span> <span class="st">"replace"</span></span>
+<span></span>
+<span><span class="co"># Blend them together</span></span>
+<span><span class="va">blended_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/blend_ERA5_Flux.html">blend_ERA5_Flux</a></span><span class="op">(</span>merged_data <span class="op">=</span> <span class="va">merged_data</span>,</span>
+<span>                                varname_FLUX <span class="op">=</span> <span class="va">ameriflux_var</span>,</span>
+<span>                                varname_ERA5 <span class="op">=</span> <span class="va">era5_var</span>,</span>
+<span>                                blending_rule <span class="op">=</span> <span class="va">blending_rule</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Processing: SW_IN using rule: replace</span></span>
+<span></span>
+<span><span class="va">blended_data</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">20</span>,<span class="op">]</span></span>
+<span><span class="co">#&gt;                   time     ssrd SW_IN  SW_IN_f</span></span>
+<span><span class="co">#&gt; 1  2024-12-31 19:00:00 663.4275    NA 663.4275</span></span>
+<span><span class="co">#&gt; 2  2024-12-31 19:30:00 331.7138    NA 331.7138</span></span>
+<span><span class="co">#&gt; 3  2024-12-31 20:00:00   0.0000    NA   0.0000</span></span>
+<span><span class="co">#&gt; 4  2024-12-31 20:30:00   0.0000    NA   0.0000</span></span>
+<span><span class="co">#&gt; 5  2024-12-31 21:00:00   0.0000    NA   0.0000</span></span>
+<span><span class="co">#&gt; 6  2024-12-31 21:30:00   0.0000    NA   0.0000</span></span>
+<span><span class="co">#&gt; 7  2024-12-31 22:00:00   0.0000    NA   0.0000</span></span>
+<span><span class="co">#&gt; 8  2024-12-31 22:30:00   0.0000    NA   0.0000</span></span>
+<span><span class="co">#&gt; 9  2024-12-31 23:00:00   0.0000    NA   0.0000</span></span>
+<span><span class="co">#&gt; 10 2024-12-31 23:30:00   0.0000    NA   0.0000</span></span>
+<span><span class="co">#&gt; 11 2025-01-01 00:00:00   0.0000 0.483   0.0000</span></span>
+<span><span class="co">#&gt; 12 2025-01-01 00:30:00   0.0000 0.518   0.0000</span></span>
+<span><span class="co">#&gt; 13 2025-01-01 01:00:00   0.0000 0.541   0.0000</span></span>
+<span><span class="co">#&gt; 14 2025-01-01 01:30:00   0.0000 0.476   0.0000</span></span>
+<span><span class="co">#&gt; 15 2025-01-01 02:00:00   0.0000 0.442   0.0000</span></span>
+<span><span class="co">#&gt; 16 2025-01-01 02:30:00   0.0000 0.438   0.0000</span></span>
+<span><span class="co">#&gt; 17 2025-01-01 03:00:00   0.0000 0.500   0.0000</span></span>
+<span><span class="co">#&gt; 18 2025-01-01 03:30:00   0.0000 0.449   0.0000</span></span>
+<span><span class="co">#&gt; 19 2025-01-01 04:00:00   0.0000 0.502   0.0000</span></span>
+<span><span class="co">#&gt; 20 2025-01-01 04:30:00   0.0000 0.478   0.0000</span></span></code></pre></div>
 <p>Maybe explain how researchers can use these results in their
 work.</p>
 </div>
