@@ -107,18 +107,18 @@ a year (e.g., 2000-01-01 00:00) and ends with the last hour of a year
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Convert NetCDF data to a CSV file</span></span></span>
 <span class="r-in"><span><span class="fu">netcdf_to_csv</span><span class="op">(</span><span class="va">site_folder</span>, <span class="va">output_filepath</span>, <span class="va">site_name</span>, full_year <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Saved: US_GL2_2024_2025_tp.csv </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Saved: US_GL2_2024_2025_ssrd.csv </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Read the CSV back in</span></span></span>
 <span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">output_filepath</span>, pattern <span class="op">=</span> <span class="st">"US_GL2"</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           time         tp</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 202412311900 0.40247058</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 202412312000 0.03797992</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 202412312100 0.07184656</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 202412312200 0.10609820</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 202412312300 0.12701539</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 202501010000 0.15275138</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           time     ssrd</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 202412311900 663.4275</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 202412312000   0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 202412312100   0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 202412312200   0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 202412312300   0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 202501010000   0.0000</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
