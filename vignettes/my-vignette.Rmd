@@ -68,7 +68,7 @@ After arranging the files, you can now generate the AmeriFlux site metadata. In 
 library(ERA5Flux)
 
 # Specify the ERA5 variables you want to get
-my_variables <- c("total_precipitation")
+my_variables <- c("surface_solar_radiation_downwards")
 
 # Point to the folder containing the unzipped site folders and requested files manifest
 my_folder <- system.file("extdata", "unzipped_AmeriFlux_data", package = "ERA5Flux")
@@ -157,8 +157,23 @@ head(data)
 After you processed the ERA5, you can merge ERA5 and AmeriFlux together.
 
 ```{r}
-# Show how to use this
-# merge_ERA5_FLUX()
+# Point to AmeriFlux data
+ameriflux_file <- system.file("extdata", "AMF_US-GL2_BASE-BADM_1-5.zip", package = "ERA5Flux")
+# Point to ERA5 data
+era5_file <- list.files(output_filepath, pattern = "US_GL2", full.names = TRUE)
+
+# List AmeriFlux variable(s) to be merged 
+ameriflux_var <- c("SW_IN")
+# List ERA5 variable(s) to be merged 
+era5_var <- c("ssrd")
+
+# Merge them together
+merged_data <- merge_ERA5_FLUX(filename_FLUX = ameriflux_file,
+                               filename_ERA5 = era5_file,
+                               varname_FLUX = ameriflux_var,
+                               varname_ERA5 = era5_var)
+
+merged_data[1:20,]
 ```
 
 After merging, you can blend them together. Maybe helpful to explain the difference between merging and blending ?
@@ -166,8 +181,16 @@ After merging, you can blend them together. Maybe helpful to explain the differe
 Final result will look like this: 
 
 ```{r}
-# Show how to use this
-# blend_ERA5_Flux()
+# Specify the blending rule(s)
+blending_rule <- "replace"
+
+# Blend them together
+blended_data <- blend_ERA5_Flux(merged_data = merged_data,
+                                varname_FLUX = ameriflux_var,
+                                varname_ERA5 = era5_var,
+                                blending_rule = blending_rule)
+
+blended_data[1:20,]
 ```
 
 Maybe explain how researchers can use these results in their work. 
