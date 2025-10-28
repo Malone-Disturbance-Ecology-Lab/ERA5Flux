@@ -1,5 +1,5 @@
 Package: ERA5Flux
-Title: Improve the Utility of ERA5 Data at Flux Site Locations
+Title: Improve the Utility of ERA5 Data at AmeriFlux Site Locations
 Version: 0.0.0.9000
 Authors@R: c(
   person(given = "Angel", family = "Chen",
@@ -31,7 +31,11 @@ Authors@R: c(
          comment = c(ORCID = "0000-0001-9034-1076"),
          role = "aut")
          )
-Description: What the package does (one paragraph).
+Description: Collection of tools useful for workflows involving ERA5 and 
+    AmeriFlux data. Includes functions for downloading ERA5 data based on 
+    AmeriFlux sites, formatting the downloaded data to match AmeriFlux 
+    standards, merging both datasets together to ensure consistent 
+    timestamps, and blending them to create a single gap-filled time series.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
