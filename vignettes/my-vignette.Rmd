@@ -20,9 +20,9 @@ knitr::opts_chunk$set(
 
 ## Intro 
 
-Explain ERA5Flux purpose, what is ERA5 and AmeriFlux, why is this package useful, what is the main purpose etc.
+This package was designed to make it easier to work with both [ERA5](https://www.ecmwf.int/en/forecasts/dataset/ecmwf-reanalysis-v5) and [AmeriFlux](https://ameriflux.lbl.gov/) data, hence the name "ERA5Flux". There may be instances where the AmeriFlux data contain gaps that you want to fill with ERA5 data to create a single time series for your analysis.
 
-Here is how to use the core functions in `ERA5Flux` in your entire workflow.
+Here is a demonstration of the workflow needed to achieve that result.
 
 ## Workflow 
 
@@ -118,7 +118,7 @@ download_ERA5(my_token = my_token,
 
 ### Step 2: Data Processing
 
-After downloading the ERA5 .nc files, we convert them into CSV files formatted to match AmeriFlux standards, enabling easy merging with existing datasets. This conversion is handled by `netcdf_df_formatter()`, which adjusts ERA5 timestamps from UTC to local time (yyyyMMddHHmm) based on each site’s coordinates and converts solar radiation (ssrd), air temperature (t2m), and total precipitation (tp) to AmeriFlux units. The `netcdf_to_csv()` function then calls `netcdf_df_formatter()` for each site folder, merging all relevant data by site and year so that each output CSV contains one site’s data for one year. If `full_year = TRUE`, the function will only return full years that begin with the first hour of theyear and end with the last. For the purposes of this example, set `full_year = FALSE`.
+After downloading the ERA5 .nc files, we convert them into CSV files formatted to match AmeriFlux standards, enabling easy merging with existing datasets. This conversion is handled by `netcdf_df_formatter()`, which adjusts ERA5 timestamps from UTC to local time (yyyyMMddHHmm) based on each site’s coordinates and converts solar radiation (ssrd), air temperature (t2m), and total precipitation (tp) to AmeriFlux units. The `netcdf_to_csv()` function then calls `netcdf_df_formatter()` for each site folder, merging all relevant data by site and year so that each output CSV contains one site’s data for one year. If `full_year = TRUE`, the function will only return full years that begin with the first hour of the year and end with the last. For the purposes of this example, set `full_year = FALSE`.
 
 ```{r}
 # Point to a folder containing ERA5 .nc files
@@ -167,6 +167,8 @@ merged_data <- merge_ERA5_FLUX(filename_FLUX = ameriflux_file,
 
 merged_data[1:20,]
 ```
+
+As shown above, the merged data contains ERA5 data in `ssrd`, as well as AmeriFlux data in `SW_IN`. 
 
 Finally, you can blend the merged data.
 
