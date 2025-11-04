@@ -60,9 +60,9 @@ data into csv format with the following characteristics.
 # 4. Flux Data Merging_03
 
 - Two functions to merge and blend ERA5 and FLUX data
-  - 03_01_merge_ERA5_FLUX: do interpolation of ERA5 data to ensure ERA5
+  - 03A_merge_ERA5_Flux: do interpolation of ERA5 data to ensure ERA5
     and FLUX datasets share the same timestamp.  
-  - 03_02_blend_ERA5_FLUX: blend ERA5 and FLUX datasets according to
+  - 03B_blend_ERA5_Flux: blend ERA5 and FLUX datasets according to
     blending rules.
 - Input and output variables of the two functions
   - input variables (character): filename_FLUX, filename_ERA5
