@@ -3,7 +3,7 @@
 #' @author Ammara Talib and Junna Wang
 #'
 #' @description
-#' This function is used to blend data from AmeriFlux and data from ERA5, ensuring they both have the same start and end timestamps. Please first make sure to run the merge function (`merge_ERA5_FLUX()`) first, because output of merge function will be used as input of this blending function.
+#' This function is used to blend data from AmeriFlux and data from ERA5, ensuring they both have the same start and end timestamps. Please first make sure to run the merge function (`merge_ERA5_Flux()`) first, because output of merge function will be used as input of this blending function.
 #'
 #' @param merged_data (data.frame) A data frame that has a datetime stamp column named "time" with the format: "%Y-%m-%d %H:%M:%S". The time step of the "time" column is the same with that of AmeriFlux file. It also includes the columns of AmeriFlux and ERA5 data that were merged together.
 #' @param varname_FLUX (character) A vector of variable names in AmeriFlux BASE data to be blended with ERA5 data.
@@ -36,7 +36,7 @@
 #' varname_ERA5 <- c("tp")
 #' # Run the merge function first, because its output will be used as input for this blending function
 #' # Merge AmeriFlux and ERA5 data together
-#' merged_data <- merge_ERA5_FLUX(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
+#' merged_data <- merge_ERA5_Flux(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
 #' # Specify the blending rule(s)
 #' blending_rule <- c('lm_no_intercept')
 #' # Blend AmeriFlux and ERA5 data together
@@ -53,7 +53,7 @@
 #' # List ERA5 variable(s) to be merged with AmeriFlux
 #' varname_ERA5 <- c('ssrd', 't2m')
 #' # Merge AmeriFlux and ERA5 data together
-#' merged_data <- merge_ERA5_FLUX(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
+#' merged_data <- merge_ERA5_Flux(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
 #' # Specify the blending rule(s)
 #' blending_rule <- c('replace', 'automatic')
 #' # Blend AmeriFlux and ERA5 data together
