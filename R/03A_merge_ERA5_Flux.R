@@ -20,29 +20,26 @@
 #' - It also includes the columns of `varname_FLUX`, the columns of `varname_ERA5`.
 #'
 #' @examples
+#' # Point to a folder containing ERA5 .nc files
+#' site_folder <- system.file("extdata", "path_to_ERA5_download_folder", package = "ERA5Flux")
+#' # Specify a site name
+#' site_name <- "US_GL2"
+#' # Create a temporary directory to export our output to
+#' output_filepath <- tempdir()
 #'
-#' # First example
-#' # Point to AmeriFlux data
-#' filename_FLUX <- system.file("extdata", "AMF_BR-Sa1_BASE-BADM_5-5.zip", package = "ERA5Flux")
-#' # Point to ERA5 data
-#' filename_ERA5 <- system.file("extdata", "BR-Sa1_tp_2002_2011.csv", package = "ERA5Flux")
-#' # List AmeriFlux variable(s) to be merged with ERA5
-#' varname_FLUX <- c("P")
-#' # List ERA5 variable(s) to be merged with AmeriFlux
-#' varname_ERA5 <- c("tp")
-#' # Merge AmeriFlux and ERA5 data together
-#' merged_data <- merge_ERA5_Flux(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
-#' head(merged_data)
+#' # Convert NetCDF data to a CSV file
+#' netcdf_to_csv(site_folder, output_filepath, site_name, full_year = FALSE)
 #'
-#' # Second example
 #' # Point to AmeriFlux data
-#' filename_FLUX <- system.file("extdata", "AMF_US-EvM_BASE-BADM_2-5.zip", package = "ERA5Flux")
+#' filename_FLUX <- system.file("extdata", "AMF_US-GL2_BASE-BADM_1-5.zip", package = "ERA5Flux")
 #' # Point to ERA5 data
-#' filename_ERA5 <- system.file("extdata", "US-EvM_ERA_2020_2023_hr.csv", package = "ERA5Flux")
+#' filename_ERA5 <- list.files(output_filepath, pattern = "US_GL2", full.names = TRUE)
+#'
 #' # List AmeriFlux variable(s) to be merged with ERA5
-#' varname_FLUX <- c('SW_IN', 'TA')
+#' varname_FLUX <- c("SW_IN")
 #' # List ERA5 variable(s) to be merged with AmeriFlux
-#' varname_ERA5 <- c('ssrd', 't2m')
+#' varname_ERA5 <- c("ssrd")
+#'
 #' # Merge AmeriFlux and ERA5 data together
 #' merged_data <- merge_ERA5_Flux(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
 #' head(merged_data)
