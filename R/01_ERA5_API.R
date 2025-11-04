@@ -1,7 +1,7 @@
 #' @title Download ERA5 Data
 #'
 #' @description
-#' This function uses the `ecmwfr` package to download ERA5 data for each site specified in the AmeriFlux site metadata dataframe. The temporal and geographical coverage of the downloaded data will match the AmeriFlux site metadata dataframe.
+#' This function uses the `ecmwfr` package to download ERA5 data for each site specified in the AmeriFlux site metadata data frame. The temporal and geographical coverage of the downloaded data will match the AmeriFlux site metadata data frame.
 #'
 #' @param my_token (character) A secret ECMWF token.
 #' @param site_metadata (data.frame) A data frame that has the AmeriFlux site metadata. Create the metadata with `get_site_metadata()`.

@@ -24,7 +24,7 @@ download_ERA5(
 (character) Paths to the downloaded files.
 }
 \description{
-This function uses the \code{ecmwfr} package to download ERA5 data for each site specified in the AmeriFlux site metadata dataframe. The temporal and geographical coverage of the downloaded data will match the AmeriFlux site metadata dataframe.
+This function uses the \code{ecmwfr} package to download ERA5 data for each site specified in the AmeriFlux site metadata data frame. The temporal and geographical coverage of the downloaded data will match the AmeriFlux site metadata data frame.
 }
 \note{
 If you haven't done so already, you may need to accept the data license agreement first before you can download the data. Visit the Copernicus Climate Data Store User Profile page at https://cds.climate.copernicus.eu/profile to accept the appropriate license(s).

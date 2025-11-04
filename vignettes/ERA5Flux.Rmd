@@ -77,7 +77,7 @@ my_site_metadata <- get_site_metadata(folder = my_folder,
 my_site_metadata
 ```
 
-The metadata dataframe will have 5 columns: `site_codes`, `lat`, `lon`, `startdate`, `enddate`, and `variables`. We will need this metadata in order to build our ERA5 data requests. 
+The metadata data frame will have 5 columns: `site_codes`, `lat`, `lon`, `startdate`, `enddate`, and `variables`. We will need this metadata in order to build our ERA5 data requests. 
 
 ### Step 1: Download ERA5 Data
 
@@ -143,7 +143,7 @@ head(data)
 
 After you processed the ERA5 data, you can merge it with the AmeriFlux data.
 
-The `merge_ERA5_Flux()` function synchronizes AmeriFlux tower observations with ERA5 reanalysis data, ensuring both datasets share consistent timestamps and comparable variable names. It first reads AmeriFlux BASE data, replaces missing values with `NA`, and imports the processed ERA5 CSV file generated from `netcdf_to_csv()`. Because ERA5 data are typically hourly and AmeriFlux data are often half-hourly, the function linearly interpolates ERA5 variables to match the AmeriFlux time step. It then merges the datasets based on the aligned time column, adding corresponding AmeriFlux and ERA5 variables side by side. The resulting dataframe provides a harmonized, site-specific time series that researchers can use to compare reanalysis and in situ flux measurements, fill short data gaps, and prepare blended climate–flux inputs for ecosystem or hydrological modeling.
+The `merge_ERA5_Flux()` function synchronizes AmeriFlux tower observations with ERA5 reanalysis data, ensuring both datasets share consistent timestamps and comparable variable names. It first reads AmeriFlux BASE data, replaces missing values with `NA`, and imports the processed ERA5 CSV file generated from `netcdf_to_csv()`. Because ERA5 data are typically hourly and AmeriFlux data are often half-hourly, the function linearly interpolates ERA5 variables to match the AmeriFlux time step. It then merges the datasets based on the aligned time column, adding corresponding AmeriFlux and ERA5 variables side by side. The resulting data frame provides a harmonized, site-specific time series that researchers can use to compare reanalysis and in situ flux measurements, fill short data gaps, and prepare blended climate–flux inputs for ecosystem or hydrological modeling.
 
 ```{r}
 # Point to AmeriFlux data

@@ -91,7 +91,7 @@ get_site_metadata <- function(folder = NULL,
     variables[i] <- base::paste(selected_variables, collapse = ", ")
   }
 
-  # Create the metadata dataframe
+  # Create the metadata data frame
   df.sitemetadata <- base::data.frame(
     site_codes,
     lat,
