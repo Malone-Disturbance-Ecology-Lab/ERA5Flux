@@ -7,3 +7,6 @@
 .RDataTmp
 docs
 inst/doc
+*.nc
+test
+vig_prep
