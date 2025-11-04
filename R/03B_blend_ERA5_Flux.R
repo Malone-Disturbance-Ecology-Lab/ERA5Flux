@@ -8,13 +8,13 @@
 #' @param merged_data (data.frame) A data frame that has a datetime stamp column named "time" with the format: "%Y-%m-%d %H:%M:%S". The time step of the "time" column is the same with that of AmeriFlux file. It also includes the columns of AmeriFlux and ERA5 data that were merged together.
 #' @param varname_FLUX (character) A vector of variable names in AmeriFlux BASE data to be blended with ERA5 data.
 #' @param varname_ERA5 (character) A vector of variable names in ERA5 data to be blended with AmeriFlux BASE data.
-#' @param blending_rule (character) There are four types of blending rules that can be used to blend AmeriFlux and ERA5 variables:
+#' @param blending_rule (character) A vector of blending rules to use. There are four types of blending rules that can be used to blend AmeriFlux and ERA5 variables:
 #' - "lm": Linear regression with slope. Fits a linear model with slope, FLUX ~ ERA5, then only fills missing values in FLUX with predicted values from ERA5.
 #' - "lm_no_intercept": Linear regression without slope. Fits a linear model without slope, FLUX ~ ERA5, then only fills missing values in FLUX with predicted values from ERA5.
 #' - "replace": Replace Ameriflux variable with ERA5 variable.
 #' - "automatic": Checks for non-missing FLUX values. If ≥50% present then uses "lm" approach. If <50% present then fallback to "replace".
 #'
-#' @note Please note that the length of `varname_FLUX` must be the same as the length of `varname_ERA5`; at the same location, `varname_FLUX` and `varname_ERA5` should refer to the same variable despite the fact that AmeriFlux and ERA5 may use different names for the same variable. For example, for incoming shortwave radiation, ERA5 uses "ssrd", but AmeriFlux uses "SW_IN".
+#' @note Please note that the length of `varname_FLUX` must be the same as the length of `varname_ERA5`; at the same location, `varname_FLUX` and `varname_ERA5` should refer to the same variable despite the fact that AmeriFlux and ERA5 may use different names for the same variable. For example, for incoming shortwave radiation, ERA5 uses "ssrd", but AmeriFlux uses "SW_IN". Additionally, if you have multiple variables like precipitation and soil temperature, you must specify a blending rule for each one.
 #'
 #' @export
 #'
@@ -47,9 +47,11 @@
 #' # Run the merge function first, because its output will be used as input for this blending function
 #' # Merge AmeriFlux and ERA5 data together
 #' merged_data <- merge_ERA5_Flux(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
+#' head(merged_data)
 #'
 #' # Specify the blending rule(s)
-#' blending_rule <- c('lm_no_intercept')
+#' # If you have multiple variables, specify a rule for each variable
+#' blending_rule <- c("replace")
 #' # Blend AmeriFlux and ERA5 data together
 #' merg_blend <- blend_ERA5_Flux(merged_data, varname_FLUX, varname_ERA5, blending_rule)
 #' head(merg_blend)

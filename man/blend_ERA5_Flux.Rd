@@ -18,7 +18,7 @@ blend_ERA5_Flux(
 
 \item{varname_ERA5}{(character) A vector of variable names in ERA5 data to be blended with AmeriFlux BASE data.}
 
-\item{blending_rule}{(character) There are four types of blending rules that can be used to blend AmeriFlux and ERA5 variables:
+\item{blending_rule}{(character) A vector of blending rules to use. There are four types of blending rules that can be used to blend AmeriFlux and ERA5 variables:
 \itemize{
 \item "lm": Linear regression with slope. Fits a linear model with slope, FLUX ~ ERA5, then only fills missing values in FLUX with predicted values from ERA5.
 \item "lm_no_intercept": Linear regression without slope. Fits a linear model without slope, FLUX ~ ERA5, then only fills missing values in FLUX with predicted values from ERA5.
@@ -38,7 +38,7 @@ blend_ERA5_Flux(
 This function is used to blend data from AmeriFlux and data from ERA5, ensuring they both have the same start and end timestamps. Please first make sure to run the merge function (\code{merge_ERA5_Flux()}) first, because output of merge function will be used as input of this blending function.
 }
 \note{
-Please note that the length of \code{varname_FLUX} must be the same as the length of \code{varname_ERA5}; at the same location, \code{varname_FLUX} and \code{varname_ERA5} should refer to the same variable despite the fact that AmeriFlux and ERA5 may use different names for the same variable. For example, for incoming shortwave radiation, ERA5 uses "ssrd", but AmeriFlux uses "SW_IN".
+Please note that the length of \code{varname_FLUX} must be the same as the length of \code{varname_ERA5}; at the same location, \code{varname_FLUX} and \code{varname_ERA5} should refer to the same variable despite the fact that AmeriFlux and ERA5 may use different names for the same variable. For example, for incoming shortwave radiation, ERA5 uses "ssrd", but AmeriFlux uses "SW_IN". Additionally, if you have multiple variables like precipitation and soil temperature, you must specify a blending rule for each one.
 }
 \examples{
 # Point to a folder containing ERA5 .nc files
@@ -64,9 +64,11 @@ varname_ERA5 <- c("ssrd")
 # Run the merge function first, because its output will be used as input for this blending function
 # Merge AmeriFlux and ERA5 data together
 merged_data <- merge_ERA5_Flux(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
+head(merged_data)
 
 # Specify the blending rule(s)
-blending_rule <- c('lm_no_intercept')
+# If you have multiple variables, specify a rule for each variable
+blending_rule <- c("replace")
 # Blend AmeriFlux and ERA5 data together
 merg_blend <- blend_ERA5_Flux(merged_data, varname_FLUX, varname_ERA5, blending_rule)
 head(merg_blend)

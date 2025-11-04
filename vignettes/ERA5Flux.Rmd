@@ -175,7 +175,8 @@ The final result will look something like this:
 
 ```{r}
 # Specify the blending rule(s)
-blending_rule <- "replace"
+# If you have multiple variables, specify a rule for each variable
+blending_rule <- c("replace")
 
 # Blend them together
 blended_data <- blend_ERA5_Flux(merged_data = merged_data,
