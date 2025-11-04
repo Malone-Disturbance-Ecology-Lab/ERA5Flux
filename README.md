@@ -30,6 +30,10 @@ pak::pak("Malone-Disturbance-Ecology-Lab/ERA5Flux")
 
 ### Main Workflow
 
+- `utc_offset()`: produces an hour offset number converting local to
+  UTC, where offset is the difference between UTC and local time without
+  considering Daylight Saving Time
+
 - `get_site_metadata()`: builds an AmeriFlux site metadata file
 
 - `get_land_sea_mask()`: downloads the netCDF land-sea mask from ERA5
@@ -62,7 +66,3 @@ pak::pak("Malone-Disturbance-Ecology-Lab/ERA5Flux")
 
 - `day_padding()`: pads 1 day for the beginning and ending days, adding
   1 day to start and end dates for future time zone offset issues
-
-- `utc_offset()`: produces an hour offset number converting local to
-  UTC, where offset is the difference between UTC and local time without
-  considering Daylight Saving Time
