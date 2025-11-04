@@ -89,59 +89,45 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># First example</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Point to a folder containing ERA5 .nc files</span></span></span>
+<span class="r-in"><span><span class="va">site_folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"path_to_ERA5_download_folder"</span>, package <span class="op">=</span> <span class="st">"ERA5Flux"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Specify a site name</span></span></span>
+<span class="r-in"><span><span class="va">site_name</span> <span class="op">&lt;-</span> <span class="st">"US_GL2"</span></span></span>
+<span class="r-in"><span><span class="co"># Create a temporary directory to export our output to</span></span></span>
+<span class="r-in"><span><span class="va">output_filepath</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Convert NetCDF data to a CSV file</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="netcdf_to_csv.html">netcdf_to_csv</a></span><span class="op">(</span><span class="va">site_folder</span>, <span class="va">output_filepath</span>, <span class="va">site_name</span>, full_year <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Saved: US_GL2_2024_2025_ssrd.csv </span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Point to AmeriFlux data</span></span></span>
-<span class="r-in"><span><span class="va">filename_FLUX</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"AMF_BR-Sa1_BASE-BADM_5-5.zip"</span>, package <span class="op">=</span> <span class="st">"ERA5Flux"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">filename_FLUX</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"AMF_US-GL2_BASE-BADM_1-5.zip"</span>, package <span class="op">=</span> <span class="st">"ERA5Flux"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># Point to ERA5 data</span></span></span>
-<span class="r-in"><span><span class="va">filename_ERA5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"BR-Sa1_tp_2002_2011.csv"</span>, package <span class="op">=</span> <span class="st">"ERA5Flux"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">filename_ERA5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">output_filepath</span>, pattern <span class="op">=</span> <span class="st">"US_GL2"</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># List AmeriFlux variable(s) to be merged with ERA5</span></span></span>
-<span class="r-in"><span><span class="va">varname_FLUX</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"P"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">varname_FLUX</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SW_IN"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># List ERA5 variable(s) to be merged with AmeriFlux</span></span></span>
-<span class="r-in"><span><span class="va">varname_ERA5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tp"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">varname_ERA5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ssrd"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Run the merge function first, because its output will be used as input for this blending function</span></span></span>
 <span class="r-in"><span><span class="co"># Merge AmeriFlux and ERA5 data together</span></span></span>
 <span class="r-in"><span><span class="va">merged_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="merge_ERA5_Flux.html">merge_ERA5_Flux</a></span><span class="op">(</span><span class="va">filename_FLUX</span>, <span class="va">filename_ERA5</span>, <span class="va">varname_FLUX</span>, <span class="va">varname_ERA5</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Specify the blending rule(s)</span></span></span>
 <span class="r-in"><span><span class="va">blending_rule</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'lm_no_intercept'</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># Blend AmeriFlux and ERA5 data together</span></span></span>
 <span class="r-in"><span><span class="va">merg_blend</span> <span class="op">&lt;-</span> <span class="fu">blend_ERA5_Flux</span><span class="op">(</span><span class="va">merged_data</span>, <span class="va">varname_FLUX</span>, <span class="va">varname_ERA5</span>, <span class="va">blending_rule</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: P using rule: lm_no_intercept</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: SW_IN using rule: lm_no_intercept</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Fitting linear model without intercept with formula: SW_IN ~ ssrd + 0</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">merg_blend</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  time        tp  P P_f</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 2002-01-01 00:00:00 0.2252227 NA  NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2002-01-01 01:00:00 0.4244113 NA  NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 2002-01-01 02:00:00 0.3902548 NA  NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 2002-01-01 03:00:00 0.6315456 NA  NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 2002-01-01 04:00:00 0.2987110 NA  NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 2002-01-01 05:00:00 0.3121161 NA  NA</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Second example</span></span></span>
-<span class="r-in"><span><span class="co"># Point to AmeriFlux data</span></span></span>
-<span class="r-in"><span><span class="va">filename_FLUX</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"AMF_US-EvM_BASE-BADM_2-5.zip"</span>, package <span class="op">=</span> <span class="st">"ERA5Flux"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co"># Point to ERA5 data</span></span></span>
-<span class="r-in"><span><span class="va">filename_ERA5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"US-EvM_ERA_2020_2023_hr.csv"</span>, package <span class="op">=</span> <span class="st">"ERA5Flux"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co"># List AmeriFlux variable(s) to be merged with ERA5</span></span></span>
-<span class="r-in"><span><span class="va">varname_FLUX</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'SW_IN'</span>, <span class="st">'TA'</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co"># List ERA5 variable(s) to be merged with AmeriFlux</span></span></span>
-<span class="r-in"><span><span class="va">varname_ERA5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'ssrd'</span>, <span class="st">'t2m'</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co"># Merge AmeriFlux and ERA5 data together</span></span></span>
-<span class="r-in"><span><span class="va">merged_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="merge_ERA5_Flux.html">merge_ERA5_Flux</a></span><span class="op">(</span><span class="va">filename_FLUX</span>, <span class="va">filename_ERA5</span>, <span class="va">varname_FLUX</span>, <span class="va">varname_ERA5</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co"># Specify the blending rule(s)</span></span></span>
-<span class="r-in"><span><span class="va">blending_rule</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'replace'</span>, <span class="st">'automatic'</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co"># Blend AmeriFlux and ERA5 data together</span></span></span>
-<span class="r-in"><span><span class="va">merg_blend</span> <span class="op">&lt;-</span> <span class="fu">blend_ERA5_Flux</span><span class="op">(</span><span class="va">merged_data</span>, <span class="va">varname_FLUX</span>, <span class="va">varname_ERA5</span>, <span class="va">blending_rule</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: SW_IN using rule: replace</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Processing: TA using rule: automatic</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Fitting linear model with formula: TA ~ t2m</span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">merg_blend</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  time ssrd      t2m SW_IN TA SW_IN_f     TA_f</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 2020-01-01 00:00:00    0 22.04965    NA NA       0 21.24062</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2020-01-01 00:30:00    0 21.83630    NA NA       0 20.95910</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 2020-01-01 01:00:00    0 21.62295    NA NA       0 20.67757</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 2020-01-01 01:30:00    0 21.40405    NA NA       0 20.38873</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 2020-01-01 02:00:00    0 21.18514    NA NA       0 20.09988</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 2020-01-01 02:30:00    0 20.99367    NA NA       0 19.84723</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  time     ssrd SW_IN  SW_IN_f</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 2024-12-31 19:00:00 663.4275    NA 44.95547</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2024-12-31 19:30:00 331.7138    NA 22.47773</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 2024-12-31 20:00:00   0.0000    NA  0.00000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 2024-12-31 20:30:00   0.0000    NA  0.00000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 2024-12-31 21:00:00   0.0000    NA  0.00000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 2024-12-31 21:30:00   0.0000    NA  0.00000</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
