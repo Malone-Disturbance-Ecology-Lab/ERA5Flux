@@ -150,7 +150,7 @@ and requested files manifest.</p>
 <span><span class="co">#&gt; 1     US-GL2 46.7167 -87.4000 2.02501e+11 202505312330</span></span>
 <span><span class="co">#&gt;                           variables</span></span>
 <span><span class="co">#&gt; 1 surface_solar_radiation_downwards</span></span></code></pre></div>
-<p>The metadata dataframe will have 5 columns: <code>site_codes</code>,
+<p>The metadata data frame will have 5 columns: <code>site_codes</code>,
 <code>lat</code>, <code>lon</code>, <code>startdate</code>,
 <code>enddate</code>, and <code>variables</code>. We will need this
 metadata in order to build our ERA5 data requests.</p>
@@ -249,7 +249,7 @@ and imports the processed ERA5 CSV file generated from
 AmeriFlux data are often half-hourly, the function linearly interpolates
 ERA5 variables to match the AmeriFlux time step. It then merges the
 datasets based on the aligned time column, adding corresponding
-AmeriFlux and ERA5 variables side by side. The resulting dataframe
+AmeriFlux and ERA5 variables side by side. The resulting data frame
 provides a harmonized, site-specific time series that researchers can
 use to compare reanalysis and in situ flux measurements, fill short data
 gaps, and prepare blended climate–flux inputs for ecosystem or
