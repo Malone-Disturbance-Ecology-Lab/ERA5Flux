@@ -34,9 +34,14 @@
 #' # Convert NetCDF data to a CSV file
 #' netcdf_to_csv(site_folder, output_filepath, site_name, full_year = FALSE)
 #'
-#' # Point to AmeriFlux data
-#' filename_FLUX <- system.file("extdata", "AMF_US-GL2_BASE-BADM_1-5.zip", package = "ERA5Flux")
-#' # Point to ERA5 data
+#' # Point to AmeriFlux CSV data
+#' filename_FLUX <- system.file("extdata",
+#'                              "example_unzipped_AmeriFlux_data",
+#'                              "AMF_US-GL2_BASE-BADM_1-5",
+#'                              "AMF_US-GL2_BASE_HH_1-5.csv",
+#'                              package = "ERA5Flux")
+#'
+#' # Point to ERA5 CSV data
 #' filename_ERA5 <- list.files(output_filepath, pattern = "US_GL2", full.names = TRUE)
 #'
 #' # List AmeriFlux variable(s) to be merged with ERA5
