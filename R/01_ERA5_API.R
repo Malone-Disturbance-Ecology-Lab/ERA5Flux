@@ -3,12 +3,12 @@
 #' @description
 #' This function uses the `ecmwfr` package to download ERA5 data for each site specified in the AmeriFlux site metadata data frame. The temporal and geographical coverage of the downloaded data will match the AmeriFlux site metadata data frame.
 #'
-#' @param my_token (character) A secret ECMWF token.
+#' @param my_key (character) A secret ECMWF API key.
 #' @param site_metadata (data.frame) A data frame that has the AmeriFlux site metadata. Create the metadata with `get_site_metadata()`.
 #' @param mask (character) File path to the ERA5 land-sea mask. Get the mask with `get_land_sea_mask()`.
 #' @param download_path (character) Path to the folder where the ERA5 data will get downloaded to.
 #'
-#' @note If you haven't done so already, you may need to accept the data license agreement first before you can download the data. Visit the Copernicus Climate Data Store User Profile page at https://cds.climate.copernicus.eu/profile to accept the appropriate license(s).
+#' @note If you haven't done so already, you may need to accept the data license agreement first before you can download the data. Visit the Copernicus Climate Data Store User Profile page at https://cds.climate.copernicus.eu/profile to accept the appropriate license(s). `download_ERA5()` also requires a valid Climate Data Store API key. When you're logged into the [Copernicus Climate Data Store](https://cds.climate.copernicus.eu/), you can grab your API key by clicking on your name for your account in the top right corner, scrolling down to the "API key" section, and copying the API key.
 #'
 #' @importFrom lubridate %m+%
 #'
@@ -25,7 +25,7 @@
 #'                                    selected_variables = my_variables)
 #'
 #' # Download the corresponding ERA5 data
-#' download_ERA5(my_token = "my_ECMWF_token",
+#' download_ERA5(my_key = "my_own_ECMWF_key",
 #'               site_metadata = site_metadata,
 #'               mask = "path_to_ERA5_land_sea_mask",
 #'               download_path = "path_to_ERA5_download_folder")
@@ -33,12 +33,12 @@
 #'
 #' @author David Reed
 #'
-download_ERA5 <- function(my_token = NULL,
+download_ERA5 <- function(my_key = NULL,
                           site_metadata = NULL,
                           mask = NULL,
                           download_path = NULL){
-  # Error out if no token is provided
-  if (base::is.null(my_token)) stop("No ECMWF token provided")
+  # Error out if no key is provided
+  if (base::is.null(my_key)) stop("No ECMWF key provided")
 
   # Error out if no AmeriFlux site metadata is provided
   if (base::is.null(site_metadata)) stop("No AmeriFlux site metadata provided. If you need to create the metadata, run `get_site_metadata()`.")
@@ -49,8 +49,8 @@ download_ERA5 <- function(my_token = NULL,
   # Error out if no download path is provided
   if (base::is.null(download_path)) stop("No download path provided")
 
-  # Set token
-  ecmwfr::wf_set_key(key = my_token)
+  # Set key
+  ecmwfr::wf_set_key(key = my_key)
 
   for(i in 1:nrow(site_metadata)){
     # Get the UTC offset for each site
