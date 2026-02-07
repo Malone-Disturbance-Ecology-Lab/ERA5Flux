@@ -17,13 +17,15 @@ knitr::opts_chunk$set(
 
 ## Intro 
 
-This package was designed to make it easier to work with both [ERA5](https://www.ecmwf.int/en/forecasts/dataset/ecmwf-reanalysis-v5) and [AmeriFlux](https://ameriflux.lbl.gov/) data, hence the name "ERA5Flux". There may be instances where the AmeriFlux data contain gaps that you want to fill with ERA5 data to create a single time series for your analysis.
+This package was designed to make it easier to work with both [ERA5](https://www.ecmwf.int/en/forecasts/dataset/ecmwf-reanalysis-v5) and [AmeriFlux](https://ameriflux.lbl.gov/) data, hence the name "ERA5Flux". There may be instances where the AmeriFlux data contain gaps that you want to fill with ERA5 data to create a single time series for your analysis. 
+
+Please note that this package only merges and gap fills for solar radiation (long name: "surface_solar_radiation_downwards" / short name: "ssrd"), air temperature (long name: "2m_temperature" / short name: "2t"), and precipitation (long name: "total_precipitation" / short name: "tp"). These variables are defined in the [ERA5 documentation here](https://confluence.ecmwf.int/display/CKB/ERA5%3A+data+documentation).
 
 Here is a demonstration of the workflow needed to achieve that result.
 
 ## Workflow 
 
-### Step 0: Get AmeriFlux data and site metadata
+### Step 1: Get AmeriFlux data, AmeriFlux site metadata, and ERA5 Data
 
 First we will need to download AmeriFlux data. Navigate to [AmeriFlux](https://ameriflux.lbl.gov/) and login to your account. Once you're logged in, you can download data at the [Download page](https://ameriflux.lbl.gov/data/download-data/).
 
@@ -58,7 +60,13 @@ your-working-directory/
     ├── ...   
     └── ...
 ```
-After arranging the files, you can now generate the AmeriFlux site metadata. In this example, the folder called `unzipped_AmeriFlux_data` contains the unzipped site folders and requested files manifest. 
+After arranging the files, you can now generate the AmeriFlux site metadata.
+
+Specify the name(s) of the ERA5 variable(s) you would like to get. Since we already got all the AmeriFlux variables, we need the corresponding names to the same variables in ERA5 that we're interested in. In this example, we specified `surface_solar_radiation_downwards` as the ERA5 variable we're interested in. 
+
+For the purposes of this vignette, the file path `system.file("extdata", "example_unzipped_AmeriFlux_data", package = "ERA5Flux")` points to a folder that contains the example unzipped site folders and example requested files manifest. Please replace this file path with your own path to the AmeriFlux data you previously unzipped.
+
+Once you point to your own folder of unzipped AmeriFlux data, run `get_site_metadata()`. The code below is a demonstration of what this part may look like. 
 
 ```{r setup}
 # Load the package
@@ -68,10 +76,12 @@ library(ERA5Flux)
 my_variables <- c("surface_solar_radiation_downwards")
 
 # Point to the folder containing the unzipped site folders and requested files manifest
-my_folder <- system.file("extdata", "unzipped_AmeriFlux_data", package = "ERA5Flux")
+# For the purposes of this demo, an example data folder will be used
+# Please point to your own existing folder for your own workflow
+my_AmeriFlux_folder <- system.file("extdata", "example_unzipped_AmeriFlux_data", package = "ERA5Flux")
 
 # Generate the AmeriFlux site metadata file
-my_site_metadata <- get_site_metadata(folder = my_folder,
+my_site_metadata <- get_site_metadata(folder = my_AmeriFlux_folder,
                                       selected_variables = my_variables)
 
 my_site_metadata
@@ -79,47 +89,56 @@ my_site_metadata
 
 The metadata data frame will have 5 columns: `site_codes`, `lat`, `lon`, `startdate`, `enddate`, and `variables`. We will need this metadata in order to build our ERA5 data requests. 
 
-### Step 1: Download ERA5 Data
+After you generate the AmeriFlux site metadata data frame, you can now focus on getting the corresponding ERA5 data.
 
-After you get the AmeriFlux site metadata, you can now go ahead and download ERA5 data.
-
-But before that, there are a few steps you need to do.
-
-First, make sure you create an account at the [Copernicus Climate Data Store](https://cds.climate.copernicus.eu/) if you haven't done so already. You may need to accept the data license agreement first before you can download the data. Visit the [Climate Data Store User Profile page](https://cds.climate.copernicus.eu/profile) to accept the appropriate license(s). 
-
-Then, `download_ERA5()` requires a land-sea mask so you must download that first with `get_land_sea_mask()`. This function will download the land-sea mask from [here](https://confluence.ecmwf.int/pages/viewpage.action?pageId=140385202#ERA5Land:datadocumentation-parameterlistingParameterlistings)
+`download_ERA5()` requires a land-sea mask so you must download that first with `get_land_sea_mask()`. This function will download the land-sea mask from [here](https://confluence.ecmwf.int/pages/viewpage.action?pageId=140385202#ERA5Land:datadocumentation-parameterlistingParameterlistings)
 
 ```{r, eval = F}
 # Download the land-sea mask if you haven't done so already
 get_land_sea_mask()
 ```
 
-Now you are ready to download ERA5 data. Copy and paste your Climate Data Store API token into the `my_token` argument. Provide the AmeriFlux site metadata in `site_metadata`, and set the file path to your land-sea mask as well. Finally, specify a folder path to where you want to download your ERA5 data to.  
+Then make sure you create an account at the [Copernicus Climate Data Store](https://cds.climate.copernicus.eu/) if you haven't done so already. You may need to accept the data license agreement first before you can download the data. Visit the [Climate Data Store User Profile page](https://cds.climate.copernicus.eu/profile) to accept the appropriate license(s). 
+
+`download_ERA5()` also requires a valid Climate Data Store API key. When you're logged into the [Copernicus Climate Data Store](https://cds.climate.copernicus.eu/), you can grab your API key by clicking on your name for your account in the top right corner, scrolling down to the "API key" section, and copying the API key. 
+
+Copy and paste your Climate Data Store API key into the `my_key` argument. Provide the AmeriFlux site metadata in the `site_metadata` argument, and set the file path to your land-sea mask as well. Finally, specify a folder to where you want to download your ERA5 data to. The folder should be an existing folder on your own machine. You may want to create this folder in the same working directory as the folder for your unzipped AmeriFlux data.
+
+Please note that the download may take a while.
 
 ```{r, eval = F}
-# Paste your token 
-my_token <- "my_ECMWF_token"
+# Paste your own API key 
+my_key <- "my_own_ECMWF_key"
 
 # Set the path to your land-sea mask
 path_to_mask <- "lsm_1279l4_0.1x0.1.grb_v4_unpack.nc"
 
 # Point to the folder where you want the ERA5 data to download to
-my_download_path <- "path_to_ERA5_download_folder"
+# For the purposes of this demo, some example placeholder text is shown
+# Please point to your own existing folder for your own workflow
+my_ERA5_download_path <- "your_own_path_to_ERA5_download_folder"
 
 # Download the ERA5 data
-download_ERA5(my_token = my_token,
+download_ERA5(my_key = my_key,
               site_metadata = my_site_metadata,
               mask = path_to_mask,
-              download_path = my_download_path)
+              download_path = my_ERA5_download_path)
 ```
 
 ### Step 2: Data Processing
 
-After downloading the ERA5 .nc files, we convert them into CSV files formatted to match AmeriFlux standards, enabling easy merging with existing datasets. This conversion is handled by `netcdf_df_formatter()`, which adjusts ERA5 timestamps from UTC to local time (yyyyMMddHHmm) based on each site’s coordinates and converts solar radiation (ssrd), air temperature (t2m), and total precipitation (tp) to AmeriFlux units. The `netcdf_to_csv()` function then calls `netcdf_df_formatter()` for each site folder, merging all relevant data by site and year so that each output CSV contains one site’s data for one year. If `full_year = TRUE`, the function will only return full years that begin with the first hour of the year and end with the last. For the purposes of this example, set `full_year = FALSE`.
+For this vignette, an example folder containing downloaded ERA5 data will be used (`system.file("extdata", "example_path_to_ERA5_download_folder", package = "ERA5Flux")`). Please remember to point to your own folder of downloaded ERA5 data. You may want to reuse the same folder in `my_ERA5_download_path` from Step 1.
+
+After downloading the ERA5 .nc files, we convert them into CSV files formatted to match AmeriFlux standards, enabling easy merging with existing datasets. This conversion is handled by `netcdf_df_formatter()`, which adjusts ERA5 timestamps from UTC to local time (yyyyMMddHHmm) based on each site’s coordinates and converts solar radiation (ssrd), air temperature (2t), and total precipitation (tp) to AmeriFlux units. 
+
+The `netcdf_to_csv()` function then calls `netcdf_df_formatter()` for each site folder, merging all relevant data by site and year so that each output CSV contains one site’s data for one year. If `full_year = TRUE`, the function will only return full years that begin with the first hour of the year and end with the last. For the purposes of this example, set `full_year = FALSE`.
 
 ```{r}
 # Point to a folder containing ERA5 .nc files
-site_folder <- system.file("extdata", "path_to_ERA5_download_folder", package = "ERA5Flux")
+# For the purposes of this demo, an example data folder will be used
+# Please point to your own existing folder for your own workflow
+# You may want to reuse the same folder in `my_ERA5_download_path` from Step 1
+site_folder <- system.file("extdata", "example_path_to_ERA5_download_folder", package = "ERA5Flux")
 
 # Specify a site name
 site_name <- "US_GL2"
@@ -138,17 +157,25 @@ head(data)
 
 
 
-
 ### Step 3: Merging and Blending AmeriFlux with ERA5 Data
 
-After you processed the ERA5 data, you can merge it with the AmeriFlux data.
+After you processed the ERA5 data, you can merge it with the AmeriFlux data. Remember to use your own file paths to your AmeriFlux and ERA5 data. Example data is used in this vignette.
 
 The `merge_ERA5_Flux()` function synchronizes AmeriFlux tower observations with ERA5 reanalysis data, ensuring both datasets share consistent timestamps and comparable variable names. It first reads AmeriFlux BASE data, replaces missing values with `NA`, and imports the processed ERA5 CSV file generated from `netcdf_to_csv()`. Because ERA5 data are typically hourly and AmeriFlux data are often half-hourly, the function linearly interpolates ERA5 variables to match the AmeriFlux time step. It then merges the datasets based on the aligned time column, adding corresponding AmeriFlux and ERA5 variables side by side. The resulting data frame provides a harmonized, site-specific time series that researchers can use to compare reanalysis and in situ flux measurements, fill short data gaps, and prepare blended climate–flux inputs for ecosystem or hydrological modeling.
 
 ```{r}
-# Point to AmeriFlux data
-ameriflux_file <- system.file("extdata", "AMF_US-GL2_BASE-BADM_1-5.zip", package = "ERA5Flux")
-# Point to ERA5 data
+# Point to AmeriFlux CSV data
+# For the purposes of this demo, an example data file will be used
+# Please point to your own existing file for your own workflow
+ameriflux_file <- system.file("extdata", 
+                              "example_unzipped_AmeriFlux_data", 
+                              "AMF_US-GL2_BASE-BADM_1-5", 
+                              "AMF_US-GL2_BASE_HH_1-5.csv", 
+                              package = "ERA5Flux")
+
+# Point to ERA5 CSV data
+# For the purposes of this demo, an example data file will be used
+# Please point to your own existing file for your own workflow
 era5_file <- list.files(output_filepath, pattern = "US_GL2", full.names = TRUE)
 
 # List AmeriFlux variable(s) to be merged 
