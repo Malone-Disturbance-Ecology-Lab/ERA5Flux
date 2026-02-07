@@ -1,0 +1,107 @@
+# ERA5Flux: Improve the Utility of ERA5 Data at AmeriFlux Site Locations
+
+The primary objective of this package is to improve the utility of
+[ERA5](https://www.ecmwf.int/en/forecasts/dataset/ecmwf-reanalysis-v5)
+data at [AmeriFlux](https://ameriflux.lbl.gov/) site locations. This
+package comprises of a collection of tools useful for workflows
+involving ERA5 and AmeriFlux data. It includes functions for downloading
+ERA5 data based on AmeriFlux sites, formatting the downloaded data to
+match AmeriFlux standards, merging both datasets together to ensure
+consistent timestamps, and blending them to create a single gap-filled
+time series.
+
+## Installation
+
+You can install the development version of ERA5Flux from
+[GitHub](https://github.com/) with:
+
+``` r
+# install.packages("pak")
+pak::pak("Malone-Disturbance-Ecology-Lab/ERA5Flux")
+```
+
+## Function Overview
+
+### Main Workflow
+
+- [`utc_offset()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/utc_offset.md):
+  produces an hour offset number converting local to UTC, where offset
+  is the difference between UTC and local time without considering
+  Daylight Saving Time
+
+- [`get_site_metadata()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/get_site_metadata.md):
+  builds an AmeriFlux site metadata file
+
+- [`get_land_sea_mask()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/get_land_sea_mask.md):
+  downloads the netCDF land-sea mask from ERA5
+
+- [`get_land_proportion()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/get_land_proportion.md):
+  returns land proportion given a latitude and longitude
+
+- [`download_ERA5()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/download_ERA5.md):
+  downloads ERA5 data for each site specified in the AmeriFlux site
+  metadata data frame
+
+- [`netcdf_df_formatter()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/netcdf_df_formatter.md):
+  reformats ERA5 .nc data into a data frame
+
+- [`netcdf_to_csv()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/netcdf_to_csv.md):
+  takes a directory of ERA5 .nc data as an argument and exports the data
+  in CSV format
+
+- [`merge_ERA5_Flux()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/merge_ERA5_Flux.md):
+  merges data from AmeriFlux and data from ERA5, ensuring they both have
+  the same start and end timestamps
+
+- [`blend_ERA5_Flux()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/blend_ERA5_Flux.md):
+  blends data from AmeriFlux and data from ERA5, ensuring they both have
+  the same start and end timestamps
+
+### Other Functions
+
+- [`check_DST()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/check_DST.md):
+  checks if a given time point is in Daylight Saving Time (DST) and if
+  so, it will adjust the time to the standard (non-DST) time
+
+- [`date_conversion()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/date_conversion.md):
+  produces a converted time, either UTC -\> local, or local -\> UTC
+
+- [`day_padding()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/day_padding.md):
+  pads 1 day for the beginning and ending days, adding 1 day to start
+  and end dates for future time zone offset issues
+
+# Package index
+
+## All functions
+
+- [`blend_ERA5_Flux()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/blend_ERA5_Flux.md)
+  : Blend ERA5 and AmeriFlux Data
+- [`check_DST()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/check_DST.md)
+  : Check Daylight Saving Time
+- [`date_conversion()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/date_conversion.md)
+  : Date Conversion
+- [`day_padding()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/day_padding.md)
+  : Pad Dates by 1 Day
+- [`download_ERA5()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/download_ERA5.md)
+  : Download ERA5 Data
+- [`get_land_proportion()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/get_land_proportion.md)
+  : Get Land Proportion
+- [`get_land_sea_mask()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/get_land_sea_mask.md)
+  : Get Land-Sea Mask from ERA5
+- [`get_site_metadata()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/get_site_metadata.md)
+  : Get AmeriFlux Site Metadata
+- [`merge_ERA5_Flux()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/merge_ERA5_Flux.md)
+  : Merge ERA5 and AmeriFlux Data
+- [`netcdf_df_formatter()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/netcdf_df_formatter.md)
+  : NetCDF Reformatter
+- [`netcdf_to_csv()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/netcdf_to_csv.md)
+  : Export NetCDF to CSV
+- [`utc_offset()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/utc_offset.md)
+  : Coordinated Universal Time (UTC) Offset
+
+# Articles
+
+### All vignettes
+
+- [Getting
+  Started](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/articles/ERA5Flux.md):
