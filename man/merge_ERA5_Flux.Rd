@@ -12,7 +12,7 @@ merge_ERA5_Flux(
 )
 }
 \arguments{
-\item{filename_FLUX}{(character) The file path to AmeriFlux BASE data downloaded from https://ameriflux.lbl.gov/.}
+\item{filename_FLUX}{(character) The file path to a CSV file of AmeriFlux BASE data downloaded from https://ameriflux.lbl.gov/.}
 
 \item{filename_ERA5}{(character) The file path to a CSV file of meterological data downloaded from ERA5 https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels?tab=overview. Please note that the original ERA5 files are in .nc format. You may want to convert these files into CSV format using the function \code{netcdf_to_csv()}.}
 
@@ -45,9 +45,14 @@ output_filepath <- tempdir()
 # Convert NetCDF data to a CSV file
 netcdf_to_csv(site_folder, output_filepath, site_name, full_year = FALSE)
 
-# Point to AmeriFlux data
-filename_FLUX <- system.file("extdata", "AMF_US-GL2_BASE-BADM_1-5.zip", package = "ERA5Flux")
-# Point to ERA5 data
+# Point to AmeriFlux CSV data
+filename_FLUX <- system.file("extdata",
+                             "example_unzipped_AmeriFlux_data",
+                             "AMF_US-GL2_BASE-BADM_1-5",
+                             "AMF_US-GL2_BASE_HH_1-5.csv",
+                             package = "ERA5Flux")
+
+# Point to ERA5 CSV data
 filename_ERA5 <- list.files(output_filepath, pattern = "US_GL2", full.names = TRUE)
 
 # List AmeriFlux variable(s) to be merged with ERA5
