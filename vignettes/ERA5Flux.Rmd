@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 
 This package was designed to make it easier to work with both [ERA5](https://www.ecmwf.int/en/forecasts/dataset/ecmwf-reanalysis-v5) and [AmeriFlux](https://ameriflux.lbl.gov/) data, hence the name "ERA5Flux". There may be instances where the AmeriFlux data contain gaps that you want to fill with ERA5 data to create a single time series for your analysis. 
 
-Please note that this package only merges and gap fills for solar radiation (long name: "surface_solar_radiation_downwards" / short name: "ssrd"), air temperature (long name: "2m_temperature" / short name: "2t"), and precipitation (long name: "total_precipitation" / short name: "tp"). These variables are defined in the [ERA5 documentation here](https://confluence.ecmwf.int/display/CKB/ERA5%3A+data+documentation).
+Please note that this package only merges and gap fills for solar radiation (long name: "surface_solar_radiation_downwards" / short name: "ssrd"), air temperature (long name: "2m_temperature" / short name: "t2m"), and precipitation (long name: "total_precipitation" / short name: "tp"). These variables are defined in the [ERA5 documentation here](https://confluence.ecmwf.int/display/CKB/ERA5%3A+data+documentation).
 
 Here is a demonstration of the workflow needed to achieve that result.
 
@@ -100,7 +100,7 @@ get_land_sea_mask()
 
 Then make sure you create an account at the [Copernicus Climate Data Store](https://cds.climate.copernicus.eu/) if you haven't done so already. You may need to accept the data license agreement first before you can download the data. Visit the [Climate Data Store User Profile page](https://cds.climate.copernicus.eu/profile) to accept the appropriate license(s). 
 
-`download_ERA5()` also requires a valid Climate Data Store API key. When you're logged into the [Copernicus Climate Data Store](https://cds.climate.copernicus.eu/), you can grab your API key by clicking on your name for your account in the top right corner, scrolling down to the "API key" section, and copying the API key. 
+`download_ERA5()` also requires a valid Climate Data Store API key. When you're logged into the [Copernicus Climate Data Store](https://cds.climate.copernicus.eu/), you can grab your API key by clicking on your name for your account in the top right corner, selecting "Your profile", scrolling down to the "API key" section, and copying the API key. 
 
 Copy and paste your Climate Data Store API key into the `my_key` argument. Provide the AmeriFlux site metadata in the `site_metadata` argument, and set the file path to your land-sea mask as well. Finally, specify a folder to where you want to download your ERA5 data to. The folder should be an existing folder on your own machine. You may want to create this folder in the same working directory as the folder for your unzipped AmeriFlux data.
 
@@ -129,7 +129,7 @@ download_ERA5(my_key = my_key,
 
 For this vignette, an example folder containing downloaded ERA5 data will be used (`system.file("extdata", "example_path_to_ERA5_download_folder", package = "ERA5Flux")`). Please remember to point to your own folder of downloaded ERA5 data. You may want to reuse the same folder in `my_ERA5_download_path` from Step 1.
 
-After downloading the ERA5 .nc files, we convert them into CSV files formatted to match AmeriFlux standards, enabling easy merging with existing datasets. This conversion is handled by `netcdf_df_formatter()`, which adjusts ERA5 timestamps from UTC to local time (yyyyMMddHHmm) based on each site’s coordinates and converts solar radiation (ssrd), air temperature (2t), and total precipitation (tp) to AmeriFlux units. 
+After downloading the ERA5 .nc files, we convert them into CSV files formatted to match AmeriFlux standards, enabling easy merging with existing datasets. This conversion is handled by `netcdf_df_formatter()`, which adjusts ERA5 timestamps from UTC to local time (yyyyMMddHHmm) based on each site’s coordinates and converts solar radiation (ssrd), air temperature (t2m), and total precipitation (tp) to AmeriFlux units. 
 
 The `netcdf_to_csv()` function then calls `netcdf_df_formatter()` for each site folder, merging all relevant data by site and year so that each output CSV contains one site’s data for one year. If `full_year = TRUE`, the function will only return full years that begin with the first hour of the year and end with the last. For the purposes of this example, set `full_year = FALSE`.
 
