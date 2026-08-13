@@ -72,9 +72,18 @@ merge_ERA5_Flux <- function(filename_FLUX = NULL,
     stop('To-be-merged varname of FLUX should correspond to to-be-merged varname of ERA5')
   }
 
+
   # Read FLUX data
-  data_BASE <- amerifluxr::amf_read_base(filename_FLUX, parse_timestamp = TRUE, unzip = FALSE)
-  data_BASE[data_BASE <= -9999] <- NA  # Replace abnormal values with NA
+  data_BASE <- base::as.data.frame(
+    readr::read_csv(
+      filename_FLUX,
+      skip = 2,
+      na = "-9999",
+      show_col_types = FALSE
+    )
+  )
+  
+  data_BASE[data_BASE <= -9999] <- NA
 
   # Read ERA5 data
   data_ERA5 <- utils::read.csv(filename_ERA5)
