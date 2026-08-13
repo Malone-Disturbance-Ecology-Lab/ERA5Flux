@@ -87,6 +87,7 @@ Once you point to your own folder of unzipped AmeriFlux data, run
 The code below is a demonstration of what this part may look like.
 
 ``` r
+
 # Load the package
 library(ERA5Flux)
 
@@ -132,6 +133,7 @@ This function will download the land-sea mask from
 [here](https://confluence.ecmwf.int/pages/viewpage.action?pageId=140385202#ERA5Land:datadocumentation-parameterlistingParameterlistings)
 
 ``` r
+
 # Download the land-sea mask if you haven't done so already
 get_land_sea_mask()
 ```
@@ -162,6 +164,7 @@ unzipped AmeriFlux data.
 Please note that the download may take a while.
 
 ``` r
+
 # Paste your own API key 
 my_key <- "my_own_ECMWF_key"
 
@@ -208,6 +211,7 @@ with the first hour of the year and end with the last. For the purposes
 of this example, set `full_year = FALSE`.
 
 ``` r
+
 # Point to a folder containing ERA5 .nc files
 # For the purposes of this demo, an example data folder will be used
 # Please point to your own existing folder for your own workflow
@@ -260,6 +264,7 @@ and in situ flux measurements, fill short data gaps, and prepare blended
 climate–flux inputs for ecosystem or hydrological modeling.
 
 ``` r
+
 # Point to AmeriFlux CSV data
 # For the purposes of this demo, an example data file will be used
 # Please point to your own existing file for your own workflow
@@ -335,6 +340,7 @@ analysis.
 The final result will look something like this:
 
 ``` r
+
 # Specify the blending rule(s)
 # If you have multiple variables, specify a rule for each variable
 blending_rule <- c("replace")

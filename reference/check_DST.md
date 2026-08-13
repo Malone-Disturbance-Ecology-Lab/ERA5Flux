@@ -39,9 +39,9 @@ timepoint <- lubridate::now()
 is_DST <- check_DST(lat = 25.4, lon = -80.5, timepoint)
 is_DST
 #> $is_DST
-#> [1] FALSE
+#> [1] TRUE
 #> 
 #> $standard_time
-#> [1] "2026-02-06 19:43:00 EST"
+#> [1] "2026-08-13 16:00:56 EDT"
 #> 
 ```
