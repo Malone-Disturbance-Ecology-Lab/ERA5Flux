@@ -32,7 +32,7 @@
 #'
 #' # Point to AmeriFlux CSV data
 #' filename_FLUX <- system.file("extdata",
-#'                              "example_unzipped_AmeriFlux_data",
+#'                              "example_AmeriFlux",
 #'                              "AMF_US-GL2_BASE-BADM_1-5",
 #'                              "AMF_US-GL2_BASE_HH_1-5.csv",
 #'                              package = "ERA5Flux")

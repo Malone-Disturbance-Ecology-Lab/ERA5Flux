@@ -64,7 +64,7 @@ After arranging the files, you can now generate the AmeriFlux site metadata.
 
 Specify the name(s) of the ERA5 variable(s) you would like to get. Since we already got all the AmeriFlux variables, we need the corresponding names to the same variables in ERA5 that we're interested in. In this example, we specified `surface_solar_radiation_downwards` as the ERA5 variable we're interested in. 
 
-For the purposes of this vignette, the file path `system.file("extdata", "example_unzipped_AmeriFlux_data", package = "ERA5Flux")` points to a folder that contains the example unzipped site folders and example requested files manifest. Please replace this file path with your own path to the AmeriFlux data you previously unzipped.
+For the purposes of this vignette, the file path `system.file("extdata", "example_AmeriFlux", package = "ERA5Flux")` points to a folder that contains the example unzipped site folders and example requested files manifest. Please replace this file path with your own path to the AmeriFlux data you previously unzipped.
 
 Once you point to your own folder of unzipped AmeriFlux data, run `get_site_metadata()`. The code below is a demonstration of what this part may look like. 
 
@@ -78,7 +78,7 @@ my_variables <- c("surface_solar_radiation_downwards")
 # Point to the folder containing the unzipped site folders and requested files manifest
 # For the purposes of this demo, an example data folder will be used
 # Please point to your own existing folder for your own workflow
-my_AmeriFlux_folder <- system.file("extdata", "example_unzipped_AmeriFlux_data", package = "ERA5Flux")
+my_AmeriFlux_folder <- system.file("extdata", "example_AmeriFlux", package = "ERA5Flux")
 
 # Generate the AmeriFlux site metadata file
 my_site_metadata <- get_site_metadata(folder = my_AmeriFlux_folder,
@@ -168,7 +168,7 @@ The `merge_ERA5_Flux()` function synchronizes AmeriFlux tower observations with 
 # For the purposes of this demo, an example data file will be used
 # Please point to your own existing file for your own workflow
 ameriflux_file <- system.file("extdata", 
-                              "example_unzipped_AmeriFlux_data", 
+                              "example_AmeriFlux", 
                               "AMF_US-GL2_BASE-BADM_1-5", 
                               "AMF_US-GL2_BASE_HH_1-5.csv", 
                               package = "ERA5Flux")
