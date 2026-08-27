@@ -25,7 +25,7 @@
 #'
 #' @examples
 #' # Point to a folder containing ERA5 .nc files
-#' site_folder <- system.file("extdata", "path_to_ERA5_download_folder", package = "ERA5Flux")
+#' site_folder <- system.file("extdata", "example_path_to_ERA5_download_folder", package = "ERA5Flux")
 #' # Specify a site name
 #' site_name <- "US_GL2"
 #' # Create a temporary directory to export our output to
