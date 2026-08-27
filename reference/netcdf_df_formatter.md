@@ -41,11 +41,16 @@ netcdf_df_formatter(nc_file_path = NULL)
 
 ``` r
 # Point to a NetCDF file
-nc_file_path <- system.file("extdata", "path_to_ERA5_download_folder",
+nc_file_path <- system.file("extdata", "example_path_to_ERA5_download_folder",
                             "ERA5-US-GL2-2025-1.nc", package = "ERA5Flux")
 # Reformat the NetCDF
 result <- netcdf_df_formatter(nc_file_path)
-#> Error in ncdf4::nc_open(nc_file_path): Passed a filename that is NOT a string of characters!
 head(result)
-#> Error: object 'result' not found
+#>           time     ssrd
+#> 1 202412311900 663.4275
+#> 2 202412312000   0.0000
+#> 3 202412312100   0.0000
+#> 4 202412312200   0.0000
+#> 5 202412312300   0.0000
+#> 6 202501010000   0.0000
 ```

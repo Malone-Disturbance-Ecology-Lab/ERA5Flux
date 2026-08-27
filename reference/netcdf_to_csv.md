@@ -54,7 +54,7 @@ year (e.g., 2020-12-31 23:00) if full_year == TRUE.
 
 ``` r
 # Point to a folder containing ERA5 .nc files
-site_folder <- system.file("extdata", "path_to_ERA5_download_folder", package = "ERA5Flux")
+site_folder <- system.file("extdata", "example_path_to_ERA5_download_folder", package = "ERA5Flux")
 # Specify a site name
 site_name <- "US_GL2"
 # Create a temporary directory to export our output to
@@ -62,17 +62,16 @@ output_filepath <- tempdir()
 
 # Convert NetCDF data to a CSV file
 netcdf_to_csv(site_folder, output_filepath, site_name, full_year = FALSE)
-#> No NetCDF files found in  
+#> Saved: US_GL2_2024_2025_ssrd.csv 
 
 # Read the CSV back in
 data <- read.csv(list.files(output_filepath, pattern = "US_GL2", full.names = TRUE))
-#> Error in file(file, "rt"): invalid 'description' argument
 head(data)
-#>                                                                             
-#> 1 function (..., list = character(), package = NULL, lib.loc = NULL,        
-#> 2     verbose = getOption("verbose"), envir = .GlobalEnv, overwrite = TRUE) 
-#> 3 {                                                                         
-#> 4     fileExt <- function(x) {                                              
-#> 5         db <- grepl("\\\\.[^.]+\\\\.(gz|bz2|xz)$", x)                     
-#> 6         ans <- sub(".*\\\\.", "", x)                                      
+#>           time     ssrd
+#> 1 202412311900 663.4275
+#> 2 202412312000   0.0000
+#> 3 202412312100   0.0000
+#> 4 202412312200   0.0000
+#> 5 202412312300   0.0000
+#> 6 202501010000   0.0000
 ```

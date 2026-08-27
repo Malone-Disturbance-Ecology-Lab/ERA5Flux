@@ -90,7 +90,7 @@ Ammara Talib and Junna Wang
 
 ``` r
 # Point to a folder containing ERA5 .nc files
-site_folder <- system.file("extdata", "path_to_ERA5_download_folder", package = "ERA5Flux")
+site_folder <- system.file("extdata", "example_path_to_ERA5_download_folder", package = "ERA5Flux")
 # Specify a site name
 site_name <- "US_GL2"
 # Create a temporary directory to export our output to
@@ -98,7 +98,7 @@ output_filepath <- tempdir()
 
 # Convert NetCDF data to a CSV file
 netcdf_to_csv(site_folder, output_filepath, site_name, full_year = FALSE)
-#> No NetCDF files found in  
+#> Saved: US_GL2_2024_2025_ssrd.csv 
 
 # Point to AmeriFlux CSV data
 filename_FLUX <- system.file("extdata",
@@ -118,16 +118,27 @@ varname_ERA5 <- c("ssrd")
 # Run the merge function first, because its output will be used as input for this blending function
 # Merge AmeriFlux and ERA5 data together
 merged_data <- merge_ERA5_Flux(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
-#> Error in file(file, "rt"): invalid 'description' argument
 head(merged_data)
-#> Error: object 'merged_data' not found
+#>                  time     ssrd SW_IN
+#> 1 2024-12-31 19:00:00 663.4275    NA
+#> 2 2024-12-31 19:30:00 331.7138    NA
+#> 3 2024-12-31 20:00:00   0.0000    NA
+#> 4 2024-12-31 20:30:00   0.0000    NA
+#> 5 2024-12-31 21:00:00   0.0000    NA
+#> 6 2024-12-31 21:30:00   0.0000    NA
 
 # Specify the blending rule(s)
 # If you have multiple variables, specify a rule for each variable
 blending_rule <- c("replace")
 # Blend AmeriFlux and ERA5 data together
 merg_blend <- blend_ERA5_Flux(merged_data, varname_FLUX, varname_ERA5, blending_rule)
-#> Error: object 'merged_data' not found
+#> Processing: SW_IN using rule: replace
 head(merg_blend)
-#> Error: object 'merg_blend' not found
+#>                  time     ssrd SW_IN  SW_IN_f
+#> 1 2024-12-31 19:00:00 663.4275    NA 663.4275
+#> 2 2024-12-31 19:30:00 331.7138    NA 331.7138
+#> 3 2024-12-31 20:00:00   0.0000    NA   0.0000
+#> 4 2024-12-31 20:30:00   0.0000    NA   0.0000
+#> 5 2024-12-31 21:00:00   0.0000    NA   0.0000
+#> 6 2024-12-31 21:30:00   0.0000    NA   0.0000
 ```

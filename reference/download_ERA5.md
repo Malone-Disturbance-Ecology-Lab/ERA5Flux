@@ -72,6 +72,6 @@ site_metadata <- get_site_metadata(folder = "path_to_data_folder",
 download_ERA5(my_key = "my_own_ECMWF_key",
               site_metadata = site_metadata,
               mask = "path_to_ERA5_land_sea_mask",
-              download_path = "path_to_ERA5_download_folder")
+              download_path = "my_ERA5_download_path")
 } # }
 ```
