@@ -134,7 +134,7 @@ in. In this example, we specified
 <code>surface_solar_radiation_downwards</code> as the ERA5 variable
 we’re interested in.</p>
 <p>For the purposes of this vignette, the file path
-<code>system.file("extdata", "example_unzipped_AmeriFlux_data", package = "ERA5Flux")</code>
+<code>system.file("extdata", "example_AmeriFlux", package = "ERA5Flux")</code>
 points to a folder that contains the example unzipped site folders and
 example requested files manifest. Please replace this file path with
 your own path to the AmeriFlux data you previously unzipped.</p>
@@ -151,7 +151,7 @@ what this part may look like.</p>
 <span><span class="co"># Point to the folder containing the unzipped site folders and requested files manifest</span></span>
 <span><span class="co"># For the purposes of this demo, an example data folder will be used</span></span>
 <span><span class="co"># Please point to your own existing folder for your own workflow</span></span>
-<span><span class="va">my_AmeriFlux_folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"example_unzipped_AmeriFlux_data"</span>, package <span class="op">=</span> <span class="st">"ERA5Flux"</span><span class="op">)</span></span>
+<span><span class="va">my_AmeriFlux_folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"example_AmeriFlux"</span>, package <span class="op">=</span> <span class="st">"ERA5Flux"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Generate the AmeriFlux site metadata file</span></span>
 <span><span class="va">my_site_metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_site_metadata.html">get_site_metadata</a></span><span class="op">(</span>folder <span class="op">=</span> <span class="va">my_AmeriFlux_folder</span>,</span>
@@ -296,7 +296,7 @@ hydrological modeling.</p>
 <span><span class="co"># For the purposes of this demo, an example data file will be used</span></span>
 <span><span class="co"># Please point to your own existing file for your own workflow</span></span>
 <span><span class="va">ameriflux_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, </span>
-<span>                              <span class="st">"example_unzipped_AmeriFlux_data"</span>, </span>
+<span>                              <span class="st">"example_AmeriFlux"</span>, </span>
 <span>                              <span class="st">"AMF_US-GL2_BASE-BADM_1-5"</span>, </span>
 <span>                              <span class="st">"AMF_US-GL2_BASE_HH_1-5.csv"</span>, </span>
 <span>                              package <span class="op">=</span> <span class="st">"ERA5Flux"</span><span class="op">)</span></span>

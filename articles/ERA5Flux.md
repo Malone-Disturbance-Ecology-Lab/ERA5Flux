@@ -77,7 +77,7 @@ example, we specified `surface_solar_radiation_downwards` as the ERA5
 variable we’re interested in.
 
 For the purposes of this vignette, the file path
-`system.file("extdata", "example_unzipped_AmeriFlux_data", package = "ERA5Flux")`
+`system.file("extdata", "example_AmeriFlux", package = "ERA5Flux")`
 points to a folder that contains the example unzipped site folders and
 example requested files manifest. Please replace this file path with
 your own path to the AmeriFlux data you previously unzipped.
@@ -97,7 +97,7 @@ my_variables <- c("surface_solar_radiation_downwards")
 # Point to the folder containing the unzipped site folders and requested files manifest
 # For the purposes of this demo, an example data folder will be used
 # Please point to your own existing folder for your own workflow
-my_AmeriFlux_folder <- system.file("extdata", "example_unzipped_AmeriFlux_data", package = "ERA5Flux")
+my_AmeriFlux_folder <- system.file("extdata", "example_AmeriFlux", package = "ERA5Flux")
 
 # Generate the AmeriFlux site metadata file
 my_site_metadata <- get_site_metadata(folder = my_AmeriFlux_folder,
@@ -269,7 +269,7 @@ climate–flux inputs for ecosystem or hydrological modeling.
 # For the purposes of this demo, an example data file will be used
 # Please point to your own existing file for your own workflow
 ameriflux_file <- system.file("extdata", 
-                              "example_unzipped_AmeriFlux_data", 
+                              "example_AmeriFlux", 
                               "AMF_US-GL2_BASE-BADM_1-5", 
                               "AMF_US-GL2_BASE_HH_1-5.csv", 
                               package = "ERA5Flux")
