@@ -39,7 +39,6 @@ Description: Collection of tools useful for workflows involving ERA5 and
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
 Imports:
     amerifluxr,
     curl,
@@ -62,3 +61,4 @@ Remotes:
 URL: https://github.com/Malone-Disturbance-Ecology-Lab/ERA5Flux, https://malone-disturbance-ecology-lab.github.io/ERA5Flux/
 BugReports: https://github.com/Malone-Disturbance-Ecology-Lab/ERA5Flux/issues
 VignetteBuilder: knitr
+Config/roxygen2/version: 8.1.0
