@@ -23,7 +23,7 @@ When downloading AmeriFlux data, select sites, download data and "requested_file
 # Specify your variables
 my_variables <- c("2m_temperature", "total_precipitation", "surface_solar_radiation_downwards")
 # Create the AmeriFlux site metadata
-site_metadata <- get_site_metadata(folder = "path_to_data_folder",
+site_metadata <- get_site_metadata(folder = "my_own_path_to_AmeriFlux_folder",
                                    selected_variables = my_variables)
 }
 

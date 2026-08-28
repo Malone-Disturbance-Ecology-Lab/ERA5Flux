@@ -34,14 +34,14 @@ If you haven't done so already, you may need to accept the data license agreemen
 # Specify your variables
 my_variables <- c("2m_temperature", "total_precipitation", "surface_solar_radiation_downwards")
 # Create the AmeriFlux site metadata
-site_metadata <- get_site_metadata(folder = "path_to_data_folder",
+site_metadata <- get_site_metadata(folder = "my_own_path_to_AmeriFlux_folder",
                                    selected_variables = my_variables)
 
 # Download the corresponding ERA5 data
 download_ERA5(my_key = "my_own_ECMWF_key",
               site_metadata = site_metadata,
-              mask = "path_to_ERA5_land_sea_mask",
-              download_path = "my_ERA5_download_path")
+              mask = "my_own_path_to_ERA5_land_sea_mask",
+              download_path = "my_own_path_to_ERA5_download_folder")
 }
 
 }
