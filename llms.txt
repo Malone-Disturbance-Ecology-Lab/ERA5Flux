@@ -21,6 +21,13 @@ You can install the development version of ERA5Flux from
 pak::pak("Malone-Disturbance-Ecology-Lab/ERA5Flux")
 ```
 
+Or download from CRAN with:
+
+``` r
+
+install.packages("ERA5Flux")
+```
+
 ## Function Overview
 
 ### Main Workflow
