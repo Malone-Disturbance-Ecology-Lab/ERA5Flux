@@ -87,14 +87,14 @@
 <span class="r-in"><span><span class="co"># Specify your variables</span></span></span>
 <span class="r-in"><span><span class="va">my_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2m_temperature"</span>, <span class="st">"total_precipitation"</span>, <span class="st">"surface_solar_radiation_downwards"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># Create the AmeriFlux site metadata</span></span></span>
-<span class="r-in"><span><span class="va">site_metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_site_metadata.html">get_site_metadata</a></span><span class="op">(</span>folder <span class="op">=</span> <span class="st">"path_to_data_folder"</span>,</span></span>
+<span class="r-in"><span><span class="va">site_metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_site_metadata.html">get_site_metadata</a></span><span class="op">(</span>folder <span class="op">=</span> <span class="st">"my_own_path_to_AmeriFlux_folder"</span>,</span></span>
 <span class="r-in"><span>                                   selected_variables <span class="op">=</span> <span class="va">my_variables</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Download the corresponding ERA5 data</span></span></span>
 <span class="r-in"><span><span class="fu">download_ERA5</span><span class="op">(</span>my_key <span class="op">=</span> <span class="st">"my_own_ECMWF_key"</span>,</span></span>
 <span class="r-in"><span>              site_metadata <span class="op">=</span> <span class="va">site_metadata</span>,</span></span>
-<span class="r-in"><span>              mask <span class="op">=</span> <span class="st">"path_to_ERA5_land_sea_mask"</span>,</span></span>
-<span class="r-in"><span>              download_path <span class="op">=</span> <span class="st">"my_ERA5_download_path"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>              mask <span class="op">=</span> <span class="st">"my_own_path_to_ERA5_land_sea_mask"</span>,</span></span>
+<span class="r-in"><span>              download_path <span class="op">=</span> <span class="st">"my_own_path_to_ERA5_download_folder"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

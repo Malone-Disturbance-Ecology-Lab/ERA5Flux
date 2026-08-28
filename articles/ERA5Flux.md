@@ -130,7 +130,7 @@ focus on getting the corresponding ERA5 data.
 requires a land-sea mask so you must download that first with
 [`get_land_sea_mask()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/get_land_sea_mask.md).
 This function will download the land-sea mask from
-[here](https://confluence.ecmwf.int/pages/viewpage.action?pageId=140385202#ERA5Land:datadocumentation-parameterlistingParameterlistings)
+[here](https://confluence.ecmwf.int/pages/viewpage.action?pageId=140385202#ERA5Land:datadocumentation-parameterlistingParameterlistings).
 
 ``` r
 
@@ -169,17 +169,17 @@ Please note that the download may take a while.
 my_key <- "my_own_ECMWF_key"
 
 # Set the path to your land-sea mask
-path_to_mask <- "lsm_1279l4_0.1x0.1.grb_v4_unpack.nc"
+my_path_to_mask <- "lsm_1279l4_0.1x0.1.grb_v4_unpack.nc"
 
 # Point to the folder where you want the ERA5 data to download to
 # For the purposes of this demo, some example placeholder text is shown
 # Please point to your own existing folder for your own workflow
-my_ERA5_download_path <- "your_own_path_to_ERA5_download_folder"
+my_ERA5_download_path <- "my_own_path_to_ERA5_download_folder"
 
 # Download the ERA5 data
 download_ERA5(my_key = my_key,
               site_metadata = my_site_metadata,
-              mask = path_to_mask,
+              mask = my_path_to_mask,
               download_path = my_ERA5_download_path)
 ```
 
@@ -332,8 +332,8 @@ an automatic rule that adapts based on data completeness. For example,
 when more than half of the AmeriFlux values are available, the function
 uses a regression-based correction to preserve site-specific patterns
 while filling gaps; otherwise, it substitutes ERA5 data directly. The
-blended output adds new columns (e.g., `SW_IN_f`, `TA_f`) that contain
-the harmonized variables, producing a continuous, high-quality dataset
+blended output adds new columns (e.g. `SW_IN_f`) that contain the
+harmonized variables, producing a continuous, high-quality dataset
 suitable for modeling, data assimilation, or long-term flux-climate
 analysis.
 

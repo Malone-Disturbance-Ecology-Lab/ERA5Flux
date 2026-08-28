@@ -179,7 +179,7 @@ metadata in order to build our ERA5 data requests.</p>
 now focus on getting the corresponding ERA5 data.</p>
 <p><code><a href="../reference/download_ERA5.html">download_ERA5()</a></code> requires a land-sea mask so you must
 download that first with <code><a href="../reference/get_land_sea_mask.html">get_land_sea_mask()</a></code>. This function
-will download the land-sea mask from <a href="https://confluence.ecmwf.int/pages/viewpage.action?pageId=140385202#ERA5Land:datadocumentation-parameterlistingParameterlistings" class="external-link">here</a></p>
+will download the land-sea mask from <a href="https://confluence.ecmwf.int/pages/viewpage.action?pageId=140385202#ERA5Land:datadocumentation-parameterlistingParameterlistings" class="external-link">here</a>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Download the land-sea mask if you haven't done so already</span></span>
 <span><span class="fu"><a href="../reference/get_land_sea_mask.html">get_land_sea_mask</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -206,17 +206,17 @@ directory as the folder for your unzipped AmeriFlux data.</p>
 <span><span class="va">my_key</span> <span class="op">&lt;-</span> <span class="st">"my_own_ECMWF_key"</span></span>
 <span></span>
 <span><span class="co"># Set the path to your land-sea mask</span></span>
-<span><span class="va">path_to_mask</span> <span class="op">&lt;-</span> <span class="st">"lsm_1279l4_0.1x0.1.grb_v4_unpack.nc"</span></span>
+<span><span class="va">my_path_to_mask</span> <span class="op">&lt;-</span> <span class="st">"lsm_1279l4_0.1x0.1.grb_v4_unpack.nc"</span></span>
 <span></span>
 <span><span class="co"># Point to the folder where you want the ERA5 data to download to</span></span>
 <span><span class="co"># For the purposes of this demo, some example placeholder text is shown</span></span>
 <span><span class="co"># Please point to your own existing folder for your own workflow</span></span>
-<span><span class="va">my_ERA5_download_path</span> <span class="op">&lt;-</span> <span class="st">"your_own_path_to_ERA5_download_folder"</span></span>
+<span><span class="va">my_ERA5_download_path</span> <span class="op">&lt;-</span> <span class="st">"my_own_path_to_ERA5_download_folder"</span></span>
 <span></span>
 <span><span class="co"># Download the ERA5 data</span></span>
 <span><span class="fu"><a href="../reference/download_ERA5.html">download_ERA5</a></span><span class="op">(</span>my_key <span class="op">=</span> <span class="va">my_key</span>,</span>
 <span>              site_metadata <span class="op">=</span> <span class="va">my_site_metadata</span>,</span>
-<span>              mask <span class="op">=</span> <span class="va">path_to_mask</span>,</span>
+<span>              mask <span class="op">=</span> <span class="va">my_path_to_mask</span>,</span>
 <span>              download_path <span class="op">=</span> <span class="va">my_ERA5_download_path</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -353,10 +353,9 @@ adapts based on data completeness. For example, when more than half of
 the AmeriFlux values are available, the function uses a regression-based
 correction to preserve site-specific patterns while filling gaps;
 otherwise, it substitutes ERA5 data directly. The blended output adds
-new columns (e.g., <code>SW_IN_f</code>, <code>TA_f</code>) that contain
-the harmonized variables, producing a continuous, high-quality dataset
-suitable for modeling, data assimilation, or long-term flux-climate
-analysis.</p>
+new columns (e.g. <code>SW_IN_f</code>) that contain the harmonized
+variables, producing a continuous, high-quality dataset suitable for
+modeling, data assimilation, or long-term flux-climate analysis.</p>
 <p>The final result will look something like this:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Specify the blending rule(s)</span></span>
