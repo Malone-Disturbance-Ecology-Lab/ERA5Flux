@@ -18,6 +18,8 @@
 - **Sparkle L Malone**. Author.
   [](https://orcid.org/0000-0001-9034-1076)
 
+- **Malone Disturbance Ecology Lab**. Copyright holder.
+
 ## Citation
 
 Source:
