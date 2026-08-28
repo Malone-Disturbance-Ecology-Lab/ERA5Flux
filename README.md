@@ -4,6 +4,7 @@
 # ERA5Flux: Improve the Utility of ERA5 Data at AmeriFlux Site Locations
 
 <!-- badges: start -->
+
 <!-- badges: end -->
 
 The primary objective of this package is to improve the utility of
@@ -24,6 +25,12 @@ You can install the development version of ERA5Flux from
 ``` r
 # install.packages("pak")
 pak::pak("Malone-Disturbance-Ecology-Lab/ERA5Flux")
+```
+
+Or download from CRAN with:
+
+``` r
+install.packages("ERA5Flux")
 ```
 
 ## Function Overview
