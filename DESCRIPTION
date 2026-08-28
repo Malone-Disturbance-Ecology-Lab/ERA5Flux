@@ -11,7 +11,7 @@ Authors@R: c(
          comment = c(ORCID = "0009-0005-1902-4066"),
          role = "aut"),
   person(given = "David E", family = "Reed", 
-         email = "david.e.reed@yale.edu",
+         email = "david.edwin.reed@gmail.com",
          comment = c(ORCID = "0000-0002-8892-1423"),
          role = "aut"),
   person(given = "Ammara", family = "Talib", 
@@ -29,7 +29,9 @@ Authors@R: c(
   person(given = "Sparkle L", family = "Malone", 
          email = "sparkle.malone@yale.edu",
          comment = c(ORCID = "0000-0001-9034-1076"),
-         role = "aut")
+         role = "aut"),
+  person(family = "Malone Disturbance Ecology Lab",
+         role = "cph")
          )
 Description: Collection of tools useful for workflows involving ERA5 and 
     AmeriFlux data. Includes functions for downloading ERA5 data based on 
