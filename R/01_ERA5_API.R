@@ -76,10 +76,10 @@ download_ERA5 <- function(my_key = NULL,
 
     ## building area parameter from metadata lat and lon values
     #area <- c(55, -130, 25, -70)
-    area <- c(base::round(base::as.numeric(site_metadata$lat[i]), digits = 2),
-              base::round(base::as.numeric(site_metadata$lon[i]), digits = 2)-.01,
-              base::round(base::as.numeric(site_metadata$lat[i]), digits = 2)-.01,
-              base::round(base::as.numeric(site_metadata$lon[i]), digits = 2))
+    area <- c(base::ceiling(base::as.numeric(site_metadata$lat[i]) * 10) / 10,
+              (base::ceiling(base::as.numeric(site_metadata$lon[i]) * 10) / 10)-.1,
+              (base::ceiling(base::as.numeric(site_metadata$lat[i]) * 10) / 10)-.1,
+              base::ceiling(base::as.numeric(site_metadata$lon[i]) * 10) / 10)
 
     start_day <- base::as.Date(base::substr(site_metadata$startdate[i], 1, 8),"%Y%m%d") - 1
     end_day <- base::as.Date(base::substr(site_metadata$enddate[i], 1, 8),"%Y%m%d") + 1
