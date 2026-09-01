@@ -4,6 +4,8 @@
 #' Reformats ERA5 .nc data into a data frame.
 #'
 #' @param nc_file_path (character) File path to ERA5 NetCDF file.
+#' @param site_lat (numeric) Latitude coordinate of site in decimal degrees.
+#' @param site_lon (numeric) Longitude coordinate of site in decimal degrees.
 #'
 #' @return (data.frame) Data frame of the following characteristics:
 #'
@@ -23,14 +25,23 @@
 #' # Point to a NetCDF file
 #' nc_file_path <- system.file("extdata", "example_path_to_ERA5_download_folder",
 #'                             "ERA5-US-GL2-2025-1.nc", package = "ERA5Flux")
+#'
+#' # Specify the site latitude and longitude coordinates
+#' site_lat <- 46.7167
+#' site_lon <- -87.4
+#'
 #' # Reformat the NetCDF
-#' result <- netcdf_df_formatter(nc_file_path)
+#' result <- netcdf_df_formatter(nc_file_path, site_lat, site_lon)
 #' head(result)
 
 
-netcdf_df_formatter <- function(nc_file_path = NULL) {
+netcdf_df_formatter <- function(nc_file_path = NULL, site_lat = NULL, site_lon = NULL) {
   # Error out if no file path is provided
   if (base::is.null(nc_file_path)) stop("No file path provided")
+
+  # Error out if no site coordinates are provided
+  if (base::is.null(site_lat)) stop("No site latitude provided")
+  if (base::is.null(site_lon)) stop("No site longitude provided")
 
   # Open NetCDF file
   nc <- ncdf4::nc_open(nc_file_path)
@@ -55,7 +66,7 @@ netcdf_df_formatter <- function(nc_file_path = NULL) {
   lat <- ncdf4::ncvar_get(nc, "latitude")
   lon <- ncdf4::ncvar_get(nc, "longitude")
   tz_name <- lutz::tz_lookup_coords(lat, lon, method = "accurate")
-  local_time <- lubridate::with_tz(utc_time, tz_name)
+  local_time <- lubridate::with_tz(utc_time, tz_name[1])
 
   # Format timestamp as YYYYMMDDHHMM
   formatted_time <- base::format(local_time, "%Y%m%d%H%M")
@@ -68,9 +79,19 @@ netcdf_df_formatter <- function(nc_file_path = NULL) {
     3600
   }
 
+  target_lat <- site_lat
+  target_lon <- site_lon
+
+  # Find the closest index in the coordinate arrays
+  lat_idx <- which.min(abs(lat - target_lat))
+  lon_idx <- which.min(abs(lon - target_lon))
+
   # Loop through each variable and format as vector
   for (varname in data_vars) {
-    var_data <- ncdf4::ncvar_get(nc, varname)
+    # Extract the point using start and count
+    # "start" indicates [lon_index, lat_index, start_time_index]
+    # "count" indicates how many steps to pull. Use -1 to pull ALL time steps.
+    var_data <- ncdf4::ncvar_get(nc, varname, start = c(lon_idx, lat_idx, 1), count = c(1, 1, -1))
     if (base::length(dim(var_data)) > 1) {
       var_data <- base::as.vector(var_data)
     }
@@ -120,6 +141,10 @@ netcdf_df_formatter <- function(nc_file_path = NULL) {
 #' @param site_name (character) Name of the site that will be concatenated onto
 #'  CSV file name (e.g. US_GL2).
 #'
+#' @param site_lat (numeric) Latitude coordinate of site in decimal degrees.
+#'
+#' @param site_lon (numeric) Longitude coordinate of site in decimal degrees.
+#'
 #' @param full_year (bool) Filter to include only complete years, such that the
 #' data will star with the first hour of year and ends with the last hour of a
 #' year. Otherwise, return data as is.
@@ -136,13 +161,17 @@ netcdf_df_formatter <- function(nc_file_path = NULL) {
 #' @examples
 #' # Point to a folder containing ERA5 .nc files
 #' site_folder <- system.file("extdata", "example_path_to_ERA5_download_folder", package = "ERA5Flux")
-#' # Specify a site name
-#' site_name <- "US_GL2"
 #' # Create a temporary directory to export our output to
 #' output_filepath <- tempdir()
 #'
+#' # Specify a site name
+#' site_name <- "US_GL2"
+#' # Specify the site latitude and longitude coordinates
+#' site_lat <- 46.7167
+#' site_lon <- -87.4
+#'
 #' # Convert NetCDF data to a CSV file
-#' netcdf_to_csv(site_folder, output_filepath, site_name, full_year = FALSE)
+#' netcdf_to_csv(site_folder, output_filepath, site_name, site_lat, site_lon, full_year = FALSE)
 #'
 #' # Read the CSV back in
 #' data <- read.csv(list.files(output_filepath, pattern = "US_GL2", full.names = TRUE))
@@ -152,11 +181,18 @@ netcdf_df_formatter <- function(nc_file_path = NULL) {
 netcdf_to_csv <- function(site_folder = NULL,
                           output_filepath = NULL,
                           site_name = NULL,
+                          site_lat = NULL,
+                          site_lon = NULL,
                           full_year = FALSE) {
-
-  if (is.null(site_folder)) stop("No site folder path provided")
-  if (is.null(output_filepath)) stop("No output file path provided")
-  if (is.null(site_name)) stop("No site name provided")
+  # Error out if no site folder is provided
+  if (base::is.null(site_folder)) stop("No site folder path provided")
+  # Error out if no output file path is provided
+  if (base::is.null(output_filepath)) stop("No output file path provided")
+  # Error out if no site name is provided
+  if (base::is.null(site_name)) stop("No site name provided")
+  # Error out if no site coordinates are provided
+  if (base::is.null(site_lat)) stop("No site latitude provided")
+  if (base::is.null(site_lon)) stop("No site longitude provided")
 
   # Find .nc files
   nc_files <- list.files(site_folder, pattern = "\\.nc$", full.names = TRUE)
@@ -171,7 +207,7 @@ netcdf_to_csv <- function(site_folder = NULL,
   # Loop through all NetCDF files
   for (f in nc_files) {
     df_part <- tryCatch({
-      netcdf_df_formatter(f)
+      netcdf_df_formatter(nc_file_path = f, site_lat = site_lat, site_lon = site_lon)
     }, error = function(e) {
       message("Error reading ", f, ": ", e$message)
       return(NULL)
