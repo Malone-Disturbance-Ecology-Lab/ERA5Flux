@@ -140,14 +140,17 @@ The `netcdf_to_csv()` function then calls `netcdf_df_formatter()` for each site 
 # You may want to reuse the same folder in `my_ERA5_download_path` from Step 1
 site_folder <- system.file("extdata", "example_path_to_ERA5_download_folder", package = "ERA5Flux")
 
-# Specify a site name
-site_name <- "US_GL2"
-
 # Create a temporary directory to export our output to
 output_filepath <- tempdir()
 
+# Specify a site name
+site_name <- "US_GL2"
+# Specify the site latitude and longitude coordinates
+site_lat <- as.numeric(my_site_metadata$lat)
+site_lon <- as.numeric(my_site_metadata$lon)
+
 # Convert NetCDF data to a CSV file
-netcdf_to_csv(site_folder, output_filepath, site_name, full_year = FALSE)
+netcdf_to_csv(site_folder, output_filepath, site_name, site_lat, site_lon, full_year = FALSE)
 
 # Read the CSV back in
 data <- read.csv(list.files(output_filepath, pattern = "US_GL2", full.names = TRUE))
@@ -169,8 +172,8 @@ The `merge_ERA5_Flux()` function synchronizes AmeriFlux tower observations with 
 # Please point to your own existing file for your own workflow
 ameriflux_file <- system.file("extdata", 
                               "example_AmeriFlux", 
-                              "AMF_US-GL2_BASE-BADM_1-5", 
-                              "AMF_US-GL2_BASE_HH_1-5.csv", 
+                              "AMF_US-GL2_BASE-BADM_2-5", 
+                              "AMF_US-GL2_BASE_HH_2-5.csv", 
                               package = "ERA5Flux")
 
 # Point to ERA5 CSV data
@@ -189,7 +192,7 @@ merged_data <- merge_ERA5_Flux(filename_FLUX = ameriflux_file,
                                varname_FLUX = ameriflux_var,
                                varname_ERA5 = era5_var)
 
-merged_data[1:20,]
+merged_data[4650:4670,]
 ```
 
 As shown above, the merged data contains ERA5 data in `ssrd`, as well as AmeriFlux data in `SW_IN`. 
@@ -211,7 +214,7 @@ blended_data <- blend_ERA5_Flux(merged_data = merged_data,
                                 varname_ERA5 = era5_var,
                                 blending_rule = blending_rule)
 
-blended_data[1:20,]
+blended_data[4650:4670,]
 ```
 
 In this example, the simple replacement blending rule was used, so a new `SW_IN_f` column was created with values from the ERA5 column, `ssrd`.  
