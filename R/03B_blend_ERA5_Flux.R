@@ -26,19 +26,23 @@
 #' @examples
 #' # Point to a folder containing ERA5 .nc files
 #' site_folder <- system.file("extdata", "example_path_to_ERA5_download_folder", package = "ERA5Flux")
-#' # Specify a site name
-#' site_name <- "US_GL2"
 #' # Create a temporary directory to export our output to
 #' output_filepath <- tempdir()
 #'
+#' # Specify a site name
+#' site_name <- "US_GL2"
+#' # Specify the site latitude and longitude coordinates
+#' site_lat <- 46.7167
+#' site_lon <- -87.4
+#'
 #' # Convert NetCDF data to a CSV file
-#' netcdf_to_csv(site_folder, output_filepath, site_name, full_year = FALSE)
+#' netcdf_to_csv(site_folder, output_filepath, site_name, site_lat, site_lon, full_year = FALSE)
 #'
 #' # Point to AmeriFlux CSV data
 #' filename_FLUX <- system.file("extdata",
 #'                              "example_AmeriFlux",
-#'                              "AMF_US-GL2_BASE-BADM_1-5",
-#'                              "AMF_US-GL2_BASE_HH_1-5.csv",
+#'                              "AMF_US-GL2_BASE-BADM_2-5",
+#'                              "AMF_US-GL2_BASE_HH_2-5.csv",
 #'                              package = "ERA5Flux")
 #'
 #' # Point to ERA5 CSV data
