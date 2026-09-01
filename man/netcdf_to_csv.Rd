@@ -8,6 +8,8 @@ netcdf_to_csv(
   site_folder = NULL,
   output_filepath = NULL,
   site_name = NULL,
+  site_lat = NULL,
+  site_lon = NULL,
   full_year = FALSE
 )
 }
@@ -21,6 +23,10 @@ be written.}
 
 \item{site_name}{(character) Name of the site that will be concatenated onto
 CSV file name (e.g. US_GL2).}
+
+\item{site_lat}{(numeric) Latitude coordinate of site in decimal degrees.}
+
+\item{site_lon}{(numeric) Longitude coordinate of site in decimal degrees.}
 
 \item{full_year}{(bool) Filter to include only complete years, such that the
 data will star with the first hour of year and ends with the last hour of a
@@ -43,13 +49,17 @@ and joins data by time, filtering to return only full years of data.
 \examples{
 # Point to a folder containing ERA5 .nc files
 site_folder <- system.file("extdata", "example_path_to_ERA5_download_folder", package = "ERA5Flux")
-# Specify a site name
-site_name <- "US_GL2"
 # Create a temporary directory to export our output to
 output_filepath <- tempdir()
 
+# Specify a site name
+site_name <- "US_GL2"
+# Specify the site latitude and longitude coordinates
+site_lat <- 46.7167
+site_lon <- -87.4
+
 # Convert NetCDF data to a CSV file
-netcdf_to_csv(site_folder, output_filepath, site_name, full_year = FALSE)
+netcdf_to_csv(site_folder, output_filepath, site_name, site_lat, site_lon, full_year = FALSE)
 
 # Read the CSV back in
 data <- read.csv(list.files(output_filepath, pattern = "US_GL2", full.names = TRUE))
