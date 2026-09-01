@@ -87,20 +87,24 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Point to a folder containing ERA5 .nc files</span></span></span>
 <span class="r-in"><span><span class="va">site_folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"example_path_to_ERA5_download_folder"</span>, package <span class="op">=</span> <span class="st">"ERA5Flux"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co"># Specify a site name</span></span></span>
-<span class="r-in"><span><span class="va">site_name</span> <span class="op">&lt;-</span> <span class="st">"US_GL2"</span></span></span>
 <span class="r-in"><span><span class="co"># Create a temporary directory to export our output to</span></span></span>
 <span class="r-in"><span><span class="va">output_filepath</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Specify a site name</span></span></span>
+<span class="r-in"><span><span class="va">site_name</span> <span class="op">&lt;-</span> <span class="st">"US_GL2"</span></span></span>
+<span class="r-in"><span><span class="co"># Specify the site latitude and longitude coordinates</span></span></span>
+<span class="r-in"><span><span class="va">site_lat</span> <span class="op">&lt;-</span> <span class="fl">46.7167</span></span></span>
+<span class="r-in"><span><span class="va">site_lon</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">87.4</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Convert NetCDF data to a CSV file</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="netcdf_to_csv.html">netcdf_to_csv</a></span><span class="op">(</span><span class="va">site_folder</span>, <span class="va">output_filepath</span>, <span class="va">site_name</span>, full_year <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="netcdf_to_csv.html">netcdf_to_csv</a></span><span class="op">(</span><span class="va">site_folder</span>, <span class="va">output_filepath</span>, <span class="va">site_name</span>, <span class="va">site_lat</span>, <span class="va">site_lon</span>, full_year <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Saved: US_GL2_2024_2025_ssrd.csv </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Point to AmeriFlux CSV data</span></span></span>
 <span class="r-in"><span><span class="va">filename_FLUX</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,</span></span>
 <span class="r-in"><span>                             <span class="st">"example_AmeriFlux"</span>,</span></span>
-<span class="r-in"><span>                             <span class="st">"AMF_US-GL2_BASE-BADM_1-5"</span>,</span></span>
-<span class="r-in"><span>                             <span class="st">"AMF_US-GL2_BASE_HH_1-5.csv"</span>,</span></span>
+<span class="r-in"><span>                             <span class="st">"AMF_US-GL2_BASE-BADM_2-5"</span>,</span></span>
+<span class="r-in"><span>                             <span class="st">"AMF_US-GL2_BASE_HH_2-5.csv"</span>,</span></span>
 <span class="r-in"><span>                             package <span class="op">=</span> <span class="st">"ERA5Flux"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Point to ERA5 CSV data</span></span></span>
@@ -115,12 +119,12 @@
 <span class="r-in"><span><span class="va">merged_data</span> <span class="op">&lt;-</span> <span class="fu">merge_ERA5_Flux</span><span class="op">(</span><span class="va">filename_FLUX</span>, <span class="va">filename_ERA5</span>, <span class="va">varname_FLUX</span>, <span class="va">varname_ERA5</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">merged_data</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  time     ssrd SW_IN</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 2024-12-31 19:00:00 663.4275    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2024-12-31 19:30:00 331.7138    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 2024-12-31 20:00:00   0.0000    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 2024-12-31 20:30:00   0.0000    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 2024-12-31 21:00:00   0.0000    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 2024-12-31 21:30:00   0.0000    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 2024-11-30 19:00:00 1201.930    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2024-11-30 19:30:00  600.965    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 2024-11-30 20:00:00    0.000    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 2024-11-30 20:30:00    0.000    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 2024-11-30 21:00:00    0.000    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 2024-11-30 21:30:00    0.000    NA</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

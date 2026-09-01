@@ -14,6 +14,8 @@ netcdf_to_csv(
   site_folder = NULL,
   output_filepath = NULL,
   site_name = NULL,
+  site_lat = NULL,
+  site_lon = NULL,
   full_year = FALSE
 )
 ```
@@ -35,6 +37,14 @@ netcdf_to_csv(
   (character) Name of the site that will be concatenated onto CSV file
   name (e.g. US_GL2).
 
+- site_lat:
+
+  (numeric) Latitude coordinate of site in decimal degrees.
+
+- site_lon:
+
+  (numeric) Longitude coordinate of site in decimal degrees.
+
 - full_year:
 
   (bool) Filter to include only complete years, such that the data will
@@ -55,23 +65,27 @@ year (e.g., 2020-12-31 23:00) if full_year == TRUE.
 ``` r
 # Point to a folder containing ERA5 .nc files
 site_folder <- system.file("extdata", "example_path_to_ERA5_download_folder", package = "ERA5Flux")
-# Specify a site name
-site_name <- "US_GL2"
 # Create a temporary directory to export our output to
 output_filepath <- tempdir()
 
+# Specify a site name
+site_name <- "US_GL2"
+# Specify the site latitude and longitude coordinates
+site_lat <- 46.7167
+site_lon <- -87.4
+
 # Convert NetCDF data to a CSV file
-netcdf_to_csv(site_folder, output_filepath, site_name, full_year = FALSE)
+netcdf_to_csv(site_folder, output_filepath, site_name, site_lat, site_lon, full_year = FALSE)
 #> Saved: US_GL2_2024_2025_ssrd.csv 
 
 # Read the CSV back in
 data <- read.csv(list.files(output_filepath, pattern = "US_GL2", full.names = TRUE))
 head(data)
-#>           time     ssrd
-#> 1 202412311900 663.4275
-#> 2 202412312000   0.0000
-#> 3 202412312100   0.0000
-#> 4 202412312200   0.0000
-#> 5 202412312300   0.0000
-#> 6 202501010000   0.0000
+#>           time    ssrd
+#> 1 202411301900 1201.93
+#> 2 202411302000    0.00
+#> 3 202411302100    0.00
+#> 4 202411302200    0.00
+#> 5 202411302300    0.00
+#> 6 202412010000    0.00
 ```

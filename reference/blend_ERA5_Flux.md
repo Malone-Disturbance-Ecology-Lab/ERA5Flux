@@ -91,20 +91,24 @@ Ammara Talib and Junna Wang
 ``` r
 # Point to a folder containing ERA5 .nc files
 site_folder <- system.file("extdata", "example_path_to_ERA5_download_folder", package = "ERA5Flux")
-# Specify a site name
-site_name <- "US_GL2"
 # Create a temporary directory to export our output to
 output_filepath <- tempdir()
 
+# Specify a site name
+site_name <- "US_GL2"
+# Specify the site latitude and longitude coordinates
+site_lat <- 46.7167
+site_lon <- -87.4
+
 # Convert NetCDF data to a CSV file
-netcdf_to_csv(site_folder, output_filepath, site_name, full_year = FALSE)
+netcdf_to_csv(site_folder, output_filepath, site_name, site_lat, site_lon, full_year = FALSE)
 #> Saved: US_GL2_2024_2025_ssrd.csv 
 
 # Point to AmeriFlux CSV data
 filename_FLUX <- system.file("extdata",
                              "example_AmeriFlux",
-                             "AMF_US-GL2_BASE-BADM_1-5",
-                             "AMF_US-GL2_BASE_HH_1-5.csv",
+                             "AMF_US-GL2_BASE-BADM_2-5",
+                             "AMF_US-GL2_BASE_HH_2-5.csv",
                              package = "ERA5Flux")
 
 # Point to ERA5 CSV data
@@ -120,12 +124,12 @@ varname_ERA5 <- c("ssrd")
 merged_data <- merge_ERA5_Flux(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
 head(merged_data)
 #>                  time     ssrd SW_IN
-#> 1 2024-12-31 19:00:00 663.4275    NA
-#> 2 2024-12-31 19:30:00 331.7138    NA
-#> 3 2024-12-31 20:00:00   0.0000    NA
-#> 4 2024-12-31 20:30:00   0.0000    NA
-#> 5 2024-12-31 21:00:00   0.0000    NA
-#> 6 2024-12-31 21:30:00   0.0000    NA
+#> 1 2024-11-30 19:00:00 1201.930    NA
+#> 2 2024-11-30 19:30:00  600.965    NA
+#> 3 2024-11-30 20:00:00    0.000    NA
+#> 4 2024-11-30 20:30:00    0.000    NA
+#> 5 2024-11-30 21:00:00    0.000    NA
+#> 6 2024-11-30 21:30:00    0.000    NA
 
 # Specify the blending rule(s)
 # If you have multiple variables, specify a rule for each variable
@@ -135,10 +139,10 @@ merg_blend <- blend_ERA5_Flux(merged_data, varname_FLUX, varname_ERA5, blending_
 #> Processing: SW_IN using rule: replace
 head(merg_blend)
 #>                  time     ssrd SW_IN  SW_IN_f
-#> 1 2024-12-31 19:00:00 663.4275    NA 663.4275
-#> 2 2024-12-31 19:30:00 331.7138    NA 331.7138
-#> 3 2024-12-31 20:00:00   0.0000    NA   0.0000
-#> 4 2024-12-31 20:30:00   0.0000    NA   0.0000
-#> 5 2024-12-31 21:00:00   0.0000    NA   0.0000
-#> 6 2024-12-31 21:30:00   0.0000    NA   0.0000
+#> 1 2024-11-30 19:00:00 1201.930    NA 1201.930
+#> 2 2024-11-30 19:30:00  600.965    NA  600.965
+#> 3 2024-11-30 20:00:00    0.000    NA    0.000
+#> 4 2024-11-30 20:30:00    0.000    NA    0.000
+#> 5 2024-11-30 21:00:00    0.000    NA    0.000
+#> 6 2024-11-30 21:30:00    0.000    NA    0.000
 ```

@@ -158,7 +158,7 @@ what this part may look like.</p>
 <span>                                      selected_variables <span class="op">=</span> <span class="va">my_variables</span><span class="op">)</span></span>
 <span><span class="co">#&gt; selected variables: surface_solar_radiation_downwards</span></span>
 <span><span class="co">#&gt; Now checking: US-GL2</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">7248</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">1</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">4320</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">1</span></span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; <span style="font-weight: bold;">Delimiter:</span> ","</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">dbl</span> (1): TIMESTAMP_START</span></span>
@@ -168,7 +168,7 @@ what this part may look like.</p>
 <span></span>
 <span><span class="va">my_site_metadata</span></span>
 <span><span class="co">#&gt;   site_codes     lat      lon   startdate      enddate</span></span>
-<span><span class="co">#&gt; 1     US-GL2 46.7167 -87.4000 2.02501e+11 202505312330</span></span>
+<span><span class="co">#&gt; 1     US-GL2 46.7167 -87.4000 2.02501e+11 202503312330</span></span>
 <span><span class="co">#&gt;                           variables</span></span>
 <span><span class="co">#&gt; 1 surface_solar_radiation_downwards</span></span></code></pre></div>
 <p>The metadata data frame will have 5 columns: <code>site_codes</code>,
@@ -249,27 +249,30 @@ and end with the last. For the purposes of this example, set
 <span><span class="co"># You may want to reuse the same folder in `my_ERA5_download_path` from Step 1</span></span>
 <span><span class="va">site_folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"example_path_to_ERA5_download_folder"</span>, package <span class="op">=</span> <span class="st">"ERA5Flux"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Specify a site name</span></span>
-<span><span class="va">site_name</span> <span class="op">&lt;-</span> <span class="st">"US_GL2"</span></span>
-<span></span>
 <span><span class="co"># Create a temporary directory to export our output to</span></span>
 <span><span class="va">output_filepath</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># Specify a site name</span></span>
+<span><span class="va">site_name</span> <span class="op">&lt;-</span> <span class="st">"US_GL2"</span></span>
+<span><span class="co"># Specify the site latitude and longitude coordinates</span></span>
+<span><span class="va">site_lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">my_site_metadata</span><span class="op">$</span><span class="va">lat</span><span class="op">)</span></span>
+<span><span class="va">site_lon</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">my_site_metadata</span><span class="op">$</span><span class="va">lon</span><span class="op">)</span></span>
+<span></span>
 <span><span class="co"># Convert NetCDF data to a CSV file</span></span>
-<span><span class="fu"><a href="../reference/netcdf_to_csv.html">netcdf_to_csv</a></span><span class="op">(</span><span class="va">site_folder</span>, <span class="va">output_filepath</span>, <span class="va">site_name</span>, full_year <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/netcdf_to_csv.html">netcdf_to_csv</a></span><span class="op">(</span><span class="va">site_folder</span>, <span class="va">output_filepath</span>, <span class="va">site_name</span>, <span class="va">site_lat</span>, <span class="va">site_lon</span>, full_year <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Saved: US_GL2_2024_2025_ssrd.csv</span></span>
 <span></span>
 <span><span class="co"># Read the CSV back in</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">output_filepath</span>, pattern <span class="op">=</span> <span class="st">"US_GL2"</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
-<span><span class="co">#&gt;           time     ssrd</span></span>
-<span><span class="co">#&gt; 1 202412311900 663.4275</span></span>
-<span><span class="co">#&gt; 2 202412312000   0.0000</span></span>
-<span><span class="co">#&gt; 3 202412312100   0.0000</span></span>
-<span><span class="co">#&gt; 4 202412312200   0.0000</span></span>
-<span><span class="co">#&gt; 5 202412312300   0.0000</span></span>
-<span><span class="co">#&gt; 6 202501010000   0.0000</span></span></code></pre></div>
+<span><span class="co">#&gt;           time    ssrd</span></span>
+<span><span class="co">#&gt; 1 202411301900 1201.93</span></span>
+<span><span class="co">#&gt; 2 202411302000    0.00</span></span>
+<span><span class="co">#&gt; 3 202411302100    0.00</span></span>
+<span><span class="co">#&gt; 4 202411302200    0.00</span></span>
+<span><span class="co">#&gt; 5 202411302300    0.00</span></span>
+<span><span class="co">#&gt; 6 202412010000    0.00</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="step-3-merging-and-blending-ameriflux-with-era5-data">Step 3: Merging and Blending AmeriFlux with ERA5 Data<a class="anchor" aria-label="anchor" href="#step-3-merging-and-blending-ameriflux-with-era5-data"></a>
@@ -297,8 +300,8 @@ hydrological modeling.</p>
 <span><span class="co"># Please point to your own existing file for your own workflow</span></span>
 <span><span class="va">ameriflux_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, </span>
 <span>                              <span class="st">"example_AmeriFlux"</span>, </span>
-<span>                              <span class="st">"AMF_US-GL2_BASE-BADM_1-5"</span>, </span>
-<span>                              <span class="st">"AMF_US-GL2_BASE_HH_1-5.csv"</span>, </span>
+<span>                              <span class="st">"AMF_US-GL2_BASE-BADM_2-5"</span>, </span>
+<span>                              <span class="st">"AMF_US-GL2_BASE_HH_2-5.csv"</span>, </span>
 <span>                              package <span class="op">=</span> <span class="st">"ERA5Flux"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Point to ERA5 CSV data</span></span>
@@ -317,28 +320,29 @@ hydrological modeling.</p>
 <span>                               varname_FLUX <span class="op">=</span> <span class="va">ameriflux_var</span>,</span>
 <span>                               varname_ERA5 <span class="op">=</span> <span class="va">era5_var</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">merged_data</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">20</span>,<span class="op">]</span></span>
-<span><span class="co">#&gt;                   time     ssrd SW_IN</span></span>
-<span><span class="co">#&gt; 1  2024-12-31 19:00:00 663.4275    NA</span></span>
-<span><span class="co">#&gt; 2  2024-12-31 19:30:00 331.7138    NA</span></span>
-<span><span class="co">#&gt; 3  2024-12-31 20:00:00   0.0000    NA</span></span>
-<span><span class="co">#&gt; 4  2024-12-31 20:30:00   0.0000    NA</span></span>
-<span><span class="co">#&gt; 5  2024-12-31 21:00:00   0.0000    NA</span></span>
-<span><span class="co">#&gt; 6  2024-12-31 21:30:00   0.0000    NA</span></span>
-<span><span class="co">#&gt; 7  2024-12-31 22:00:00   0.0000    NA</span></span>
-<span><span class="co">#&gt; 8  2024-12-31 22:30:00   0.0000    NA</span></span>
-<span><span class="co">#&gt; 9  2024-12-31 23:00:00   0.0000    NA</span></span>
-<span><span class="co">#&gt; 10 2024-12-31 23:30:00   0.0000    NA</span></span>
-<span><span class="co">#&gt; 11 2025-01-01 00:00:00   0.0000 0.483</span></span>
-<span><span class="co">#&gt; 12 2025-01-01 00:30:00   0.0000 0.518</span></span>
-<span><span class="co">#&gt; 13 2025-01-01 01:00:00   0.0000 0.541</span></span>
-<span><span class="co">#&gt; 14 2025-01-01 01:30:00   0.0000 0.476</span></span>
-<span><span class="co">#&gt; 15 2025-01-01 02:00:00   0.0000 0.442</span></span>
-<span><span class="co">#&gt; 16 2025-01-01 02:30:00   0.0000 0.438</span></span>
-<span><span class="co">#&gt; 17 2025-01-01 03:00:00   0.0000 0.500</span></span>
-<span><span class="co">#&gt; 18 2025-01-01 03:30:00   0.0000 0.449</span></span>
-<span><span class="co">#&gt; 19 2025-01-01 04:00:00   0.0000 0.502</span></span>
-<span><span class="co">#&gt; 20 2025-01-01 04:30:00   0.0000 0.478</span></span></code></pre></div>
+<span><span class="va">merged_data</span><span class="op">[</span><span class="fl">4650</span><span class="op">:</span><span class="fl">4670</span>,<span class="op">]</span></span>
+<span><span class="co">#&gt;                     time     ssrd  SW_IN</span></span>
+<span><span class="co">#&gt; 4650 2025-03-07 15:30:00 2928.982 246.30</span></span>
+<span><span class="co">#&gt; 4651 2025-03-07 16:00:00 3113.339 161.50</span></span>
+<span><span class="co">#&gt; 4652 2025-03-07 16:30:00 3216.787 116.00</span></span>
+<span><span class="co">#&gt; 4653 2025-03-07 17:00:00 3320.236  57.56</span></span>
+<span><span class="co">#&gt; 4654 2025-03-07 17:30:00 3363.782  48.99</span></span>
+<span><span class="co">#&gt; 4655 2025-03-07 18:00:00 3407.327     NA</span></span>
+<span><span class="co">#&gt; 4656 2025-03-07 18:30:00 3414.466     NA</span></span>
+<span><span class="co">#&gt; 4657 2025-03-07 19:00:00 3421.604     NA</span></span>
+<span><span class="co">#&gt; 4658 2025-03-07 19:30:00 1710.802     NA</span></span>
+<span><span class="co">#&gt; 4659 2025-03-07 20:00:00    0.000     NA</span></span>
+<span><span class="co">#&gt; 4660 2025-03-07 20:30:00    0.000     NA</span></span>
+<span><span class="co">#&gt; 4661 2025-03-07 21:00:00    0.000     NA</span></span>
+<span><span class="co">#&gt; 4662 2025-03-07 21:30:00    0.000     NA</span></span>
+<span><span class="co">#&gt; 4663 2025-03-07 22:00:00    0.000     NA</span></span>
+<span><span class="co">#&gt; 4664 2025-03-07 22:30:00    0.000     NA</span></span>
+<span><span class="co">#&gt; 4665 2025-03-07 23:00:00    0.000     NA</span></span>
+<span><span class="co">#&gt; 4666 2025-03-07 23:30:00    0.000     NA</span></span>
+<span><span class="co">#&gt; 4667 2025-03-08 00:00:00    0.000     NA</span></span>
+<span><span class="co">#&gt; 4668 2025-03-08 00:30:00    0.000     NA</span></span>
+<span><span class="co">#&gt; 4669 2025-03-08 01:00:00    0.000     NA</span></span>
+<span><span class="co">#&gt; 4670 2025-03-08 01:30:00    0.000     NA</span></span></code></pre></div>
 <p>As shown above, the merged data contains ERA5 data in
 <code>ssrd</code>, as well as AmeriFlux data in <code>SW_IN</code>.</p>
 <p>Finally, you can blend the merged data.</p>
@@ -369,28 +373,29 @@ modeling, data assimilation, or long-term flux-climate analysis.</p>
 <span>                                blending_rule <span class="op">=</span> <span class="va">blending_rule</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Processing: SW_IN using rule: replace</span></span>
 <span></span>
-<span><span class="va">blended_data</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">20</span>,<span class="op">]</span></span>
-<span><span class="co">#&gt;                   time     ssrd SW_IN  SW_IN_f</span></span>
-<span><span class="co">#&gt; 1  2024-12-31 19:00:00 663.4275    NA 663.4275</span></span>
-<span><span class="co">#&gt; 2  2024-12-31 19:30:00 331.7138    NA 331.7138</span></span>
-<span><span class="co">#&gt; 3  2024-12-31 20:00:00   0.0000    NA   0.0000</span></span>
-<span><span class="co">#&gt; 4  2024-12-31 20:30:00   0.0000    NA   0.0000</span></span>
-<span><span class="co">#&gt; 5  2024-12-31 21:00:00   0.0000    NA   0.0000</span></span>
-<span><span class="co">#&gt; 6  2024-12-31 21:30:00   0.0000    NA   0.0000</span></span>
-<span><span class="co">#&gt; 7  2024-12-31 22:00:00   0.0000    NA   0.0000</span></span>
-<span><span class="co">#&gt; 8  2024-12-31 22:30:00   0.0000    NA   0.0000</span></span>
-<span><span class="co">#&gt; 9  2024-12-31 23:00:00   0.0000    NA   0.0000</span></span>
-<span><span class="co">#&gt; 10 2024-12-31 23:30:00   0.0000    NA   0.0000</span></span>
-<span><span class="co">#&gt; 11 2025-01-01 00:00:00   0.0000 0.483   0.0000</span></span>
-<span><span class="co">#&gt; 12 2025-01-01 00:30:00   0.0000 0.518   0.0000</span></span>
-<span><span class="co">#&gt; 13 2025-01-01 01:00:00   0.0000 0.541   0.0000</span></span>
-<span><span class="co">#&gt; 14 2025-01-01 01:30:00   0.0000 0.476   0.0000</span></span>
-<span><span class="co">#&gt; 15 2025-01-01 02:00:00   0.0000 0.442   0.0000</span></span>
-<span><span class="co">#&gt; 16 2025-01-01 02:30:00   0.0000 0.438   0.0000</span></span>
-<span><span class="co">#&gt; 17 2025-01-01 03:00:00   0.0000 0.500   0.0000</span></span>
-<span><span class="co">#&gt; 18 2025-01-01 03:30:00   0.0000 0.449   0.0000</span></span>
-<span><span class="co">#&gt; 19 2025-01-01 04:00:00   0.0000 0.502   0.0000</span></span>
-<span><span class="co">#&gt; 20 2025-01-01 04:30:00   0.0000 0.478   0.0000</span></span></code></pre></div>
+<span><span class="va">blended_data</span><span class="op">[</span><span class="fl">4650</span><span class="op">:</span><span class="fl">4670</span>,<span class="op">]</span></span>
+<span><span class="co">#&gt;                     time     ssrd  SW_IN  SW_IN_f</span></span>
+<span><span class="co">#&gt; 4650 2025-03-07 15:30:00 2928.982 246.30 2928.982</span></span>
+<span><span class="co">#&gt; 4651 2025-03-07 16:00:00 3113.339 161.50 3113.339</span></span>
+<span><span class="co">#&gt; 4652 2025-03-07 16:30:00 3216.787 116.00 3216.787</span></span>
+<span><span class="co">#&gt; 4653 2025-03-07 17:00:00 3320.236  57.56 3320.236</span></span>
+<span><span class="co">#&gt; 4654 2025-03-07 17:30:00 3363.782  48.99 3363.782</span></span>
+<span><span class="co">#&gt; 4655 2025-03-07 18:00:00 3407.327     NA 3407.327</span></span>
+<span><span class="co">#&gt; 4656 2025-03-07 18:30:00 3414.466     NA 3414.466</span></span>
+<span><span class="co">#&gt; 4657 2025-03-07 19:00:00 3421.604     NA 3421.604</span></span>
+<span><span class="co">#&gt; 4658 2025-03-07 19:30:00 1710.802     NA 1710.802</span></span>
+<span><span class="co">#&gt; 4659 2025-03-07 20:00:00    0.000     NA    0.000</span></span>
+<span><span class="co">#&gt; 4660 2025-03-07 20:30:00    0.000     NA    0.000</span></span>
+<span><span class="co">#&gt; 4661 2025-03-07 21:00:00    0.000     NA    0.000</span></span>
+<span><span class="co">#&gt; 4662 2025-03-07 21:30:00    0.000     NA    0.000</span></span>
+<span><span class="co">#&gt; 4663 2025-03-07 22:00:00    0.000     NA    0.000</span></span>
+<span><span class="co">#&gt; 4664 2025-03-07 22:30:00    0.000     NA    0.000</span></span>
+<span><span class="co">#&gt; 4665 2025-03-07 23:00:00    0.000     NA    0.000</span></span>
+<span><span class="co">#&gt; 4666 2025-03-07 23:30:00    0.000     NA    0.000</span></span>
+<span><span class="co">#&gt; 4667 2025-03-08 00:00:00    0.000     NA    0.000</span></span>
+<span><span class="co">#&gt; 4668 2025-03-08 00:30:00    0.000     NA    0.000</span></span>
+<span><span class="co">#&gt; 4669 2025-03-08 01:00:00    0.000     NA    0.000</span></span>
+<span><span class="co">#&gt; 4670 2025-03-08 01:30:00    0.000     NA    0.000</span></span></code></pre></div>
 <p>In this example, the simple replacement blending rule was used, so a
 new <code>SW_IN_f</code> column was created with values from the ERA5
 column, <code>ssrd</code>.</p>

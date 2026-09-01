@@ -5,7 +5,7 @@ Reformats ERA5 .nc data into a data frame.
 ## Usage
 
 ``` r
-netcdf_df_formatter(nc_file_path = NULL)
+netcdf_df_formatter(nc_file_path = NULL, site_lat = NULL, site_lon = NULL)
 ```
 
 ## Arguments
@@ -13,6 +13,14 @@ netcdf_df_formatter(nc_file_path = NULL)
 - nc_file_path:
 
   (character) File path to ERA5 NetCDF file.
+
+- site_lat:
+
+  (numeric) Latitude coordinate of site in decimal degrees.
+
+- site_lon:
+
+  (numeric) Longitude coordinate of site in decimal degrees.
 
 ## Value
 
@@ -43,14 +51,19 @@ netcdf_df_formatter(nc_file_path = NULL)
 # Point to a NetCDF file
 nc_file_path <- system.file("extdata", "example_path_to_ERA5_download_folder",
                             "ERA5-US-GL2-2025-1.nc", package = "ERA5Flux")
+
+# Specify the site latitude and longitude coordinates
+site_lat <- 46.7167
+site_lon <- -87.4
+
 # Reformat the NetCDF
-result <- netcdf_df_formatter(nc_file_path)
+result <- netcdf_df_formatter(nc_file_path, site_lat, site_lon)
 head(result)
-#>           time     ssrd
-#> 1 202412311900 663.4275
-#> 2 202412312000   0.0000
-#> 3 202412312100   0.0000
-#> 4 202412312200   0.0000
-#> 5 202412312300   0.0000
-#> 6 202501010000   0.0000
+#>           time   ssrd
+#> 1 202412311900 670.36
+#> 2 202412312000   0.00
+#> 3 202412312100   0.00
+#> 4 202412312200   0.00
+#> 5 202412312300   0.00
+#> 6 202501010000   0.00
 ```
