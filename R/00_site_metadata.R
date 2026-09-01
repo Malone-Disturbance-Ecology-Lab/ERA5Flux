@@ -38,7 +38,7 @@ get_site_metadata <- function(folder = NULL,
   }
 
   # Read it in
-  fluxmanifest <- utils::read.csv(file.path(folder, manifest.file), skip = 3, header = TRUE)
+  fluxmanifest <- base::suppressWarnings(utils::read.csv(file.path(folder, manifest.file), skip = 3, header = TRUE))
 
   # Get the site codes
   site_codes <- base::unique(fluxmanifest$SITE_ID)
