@@ -1,0 +1,6 @@
+#downloadDate:20260901121943
+#numberOfSitesDownloaded:1
+#dataFiles
+SITE_ID,filename,start_year,end_year,version,filetype,timestamp
+US-GL2,AMF_US-GL2_BASE_HH_2-5.csv,2024,2025,2-5,FLUX-MET,202603161142
+US-GL2,AMF_US-GL2_BIF_20251017.xlsx,,,20251017,BADM,202510171308
