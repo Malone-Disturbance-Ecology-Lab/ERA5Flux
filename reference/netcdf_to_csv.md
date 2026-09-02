@@ -48,7 +48,7 @@ netcdf_to_csv(
 - full_year:
 
   (bool) Filter to include only complete years, such that the data will
-  star with the first hour of year and ends with the last hour of a
+  start with the first hour of year and end with the last hour of a
   year. Otherwise, return data as is.
 
 ## Value
