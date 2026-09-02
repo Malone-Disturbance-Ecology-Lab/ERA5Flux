@@ -83,8 +83,8 @@ netcdf_df_formatter <- function(nc_file_path = NULL, site_lat = NULL, site_lon =
   target_lon <- site_lon
 
   # Find the closest index in the coordinate arrays
-  lat_idx <- which.min(abs(lat - target_lat))
-  lon_idx <- which.min(abs(lon - target_lon))
+  lat_idx <- base::which.min(base::abs(lat - target_lat))
+  lon_idx <- base::which.min(base::abs(lon - target_lon))
 
   # Loop through each variable and format as vector
   for (varname in data_vars) {
@@ -92,6 +92,14 @@ netcdf_df_formatter <- function(nc_file_path = NULL, site_lat = NULL, site_lon =
     # "start" indicates [lon_index, lat_index, start_time_index]
     # "count" indicates how many steps to pull. Use -1 to pull ALL time steps.
     var_data <- ncdf4::ncvar_get(nc, varname, start = c(lon_idx, lat_idx, 1), count = c(1, 1, -1))
+
+    # If all the extracted values are NA, extract from a different lon/lat index
+    if (base::all(base::is.na(var_data)) == TRUE){
+      lat_idx <- base::which(lat == base::setdiff(lat, lat[lat_idx]))
+      lon_idx <- base::which(lon == base::setdiff(lon, lon[lon_idx]))
+      var_data <- ncdf4::ncvar_get(nc, varname, start = c(lon_idx, lat_idx, 1), count = c(1, 1, -1))
+    }
+
     if (base::length(dim(var_data)) > 1) {
       var_data <- base::as.vector(var_data)
     }
