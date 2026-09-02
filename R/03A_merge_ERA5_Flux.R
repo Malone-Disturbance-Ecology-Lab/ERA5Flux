@@ -108,6 +108,7 @@ merge_ERA5_Flux <- function(filename_FLUX = NULL,
 
     for (i in 1:base::length(varname_ERA5)) {
       if (varname_ERA5[i] == 'tp') {
+        if(base::length(data_ERA5$time)*2 != base::length(data_ERA5_intp$time)) stop("There may be a skipped timestep in the ERA5 data. Please check for gaps in the timesteps because this will affect how precip is interpolated in the code.")
         data_ERA5_intp[, i + 1] <- base::rep(data_ERA5[, varname_ERA5[i]] / 2, each = 2)
       } else {
         data_ERA5_intp[, i + 1] <- stats::approx(data_ERA5$time, data_ERA5[, varname_ERA5[i]], data_ERA5_intp$time, method = "linear", rule=2)$y
