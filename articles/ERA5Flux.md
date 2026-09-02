@@ -183,14 +183,20 @@ download_ERA5(my_key = my_key,
               download_path = my_ERA5_download_path)
 ```
 
+If you have multiple sites,
+[`download_ERA5()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/download_ERA5.md)
+will download files from every site into the folder you specify in
+`download_path`. Once the download finishes, it’s recommended to
+organize your files so that you have a separate folder for each site.
+Make sure that each site folder has all the downloaded data files for
+its respective site.
+
 ### Step 2: Data Processing
 
 For this vignette, an example folder containing downloaded ERA5 data
 will be used
 (`system.file("extdata", "example_path_to_ERA5_download_folder", package = "ERA5Flux")`).
-Please remember to point to your own folder of downloaded ERA5 data. You
-may want to reuse the same folder in `my_ERA5_download_path` from Step
-1.
+Please remember to point to your own folder of downloaded ERA5 data.
 
 After downloading the ERA5 .nc files, we convert them into CSV files
 formatted to match AmeriFlux standards, enabling easy merging with
@@ -215,7 +221,6 @@ of this example, set `full_year = FALSE`.
 # Point to a folder containing ERA5 .nc files
 # For the purposes of this demo, an example data folder will be used
 # Please point to your own existing folder for your own workflow
-# You may want to reuse the same folder in `my_ERA5_download_path` from Step 1
 site_folder <- system.file("extdata", "example_path_to_ERA5_download_folder", package = "ERA5Flux")
 
 # Create a temporary directory to export our output to
