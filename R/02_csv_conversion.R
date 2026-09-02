@@ -125,44 +125,24 @@ netcdf_df_formatter <- function(nc_file_path = NULL, site_lat = NULL, site_lon =
 }
 
 
-
-
-
-
-
-
 #' @title Export NetCDF to CSV
 #'
 #' @description
-#' Takes a directory of ERA5 .nc data as an argument and exports the data in CSV
-#' format. This function grabs each NetCDF file and runs `netcdf_df_formatter()`
-#' on it. It builds a list of variables across all data frames in the folder
-#' and joins data by time, filtering to return only full years of data.
+#' Takes a directory of ERA5 .nc data as an argument and exports the data in CSV format. This function grabs each NetCDF file and runs `netcdf_df_formatter()` on it. It builds a list of variables across all data frames in the folder and joins data by time, filtering to return only full years of data.
 #'
-#' @param site_folder (character) A folder for one site with NetCDF data. The
-#' NetCDF files can be of different variables and of different years so long as
-#' it is for one site.
+#' @param site_folder (character) A folder for one site with NetCDF data. The NetCDF files can be of different variables and of different years so long as it is for one site.
 #'
-#' @param output_filepath (character) File path to where the output CSV should
-#' be written.
+#' @param output_filepath (character) File path to where the output CSV should be written.
 #'
-#' @param site_name (character) Name of the site that will be concatenated onto
-#'  CSV file name (e.g. US_GL2).
+#' @param site_name (character) Name of the site that will be concatenated onto CSV file name (e.g. US_GL2).
 #'
 #' @param site_lat (numeric) Latitude coordinate of site in decimal degrees.
 #'
 #' @param site_lon (numeric) Longitude coordinate of site in decimal degrees.
 #'
-#' @param full_year (bool) Filter to include only complete years, such that the
-#' data will star with the first hour of year and ends with the last hour of a
-#' year. Otherwise, return data as is.
+#' @param full_year (bool) Filter to include only complete years, such that the data will start with the first hour of year and end with the last hour of a year. Otherwise, return data as is.
 #'
-#' @return .csv file of NetCDF data within the site folder. The .csv file has
-#' the file name format: siteID_startYear_endYear_variableName.csv. For example,
-#'  US-Ho1_2001_2020_tp_t2m.csv. SiteID is determined from lat and lon
-#'  coordinates in df.sitemetadata. Each CSV file starts from the first hour of
-#'  a year (e.g., 2000-01-01 00:00) and ends with the last hour of a year
-#'  (e.g., 2020-12-31 23:00) if full_year == TRUE.
+#' @return .csv file of NetCDF data within the site folder. The .csv file has the file name format: siteID_startYear_endYear_variableName.csv. For example, US-Ho1_2001_2020_tp_t2m.csv. SiteID is determined from lat and lon coordinates in df.sitemetadata. Each CSV file starts from the first hour of a year (e.g., 2000-01-01 00:00) and ends with the last hour of a year (e.g., 2020-12-31 23:00) if full_year == TRUE.
 #'
 #' @export
 #'

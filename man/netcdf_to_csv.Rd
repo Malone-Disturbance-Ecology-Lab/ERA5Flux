@@ -14,37 +14,23 @@ netcdf_to_csv(
 )
 }
 \arguments{
-\item{site_folder}{(character) A folder for one site with NetCDF data. The
-NetCDF files can be of different variables and of different years so long as
-it is for one site.}
+\item{site_folder}{(character) A folder for one site with NetCDF data. The NetCDF files can be of different variables and of different years so long as it is for one site.}
 
-\item{output_filepath}{(character) File path to where the output CSV should
-be written.}
+\item{output_filepath}{(character) File path to where the output CSV should be written.}
 
-\item{site_name}{(character) Name of the site that will be concatenated onto
-CSV file name (e.g. US_GL2).}
+\item{site_name}{(character) Name of the site that will be concatenated onto CSV file name (e.g. US_GL2).}
 
 \item{site_lat}{(numeric) Latitude coordinate of site in decimal degrees.}
 
 \item{site_lon}{(numeric) Longitude coordinate of site in decimal degrees.}
 
-\item{full_year}{(bool) Filter to include only complete years, such that the
-data will star with the first hour of year and ends with the last hour of a
-year. Otherwise, return data as is.}
+\item{full_year}{(bool) Filter to include only complete years, such that the data will start with the first hour of year and end with the last hour of a year. Otherwise, return data as is.}
 }
 \value{
-.csv file of NetCDF data within the site folder. The .csv file has
-the file name format: siteID_startYear_endYear_variableName.csv. For example,
-US-Ho1_2001_2020_tp_t2m.csv. SiteID is determined from lat and lon
-coordinates in df.sitemetadata. Each CSV file starts from the first hour of
-a year (e.g., 2000-01-01 00:00) and ends with the last hour of a year
-(e.g., 2020-12-31 23:00) if full_year == TRUE.
+.csv file of NetCDF data within the site folder. The .csv file has the file name format: siteID_startYear_endYear_variableName.csv. For example, US-Ho1_2001_2020_tp_t2m.csv. SiteID is determined from lat and lon coordinates in df.sitemetadata. Each CSV file starts from the first hour of a year (e.g., 2000-01-01 00:00) and ends with the last hour of a year (e.g., 2020-12-31 23:00) if full_year == TRUE.
 }
 \description{
-Takes a directory of ERA5 .nc data as an argument and exports the data in CSV
-format. This function grabs each NetCDF file and runs \code{netcdf_df_formatter()}
-on it. It builds a list of variables across all data frames in the folder
-and joins data by time, filtering to return only full years of data.
+Takes a directory of ERA5 .nc data as an argument and exports the data in CSV format. This function grabs each NetCDF file and runs \code{netcdf_df_formatter()} on it. It builds a list of variables across all data frames in the folder and joins data by time, filtering to return only full years of data.
 }
 \examples{
 # Point to a folder containing ERA5 .nc files
