@@ -18,6 +18,13 @@
 - **Sparkle L Malone**. Author.
   [](https://orcid.org/0000-0001-9034-1076)
 
+- **National Science Foundation**. Funder.  
+  NSF 2047687
+
+- **Yale School of the Environment**. Funder.
+
+- **Yale Center for Natural Carbon Capture**. Funder.
+
 - **Malone Disturbance Ecology Lab**. Copyright holder.
 
 ## Citation
