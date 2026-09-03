@@ -49,7 +49,7 @@ netcdf_to_csv(
 
   (bool) If TRUE, filter to include only complete years, such that the
   data will start with the first hour of year and end with the last hour
-  of a year. Otherwise, return data as is. The default is FALSE.
+  of a year. Otherwise, return data as-is. The default is FALSE.
 
 ## Value
 

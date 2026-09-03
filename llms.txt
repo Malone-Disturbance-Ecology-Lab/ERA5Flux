@@ -38,7 +38,7 @@ install.packages("ERA5Flux")
   Daylight Saving Time
 
 - [`get_site_metadata()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/get_site_metadata.md):
-  builds an AmeriFlux site metadata file
+  builds an AmeriFlux site metadata data frame
 
 - [`get_land_sea_mask()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/get_land_sea_mask.md):
   downloads the netCDF land-sea mask from ERA5
