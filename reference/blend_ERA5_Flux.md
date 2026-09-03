@@ -3,9 +3,9 @@
 This function is used to blend data from AmeriFlux and data from ERA5,
 ensuring they both have the same start and end timestamps. Please first
 make sure to run the merge function
-([`merge_ERA5_Flux()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/merge_ERA5_Flux.md))
-first, because output of merge function will be used as input of this
-blending function.
+([`merge_ERA5_Flux()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/merge_ERA5_Flux.md)),
+because output of merge function will be used as input of this blending
+function.
 
 ## Usage
 
