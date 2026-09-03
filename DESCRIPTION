@@ -30,6 +30,13 @@ Authors@R: c(
          email = "sparkle.malone@yale.edu",
          comment = c(ORCID = "0000-0001-9034-1076"),
          role = "aut"),
+  person(family = "National Science Foundation",
+         role = "fnd",
+         comment = "NSF 2047687"),
+  person(family = "Yale School of the Environment",
+         role = "fnd"),
+  person(family = "Yale Center for Natural Carbon Capture",
+         role = "fnd"),
   person(family = "Malone Disturbance Ecology Lab",
          role = "cph")
          )
