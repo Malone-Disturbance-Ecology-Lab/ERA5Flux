@@ -99,7 +99,7 @@ merge_ERA5_Flux <- function(filename_FLUX = NULL,
   # Convert time column to datetime format
   data_ERA5$time <- lubridate::ymd_hm(data_ERA5$time)
 
-  # Find time step of Ameriflux data
+  # Find time step of AmeriFlux data
   dt <- base::as.numeric(base::difftime(lubridate::ymd_hm(data_BASE$TIMESTAMP_END[2]), lubridate::ymd_hm(data_BASE$TIMESTAMP_END[1]), units = 'hours'))
 
   # Interpolate ERA5 data to half-hourly intervals

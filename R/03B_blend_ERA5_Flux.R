@@ -11,7 +11,7 @@
 #' @param blending_rule (character) A vector of blending rules to use. There are four types of blending rules that can be used to blend AmeriFlux and ERA5 variables:
 #' - "lm": Linear regression with slope. Fits a linear model with slope, FLUX ~ ERA5, then only fills missing values in FLUX with predicted values from ERA5.
 #' - "lm_no_intercept": Linear regression without slope. Fits a linear model without slope, FLUX ~ ERA5, then only fills missing values in FLUX with predicted values from ERA5.
-#' - "replace": Replace Ameriflux variable with ERA5 variable.
+#' - "replace": Replace AmeriFlux variable with ERA5 variable.
 #' - "automatic": Checks for non-missing FLUX values. If ≥50% present then uses "lm" approach. If <50% present then fallback to "replace".
 #'
 #' @note Please note that the length of `varname_FLUX` must be the same as the length of `varname_ERA5`; at the same location, `varname_FLUX` and `varname_ERA5` should refer to the same variable despite the fact that AmeriFlux and ERA5 may use different names for the same variable. For example, for incoming shortwave radiation, ERA5 uses "ssrd", but AmeriFlux uses "SW_IN". Additionally, if you have multiple variables like precipitation and soil temperature, you must specify a blending rule for each one.
