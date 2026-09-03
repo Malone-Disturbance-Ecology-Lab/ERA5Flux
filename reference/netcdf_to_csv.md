@@ -55,10 +55,9 @@ netcdf_to_csv(
 
 .csv file of NetCDF data within the site folder. The .csv file has the
 file name format: siteID_startYear_endYear_variableName.csv. For
-example, US-Ho1_2001_2020_tp_t2m.csv. SiteID is determined from lat and
-lon coordinates in df.sitemetadata. Each CSV file starts from the first
-hour of a year (e.g., 2000-01-01 00:00) and ends with the last hour of a
-year (e.g., 2020-12-31 23:00) if full_year == TRUE.
+example, US-Ho1_2001_2020_tp_t2m.csv. Each CSV file starts from the
+first hour of a year (e.g., 2000-01-01 00:00) and ends with the last
+hour of a year (e.g., 2020-12-31 23:00) if full_year == TRUE.
 
 ## Examples
 

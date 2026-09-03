@@ -157,9 +157,7 @@ Copy and paste your Climate Data Store API key into the `my_key`
 argument. Provide the AmeriFlux site metadata in the `site_metadata`
 argument, and set the file path to your land-sea mask as well. Finally,
 specify a folder to where you want to download your ERA5 data to. The
-folder should be an existing folder on your own machine. You may want to
-create this folder in the same working directory as the folder for your
-unzipped AmeriFlux data.
+folder should be an existing folder on your own machine.
 
 Please note that the download may take a while.
 

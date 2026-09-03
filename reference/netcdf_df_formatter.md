@@ -30,8 +30,6 @@ netcdf_df_formatter(nc_file_path = NULL, site_lat = NULL, site_lon = NULL)
 
 - UTC timezones converted to local time.
 
-- SiteID is determined from lat and lon coordinates in df.sitemetadata.
-
 - Time column formatted as yyyyMMddHHmm, time zone determined using
   coordinates.
 
