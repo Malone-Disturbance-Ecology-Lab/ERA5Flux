@@ -102,7 +102,7 @@ Then make sure you create an account at the [Copernicus Climate Data Store](http
 
 `download_ERA5()` also requires a valid Climate Data Store API key. When you're logged into the [Copernicus Climate Data Store](https://cds.climate.copernicus.eu/), you can grab your API key by clicking on your name for your account in the top right corner, selecting "Your profile", scrolling down to the "API key" section, and copying the API key. 
 
-Copy and paste your Climate Data Store API key into the `my_key` argument. Provide the AmeriFlux site metadata in the `site_metadata` argument, and set the file path to your land-sea mask as well. Finally, specify a folder to where you want to download your ERA5 data to. The folder should be an existing folder on your own machine. You may want to create this folder in the same working directory as the folder for your unzipped AmeriFlux data.
+Copy and paste your Climate Data Store API key into the `my_key` argument. Provide the AmeriFlux site metadata in the `site_metadata` argument, and set the file path to your land-sea mask as well. Finally, specify a folder to where you want to download your ERA5 data to. The folder should be an existing folder on your own machine.
 
 Please note that the download may take a while.
 
