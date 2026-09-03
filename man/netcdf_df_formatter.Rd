@@ -18,7 +18,6 @@ netcdf_df_formatter(nc_file_path = NULL, site_lat = NULL, site_lon = NULL)
 \itemize{
 \item Datetime stamp column named "time".
 \item UTC timezones converted to local time.
-\item SiteID is determined from lat and lon coordinates in df.sitemetadata.
 \item Time column formatted as yyyyMMddHHmm, time zone determined using coordinates.
 \item Variables names from ERA5 dataset maintained.
 \item ERA5 units converted to Ameriflux units:

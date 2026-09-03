@@ -11,7 +11,6 @@
 #'
 #' - Datetime stamp column named "time".
 #' - UTC timezones converted to local time.
-#' - SiteID is determined from lat and lon coordinates in df.sitemetadata.
 #' - Time column formatted as yyyyMMddHHmm, time zone determined using coordinates.
 #' - Variables names from ERA5 dataset maintained.
 #' - ERA5 units converted to Ameriflux units:
@@ -142,7 +141,7 @@ netcdf_df_formatter <- function(nc_file_path = NULL, site_lat = NULL, site_lon =
 #'
 #' @param full_year (bool) Filter to include only complete years, such that the data will start with the first hour of year and end with the last hour of a year. Otherwise, return data as is.
 #'
-#' @return .csv file of NetCDF data within the site folder. The .csv file has the file name format: siteID_startYear_endYear_variableName.csv. For example, US-Ho1_2001_2020_tp_t2m.csv. SiteID is determined from lat and lon coordinates in df.sitemetadata. Each CSV file starts from the first hour of a year (e.g., 2000-01-01 00:00) and ends with the last hour of a year (e.g., 2020-12-31 23:00) if full_year == TRUE.
+#' @return .csv file of NetCDF data within the site folder. The .csv file has the file name format: siteID_startYear_endYear_variableName.csv. For example, US-Ho1_2001_2020_tp_t2m.csv. Each CSV file starts from the first hour of a year (e.g., 2000-01-01 00:00) and ends with the last hour of a year (e.g., 2020-12-31 23:00) if full_year == TRUE.
 #'
 #' @export
 #'
