@@ -20,7 +20,7 @@ netcdf_df_formatter(nc_file_path = NULL, site_lat = NULL, site_lon = NULL)
 \item UTC timezones converted to local time.
 \item Time column formatted as yyyyMMddHHmm, time zone determined using coordinates.
 \item Variables names from ERA5 dataset maintained.
-\item ERA5 units converted to Ameriflux units:
+\item ERA5 units converted to AmeriFlux units:
 \itemize{
 \item Solar radiation (ssrd) from Jm-2 to Wm-2.
 \item Air Temperature (t2m) from Kelvin to Celsius.

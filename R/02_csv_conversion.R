@@ -13,7 +13,7 @@
 #' - UTC timezones converted to local time.
 #' - Time column formatted as yyyyMMddHHmm, time zone determined using coordinates.
 #' - Variables names from ERA5 dataset maintained.
-#' - ERA5 units converted to Ameriflux units:
+#' - ERA5 units converted to AmeriFlux units:
 #'    - Solar radiation (ssrd) from Jm-2 to Wm-2.
 #'    - Air Temperature (t2m) from Kelvin to Celsius.
 #'    - Total precipitation (tp) from meters to millimeters.
@@ -127,7 +127,7 @@ netcdf_df_formatter <- function(nc_file_path = NULL, site_lat = NULL, site_lon =
 #' @title Export NetCDF to CSV
 #'
 #' @description
-#' Takes a directory of ERA5 .nc data as an argument and exports the data in CSV format. This function grabs each NetCDF file and runs `netcdf_df_formatter()` on it. It builds a list of variables across all data frames in the folder and joins data by time, filtering to return only full years of data.
+#' Takes a directory of ERA5 .nc data as an argument and exports the data in CSV format. This function grabs each NetCDF file and runs `netcdf_df_formatter()` on it. It builds a list of variables across all data frames in the folder and joins data by time, with an option to filter to return only full years of data.
 #'
 #' @param site_folder (character) A folder for one site with NetCDF data. The NetCDF files can be of different variables and of different years so long as it is for one site.
 #'
@@ -139,7 +139,7 @@ netcdf_df_formatter <- function(nc_file_path = NULL, site_lat = NULL, site_lon =
 #'
 #' @param site_lon (numeric) Longitude coordinate of site in decimal degrees.
 #'
-#' @param full_year (bool) Filter to include only complete years, such that the data will start with the first hour of year and end with the last hour of a year. Otherwise, return data as is.
+#' @param full_year (bool) If TRUE, filter to include only complete years, such that the data will start with the first hour of year and end with the last hour of a year. Otherwise, return data as is. The default is FALSE.
 #'
 #' @return .csv file of NetCDF data within the site folder. The .csv file has the file name format: siteID_startYear_endYear_variableName.csv. For example, US-Ho1_2001_2020_tp_t2m.csv. Each CSV file starts from the first hour of a year (e.g., 2000-01-01 00:00) and ends with the last hour of a year (e.g., 2020-12-31 23:00) if full_year == TRUE.
 #'
