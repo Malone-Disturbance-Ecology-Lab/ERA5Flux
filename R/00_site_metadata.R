@@ -1,10 +1,10 @@
 #' @title Get AmeriFlux Site Metadata
 #'
 #' @description
-#' This function is designed to build an AmeriFlux site metadata file. The site metadata file consists of site code, latitude, longitude, start date, end data, and variables needed.
-#' When downloading AmeriFlux data, select sites, download data and "requested_files_manifest" file. Then extract all files to a data folder. Variables need to be added by the user.
+#' This function is designed to build an AmeriFlux site metadata data frame. The data frame consists of site code, latitude, longitude, start date, end date, and ERA5 variables needed. This data frame will be used to create the ERA5 download request.
+#' To get started with this metadata function, you must have AmeriFlux data downloaded already. When downloading AmeriFlux data, select sites, download data and the "requested_files_manifest" text file. Then extract all files to a data folder, where the extracted data for each site has its own respective subfolder. ERA5 variables need to be added by the user. Please see the vignette for more help.
 #'
-#' @param folder (character) Path to the folder containing extracted AmeriFlux data and "requested_files_manifest" file.
+#' @param folder (character) Path to the folder containing extracted AmeriFlux data and "requested_files_manifest" text file.
 #'
 #' @param selected_variables (character) A vector of variable names.
 #'
