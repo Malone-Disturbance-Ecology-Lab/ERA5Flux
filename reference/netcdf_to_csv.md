@@ -4,8 +4,8 @@ Takes a directory of ERA5 .nc data as an argument and exports the data
 in CSV format. This function grabs each NetCDF file and runs
 [`netcdf_df_formatter()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/netcdf_df_formatter.md)
 on it. It builds a list of variables across all data frames in the
-folder and joins data by time, filtering to return only full years of
-data.
+folder and joins data by time, with an option to filter to return only
+full years of data.
 
 ## Usage
 
@@ -47,9 +47,9 @@ netcdf_to_csv(
 
 - full_year:
 
-  (bool) Filter to include only complete years, such that the data will
-  start with the first hour of year and end with the last hour of a
-  year. Otherwise, return data as is.
+  (bool) If TRUE, filter to include only complete years, such that the
+  data will start with the first hour of year and end with the last hour
+  of a year. Otherwise, return data as is. The default is FALSE.
 
 ## Value
 

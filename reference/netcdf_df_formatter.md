@@ -35,7 +35,7 @@ netcdf_df_formatter(nc_file_path = NULL, site_lat = NULL, site_lon = NULL)
 
 - Variables names from ERA5 dataset maintained.
 
-- ERA5 units converted to Ameriflux units:
+- ERA5 units converted to AmeriFlux units:
 
   - Solar radiation (ssrd) from Jm-2 to Wm-2.
 

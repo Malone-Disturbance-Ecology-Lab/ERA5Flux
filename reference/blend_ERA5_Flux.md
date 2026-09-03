@@ -51,7 +51,7 @@ blend_ERA5_Flux(
     model without slope, FLUX ~ ERA5, then only fills missing values in
     FLUX with predicted values from ERA5.
 
-  - "replace": Replace Ameriflux variable with ERA5 variable.
+  - "replace": Replace AmeriFlux variable with ERA5 variable.
 
   - "automatic": Checks for non-missing FLUX values. If ≥50% present
     then uses "lm" approach. If \<50% present then fallback to
