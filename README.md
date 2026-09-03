@@ -41,7 +41,7 @@ install.packages("ERA5Flux")
   UTC, where offset is the difference between UTC and local time without
   considering Daylight Saving Time
 
-- `get_site_metadata()`: builds an AmeriFlux site metadata file
+- `get_site_metadata()`: builds an AmeriFlux site metadata data frame
 
 - `get_land_sea_mask()`: downloads the netCDF land-sea mask from ERA5
 
