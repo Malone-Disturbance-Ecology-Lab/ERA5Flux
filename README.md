@@ -8,14 +8,13 @@
 <!-- badges: end -->
 
 The primary objective of this package is to improve the utility of
-[ERA5](https://www.ecmwf.int/en/forecasts/dataset/ecmwf-reanalysis-v5)
-data at [AmeriFlux](https://ameriflux.lbl.gov/) site locations. This
-package comprises of a collection of tools useful for workflows
-involving ERA5 and AmeriFlux data. It includes functions for downloading
-ERA5 data based on AmeriFlux sites, formatting the downloaded data to
-match AmeriFlux standards, merging both datasets together to ensure
-consistent timestamps, and blending them to create a single gap-filled
-time series.
+[ERA5](https://doi.org/10.24381/cds.e2161bac) data at
+[AmeriFlux](https://ameriflux.lbl.gov/) site locations. This package
+comprises of a collection of tools useful for workflows involving ERA5
+and AmeriFlux data. It includes functions for downloading ERA5 data
+based on AmeriFlux sites, formatting the downloaded data to match
+AmeriFlux standards, merging both datasets together to ensure consistent
+timestamps, and blending them to create a single gap-filled time series.
 
 ## Installation
 
