@@ -23,7 +23,7 @@ blend_ERA5_Flux(
 \item "lm": Linear regression with slope. Fits a linear model with slope, FLUX ~ ERA5, then only fills missing values in FLUX with predicted values from ERA5.
 \item "lm_no_intercept": Linear regression without slope. Fits a linear model without slope, FLUX ~ ERA5, then only fills missing values in FLUX with predicted values from ERA5.
 \item "replace": Replace AmeriFlux variable with ERA5 variable.
-\item "automatic": Checks for non-missing FLUX values. If ≥50\% present then uses "lm" approach. If <50\% present then fallback to "replace".
+\item "automatic": Checks for non-missing FLUX values. If >=50\% present then uses "lm" approach. If <50\% present then fallback to "replace".
 }}
 }
 \value{
