@@ -94,6 +94,10 @@ blend_ERA5_Flux <- function(merged_data = NULL,
   # Error out if blending rule(s) is not a character string or a character vector
   if (!base::is.character(blending_rule)) stop("Blending rule(s) must be a character string or vector of character strings")
 
+  # Error out if the amount of variables and blending rules don't match
+  if (base::length(varname_FLUX) != base::length(blending_rule)) stop("Please make sure you specify one blending rule for each variable")
+  if (base::length(varname_ERA5) != base::length(blending_rule)) stop("Please make sure you specify one blending rule for each variable")
+
   for (i in base::seq_along(varname_FLUX)) {
     flux_var <- varname_FLUX[i]
     era5_var <- varname_ERA5[i]
