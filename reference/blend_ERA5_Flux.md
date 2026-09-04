@@ -53,7 +53,7 @@ blend_ERA5_Flux(
 
   - "replace": Replace AmeriFlux variable with ERA5 variable.
 
-  - "automatic": Checks for non-missing FLUX values. If ≥50% present
+  - "automatic": Checks for non-missing FLUX values. If \>=50% present
     then uses "lm" approach. If \<50% present then fallback to
     "replace".
 
