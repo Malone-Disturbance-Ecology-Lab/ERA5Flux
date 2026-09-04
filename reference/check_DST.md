@@ -37,11 +37,7 @@ standard time if DST is in effect.
 timepoint <- lubridate::now()
 # Check whether the time is in DST at latitude 25.4, longitude -80.5 and get the standard time if so
 is_DST <- check_DST(lat = 25.4, lon = -80.5, timepoint)
+#> Error in check_DST(lat = 25.4, lon = -80.5, timepoint): Time point must be a character string
 is_DST
-#> $is_DST
-#> [1] TRUE
-#> 
-#> $standard_time
-#> [1] "2026-09-03 15:20:08 EDT"
-#> 
+#> Error: object 'is_DST' not found
 ```

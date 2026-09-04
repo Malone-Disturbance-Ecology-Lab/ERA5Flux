@@ -3,7 +3,7 @@ pkgdown: 2.2.1
 pkgdown_sha: ~
 articles:
   ERA5Flux: ERA5Flux.html
-last_built: 2026-09-03T20:19Z
+last_built: 2026-09-04T15:36Z
 urls:
   reference: https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference
   article: https://malone-disturbance-ecology-lab.github.io/ERA5Flux/articles
