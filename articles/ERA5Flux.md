@@ -3,11 +3,11 @@
 ## Intro
 
 This package was designed to make it easier to work with both
-[ERA5](https://www.ecmwf.int/en/forecasts/dataset/ecmwf-reanalysis-v5)
-and [AmeriFlux](https://ameriflux.lbl.gov/) data, hence the name
-“ERA5Flux”. There may be instances where the AmeriFlux data contain gaps
-that you want to fill with ERA5 data to create a single time series for
-your analysis.
+[ERA5](https://doi.org/10.24381/cds.e2161bac) and
+[AmeriFlux](https://ameriflux.lbl.gov/) data, hence the name “ERA5Flux”.
+There may be instances where the AmeriFlux data contain gaps that you
+want to fill with ERA5 data to create a single time series for your
+analysis.
 
 Please note that this package only merges and gap fills for solar
 radiation (long name: “surface_solar_radiation_downwards” / short name:
