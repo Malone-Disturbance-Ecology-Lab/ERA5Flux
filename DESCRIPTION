@@ -1,6 +1,6 @@
 Package: ERA5Flux
 Title: Improve the Utility of ERA5 Data at AmeriFlux Site Locations
-Version: 0.0.0.9000
+Version: 1.0.0
 Authors@R: c(
   person(given = "Angel", family = "Chen",
          email = "angel777chen@gmail.com",
