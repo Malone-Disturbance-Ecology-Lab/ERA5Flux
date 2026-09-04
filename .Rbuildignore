@@ -8,3 +8,4 @@
 ^\.github$
 ^test$
 ^vig_prep$
+^cran-comments\.md$
