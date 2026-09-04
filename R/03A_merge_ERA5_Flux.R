@@ -69,6 +69,18 @@ merge_ERA5_Flux <- function(filename_FLUX = NULL,
   # Error out if no ERA5 variable(s) is provided
   if (base::is.null(varname_ERA5)) stop("No ERA5 variable(s) provided")
 
+  # Error out if AmeriFlux file path is not a character string
+  if (!base::is.character(filename_FLUX)) stop("AmeriFlux file path must be a character string")
+
+  # Error out if ERA5 file path is not a character string
+  if (!base::is.character(filename_ERA5)) stop("ERA5 file path must be a character string")
+
+  # Error out if AmeriFlux variable(s) is not a character string or a character vector
+  if (!base::is.character(varname_FLUX)) stop("AmeriFlux variable(s) must be a character string or vector of character strings")
+
+  # Error out if ERA5 variable(s) is not a character string or a character vector
+  if (!base::is.character(varname_ERA5)) stop("ERA5 variable(s) must be a character string or vector of character strings")
+
   if (base::length(filename_FLUX) > 1 | base::length(filename_ERA5) > 1) {
     stop('This function works for one site each time.')
   }

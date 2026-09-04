@@ -42,6 +42,13 @@ netcdf_df_formatter <- function(nc_file_path = NULL, site_lat = NULL, site_lon =
   if (base::is.null(site_lat)) stop("No site latitude provided")
   if (base::is.null(site_lon)) stop("No site longitude provided")
 
+  # Error out if netCDF file path is not a character string
+  if (!base::is.character(nc_file_path)) stop("netCDF file path must be a character string")
+  # Error out if site latitude is not numeric
+  if (!base::is.numeric(site_lat)) stop("Site latitude must be numeric")
+  # Error out if site longitude is not numeric
+  if (!base::is.numeric(site_lon)) stop("Site longitude must be numeric")
+
   # Open NetCDF file
   nc <- ncdf4::nc_open(nc_file_path)
 
@@ -180,6 +187,17 @@ netcdf_to_csv <- function(site_folder = NULL,
   # Error out if no site coordinates are provided
   if (base::is.null(site_lat)) stop("No site latitude provided")
   if (base::is.null(site_lon)) stop("No site longitude provided")
+
+  # Error out if site folder is not a character string
+  if (!base::is.character(site_folder)) stop("Site folder path must be a character string")
+  # Error out if output path is not a character string
+  if (!base::is.character(output_filepath)) stop("Output path must be a character string")
+  # Error out if site name is not a character string
+  if (!base::is.character(site_name)) stop("Site name must be a character string")
+  # Error out if site latitude is not numeric
+  if (!base::is.numeric(site_lat)) stop("Site latitude must be numeric")
+  # Error out if site longitude is not numeric
+  if (!base::is.numeric(site_lon)) stop("Site longitude must be numeric")
 
   # Find .nc files
   nc_files <- list.files(site_folder, pattern = "\\.nc$", full.names = TRUE)

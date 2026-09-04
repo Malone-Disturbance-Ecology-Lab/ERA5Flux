@@ -33,6 +33,15 @@ get_land_proportion <- function(nc_file = NULL,
   # Error out if no lon is provided
   if (base::is.null(lon)) stop("No longitude provided")
 
+  # Error out if netCDF file path is not a character string
+  if (!base::is.character(nc_file)) stop("netCDF file path must be a character string")
+
+  # Error out if latitude is not numeric
+  if (!base::is.numeric(lat)) stop("Latitude must be numeric")
+
+  # Error out if longitude is not numeric
+  if (!base::is.numeric(lon)) stop("Longitude must be numeric")
+
   if (lon < 0) {
     lon <- lon + 360
   }

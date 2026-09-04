@@ -24,6 +24,12 @@ day_padding <- function(start_day = NULL,
   # Error out if no end day is provided
   if (base::is.null(end_day)) stop("No end day provided")
 
+  # Error out if start day is not a character string
+  if (!base::is.character(start_day)) stop("Start day must be a character string")
+
+  # Error out if end day is not a character string
+  if (!base::is.character(end_day)) stop("End day must be a character string")
+
   # Convert string to Date format
   start_date <- base::as.Date(start_day)
   end_date <- base::as.Date(end_day)

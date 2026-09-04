@@ -31,6 +31,12 @@ get_site_metadata <- function(folder = NULL,
   # Error out if no variable is provided
   if (base::is.null(selected_variables)) stop("No variable provided")
 
+  # Error out if folder path is not a character string
+  if (!base::is.character(folder)) stop("Folder path must be a character string")
+
+  # Error out if variable(s) is not a character string or a character vector
+  if (!base::is.character(selected_variables)) stop("Variable(s) must be a character string or vector of character strings")
+
   # Point to the "requested_files_manifest" file
   manifest.file <- base::list.files(folder, pattern = "requested_files_manifest")
   if(length(manifest.file) == 0){

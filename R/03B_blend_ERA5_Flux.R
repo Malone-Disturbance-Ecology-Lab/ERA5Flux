@@ -82,6 +82,18 @@ blend_ERA5_Flux <- function(merged_data = NULL,
   # Error out if no blending rule(s) is provided
   if (base::is.null(blending_rule)) stop("No blending rule(s) provided")
 
+  # Error out if merged data is not a data frame
+  if (!base::is.data.frame(merged_data)) stop("Merged data must be a data frame")
+
+  # Error out if AmeriFlux variable(s) is not a character string or a character vector
+  if (!base::is.character(varname_FLUX)) stop("AmeriFlux variable(s) must be a character string or vector of character strings")
+
+  # Error out if ERA5 variable(s) is not a character string or a character vector
+  if (!base::is.character(varname_ERA5)) stop("ERA5 variable(s) must be a character string or vector of character strings")
+
+  # Error out if blending rule(s) is not a character string or a character vector
+  if (!base::is.character(blending_rule)) stop("Blending rule(s) must be a character string or vector of character strings")
+
   for (i in base::seq_along(varname_FLUX)) {
     flux_var <- varname_FLUX[i]
     era5_var <- varname_ERA5[i]

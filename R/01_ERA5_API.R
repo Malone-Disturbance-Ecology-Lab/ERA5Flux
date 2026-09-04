@@ -49,6 +49,18 @@ download_ERA5 <- function(my_key = NULL,
   # Error out if no download path is provided
   if (base::is.null(download_path)) stop("No download path provided")
 
+  # Error out if key is not a character string
+  if (!base::is.character(my_key)) stop("Key must be a character string")
+
+  # Error out if site metadata is not a data frame
+  if (!base::is.data.frame(site_metadata)) stop("Site metadata must be a data frame")
+
+  # Error out if mask path is not a character string
+  if (!base::is.character(mask)) stop("Mask path must be a character string")
+
+  # Error out if download path is not a character string
+  if (!base::is.character(download_path)) stop("Download path must be a character string")
+
   # Set key
   ecmwfr::wf_set_key(key = my_key)
 

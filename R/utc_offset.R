@@ -30,6 +30,15 @@ check_DST <- function(lat = NULL,
   # Error out if no time point is provided
   if (base::is.null(timepoint)) stop("No time point provided")
 
+  # Error out if latitude is not numeric
+  if (!base::is.numeric(lat)) stop("Latitude must be numeric")
+
+  # Error out if longitude is not numeric
+  if (!base::is.numeric(lon)) stop("Longitude must be numeric")
+
+  # Error out if time point is not a character string
+  if (!base::is.character(timepoint)) stop("Time point must be a character string")
+
   # Get the timezone based on lat, lon
   timezone <- lutz::tz_lookup_coords(lat = lat, lon = lon, method = "accurate")
 
@@ -75,6 +84,12 @@ utc_offset <- function(lat = NULL,
 
   # Error out if no lon is provided
   if (base::is.null(lon)) stop("No longitude provided")
+
+  # Error out if latitude is not numeric
+  if (!base::is.numeric(lat)) stop("Latitude must be numeric")
+
+  # Error out if longitude is not numeric
+  if (!base::is.numeric(lon)) stop("Longitude must be numeric")
 
   # Get timezone for the given coordinates
   timezone <- lutz::tz_lookup_coords(lat = lat, lon = lon, method = "accurate")
@@ -149,6 +164,18 @@ date_conversion <- function(lat = NULL,
 
   # Error out if no flag is provided
   if (base::is.null(flag)) stop("No flag provided")
+
+  # Error out if latitude is not numeric
+  if (!base::is.numeric(lat)) stop("Latitude must be numeric")
+
+  # Error out if longitude is not numeric
+  if (!base::is.numeric(lon)) stop("Longitude must be numeric")
+
+  # Error out if time is not a character string
+  if (!base::is.character(time)) stop("Time must be a character string")
+
+  # Error out if flag is not numeric
+  if (!base::is.numeric(flag)) stop("Flag must be numeric")
 
   # Get timezone for the given coordinates
   timezone <- lutz::tz_lookup_coords(lat = lat, lon = lon, method = "accurate")
