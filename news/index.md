@@ -1,5 +1,5 @@
 # Changelog
 
-## ERA5Flux 0.0.0.9000
+## ERA5Flux 1.0.0
 
-- This package is currently in development.
+This is the first fully functioning version of the package.
