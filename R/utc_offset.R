@@ -5,7 +5,7 @@
 #'
 #' @param lat (numeric) Latitude coordinate in decimal degrees.
 #' @param lon (numeric) Longitude coordinate in decimal degrees.
-#' @param timepoint (character) Time point in either %Y-%m-%d HH:MM:SS or %Y/%m/%d HH:MM:SS format.
+#' @param timepoint (character or POSIXt object) Time point in either %Y-%m-%d HH:MM:SS or %Y/%m/%d HH:MM:SS format.
 #'
 #' @return (list) A list containing a boolean representing the DST status and the standard time if DST is in effect.
 #'
@@ -36,8 +36,8 @@ check_DST <- function(lat = NULL,
   # Error out if longitude is not numeric
   if (!base::is.numeric(lon)) stop("Longitude must be numeric")
 
-  # Error out if time point is not a character string
-  if (!base::is.character(timepoint)) stop("Time point must be a character string")
+  # Error out if time point is not a character string or POSIXt object
+  if (!(base::is.character(timepoint) | lubridate::is.POSIXt(timepoint))) stop("Time point must be a character string or POSIXt object")
 
   # Get the timezone based on lat, lon
   timezone <- lutz::tz_lookup_coords(lat = lat, lon = lon, method = "accurate")
