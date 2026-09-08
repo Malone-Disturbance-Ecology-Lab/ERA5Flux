@@ -24,20 +24,6 @@
 #' - Variable column with the blending rule applied on it. Name of the blended column is similar to AmeriFlux column name but with addition of "_f".
 #'
 #' @examples
-#' # Point to a folder containing ERA5 .nc files
-#' site_folder <- system.file("extdata", "example_path_to_ERA5_download_folder", package = "ERA5Flux")
-#' # Create a temporary directory to export our output to
-#' output_filepath <- tempdir()
-#'
-#' # Specify a site name
-#' site_name <- "US_GL2"
-#' # Specify the site latitude and longitude coordinates
-#' site_lat <- 46.7167
-#' site_lon <- -87.4
-#'
-#' # Convert NetCDF data to a CSV file
-#' netcdf_to_csv(site_folder, output_filepath, site_name, site_lat, site_lon, full_year = FALSE)
-#'
 #' # Point to AmeriFlux CSV data
 #' filename_FLUX <- system.file("extdata",
 #'                              "example_AmeriFlux",
@@ -46,7 +32,10 @@
 #'                              package = "ERA5Flux")
 #'
 #' # Point to ERA5 CSV data
-#' filename_ERA5 <- list.files(output_filepath, pattern = "US_GL2", full.names = TRUE)
+#' filename_ERA5 <- system.file("extdata",
+#'                              "example_processed_ERA5",
+#'                              "US_GL2_2024_2025_ssrd.csv",
+#'                              package = "ERA5Flux")
 #'
 #' # List AmeriFlux variable(s) to be merged with ERA5
 #' varname_FLUX <- c("SW_IN")
