@@ -321,29 +321,29 @@ hydrological modeling.</p>
 <span>                               varname_FLUX <span class="op">=</span> <span class="va">ameriflux_var</span>,</span>
 <span>                               varname_ERA5 <span class="op">=</span> <span class="va">era5_var</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">merged_data</span><span class="op">[</span><span class="fl">4650</span><span class="op">:</span><span class="fl">4670</span>,<span class="op">]</span></span>
-<span><span class="co">#&gt;       time ssrd SW_IN</span></span>
-<span><span class="co">#&gt; NA    &lt;NA&gt;   NA    NA</span></span>
-<span><span class="co">#&gt; NA.1  &lt;NA&gt;   NA    NA</span></span>
-<span><span class="co">#&gt; NA.2  &lt;NA&gt;   NA    NA</span></span>
-<span><span class="co">#&gt; NA.3  &lt;NA&gt;   NA    NA</span></span>
-<span><span class="co">#&gt; NA.4  &lt;NA&gt;   NA    NA</span></span>
-<span><span class="co">#&gt; NA.5  &lt;NA&gt;   NA    NA</span></span>
-<span><span class="co">#&gt; NA.6  &lt;NA&gt;   NA    NA</span></span>
-<span><span class="co">#&gt; NA.7  &lt;NA&gt;   NA    NA</span></span>
-<span><span class="co">#&gt; NA.8  &lt;NA&gt;   NA    NA</span></span>
-<span><span class="co">#&gt; NA.9  &lt;NA&gt;   NA    NA</span></span>
-<span><span class="co">#&gt; NA.10 &lt;NA&gt;   NA    NA</span></span>
-<span><span class="co">#&gt; NA.11 &lt;NA&gt;   NA    NA</span></span>
-<span><span class="co">#&gt; NA.12 &lt;NA&gt;   NA    NA</span></span>
-<span><span class="co">#&gt; NA.13 &lt;NA&gt;   NA    NA</span></span>
-<span><span class="co">#&gt; NA.14 &lt;NA&gt;   NA    NA</span></span>
-<span><span class="co">#&gt; NA.15 &lt;NA&gt;   NA    NA</span></span>
-<span><span class="co">#&gt; NA.16 &lt;NA&gt;   NA    NA</span></span>
-<span><span class="co">#&gt; NA.17 &lt;NA&gt;   NA    NA</span></span>
-<span><span class="co">#&gt; NA.18 &lt;NA&gt;   NA    NA</span></span>
-<span><span class="co">#&gt; NA.19 &lt;NA&gt;   NA    NA</span></span>
-<span><span class="co">#&gt; NA.20 &lt;NA&gt;   NA    NA</span></span></code></pre></div>
+<span><span class="va">merged_data</span><span class="op">[</span><span class="fl">3162</span><span class="op">:</span><span class="fl">3182</span>,<span class="op">]</span></span>
+<span><span class="co">#&gt;                     time     ssrd  SW_IN</span></span>
+<span><span class="co">#&gt; 3162 2025-03-07 15:30:00 2928.982 246.30</span></span>
+<span><span class="co">#&gt; 3163 2025-03-07 16:00:00 3113.339 161.50</span></span>
+<span><span class="co">#&gt; 3164 2025-03-07 16:30:00 3216.787 116.00</span></span>
+<span><span class="co">#&gt; 3165 2025-03-07 17:00:00 3320.236  57.56</span></span>
+<span><span class="co">#&gt; 3166 2025-03-07 17:30:00 3363.782  48.99</span></span>
+<span><span class="co">#&gt; 3167 2025-03-07 18:00:00 3407.327     NA</span></span>
+<span><span class="co">#&gt; 3168 2025-03-07 18:30:00 3414.466     NA</span></span>
+<span><span class="co">#&gt; 3169 2025-03-07 19:00:00 3421.604     NA</span></span>
+<span><span class="co">#&gt; 3170 2025-03-07 19:30:00 1710.802     NA</span></span>
+<span><span class="co">#&gt; 3171 2025-03-07 20:00:00    0.000     NA</span></span>
+<span><span class="co">#&gt; 3172 2025-03-07 20:30:00    0.000     NA</span></span>
+<span><span class="co">#&gt; 3173 2025-03-07 21:00:00    0.000     NA</span></span>
+<span><span class="co">#&gt; 3174 2025-03-07 21:30:00    0.000     NA</span></span>
+<span><span class="co">#&gt; 3175 2025-03-07 22:00:00    0.000     NA</span></span>
+<span><span class="co">#&gt; 3176 2025-03-07 22:30:00    0.000     NA</span></span>
+<span><span class="co">#&gt; 3177 2025-03-07 23:00:00    0.000     NA</span></span>
+<span><span class="co">#&gt; 3178 2025-03-07 23:30:00    0.000     NA</span></span>
+<span><span class="co">#&gt; 3179 2025-03-08 00:00:00    0.000     NA</span></span>
+<span><span class="co">#&gt; 3180 2025-03-08 00:30:00    0.000     NA</span></span>
+<span><span class="co">#&gt; 3181 2025-03-08 01:00:00    0.000     NA</span></span>
+<span><span class="co">#&gt; 3182 2025-03-08 01:30:00    0.000     NA</span></span></code></pre></div>
 <p>As shown above, the merged data contains ERA5 data in
 <code>ssrd</code>, as well as AmeriFlux data in <code>SW_IN</code>.</p>
 <p>Finally, you can blend the merged data.</p>
@@ -374,29 +374,29 @@ modeling, data assimilation, or long-term flux-climate analysis.</p>
 <span>                                blending_rule <span class="op">=</span> <span class="va">blending_rule</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Processing: SW_IN using rule: replace</span></span>
 <span></span>
-<span><span class="va">blended_data</span><span class="op">[</span><span class="fl">4650</span><span class="op">:</span><span class="fl">4670</span>,<span class="op">]</span></span>
-<span><span class="co">#&gt;       time ssrd SW_IN SW_IN_f</span></span>
-<span><span class="co">#&gt; NA    &lt;NA&gt;   NA    NA      NA</span></span>
-<span><span class="co">#&gt; NA.1  &lt;NA&gt;   NA    NA      NA</span></span>
-<span><span class="co">#&gt; NA.2  &lt;NA&gt;   NA    NA      NA</span></span>
-<span><span class="co">#&gt; NA.3  &lt;NA&gt;   NA    NA      NA</span></span>
-<span><span class="co">#&gt; NA.4  &lt;NA&gt;   NA    NA      NA</span></span>
-<span><span class="co">#&gt; NA.5  &lt;NA&gt;   NA    NA      NA</span></span>
-<span><span class="co">#&gt; NA.6  &lt;NA&gt;   NA    NA      NA</span></span>
-<span><span class="co">#&gt; NA.7  &lt;NA&gt;   NA    NA      NA</span></span>
-<span><span class="co">#&gt; NA.8  &lt;NA&gt;   NA    NA      NA</span></span>
-<span><span class="co">#&gt; NA.9  &lt;NA&gt;   NA    NA      NA</span></span>
-<span><span class="co">#&gt; NA.10 &lt;NA&gt;   NA    NA      NA</span></span>
-<span><span class="co">#&gt; NA.11 &lt;NA&gt;   NA    NA      NA</span></span>
-<span><span class="co">#&gt; NA.12 &lt;NA&gt;   NA    NA      NA</span></span>
-<span><span class="co">#&gt; NA.13 &lt;NA&gt;   NA    NA      NA</span></span>
-<span><span class="co">#&gt; NA.14 &lt;NA&gt;   NA    NA      NA</span></span>
-<span><span class="co">#&gt; NA.15 &lt;NA&gt;   NA    NA      NA</span></span>
-<span><span class="co">#&gt; NA.16 &lt;NA&gt;   NA    NA      NA</span></span>
-<span><span class="co">#&gt; NA.17 &lt;NA&gt;   NA    NA      NA</span></span>
-<span><span class="co">#&gt; NA.18 &lt;NA&gt;   NA    NA      NA</span></span>
-<span><span class="co">#&gt; NA.19 &lt;NA&gt;   NA    NA      NA</span></span>
-<span><span class="co">#&gt; NA.20 &lt;NA&gt;   NA    NA      NA</span></span></code></pre></div>
+<span><span class="va">blended_data</span><span class="op">[</span><span class="fl">3162</span><span class="op">:</span><span class="fl">3182</span>,<span class="op">]</span></span>
+<span><span class="co">#&gt;                     time     ssrd  SW_IN  SW_IN_f</span></span>
+<span><span class="co">#&gt; 3162 2025-03-07 15:30:00 2928.982 246.30 2928.982</span></span>
+<span><span class="co">#&gt; 3163 2025-03-07 16:00:00 3113.339 161.50 3113.339</span></span>
+<span><span class="co">#&gt; 3164 2025-03-07 16:30:00 3216.787 116.00 3216.787</span></span>
+<span><span class="co">#&gt; 3165 2025-03-07 17:00:00 3320.236  57.56 3320.236</span></span>
+<span><span class="co">#&gt; 3166 2025-03-07 17:30:00 3363.782  48.99 3363.782</span></span>
+<span><span class="co">#&gt; 3167 2025-03-07 18:00:00 3407.327     NA 3407.327</span></span>
+<span><span class="co">#&gt; 3168 2025-03-07 18:30:00 3414.466     NA 3414.466</span></span>
+<span><span class="co">#&gt; 3169 2025-03-07 19:00:00 3421.604     NA 3421.604</span></span>
+<span><span class="co">#&gt; 3170 2025-03-07 19:30:00 1710.802     NA 1710.802</span></span>
+<span><span class="co">#&gt; 3171 2025-03-07 20:00:00    0.000     NA    0.000</span></span>
+<span><span class="co">#&gt; 3172 2025-03-07 20:30:00    0.000     NA    0.000</span></span>
+<span><span class="co">#&gt; 3173 2025-03-07 21:00:00    0.000     NA    0.000</span></span>
+<span><span class="co">#&gt; 3174 2025-03-07 21:30:00    0.000     NA    0.000</span></span>
+<span><span class="co">#&gt; 3175 2025-03-07 22:00:00    0.000     NA    0.000</span></span>
+<span><span class="co">#&gt; 3176 2025-03-07 22:30:00    0.000     NA    0.000</span></span>
+<span><span class="co">#&gt; 3177 2025-03-07 23:00:00    0.000     NA    0.000</span></span>
+<span><span class="co">#&gt; 3178 2025-03-07 23:30:00    0.000     NA    0.000</span></span>
+<span><span class="co">#&gt; 3179 2025-03-08 00:00:00    0.000     NA    0.000</span></span>
+<span><span class="co">#&gt; 3180 2025-03-08 00:30:00    0.000     NA    0.000</span></span>
+<span><span class="co">#&gt; 3181 2025-03-08 01:00:00    0.000     NA    0.000</span></span>
+<span><span class="co">#&gt; 3182 2025-03-08 01:30:00    0.000     NA    0.000</span></span></code></pre></div>
 <p>In this example, the simple replacement blending rule was used, so a
 new <code>SW_IN_f</code> column was created with values from the ERA5
 column, <code>ssrd</code>.</p>
