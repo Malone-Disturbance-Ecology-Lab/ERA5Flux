@@ -123,13 +123,13 @@ varname_ERA5 <- c("ssrd")
 # Merge AmeriFlux and ERA5 data together
 merged_data <- merge_ERA5_Flux(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
 head(merged_data)
-#>                  time     ssrd SW_IN
-#> 1 2024-11-30 19:00:00 1201.930    NA
-#> 2 2024-11-30 19:30:00  600.965    NA
-#> 3 2024-11-30 20:00:00    0.000    NA
-#> 4 2024-11-30 20:30:00    0.000    NA
-#> 5 2024-11-30 21:00:00    0.000    NA
-#> 6 2024-11-30 21:30:00    0.000    NA
+#>                  time   ssrd SW_IN
+#> 1 2024-12-31 19:00:00 670.36    NA
+#> 2 2024-12-31 19:30:00 335.18    NA
+#> 3 2024-12-31 20:00:00   0.00    NA
+#> 4 2024-12-31 20:30:00   0.00    NA
+#> 5 2024-12-31 21:00:00   0.00    NA
+#> 6 2024-12-31 21:30:00   0.00    NA
 
 # Specify the blending rule(s)
 # If you have multiple variables, specify a rule for each variable
@@ -138,11 +138,11 @@ blending_rule <- c("replace")
 merg_blend <- blend_ERA5_Flux(merged_data, varname_FLUX, varname_ERA5, blending_rule)
 #> Processing: SW_IN using rule: replace
 head(merg_blend)
-#>                  time     ssrd SW_IN  SW_IN_f
-#> 1 2024-11-30 19:00:00 1201.930    NA 1201.930
-#> 2 2024-11-30 19:30:00  600.965    NA  600.965
-#> 3 2024-11-30 20:00:00    0.000    NA    0.000
-#> 4 2024-11-30 20:30:00    0.000    NA    0.000
-#> 5 2024-11-30 21:00:00    0.000    NA    0.000
-#> 6 2024-11-30 21:30:00    0.000    NA    0.000
+#>                  time   ssrd SW_IN SW_IN_f
+#> 1 2024-12-31 19:00:00 670.36    NA  670.36
+#> 2 2024-12-31 19:30:00 335.18    NA  335.18
+#> 3 2024-12-31 20:00:00   0.00    NA    0.00
+#> 4 2024-12-31 20:30:00   0.00    NA    0.00
+#> 5 2024-12-31 21:00:00   0.00    NA    0.00
+#> 6 2024-12-31 21:30:00   0.00    NA    0.00
 ```

@@ -80,11 +80,11 @@ netcdf_to_csv(site_folder, output_filepath, site_name, site_lat, site_lon, full_
 # Read the CSV back in
 data <- read.csv(list.files(output_filepath, pattern = "US_GL2", full.names = TRUE))
 head(data)
-#>           time    ssrd
-#> 1 202411301900 1201.93
-#> 2 202411302000    0.00
-#> 3 202411302100    0.00
-#> 4 202411302200    0.00
-#> 5 202411302300    0.00
-#> 6 202412010000    0.00
+#>           time   ssrd
+#> 1 202412311900 670.36
+#> 2 202412312000   0.00
+#> 3 202412312100   0.00
+#> 4 202412312200   0.00
+#> 5 202412312300   0.00
+#> 6 202501010000   0.00
 ```

@@ -104,7 +104,7 @@ my_site_metadata <- get_site_metadata(folder = my_AmeriFlux_folder,
                                       selected_variables = my_variables)
 #> selected variables: surface_solar_radiation_downwards
 #> Now checking: US-GL2
-#> Rows: 4320 Columns: 1
+#> Rows: 2832 Columns: 1
 #> ── Column specification ────────────────────────────────────────────────────────
 #> Delimiter: ","
 #> dbl (1): TIMESTAMP_START
@@ -114,7 +114,7 @@ my_site_metadata <- get_site_metadata(folder = my_AmeriFlux_folder,
 
 my_site_metadata
 #>   site_codes     lat      lon   startdate      enddate
-#> 1     US-GL2 46.7167 -87.4000 2.02501e+11 202503312330
+#> 1     US-GL2 46.7167 -87.4000 2.02502e+11 202503312330
 #>                           variables
 #> 1 surface_solar_radiation_downwards
 ```
@@ -238,13 +238,13 @@ netcdf_to_csv(site_folder, output_filepath, site_name, site_lat, site_lon, full_
 data <- read.csv(list.files(output_filepath, pattern = "US_GL2", full.names = TRUE))
 
 head(data)
-#>           time    ssrd
-#> 1 202411301900 1201.93
-#> 2 202411302000    0.00
-#> 3 202411302100    0.00
-#> 4 202411302200    0.00
-#> 5 202411302300    0.00
-#> 6 202412010000    0.00
+#>           time   ssrd
+#> 1 202412311900 670.36
+#> 2 202412312000   0.00
+#> 3 202412312100   0.00
+#> 4 202412312200   0.00
+#> 5 202412312300   0.00
+#> 6 202501010000   0.00
 ```
 
 ### Step 3: Merging and Blending AmeriFlux with ERA5 Data
@@ -297,28 +297,28 @@ merged_data <- merge_ERA5_Flux(filename_FLUX = ameriflux_file,
                                varname_ERA5 = era5_var)
 
 merged_data[4650:4670,]
-#>                     time     ssrd  SW_IN
-#> 4650 2025-03-07 15:30:00 2928.982 246.30
-#> 4651 2025-03-07 16:00:00 3113.339 161.50
-#> 4652 2025-03-07 16:30:00 3216.787 116.00
-#> 4653 2025-03-07 17:00:00 3320.236  57.56
-#> 4654 2025-03-07 17:30:00 3363.782  48.99
-#> 4655 2025-03-07 18:00:00 3407.327     NA
-#> 4656 2025-03-07 18:30:00 3414.466     NA
-#> 4657 2025-03-07 19:00:00 3421.604     NA
-#> 4658 2025-03-07 19:30:00 1710.802     NA
-#> 4659 2025-03-07 20:00:00    0.000     NA
-#> 4660 2025-03-07 20:30:00    0.000     NA
-#> 4661 2025-03-07 21:00:00    0.000     NA
-#> 4662 2025-03-07 21:30:00    0.000     NA
-#> 4663 2025-03-07 22:00:00    0.000     NA
-#> 4664 2025-03-07 22:30:00    0.000     NA
-#> 4665 2025-03-07 23:00:00    0.000     NA
-#> 4666 2025-03-07 23:30:00    0.000     NA
-#> 4667 2025-03-08 00:00:00    0.000     NA
-#> 4668 2025-03-08 00:30:00    0.000     NA
-#> 4669 2025-03-08 01:00:00    0.000     NA
-#> 4670 2025-03-08 01:30:00    0.000     NA
+#>       time ssrd SW_IN
+#> NA    <NA>   NA    NA
+#> NA.1  <NA>   NA    NA
+#> NA.2  <NA>   NA    NA
+#> NA.3  <NA>   NA    NA
+#> NA.4  <NA>   NA    NA
+#> NA.5  <NA>   NA    NA
+#> NA.6  <NA>   NA    NA
+#> NA.7  <NA>   NA    NA
+#> NA.8  <NA>   NA    NA
+#> NA.9  <NA>   NA    NA
+#> NA.10 <NA>   NA    NA
+#> NA.11 <NA>   NA    NA
+#> NA.12 <NA>   NA    NA
+#> NA.13 <NA>   NA    NA
+#> NA.14 <NA>   NA    NA
+#> NA.15 <NA>   NA    NA
+#> NA.16 <NA>   NA    NA
+#> NA.17 <NA>   NA    NA
+#> NA.18 <NA>   NA    NA
+#> NA.19 <NA>   NA    NA
+#> NA.20 <NA>   NA    NA
 ```
 
 As shown above, the merged data contains ERA5 data in `ssrd`, as well as
@@ -360,28 +360,28 @@ blended_data <- blend_ERA5_Flux(merged_data = merged_data,
 #> Processing: SW_IN using rule: replace
 
 blended_data[4650:4670,]
-#>                     time     ssrd  SW_IN  SW_IN_f
-#> 4650 2025-03-07 15:30:00 2928.982 246.30 2928.982
-#> 4651 2025-03-07 16:00:00 3113.339 161.50 3113.339
-#> 4652 2025-03-07 16:30:00 3216.787 116.00 3216.787
-#> 4653 2025-03-07 17:00:00 3320.236  57.56 3320.236
-#> 4654 2025-03-07 17:30:00 3363.782  48.99 3363.782
-#> 4655 2025-03-07 18:00:00 3407.327     NA 3407.327
-#> 4656 2025-03-07 18:30:00 3414.466     NA 3414.466
-#> 4657 2025-03-07 19:00:00 3421.604     NA 3421.604
-#> 4658 2025-03-07 19:30:00 1710.802     NA 1710.802
-#> 4659 2025-03-07 20:00:00    0.000     NA    0.000
-#> 4660 2025-03-07 20:30:00    0.000     NA    0.000
-#> 4661 2025-03-07 21:00:00    0.000     NA    0.000
-#> 4662 2025-03-07 21:30:00    0.000     NA    0.000
-#> 4663 2025-03-07 22:00:00    0.000     NA    0.000
-#> 4664 2025-03-07 22:30:00    0.000     NA    0.000
-#> 4665 2025-03-07 23:00:00    0.000     NA    0.000
-#> 4666 2025-03-07 23:30:00    0.000     NA    0.000
-#> 4667 2025-03-08 00:00:00    0.000     NA    0.000
-#> 4668 2025-03-08 00:30:00    0.000     NA    0.000
-#> 4669 2025-03-08 01:00:00    0.000     NA    0.000
-#> 4670 2025-03-08 01:30:00    0.000     NA    0.000
+#>       time ssrd SW_IN SW_IN_f
+#> NA    <NA>   NA    NA      NA
+#> NA.1  <NA>   NA    NA      NA
+#> NA.2  <NA>   NA    NA      NA
+#> NA.3  <NA>   NA    NA      NA
+#> NA.4  <NA>   NA    NA      NA
+#> NA.5  <NA>   NA    NA      NA
+#> NA.6  <NA>   NA    NA      NA
+#> NA.7  <NA>   NA    NA      NA
+#> NA.8  <NA>   NA    NA      NA
+#> NA.9  <NA>   NA    NA      NA
+#> NA.10 <NA>   NA    NA      NA
+#> NA.11 <NA>   NA    NA      NA
+#> NA.12 <NA>   NA    NA      NA
+#> NA.13 <NA>   NA    NA      NA
+#> NA.14 <NA>   NA    NA      NA
+#> NA.15 <NA>   NA    NA      NA
+#> NA.16 <NA>   NA    NA      NA
+#> NA.17 <NA>   NA    NA      NA
+#> NA.18 <NA>   NA    NA      NA
+#> NA.19 <NA>   NA    NA      NA
+#> NA.20 <NA>   NA    NA      NA
 ```
 
 In this example, the simple replacement blending rule was used, so a new
