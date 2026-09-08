@@ -98,7 +98,14 @@ download_ERA5 <- function(my_key = NULL,
 
     #num_years <- as.numeric(substr(site_metadata$enddate[i], 1, 4))-as.numeric(substr(site_metadata$startdate[i], 1, 4))
 
-    loop_date <- base::as.Date(base::paste(lubridate::year(start_day), lubridate::month(start_day),"01", sep = ""), "%Y%m%d")
+    loop_date_month <- lubridate::month(start_day)
+
+    if (base::nchar(loop_date_month) == 1){
+      # Add a leading zero if the month is single-digit
+      loop_date_month <- base::paste0("0", loop_date_month)
+    }
+
+    loop_date <- base::as.Date(base::paste(lubridate::year(start_day), loop_date_month, "01", sep = ""), "%Y%m%d")
 
     while (loop_date < end_day) {
       #print(loop_date)
