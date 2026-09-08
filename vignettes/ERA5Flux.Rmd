@@ -193,7 +193,7 @@ merged_data <- merge_ERA5_Flux(filename_FLUX = ameriflux_file,
                                varname_FLUX = ameriflux_var,
                                varname_ERA5 = era5_var)
 
-merged_data[4650:4670,]
+merged_data[3162:3182,]
 ```
 
 As shown above, the merged data contains ERA5 data in `ssrd`, as well as AmeriFlux data in `SW_IN`. 
@@ -215,7 +215,7 @@ blended_data <- blend_ERA5_Flux(merged_data = merged_data,
                                 varname_ERA5 = era5_var,
                                 blending_rule = blending_rule)
 
-blended_data[4650:4670,]
+blended_data[3162:3182,]
 ```
 
 In this example, the simple replacement blending rule was used, so a new `SW_IN_f` column was created with values from the ERA5 column, `ssrd`.  
