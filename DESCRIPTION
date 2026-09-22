@@ -45,6 +45,8 @@ Description: Collection of tools useful for workflows involving ERA5-Land and
     AmeriFlux sites, formatting the downloaded data to match AmeriFlux 
     standards, merging both datasets together to ensure consistent 
     timestamps, and blending them to create a single gap-filled time series.
+    For more details, visit the ERA5-Land dataset page at <https://doi.org/10.24381/cds.e2161bac> 
+    and the AmeriFlux homepage at <https://ameriflux.lbl.gov/>.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
