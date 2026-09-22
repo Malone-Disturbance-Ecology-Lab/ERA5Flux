@@ -19,13 +19,21 @@ This function is designed to build an AmeriFlux site metadata data frame. The da
 To get started with this metadata function, you must have AmeriFlux data downloaded already. When downloading AmeriFlux data, select sites, download data and the "requested_files_manifest" text file. Then extract all files to a data folder, where the extracted data for each site has its own respective subfolder. ERA5-Land variables need to be added by the user. Please see the vignette for more help.
 }
 \examples{
-\dontrun{
-# Specify your variables
-my_variables <- c("2m_temperature", "total_precipitation", "surface_solar_radiation_downwards")
+# Specify the ERA5-Land variables you want to get
+# Choose any combination from:
+# 2m_temperature, total_precipitation, and surface_solar_radiation_downwards
+my_variables <- c("surface_solar_radiation_downwards")
+
+# Point to the folder containing the unzipped site folders and requested files manifest
+# For the purposes of this example, an example data folder is used
+# Please point to your own existing folder for your own workflow
+my_AmeriFlux_folder <- system.file("extdata", "example_AmeriFlux", package = "ERA5Flux")
+
 # Create the AmeriFlux site metadata
-site_metadata <- get_site_metadata(folder = "my_own_path_to_AmeriFlux_folder",
+my_site_metadata <- get_site_metadata(folder = my_AmeriFlux_folder,
                                    selected_variables = my_variables)
-}
+
+my_site_metadata
 
 }
 \author{

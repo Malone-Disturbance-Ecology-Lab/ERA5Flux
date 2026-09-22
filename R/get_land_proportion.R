@@ -12,8 +12,17 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' land_proportion <- get_land_proportion("file_path_to_the_nc_file", 25.2, -80.3)
+#' \donttest{
+#' # Create a temporary directory to download to
+#' temp_path <- tempdir()
+#' # Download the land-sea mask
+#' get_land_sea_mask(file_name = "lsm_1279l4_0.1x0.1.grb_v4_unpack.nc",
+#'                   download_path = temp_path)
+#'
+#' # Get land proportion for a given latitude and longitude
+#' get_land_proportion(nc_file = file.path(temp_path, "lsm_1279l4_0.1x0.1.grb_v4_unpack.nc"),
+#'                     lat = 25.2,
+#'                     lon = -80.3)
 #' }
 #'
 #' @note In cycles of the ECMWF Integrated Forecasting System (IFS) from CY41R1 (introduced in May 2015) onwards, grid boxes where this parameter has a value above 0.5 can be comprised of a mixture of land and inland water but not ocean. Grid boxes with a value of 0.5 and below can only be comprised of a water surface. In the latter case, the lake cover is used to determine how much of the water surface is ocean or inland water.

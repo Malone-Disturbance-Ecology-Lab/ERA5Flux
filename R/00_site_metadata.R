@@ -13,13 +13,21 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' # Specify your variables
-#' my_variables <- c("2m_temperature", "total_precipitation", "surface_solar_radiation_downwards")
+#' # Specify the ERA5-Land variables you want to get
+#' # Choose any combination from:
+#' # 2m_temperature, total_precipitation, and surface_solar_radiation_downwards
+#' my_variables <- c("surface_solar_radiation_downwards")
+#'
+#' # Point to the folder containing the unzipped site folders and requested files manifest
+#' # For the purposes of this example, an example data folder is used
+#' # Please point to your own existing folder for your own workflow
+#' my_AmeriFlux_folder <- system.file("extdata", "example_AmeriFlux", package = "ERA5Flux")
+#'
 #' # Create the AmeriFlux site metadata
-#' site_metadata <- get_site_metadata(folder = "my_own_path_to_AmeriFlux_folder",
+#' my_site_metadata <- get_site_metadata(folder = my_AmeriFlux_folder,
 #'                                    selected_variables = my_variables)
-#' }
+#'
+#' my_site_metadata
 #'
 #' @author David Reed
 #'

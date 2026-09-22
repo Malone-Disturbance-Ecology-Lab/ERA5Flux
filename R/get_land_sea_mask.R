@@ -12,8 +12,12 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' get_land_sea_mask()
+#' \donttest{
+#' # Create a temporary directory to download to
+#' temp_path <- tempdir()
+#' # Download the land-sea mask
+#' get_land_sea_mask(file_name = "lsm_1279l4_0.1x0.1.grb_v4_unpack.nc",
+#'                   download_path = temp_path)
 #' }
 #'
 get_land_sea_mask <- function(file_name = "lsm_1279l4_0.1x0.1.grb_v4_unpack.nc",
