@@ -19,6 +19,6 @@ Offset is the difference between UTC and local time without considering Daylight
 }
 \examples{
 # Get the UTC offset at latitude 25.4, longitude -80.5
-offset <- utc_offset(lat = 25.4, lon = -80.5)
+utc_offset(lat = 25.4, lon = -80.5)
 
 }

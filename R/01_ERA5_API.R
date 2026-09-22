@@ -77,7 +77,7 @@ download_ERA5 <- function(my_key = NULL,
                                       lon = base::as.numeric(site_metadata$lon[i]))
 
 
-    base::print(base::paste("The proporation of land at site", site_metadata$site_codes[i], "is:", land_cover$lsm))
+    base::message("The proporation of land at site ", site_metadata$site_codes[i], " is: ", land_cover$lsm)
   }
 
   ####### start of API code
@@ -108,7 +108,7 @@ download_ERA5 <- function(my_key = NULL,
     loop_date <- base::as.Date(base::paste(lubridate::year(start_day), loop_date_month, "01", sep = ""), "%Y%m%d")
 
     while (loop_date < end_day) {
-      #print(loop_date)
+
 
       date <- base::paste(
         lubridate::year(loop_date),

@@ -75,7 +75,7 @@ check_DST <- function(lat = NULL,
 #'
 #' @examples
 #' # Get the UTC offset at latitude 25.4, longitude -80.5
-#' offset <- utc_offset(lat = 25.4, lon = -80.5)
+#' utc_offset(lat = 25.4, lon = -80.5)
 #'
 utc_offset <- function(lat = NULL,
                        lon = NULL) {
@@ -101,24 +101,18 @@ utc_offset <- function(lat = NULL,
   # Get the current time in UTC
   time_utc <- lubridate::now(tz = "UTC")  # No DST
   #time_utc <- as.POSIXct("2025-06-21 12:00:00", tz = "UTC") ## WITH DST
-  #print(time_utc)
 
   # Convert UTC time to local time with proper timezone
   local_time_result <- lubridate::with_tz(time_utc, tzone = timezone)  # Keeps time zone
-  #print(local_time_result)
 
   # Check if the current time is in Daylight Saving Time (DST)
   result <- check_DST(lat, lon, local_time_result)
-  #print(paste("Is it DST? ", result$is_DST))
-  #print(paste("Standard time (if not in DST):", result$standard_time))
   local_revised <- result$standard_time
-
   conversion <- lubridate::force_tz(local_revised, "UTC")
-  #print(conversion)
+
   # Calculate the difference in hours, respecting time zones
   offset_hours <- base::as.numeric(difftime(conversion, time_utc, units = "hours"))
 
-  base::print(offset_hours)
   return(offset_hours)
 }
 
@@ -179,7 +173,8 @@ date_conversion <- function(lat = NULL,
 
   # Get timezone for the given coordinates
   timezone <- lutz::tz_lookup_coords(lat = lat, lon = lon, method = "accurate")
-  print(timezone)
+  base::message("The timezone for the given coordinates is: ", timezone)
+
   if (flag == 1) {
     # Convert UTC to Local Time
     time <- base::as.POSIXct(time, format = "%Y-%m-%d %H:%M:%S", tz = "UTC")
