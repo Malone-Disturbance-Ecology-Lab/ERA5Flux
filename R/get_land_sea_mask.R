@@ -1,7 +1,7 @@
-#' @title Get Land-Sea Mask from ERA5
+#' @title Get Land-Sea Mask from ERA5-Land
 #'
 #' @description
-#' This function downloads the netCDF land-sea mask from ERA5. The mask is needed in order to run `download_ERA5()`. The mask can be found online here:
+#' This function downloads the netCDF land-sea mask from ERA5-Land. The mask is needed in order to run `download_ERA5()`. The mask can be found online here:
 #' https://confluence.ecmwf.int/pages/viewpage.action?pageId=140385202#ERA5Land:datadocumentation-parameterlistingParameterlistings.
 #'
 #' @param file_name (character) Name of the land-sea mask. The default name is "lsm_1279l4_0.1x0.1.grb_v4_unpack.nc".

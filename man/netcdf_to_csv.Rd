@@ -30,10 +30,10 @@ netcdf_to_csv(
 .csv file of NetCDF data within the site folder. The .csv file has the file name format: siteID_startYear_endYear_variableName.csv. For example, US_Ho1_2001_2020_tp_t2m.csv. Each CSV file starts from the first hour of a year (e.g., 2001-01-01 00:00) and ends with the last hour of a year (e.g., 2020-12-31 23:00) if full_year == TRUE.
 }
 \description{
-Takes a directory of ERA5 .nc data as an argument and exports the data in CSV format. This function grabs each NetCDF file and runs \code{netcdf_df_formatter()} on it. It builds a list of variables across all data frames in the folder and joins data by time, with an option to filter to return only full years of data.
+Takes a directory of ERA5-Land .nc data as an argument and exports the data in CSV format. This function grabs each NetCDF file and runs \code{netcdf_df_formatter()} on it. It builds a list of variables across all data frames in the folder and joins data by time, with an option to filter to return only full years of data.
 }
 \examples{
-# Point to a folder containing ERA5 .nc files
+# Point to a folder containing ERA5-Land .nc files
 site_folder <- system.file("extdata", "example_path_to_ERA5_download_folder", package = "ERA5Flux")
 # Create a temporary directory to export our output to
 output_filepath <- tempdir()

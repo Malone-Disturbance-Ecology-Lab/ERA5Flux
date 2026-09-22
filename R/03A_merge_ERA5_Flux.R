@@ -1,16 +1,16 @@
-#' @title Merge ERA5 and AmeriFlux Data
+#' @title Merge ERA5-Land and AmeriFlux Data
 #'
 #' @author Ammara Talib and Junna Wang
 #'
 #' @description
-#' This function is used to merge data from AmeriFlux and data from ERA5, ensuring they both have the same start and end timestamps.
+#' This function is used to merge data from AmeriFlux and data from ERA5-Land, ensuring they both have the same start and end timestamps.
 #'
 #' @param filename_FLUX (character) The file path to a CSV file of AmeriFlux BASE data downloaded from https://ameriflux.lbl.gov/.
-#' @param filename_ERA5 (character) The file path to a CSV file of meterological data downloaded from ERA5 https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels?tab=overview. Please note that the original ERA5 files are in .nc format. You may want to convert these files into CSV format using the function `netcdf_to_csv()`.
-#' @param varname_FLUX (character) A vector of variable names in AmeriFlux BASE data to be merged with ERA5 data.
-#' @param varname_ERA5 (character) A vector of variable names in ERA5 data to be merged with AmeriFlux BASE data.
+#' @param filename_ERA5 (character) The file path to a CSV file of meterological data downloaded from ERA5-Land https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels?tab=overview. Please note that the original ERA5-Land files are in .nc format. You may want to convert these files into CSV format using the function `netcdf_to_csv()`.
+#' @param varname_FLUX (character) A vector of variable names in AmeriFlux BASE data to be merged with ERA5-Land data.
+#' @param varname_ERA5 (character) A vector of variable names in ERA5-Land data to be merged with AmeriFlux BASE data.
 #'
-#' @note Please note that the length of `varname_FLUX` must be the same as the length of `varname_ERA5`; at the same location, `varname_FLUX` and `varname_ERA5` should refer to the same variable despite the fact that AmeriFlux and ERA5 may use different names for the same variable. For example, for incoming shortwave radiation, ERA5 uses "ssrd", but AmeriFlux uses "SW_IN".
+#' @note Please note that the length of `varname_FLUX` must be the same as the length of `varname_ERA5`; at the same location, `varname_FLUX` and `varname_ERA5` should refer to the same variable despite the fact that AmeriFlux and ERA5-Land may use different names for the same variable. For example, for incoming shortwave radiation, ERA5-Land uses "ssrd", but AmeriFlux uses "SW_IN".
 #'
 #' @export
 #'
@@ -27,18 +27,18 @@
 #'                              "AMF_US-GL2_BASE_HH_2-5.csv",
 #'                              package = "ERA5Flux")
 #'
-#' # Point to ERA5 CSV data
+#' # Point to ERA5-Land CSV data
 #' filename_ERA5 <- system.file("extdata",
 #'                              "example_processed_ERA5",
 #'                              "US_GL2_2024_2025_ssrd.csv",
 #'                              package = "ERA5Flux")
 #'
-#' # List AmeriFlux variable(s) to be merged with ERA5
+#' # List AmeriFlux variable(s) to be merged with ERA5-Land
 #' varname_FLUX <- c("SW_IN")
-#' # List ERA5 variable(s) to be merged with AmeriFlux
+#' # List ERA5-Land variable(s) to be merged with AmeriFlux
 #' varname_ERA5 <- c("ssrd")
 #'
-#' # Merge AmeriFlux and ERA5 data together
+#' # Merge AmeriFlux and ERA5-Land data together
 #' merged_data <- merge_ERA5_Flux(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
 #' head(merged_data)
 #'
@@ -49,32 +49,32 @@ merge_ERA5_Flux <- function(filename_FLUX = NULL,
   # Error out if no AmeriFlux file path is provided
   if (base::is.null(filename_FLUX)) stop("No AmeriFlux file path provided")
 
-  # Error out if no ERA5 file path is provided
-  if (base::is.null(filename_ERA5)) stop("No ERA5 file path provided")
+  # Error out if no ERA5-Land file path is provided
+  if (base::is.null(filename_ERA5)) stop("No ERA5-Land file path provided")
 
   # Error out if no AmeriFlux variable(s) is provided
   if (base::is.null(varname_FLUX)) stop("No AmeriFlux variable(s) provided")
 
-  # Error out if no ERA5 variable(s) is provided
-  if (base::is.null(varname_ERA5)) stop("No ERA5 variable(s) provided")
+  # Error out if no ERA5-Land variable(s) is provided
+  if (base::is.null(varname_ERA5)) stop("No ERA5-Land variable(s) provided")
 
   # Error out if AmeriFlux file path is not a character string
   if (!base::is.character(filename_FLUX)) stop("AmeriFlux file path must be a character string")
 
-  # Error out if ERA5 file path is not a character string
-  if (!base::is.character(filename_ERA5)) stop("ERA5 file path must be a character string")
+  # Error out if ERA5-Land file path is not a character string
+  if (!base::is.character(filename_ERA5)) stop("ERA5-Land file path must be a character string")
 
   # Error out if AmeriFlux variable(s) is not a character string or a character vector
   if (!base::is.character(varname_FLUX)) stop("AmeriFlux variable(s) must be a character string or vector of character strings")
 
-  # Error out if ERA5 variable(s) is not a character string or a character vector
-  if (!base::is.character(varname_ERA5)) stop("ERA5 variable(s) must be a character string or vector of character strings")
+  # Error out if ERA5-Land variable(s) is not a character string or a character vector
+  if (!base::is.character(varname_ERA5)) stop("ERA5-Land variable(s) must be a character string or vector of character strings")
 
   if (base::length(filename_FLUX) > 1 | base::length(filename_ERA5) > 1) {
     stop('This function works for one site each time.')
   }
   if (base::length(varname_FLUX) != base::length(varname_ERA5)) {
-    stop('To-be-merged varname of FLUX should correspond to to-be-merged varname of ERA5')
+    stop('To-be-merged varname of AmeriFlux should correspond to to-be-merged varname of ERA5-Land')
   }
 
 
@@ -90,11 +90,11 @@ merge_ERA5_Flux <- function(filename_FLUX = NULL,
 
   data_BASE[data_BASE <= -9999] <- NA
 
-  # Read ERA5 data
+  # Read ERA5-Land data
   data_ERA5 <- utils::read.csv(filename_ERA5)
 
   if (base::any(!varname_ERA5 %in% base::colnames(data_ERA5))) {
-    stop('Wrong varnames were given for ERA5 data')
+    stop('Wrong varnames were given for ERA5-Land data')
   }
 
   # Convert time column to datetime format
@@ -103,13 +103,13 @@ merge_ERA5_Flux <- function(filename_FLUX = NULL,
   # Find time step of AmeriFlux data
   dt <- base::as.numeric(base::difftime(lubridate::ymd_hm(data_BASE$TIMESTAMP_END[2]), lubridate::ymd_hm(data_BASE$TIMESTAMP_END[1]), units = 'hours'))
 
-  # Interpolate ERA5 data to half-hourly intervals
+  # Interpolate ERA5-Land data to half-hourly intervals
   if (dt == 0.5) {
     data_ERA5_intp <- base::data.frame(time = base::seq(data_ERA5$time[1], data_ERA5$time[nrow(data_ERA5)] + 30*60, by = "30 min"))
 
     for (i in 1:base::length(varname_ERA5)) {
       if (varname_ERA5[i] == 'tp') {
-        if(base::length(data_ERA5$time)*2 != base::length(data_ERA5_intp$time)) stop("There may be a skipped timestep in the ERA5 data. Please check for gaps in the timesteps because this will affect how precip is interpolated in the code.")
+        if(base::length(data_ERA5$time)*2 != base::length(data_ERA5_intp$time)) stop("There may be a skipped timestep in the ERA5-Land data. Please check for gaps in the timesteps because this will affect how precip is interpolated in the code.")
         data_ERA5_intp[, i + 1] <- base::rep(data_ERA5[, varname_ERA5[i]] / 2, each = 2)
       } else {
         data_ERA5_intp[, i + 1] <- stats::approx(data_ERA5$time, data_ERA5[, varname_ERA5[i]], data_ERA5_intp$time, method = "linear", rule=2)$y

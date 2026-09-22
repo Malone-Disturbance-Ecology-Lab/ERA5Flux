@@ -1,5 +1,5 @@
 Package: ERA5Flux
-Title: Improve the Utility of ERA5 Data at AmeriFlux Site Locations
+Title: Improve the Utility of ERA5-Land Data at AmeriFlux Site Locations
 Version: 1.0.0
 Authors@R: c(
   person(given = "Angel", family = "Chen",
@@ -40,8 +40,8 @@ Authors@R: c(
   person(family = "Malone Disturbance Ecology Lab",
          role = "cph")
          )
-Description: Collection of tools useful for workflows involving ERA5 and 
-    AmeriFlux data. Includes functions for downloading ERA5 data based on 
+Description: Collection of tools useful for workflows involving ERA5-Land and 
+    AmeriFlux data. Includes functions for downloading ERA5-Land data based on 
     AmeriFlux sites, formatting the downloaded data to match AmeriFlux 
     standards, merging both datasets together to ensure consistent 
     timestamps, and blending them to create a single gap-filled time series.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_land_sea_mask.R
 \name{get_land_sea_mask}
 \alias{get_land_sea_mask}
-\title{Get Land-Sea Mask from ERA5}
+\title{Get Land-Sea Mask from ERA5-Land}
 \usage{
 get_land_sea_mask(
   file_name = "lsm_1279l4_0.1x0.1.grb_v4_unpack.nc",
@@ -18,7 +18,7 @@ get_land_sea_mask(
 Path to the downloaded land-sea mask (invisibly).
 }
 \description{
-This function downloads the netCDF land-sea mask from ERA5. The mask is needed in order to run \code{download_ERA5()}. The mask can be found online here:
+This function downloads the netCDF land-sea mask from ERA5-Land. The mask is needed in order to run \code{download_ERA5()}. The mask can be found online here:
 https://confluence.ecmwf.int/pages/viewpage.action?pageId=140385202#ERA5Land:datadocumentation-parameterlistingParameterlistings.
 }
 \examples{

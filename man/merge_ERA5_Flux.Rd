@@ -2,7 +2,7 @@
 % Please edit documentation in R/03A_merge_ERA5_Flux.R
 \name{merge_ERA5_Flux}
 \alias{merge_ERA5_Flux}
-\title{Merge ERA5 and AmeriFlux Data}
+\title{Merge ERA5-Land and AmeriFlux Data}
 \usage{
 merge_ERA5_Flux(
   filename_FLUX = NULL,
@@ -14,11 +14,11 @@ merge_ERA5_Flux(
 \arguments{
 \item{filename_FLUX}{(character) The file path to a CSV file of AmeriFlux BASE data downloaded from https://ameriflux.lbl.gov/.}
 
-\item{filename_ERA5}{(character) The file path to a CSV file of meterological data downloaded from ERA5 https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels?tab=overview. Please note that the original ERA5 files are in .nc format. You may want to convert these files into CSV format using the function \code{netcdf_to_csv()}.}
+\item{filename_ERA5}{(character) The file path to a CSV file of meterological data downloaded from ERA5-Land https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels?tab=overview. Please note that the original ERA5-Land files are in .nc format. You may want to convert these files into CSV format using the function \code{netcdf_to_csv()}.}
 
-\item{varname_FLUX}{(character) A vector of variable names in AmeriFlux BASE data to be merged with ERA5 data.}
+\item{varname_FLUX}{(character) A vector of variable names in AmeriFlux BASE data to be merged with ERA5-Land data.}
 
-\item{varname_ERA5}{(character) A vector of variable names in ERA5 data to be merged with AmeriFlux BASE data.}
+\item{varname_ERA5}{(character) A vector of variable names in ERA5-Land data to be merged with AmeriFlux BASE data.}
 }
 \value{
 (data.frame) A data frame with the following characteristics:
@@ -29,10 +29,10 @@ merge_ERA5_Flux(
 }
 }
 \description{
-This function is used to merge data from AmeriFlux and data from ERA5, ensuring they both have the same start and end timestamps.
+This function is used to merge data from AmeriFlux and data from ERA5-Land, ensuring they both have the same start and end timestamps.
 }
 \note{
-Please note that the length of \code{varname_FLUX} must be the same as the length of \code{varname_ERA5}; at the same location, \code{varname_FLUX} and \code{varname_ERA5} should refer to the same variable despite the fact that AmeriFlux and ERA5 may use different names for the same variable. For example, for incoming shortwave radiation, ERA5 uses "ssrd", but AmeriFlux uses "SW_IN".
+Please note that the length of \code{varname_FLUX} must be the same as the length of \code{varname_ERA5}; at the same location, \code{varname_FLUX} and \code{varname_ERA5} should refer to the same variable despite the fact that AmeriFlux and ERA5-Land may use different names for the same variable. For example, for incoming shortwave radiation, ERA5-Land uses "ssrd", but AmeriFlux uses "SW_IN".
 }
 \examples{
 # Point to AmeriFlux CSV data
@@ -42,18 +42,18 @@ filename_FLUX <- system.file("extdata",
                              "AMF_US-GL2_BASE_HH_2-5.csv",
                              package = "ERA5Flux")
 
-# Point to ERA5 CSV data
+# Point to ERA5-Land CSV data
 filename_ERA5 <- system.file("extdata",
                              "example_processed_ERA5",
                              "US_GL2_2024_2025_ssrd.csv",
                              package = "ERA5Flux")
 
-# List AmeriFlux variable(s) to be merged with ERA5
+# List AmeriFlux variable(s) to be merged with ERA5-Land
 varname_FLUX <- c("SW_IN")
-# List ERA5 variable(s) to be merged with AmeriFlux
+# List ERA5-Land variable(s) to be merged with AmeriFlux
 varname_ERA5 <- c("ssrd")
 
-# Merge AmeriFlux and ERA5 data together
+# Merge AmeriFlux and ERA5-Land data together
 merged_data <- merge_ERA5_Flux(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
 head(merged_data)
 

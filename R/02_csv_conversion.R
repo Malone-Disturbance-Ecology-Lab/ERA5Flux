@@ -1,9 +1,9 @@
 #' @title NetCDF Reformatter
 #'
 #' @description
-#' Reformats ERA5 .nc data into a data frame.
+#' Reformats ERA5-Land .nc data into a data frame.
 #'
-#' @param nc_file_path (character) File path to ERA5 NetCDF file.
+#' @param nc_file_path (character) File path to ERA5-Land NetCDF file.
 #' @param site_lat (numeric) Latitude coordinate of site in decimal degrees.
 #' @param site_lon (numeric) Longitude coordinate of site in decimal degrees.
 #'
@@ -12,8 +12,8 @@
 #' - Datetime stamp column named "time".
 #' - UTC timezones converted to local time.
 #' - Time column formatted as yyyyMMddHHmm, time zone determined using coordinates.
-#' - Variables names from ERA5 dataset maintained.
-#' - ERA5 units converted to AmeriFlux units:
+#' - Variables names from ERA5-Land dataset maintained.
+#' - ERA5-Land units converted to AmeriFlux units:
 #'    - Solar radiation (ssrd) from Jm-2 to Wm-2.
 #'    - Air Temperature (t2m) from Kelvin to Celsius.
 #'    - Total precipitation (tp) from meters to millimeters.
@@ -134,7 +134,7 @@ netcdf_df_formatter <- function(nc_file_path = NULL, site_lat = NULL, site_lon =
 #' @title Export NetCDF to CSV
 #'
 #' @description
-#' Takes a directory of ERA5 .nc data as an argument and exports the data in CSV format. This function grabs each NetCDF file and runs `netcdf_df_formatter()` on it. It builds a list of variables across all data frames in the folder and joins data by time, with an option to filter to return only full years of data.
+#' Takes a directory of ERA5-Land .nc data as an argument and exports the data in CSV format. This function grabs each NetCDF file and runs `netcdf_df_formatter()` on it. It builds a list of variables across all data frames in the folder and joins data by time, with an option to filter to return only full years of data.
 #'
 #' @param site_folder (character) A folder for one site with NetCDF data. The NetCDF files can be of different variables and of different years so long as it is for one site.
 #'
@@ -153,7 +153,7 @@ netcdf_df_formatter <- function(nc_file_path = NULL, site_lat = NULL, site_lon =
 #' @export
 #'
 #' @examples
-#' # Point to a folder containing ERA5 .nc files
+#' # Point to a folder containing ERA5-Land .nc files
 #' site_folder <- system.file("extdata", "example_path_to_ERA5_download_folder", package = "ERA5Flux")
 #' # Create a temporary directory to export our output to
 #' output_filepath <- tempdir()

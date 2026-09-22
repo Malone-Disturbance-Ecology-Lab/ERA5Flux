@@ -7,7 +7,7 @@
 netcdf_df_formatter(nc_file_path = NULL, site_lat = NULL, site_lon = NULL)
 }
 \arguments{
-\item{nc_file_path}{(character) File path to ERA5 NetCDF file.}
+\item{nc_file_path}{(character) File path to ERA5-Land NetCDF file.}
 
 \item{site_lat}{(numeric) Latitude coordinate of site in decimal degrees.}
 
@@ -19,8 +19,8 @@ netcdf_df_formatter(nc_file_path = NULL, site_lat = NULL, site_lon = NULL)
 \item Datetime stamp column named "time".
 \item UTC timezones converted to local time.
 \item Time column formatted as yyyyMMddHHmm, time zone determined using coordinates.
-\item Variables names from ERA5 dataset maintained.
-\item ERA5 units converted to AmeriFlux units:
+\item Variables names from ERA5-Land dataset maintained.
+\item ERA5-Land units converted to AmeriFlux units:
 \itemize{
 \item Solar radiation (ssrd) from Jm-2 to Wm-2.
 \item Air Temperature (t2m) from Kelvin to Celsius.
@@ -29,7 +29,7 @@ netcdf_df_formatter(nc_file_path = NULL, site_lat = NULL, site_lon = NULL)
 }
 }
 \description{
-Reformats ERA5 .nc data into a data frame.
+Reformats ERA5-Land .nc data into a data frame.
 }
 \examples{
 # Point to a NetCDF file
