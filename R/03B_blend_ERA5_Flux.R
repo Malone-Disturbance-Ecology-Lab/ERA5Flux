@@ -14,7 +14,7 @@
 #' - "replace": Replace AmeriFlux variable with ERA5-Land variable.
 #' - "automatic": Checks for non-missing FLUX values. If >=50% present then uses "lm" approach. If <50% present then fallback to "replace".
 #'
-#' @note Please note that the length of `varname_FLUX` must be the same as the length of `varname_ERA5`; at the same location, `varname_FLUX` and `varname_ERA5` should refer to the same variable despite the fact that AmeriFlux and ERA5-Land may use different names for the same variable. For example, for incoming shortwave radiation, ERA5-Land uses "ssrd", but AmeriFlux uses "SW_IN". Additionally, if you have multiple variables like precipitation and soil temperature, you must specify a blending rule for each one.
+#' @note Please note that the length of `varname_FLUX` must be the same as the length of `varname_ERA5`; at the same location, `varname_FLUX` and `varname_ERA5` should refer to the same variable despite the fact that AmeriFlux and ERA5-Land may use different names for the same variable. For example, for incoming shortwave radiation, ERA5-Land uses "ssrd", but AmeriFlux uses "SW_IN". Additionally, if you have multiple variables like precipitation and air temperature, you must specify a blending rule for each one.
 #'
 #' @export
 #'
