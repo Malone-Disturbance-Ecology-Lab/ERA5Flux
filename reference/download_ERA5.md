@@ -1,8 +1,8 @@
-# Download ERA5 Data
+# Download ERA5-Land Data
 
-This function uses the `ecmwfr` package to download ERA5 data for each
-site specified in the AmeriFlux site metadata data frame. The temporal
-and geographical coverage of the downloaded data will match the
+This function uses the `ecmwfr` package to download ERA5-Land data for
+each site specified in the AmeriFlux site metadata data frame. The
+temporal and geographical coverage of the downloaded data will match the
 AmeriFlux site metadata data frame.
 
 ## Usage
@@ -30,13 +30,14 @@ download_ERA5(
 
 - mask:
 
-  (character) File path to the ERA5 land-sea mask. Get the mask with
+  (character) File path to the ERA5-Land land-sea mask. Get the mask
+  with
   [`get_land_sea_mask()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/get_land_sea_mask.md).
 
 - download_path:
 
-  (character) Path to the folder where the ERA5 data will get downloaded
-  to.
+  (character) Path to the folder where the ERA5-Land data will get
+  downloaded to.
 
 ## Value
 
@@ -68,7 +69,7 @@ my_variables <- c("2m_temperature", "total_precipitation", "surface_solar_radiat
 site_metadata <- get_site_metadata(folder = "my_own_path_to_AmeriFlux_folder",
                                    selected_variables = my_variables)
 
-# Download the corresponding ERA5 data
+# Download the corresponding ERA5-Land data
 download_ERA5(my_key = "my_own_ECMWF_key",
               site_metadata = site_metadata,
               mask = "my_own_path_to_ERA5_land_sea_mask",

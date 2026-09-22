@@ -1,6 +1,6 @@
 # NetCDF Reformatter
 
-Reformats ERA5 .nc data into a data frame.
+Reformats ERA5-Land .nc data into a data frame.
 
 ## Usage
 
@@ -12,7 +12,7 @@ netcdf_df_formatter(nc_file_path = NULL, site_lat = NULL, site_lon = NULL)
 
 - nc_file_path:
 
-  (character) File path to ERA5 NetCDF file.
+  (character) File path to ERA5-Land NetCDF file.
 
 - site_lat:
 
@@ -33,9 +33,9 @@ netcdf_df_formatter(nc_file_path = NULL, site_lat = NULL, site_lon = NULL)
 - Time column formatted as yyyyMMddHHmm, time zone determined using
   coordinates.
 
-- Variables names from ERA5 dataset maintained.
+- Variables names from ERA5-Land dataset maintained.
 
-- ERA5 units converted to AmeriFlux units:
+- ERA5-Land units converted to AmeriFlux units:
 
   - Solar radiation (ssrd) from Jm-2 to Wm-2.
 

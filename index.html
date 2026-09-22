@@ -5,14 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Improve the Utility of ERA5 Data at AmeriFlux Site Locations • ERA5Flux</title>
+<title>Improve the Utility of ERA5-Land Data at AmeriFlux Site Locations • ERA5Flux</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Improve the Utility of ERA5 Data at AmeriFlux Site Locations">
-<meta name="description" content="Collection of tools useful for workflows involving ERA5 and AmeriFlux data. Includes functions for downloading ERA5 data based on AmeriFlux sites, formatting the downloaded data to match AmeriFlux standards, merging both datasets together to ensure consistent timestamps, and blending them to create a single gap-filled time series.">
-<meta property="og:description" content="Collection of tools useful for workflows involving ERA5 and AmeriFlux data. Includes functions for downloading ERA5 data based on AmeriFlux sites, formatting the downloaded data to match AmeriFlux standards, merging both datasets together to ensure consistent timestamps, and blending them to create a single gap-filled time series.">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Improve the Utility of ERA5-Land Data at AmeriFlux Site Locations">
+<meta name="description" content="Collection of tools useful for workflows involving ERA5-Land and AmeriFlux data. Includes functions for downloading ERA5-Land data based on AmeriFlux sites, formatting the downloaded data to match AmeriFlux standards, merging both datasets together to ensure consistent timestamps, and blending them to create a single gap-filled time series. For more details, visit the ERA5-Land dataset page at &lt;https://doi.org/10.24381/cds.e2161bac&gt; and the AmeriFlux homepage at &lt;https://ameriflux.lbl.gov/&gt;.">
+<meta property="og:description" content="Collection of tools useful for workflows involving ERA5-Land and AmeriFlux data. Includes functions for downloading ERA5-Land data based on AmeriFlux sites, formatting the downloaded data to match AmeriFlux standards, merging both datasets together to ensure consistent timestamps, and blending them to create a single gap-filled time series. For more details, visit the ERA5-Land dataset page at &lt;https://doi.org/10.24381/cds.e2161bac&gt; and the AmeriFlux homepage at &lt;https://ameriflux.lbl.gov/&gt;.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -48,11 +48,11 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="era5flux-improve-the-utility-of-era5-data-at-ameriflux-site-locations">ERA5Flux: Improve the Utility of ERA5 Data at AmeriFlux Site Locations<a class="anchor" aria-label="anchor" href="#era5flux-improve-the-utility-of-era5-data-at-ameriflux-site-locations"></a>
+<div class="page-header"><h1 id="era5flux-improve-the-utility-of-era5-land-data-at-ameriflux-site-locations">ERA5Flux: Improve the Utility of ERA5-Land Data at AmeriFlux Site Locations<a class="anchor" aria-label="anchor" href="#era5flux-improve-the-utility-of-era5-land-data-at-ameriflux-site-locations"></a>
 </h1></div>
 <!-- badges: start -->
 <!-- badges: end -->
-<p>The primary objective of this package is to improve the utility of <a href="https://doi.org/10.24381/cds.e2161bac" class="external-link">ERA5</a> data at <a href="https://ameriflux.lbl.gov/" class="external-link">AmeriFlux</a> site locations. This package comprises of a collection of tools useful for workflows involving ERA5 and AmeriFlux data. It includes functions for downloading ERA5 data based on AmeriFlux sites, formatting the downloaded data to match AmeriFlux standards, merging both datasets together to ensure consistent timestamps, and blending them to create a single gap-filled time series.</p>
+<p>The primary objective of this package is to improve the utility of <a href="https://doi.org/10.24381/cds.e2161bac" class="external-link">ERA5-Land</a> data at <a href="https://ameriflux.lbl.gov/" class="external-link">AmeriFlux</a> site locations. This package comprises of a collection of tools useful for workflows involving ERA5-Land and AmeriFlux data. It includes functions for downloading ERA5-Land data based on AmeriFlux sites, formatting the downloaded data to match AmeriFlux standards, merging both datasets together to ensure consistent timestamps, and blending them to create a single gap-filled time series.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -73,13 +73,13 @@
 <ul>
 <li><p><code><a href="reference/utc_offset.html">utc_offset()</a></code>: produces an hour offset number converting local to UTC, where offset is the difference between UTC and local time without considering Daylight Saving Time</p></li>
 <li><p><code><a href="reference/get_site_metadata.html">get_site_metadata()</a></code>: builds an AmeriFlux site metadata data frame</p></li>
-<li><p><code><a href="reference/get_land_sea_mask.html">get_land_sea_mask()</a></code>: downloads the netCDF land-sea mask from ERA5</p></li>
+<li><p><code><a href="reference/get_land_sea_mask.html">get_land_sea_mask()</a></code>: downloads the netCDF land-sea mask from ERA5-Land</p></li>
 <li><p><code><a href="reference/get_land_proportion.html">get_land_proportion()</a></code>: returns land proportion given a latitude and longitude</p></li>
-<li><p><code><a href="reference/download_ERA5.html">download_ERA5()</a></code>: downloads ERA5 data for each site specified in the AmeriFlux site metadata data frame</p></li>
-<li><p><code><a href="reference/netcdf_df_formatter.html">netcdf_df_formatter()</a></code>: reformats ERA5 .nc data into a data frame</p></li>
-<li><p><code><a href="reference/netcdf_to_csv.html">netcdf_to_csv()</a></code>: takes a directory of ERA5 .nc data as an argument and exports the data in CSV format</p></li>
-<li><p><code><a href="reference/merge_ERA5_Flux.html">merge_ERA5_Flux()</a></code>: merges data from AmeriFlux and data from ERA5, ensuring they both have the same start and end timestamps</p></li>
-<li><p><code><a href="reference/blend_ERA5_Flux.html">blend_ERA5_Flux()</a></code>: blends data from AmeriFlux and data from ERA5, ensuring they both have the same start and end timestamps</p></li>
+<li><p><code><a href="reference/download_ERA5.html">download_ERA5()</a></code>: downloads ERA5-Land data for each site specified in the AmeriFlux site metadata data frame</p></li>
+<li><p><code><a href="reference/netcdf_df_formatter.html">netcdf_df_formatter()</a></code>: reformats ERA5-Land .nc data into a data frame</p></li>
+<li><p><code><a href="reference/netcdf_to_csv.html">netcdf_to_csv()</a></code>: takes a directory of ERA5-Land .nc data as an argument and exports the data in CSV format</p></li>
+<li><p><code><a href="reference/merge_ERA5_Flux.html">merge_ERA5_Flux()</a></code>: merges data from AmeriFlux and data from ERA5-Land, ensuring they both have the same start and end timestamps</p></li>
+<li><p><code><a href="reference/blend_ERA5_Flux.html">blend_ERA5_Flux()</a></code>: blends data from AmeriFlux and data from ERA5-Land, ensuring they both have the same start and end timestamps</p></li>
 </ul>
 </div>
 <div class="section level3">

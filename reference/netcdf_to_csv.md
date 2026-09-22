@@ -1,7 +1,7 @@
 # Export NetCDF to CSV
 
-Takes a directory of ERA5 .nc data as an argument and exports the data
-in CSV format. This function grabs each NetCDF file and runs
+Takes a directory of ERA5-Land .nc data as an argument and exports the
+data in CSV format. This function grabs each NetCDF file and runs
 [`netcdf_df_formatter()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/netcdf_df_formatter.md)
 on it. It builds a list of variables across all data frames in the
 folder and joins data by time, with an option to filter to return only
@@ -62,7 +62,7 @@ hour of a year (e.g., 2020-12-31 23:00) if full_year == TRUE.
 ## Examples
 
 ``` r
-# Point to a folder containing ERA5 .nc files
+# Point to a folder containing ERA5-Land .nc files
 site_folder <- system.file("extdata", "example_path_to_ERA5_download_folder", package = "ERA5Flux")
 # Create a temporary directory to export our output to
 output_filepath <- tempdir()

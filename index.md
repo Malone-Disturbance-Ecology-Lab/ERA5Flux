@@ -1,13 +1,14 @@
-# ERA5Flux: Improve the Utility of ERA5 Data at AmeriFlux Site Locations
+# ERA5Flux: Improve the Utility of ERA5-Land Data at AmeriFlux Site Locations
 
 The primary objective of this package is to improve the utility of
-[ERA5](https://doi.org/10.24381/cds.e2161bac) data at
+[ERA5-Land](https://doi.org/10.24381/cds.e2161bac) data at
 [AmeriFlux](https://ameriflux.lbl.gov/) site locations. This package
-comprises of a collection of tools useful for workflows involving ERA5
-and AmeriFlux data. It includes functions for downloading ERA5 data
-based on AmeriFlux sites, formatting the downloaded data to match
-AmeriFlux standards, merging both datasets together to ensure consistent
-timestamps, and blending them to create a single gap-filled time series.
+comprises of a collection of tools useful for workflows involving
+ERA5-Land and AmeriFlux data. It includes functions for downloading
+ERA5-Land data based on AmeriFlux sites, formatting the downloaded data
+to match AmeriFlux standards, merging both datasets together to ensure
+consistent timestamps, and blending them to create a single gap-filled
+time series.
 
 ## Installation
 
@@ -40,29 +41,29 @@ install.packages("ERA5Flux")
   builds an AmeriFlux site metadata data frame
 
 - [`get_land_sea_mask()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/get_land_sea_mask.md):
-  downloads the netCDF land-sea mask from ERA5
+  downloads the netCDF land-sea mask from ERA5-Land
 
 - [`get_land_proportion()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/get_land_proportion.md):
   returns land proportion given a latitude and longitude
 
 - [`download_ERA5()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/download_ERA5.md):
-  downloads ERA5 data for each site specified in the AmeriFlux site
+  downloads ERA5-Land data for each site specified in the AmeriFlux site
   metadata data frame
 
 - [`netcdf_df_formatter()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/netcdf_df_formatter.md):
-  reformats ERA5 .nc data into a data frame
+  reformats ERA5-Land .nc data into a data frame
 
 - [`netcdf_to_csv()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/netcdf_to_csv.md):
-  takes a directory of ERA5 .nc data as an argument and exports the data
-  in CSV format
+  takes a directory of ERA5-Land .nc data as an argument and exports the
+  data in CSV format
 
 - [`merge_ERA5_Flux()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/merge_ERA5_Flux.md):
-  merges data from AmeriFlux and data from ERA5, ensuring they both have
-  the same start and end timestamps
+  merges data from AmeriFlux and data from ERA5-Land, ensuring they both
+  have the same start and end timestamps
 
 - [`blend_ERA5_Flux()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/blend_ERA5_Flux.md):
-  blends data from AmeriFlux and data from ERA5, ensuring they both have
-  the same start and end timestamps
+  blends data from AmeriFlux and data from ERA5-Land, ensuring they both
+  have the same start and end timestamps
 
 ### Other Functions
 

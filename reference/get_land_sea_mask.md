@@ -1,7 +1,7 @@
-# Get Land-Sea Mask from ERA5
+# Get Land-Sea Mask from ERA5-Land
 
-This function downloads the netCDF land-sea mask from ERA5. The mask is
-needed in order to run
+This function downloads the netCDF land-sea mask from ERA5-Land. The
+mask is needed in order to run
 [`download_ERA5()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/download_ERA5.md).
 The mask can be found online here:
 https://confluence.ecmwf.int/pages/viewpage.action?pageId=140385202#ERA5Land:datadocumentation-parameterlistingParameterlistings.

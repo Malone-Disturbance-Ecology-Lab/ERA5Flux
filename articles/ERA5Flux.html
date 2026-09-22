@@ -63,15 +63,15 @@
 <div class="section level2">
 <h2 id="intro">Intro<a class="anchor" aria-label="anchor" href="#intro"></a>
 </h2>
-<p>This package was designed to make it easier to work with both <a href="https://doi.org/10.24381/cds.e2161bac" class="external-link">ERA5</a> and <a href="https://ameriflux.lbl.gov/" class="external-link">AmeriFlux</a> data, hence the name
+<p>This package was designed to make it easier to work with both <a href="https://doi.org/10.24381/cds.e2161bac" class="external-link">ERA5-Land</a> and <a href="https://ameriflux.lbl.gov/" class="external-link">AmeriFlux</a> data, hence the name
 “ERA5Flux”. There may be instances where the AmeriFlux data contain gaps
-that you want to fill with ERA5 data to create a single time series for
-your analysis.</p>
+that you want to fill with ERA5-Land data to create a single time series
+for your analysis.</p>
 <p>Please note that this package only merges and gap fills for solar
 radiation (long name: “surface_solar_radiation_downwards” / short name:
 “ssrd”), air temperature (long name: “2m_temperature” / short name:
 “t2m”), and precipitation (long name: “total_precipitation” / short
-name: “tp”). These variables are defined in the <a href="https://confluence.ecmwf.int/display/CKB/ERA5%3A+data+documentation" class="external-link">ERA5
+name: “tp”). These variables are defined in the <a href="https://confluence.ecmwf.int/spaces/CKB/pages/140385202/ERA5-Land+data+documentation" class="external-link">ERA5-Land
 documentation here</a>.</p>
 <p>Here is a demonstration of the workflow needed to achieve that
 result.</p>
@@ -80,8 +80,8 @@ result.</p>
 <h2 id="workflow">Workflow<a class="anchor" aria-label="anchor" href="#workflow"></a>
 </h2>
 <div class="section level3">
-<h3 id="step-1-get-ameriflux-data-ameriflux-site-metadata-and-era5-data">Step 1: Get AmeriFlux data, AmeriFlux site metadata, and ERA5
-Data<a class="anchor" aria-label="anchor" href="#step-1-get-ameriflux-data-ameriflux-site-metadata-and-era5-data"></a>
+<h3 id="step-1-get-ameriflux-data-ameriflux-site-metadata-and-era5-land-data">Step 1: Get AmeriFlux data, AmeriFlux site metadata, and ERA5-Land
+Data<a class="anchor" aria-label="anchor" href="#step-1-get-ameriflux-data-ameriflux-site-metadata-and-era5-land-data"></a>
 </h3>
 <p>First we will need to download AmeriFlux data. Navigate to <a href="https://ameriflux.lbl.gov/" class="external-link">AmeriFlux</a> and login to your
 account. Once you’re logged in, you can download data at the <a href="https://ameriflux.lbl.gov/data/download-data/" class="external-link">Download
@@ -126,11 +126,11 @@ you arrange your files like so:</p>
     └── ...</code></pre>
 <p>After arranging the files, you can now generate the AmeriFlux site
 metadata.</p>
-<p>Specify the name(s) of the ERA5 variable(s) you would like to get.
-Since we already got all the AmeriFlux variables, we need the
-corresponding names to the same variables in ERA5 that we’re interested
-in. In this example, we specified
-<code>surface_solar_radiation_downwards</code> as the ERA5 variable
+<p>Specify the name(s) of the ERA5-Land variable(s) you would like to
+get. Since we already got all the AmeriFlux variables, we need the
+corresponding names to the same variables in ERA5-Land that we’re
+interested in. In this example, we specified
+<code>surface_solar_radiation_downwards</code> as the ERA5-Land variable
 we’re interested in.</p>
 <p>For the purposes of this vignette, the file path
 <code>system.file("extdata", "example_AmeriFlux", package = "ERA5Flux")</code>
@@ -144,7 +144,7 @@ what this part may look like.</p>
 <code class="sourceCode R"><span><span class="co"># Load the package</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Malone-Disturbance-Ecology-Lab/ERA5Flux" class="external-link">ERA5Flux</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Specify the ERA5 variables you want to get</span></span>
+<span><span class="co"># Specify the ERA5-Land variables you want to get</span></span>
 <span><span class="va">my_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"surface_solar_radiation_downwards"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Point to the folder containing the unzipped site folders and requested files manifest</span></span>
@@ -173,9 +173,9 @@ what this part may look like.</p>
 <p>The metadata data frame will have 5 columns: <code>site_codes</code>,
 <code>lat</code>, <code>lon</code>, <code>startdate</code>,
 <code>enddate</code>, and <code>variables</code>. We will need this
-metadata in order to build our ERA5 data requests.</p>
+metadata in order to build our ERA5-Land data requests.</p>
 <p>After you generate the AmeriFlux site metadata data frame, you can
-now focus on getting the corresponding ERA5 data.</p>
+now focus on getting the corresponding ERA5-Land data.</p>
 <p><code><a href="../reference/download_ERA5.html">download_ERA5()</a></code> requires a land-sea mask so you must
 download that first with <code><a href="../reference/get_land_sea_mask.html">get_land_sea_mask()</a></code>. This function
 will download the land-sea mask from <a href="https://confluence.ecmwf.int/pages/viewpage.action?pageId=140385202#ERA5Land:datadocumentation-parameterlistingParameterlistings" class="external-link">here</a>.</p>
@@ -196,8 +196,8 @@ down to the “API key” section, and copying the API key.</p>
 <code>my_key</code> argument. Provide the AmeriFlux site metadata in the
 <code>site_metadata</code> argument, and set the file path to your
 land-sea mask as well. Finally, specify a folder to where you want to
-download your ERA5 data to. The folder should be an existing folder on
-your own machine.</p>
+download your ERA5-Land data to. The folder should be an existing folder
+on your own machine.</p>
 <p>Please note that the download may take a while.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Paste your own API key </span></span>
@@ -206,12 +206,12 @@ your own machine.</p>
 <span><span class="co"># Set the path to your land-sea mask</span></span>
 <span><span class="va">my_path_to_mask</span> <span class="op">&lt;-</span> <span class="st">"lsm_1279l4_0.1x0.1.grb_v4_unpack.nc"</span></span>
 <span></span>
-<span><span class="co"># Point to the folder where you want the ERA5 data to download to</span></span>
+<span><span class="co"># Point to the folder where you want the ERA5-Land data to download to</span></span>
 <span><span class="co"># For the purposes of this demo, some example placeholder text is shown</span></span>
 <span><span class="co"># Please point to your own existing folder for your own workflow</span></span>
 <span><span class="va">my_ERA5_download_path</span> <span class="op">&lt;-</span> <span class="st">"my_own_path_to_ERA5_download_folder"</span></span>
 <span></span>
-<span><span class="co"># Download the ERA5 data</span></span>
+<span><span class="co"># Download the ERA5-Land data</span></span>
 <span><span class="fu"><a href="../reference/download_ERA5.html">download_ERA5</a></span><span class="op">(</span>my_key <span class="op">=</span> <span class="va">my_key</span>,</span>
 <span>              site_metadata <span class="op">=</span> <span class="va">my_site_metadata</span>,</span>
 <span>              mask <span class="op">=</span> <span class="va">my_path_to_mask</span>,</span>
@@ -226,16 +226,17 @@ its respective site.</p>
 <div class="section level3">
 <h3 id="step-2-data-processing">Step 2: Data Processing<a class="anchor" aria-label="anchor" href="#step-2-data-processing"></a>
 </h3>
-<p>For this vignette, an example folder containing downloaded ERA5 data
-will be used
+<p>For this vignette, an example folder containing downloaded ERA5-Land
+data will be used
 (<code>system.file("extdata", "example_path_to_ERA5_download_folder", package = "ERA5Flux")</code>).
-Please remember to point to your own folder of downloaded ERA5 data.</p>
-<p>After downloading the ERA5 .nc files, we convert them into CSV files
-formatted to match AmeriFlux standards, enabling easy merging with
+Please remember to point to your own folder of downloaded ERA5-Land
+data.</p>
+<p>After downloading the ERA5-Land .nc files, we convert them into CSV
+files formatted to match AmeriFlux standards, enabling easy merging with
 existing datasets. This conversion is handled by
-<code><a href="../reference/netcdf_df_formatter.html">netcdf_df_formatter()</a></code>, which adjusts ERA5 timestamps from
-UTC to local time (yyyyMMddHHmm) based on each site’s coordinates and
-converts solar radiation (ssrd), air temperature (t2m), and total
+<code><a href="../reference/netcdf_df_formatter.html">netcdf_df_formatter()</a></code>, which adjusts ERA5-Land timestamps
+from UTC to local time (yyyyMMddHHmm) based on each site’s coordinates
+and converts solar radiation (ssrd), air temperature (t2m), and total
 precipitation (tp) to AmeriFlux units.</p>
 <p>The <code><a href="../reference/netcdf_to_csv.html">netcdf_to_csv()</a></code> function then calls
 <code><a href="../reference/netcdf_df_formatter.html">netcdf_df_formatter()</a></code> for each site folder, merging all
@@ -245,7 +246,7 @@ will only return full years that begin with the first hour of the year
 and end with the last. For the purposes of this example, set
 <code>full_year = FALSE</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Point to a folder containing ERA5 .nc files</span></span>
+<code class="sourceCode R"><span><span class="co"># Point to a folder containing ERA5-Land .nc files</span></span>
 <span><span class="co"># For the purposes of this demo, an example data folder will be used</span></span>
 <span><span class="co"># Please point to your own existing folder for your own workflow</span></span>
 <span><span class="va">site_folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"example_path_to_ERA5_download_folder"</span>, package <span class="op">=</span> <span class="st">"ERA5Flux"</span><span class="op">)</span></span>
@@ -278,23 +279,23 @@ and end with the last. For the purposes of this example, set
 <div class="section level3">
 <h3 id="step-3-merging-and-blending-ameriflux-with-era5-data">Step 3: Merging and Blending AmeriFlux with ERA5 Data<a class="anchor" aria-label="anchor" href="#step-3-merging-and-blending-ameriflux-with-era5-data"></a>
 </h3>
-<p>After you processed the ERA5 data, you can merge it with the
+<p>After you processed the ERA5-Land data, you can merge it with the
 AmeriFlux data. Remember to use your own file paths to your AmeriFlux
-and ERA5 data. Example data is used in this vignette.</p>
+and ERA5-Land data. Example data is used in this vignette.</p>
 <p>The <code><a href="../reference/merge_ERA5_Flux.html">merge_ERA5_Flux()</a></code> function synchronizes AmeriFlux
-tower observations with ERA5 reanalysis data, ensuring both datasets
-share consistent timestamps and comparable variable names. It first
-reads AmeriFlux BASE data, replaces missing values with <code>NA</code>,
-and imports the processed ERA5 CSV file generated from
-<code><a href="../reference/netcdf_to_csv.html">netcdf_to_csv()</a></code>. Because ERA5 data are typically hourly and
-AmeriFlux data are often half-hourly, the function linearly interpolates
-ERA5 variables to match the AmeriFlux time step. It then merges the
-datasets based on the aligned time column, adding corresponding
-AmeriFlux and ERA5 variables side by side. The resulting data frame
-provides a harmonized, site-specific time series that researchers can
-use to compare reanalysis and in situ flux measurements, fill short data
-gaps, and prepare blended climate–flux inputs for ecosystem or
-hydrological modeling.</p>
+tower observations with ERA5-Land reanalysis data, ensuring both
+datasets share consistent timestamps and comparable variable names. It
+first reads AmeriFlux BASE data, replaces missing values with
+<code>NA</code>, and imports the processed ERA5-Land CSV file generated
+from <code><a href="../reference/netcdf_to_csv.html">netcdf_to_csv()</a></code>. Because ERA5-Land data are typically
+hourly and AmeriFlux data are often half-hourly, the function linearly
+interpolates ERA5-Land variables to match the AmeriFlux time step. It
+then merges the datasets based on the aligned time column, adding
+corresponding AmeriFlux and ERA5-Land variables side by side. The
+resulting data frame provides a harmonized, site-specific time series
+that researchers can use to compare reanalysis and in situ flux
+measurements, fill short data gaps, and prepare blended climate–flux
+inputs for ecosystem or hydrological modeling.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Point to AmeriFlux CSV data</span></span>
 <span><span class="co"># For the purposes of this demo, an example data file will be used</span></span>
@@ -305,14 +306,14 @@ hydrological modeling.</p>
 <span>                              <span class="st">"AMF_US-GL2_BASE_HH_2-5.csv"</span>, </span>
 <span>                              package <span class="op">=</span> <span class="st">"ERA5Flux"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Point to ERA5 CSV data</span></span>
+<span><span class="co"># Point to ERA5-Land CSV data</span></span>
 <span><span class="co"># For the purposes of this demo, an example data file will be used</span></span>
 <span><span class="co"># Please point to your own existing file for your own workflow</span></span>
 <span><span class="va">era5_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">output_filepath</span>, pattern <span class="op">=</span> <span class="st">"US_GL2"</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># List AmeriFlux variable(s) to be merged </span></span>
 <span><span class="va">ameriflux_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SW_IN"</span><span class="op">)</span></span>
-<span><span class="co"># List ERA5 variable(s) to be merged </span></span>
+<span><span class="co"># List ERA5-Land variable(s) to be merged </span></span>
 <span><span class="va">era5_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ssrd"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Merge them together</span></span>
@@ -344,23 +345,24 @@ hydrological modeling.</p>
 <span><span class="co">#&gt; 3180 2025-03-08 00:30:00    0.000     NA</span></span>
 <span><span class="co">#&gt; 3181 2025-03-08 01:00:00    0.000     NA</span></span>
 <span><span class="co">#&gt; 3182 2025-03-08 01:30:00    0.000     NA</span></span></code></pre></div>
-<p>As shown above, the merged data contains ERA5 data in
+<p>As shown above, the merged data contains ERA5-Land data in
 <code>ssrd</code>, as well as AmeriFlux data in <code>SW_IN</code>.</p>
 <p>Finally, you can blend the merged data.</p>
 <p>The <code><a href="../reference/blend_ERA5_Flux.html">blend_ERA5_Flux()</a></code> function combines AmeriFlux and
-ERA5 datasets into a single, gap-filled time series by applying flexible
-blending rules that determine how missing or incomplete AmeriFlux data
-should be replaced or adjusted using ERA5 values. Building on the merged
-output from <code><a href="../reference/merge_ERA5_Flux.html">merge_ERA5_Flux()</a></code>, this function allows users
-to select among four blending approaches: simple replacement, linear
-regression with or without an intercept, or an automatic rule that
-adapts based on data completeness. For example, when more than half of
-the AmeriFlux values are available, the function uses a regression-based
-correction to preserve site-specific patterns while filling gaps;
-otherwise, it substitutes ERA5 data directly. The blended output adds
-new columns (e.g. <code>SW_IN_f</code>) that contain the harmonized
-variables, producing a continuous, high-quality dataset suitable for
-modeling, data assimilation, or long-term flux-climate analysis.</p>
+ERA5-Land datasets into a single, gap-filled time series by applying
+flexible blending rules that determine how missing or incomplete
+AmeriFlux data should be replaced or adjusted using ERA5-Land values.
+Building on the merged output from <code><a href="../reference/merge_ERA5_Flux.html">merge_ERA5_Flux()</a></code>, this
+function allows users to select among four blending approaches: simple
+replacement, linear regression with or without an intercept, or an
+automatic rule that adapts based on data completeness. For example, when
+more than half of the AmeriFlux values are available, the function uses
+a regression-based correction to preserve site-specific patterns while
+filling gaps; otherwise, it substitutes ERA5-Land data directly. The
+blended output adds new columns (e.g. <code>SW_IN_f</code>) that contain
+the harmonized variables, producing a continuous, high-quality dataset
+suitable for modeling, data assimilation, or long-term flux-climate
+analysis.</p>
 <p>The final result will look something like this:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Specify the blending rule(s)</span></span>
@@ -398,8 +400,8 @@ modeling, data assimilation, or long-term flux-climate analysis.</p>
 <span><span class="co">#&gt; 3181 2025-03-08 01:00:00    0.000     NA    0.000</span></span>
 <span><span class="co">#&gt; 3182 2025-03-08 01:30:00    0.000     NA    0.000</span></span></code></pre></div>
 <p>In this example, the simple replacement blending rule was used, so a
-new <code>SW_IN_f</code> column was created with values from the ERA5
-column, <code>ssrd</code>.</p>
+new <code>SW_IN_f</code> column was created with values from the
+ERA5-Land column, <code>ssrd</code>.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

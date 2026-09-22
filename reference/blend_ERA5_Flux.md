@@ -1,8 +1,8 @@
-# Blend ERA5 and AmeriFlux Data
+# Blend ERA5-Land and AmeriFlux Data
 
-This function is used to blend data from AmeriFlux and data from ERA5,
-ensuring they both have the same start and end timestamps. Please first
-make sure to run the merge function
+This function is used to blend data from AmeriFlux and data from
+ERA5-Land, ensuring they both have the same start and end timestamps.
+Please first make sure to run the merge function
 ([`merge_ERA5_Flux()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/merge_ERA5_Flux.md)),
 because output of merge function will be used as input of this blending
 function.
@@ -25,23 +25,24 @@ blend_ERA5_Flux(
   (data.frame) A data frame that has a datetime stamp column named
   "time" with the format: "%Y-%m-%d %H:%M:%S". The time step of the
   "time" column is the same with that of AmeriFlux file. It also
-  includes the columns of AmeriFlux and ERA5 data that were merged
+  includes the columns of AmeriFlux and ERA5-Land data that were merged
   together.
 
 - varname_FLUX:
 
   (character) A vector of variable names in AmeriFlux BASE data to be
-  blended with ERA5 data.
+  blended with ERA5-Land data.
 
 - varname_ERA5:
 
-  (character) A vector of variable names in ERA5 data to be blended with
-  AmeriFlux BASE data.
+  (character) A vector of variable names in ERA5-Land data to be blended
+  with AmeriFlux BASE data.
 
 - blending_rule:
 
   (character) A vector of blending rules to use. There are four types of
-  blending rules that can be used to blend AmeriFlux and ERA5 variables:
+  blending rules that can be used to blend AmeriFlux and ERA5-Land
+  variables:
 
   - "lm": Linear regression with slope. Fits a linear model with slope,
     FLUX ~ ERA5, then only fills missing values in FLUX with predicted
@@ -51,7 +52,7 @@ blend_ERA5_Flux(
     model without slope, FLUX ~ ERA5, then only fills missing values in
     FLUX with predicted values from ERA5.
 
-  - "replace": Replace AmeriFlux variable with ERA5 variable.
+  - "replace": Replace AmeriFlux variable with ERA5-Land variable.
 
   - "automatic": Checks for non-missing FLUX values. If \>=50% present
     then uses "lm" approach. If \<50% present then fallback to
@@ -76,11 +77,11 @@ blend_ERA5_Flux(
 Please note that the length of `varname_FLUX` must be the same as the
 length of `varname_ERA5`; at the same location, `varname_FLUX` and
 `varname_ERA5` should refer to the same variable despite the fact that
-AmeriFlux and ERA5 may use different names for the same variable. For
-example, for incoming shortwave radiation, ERA5 uses "ssrd", but
-AmeriFlux uses "SW_IN". Additionally, if you have multiple variables
-like precipitation and soil temperature, you must specify a blending
-rule for each one.
+AmeriFlux and ERA5-Land may use different names for the same variable.
+For example, for incoming shortwave radiation, ERA5-Land uses "ssrd",
+but AmeriFlux uses "SW_IN". Additionally, if you have multiple variables
+like precipitation and air temperature, you must specify a blending rule
+for each one.
 
 ## Author
 
@@ -96,19 +97,19 @@ filename_FLUX <- system.file("extdata",
                              "AMF_US-GL2_BASE_HH_2-5.csv",
                              package = "ERA5Flux")
 
-# Point to ERA5 CSV data
+# Point to ERA5-Land CSV data
 filename_ERA5 <- system.file("extdata",
                              "example_processed_ERA5",
                              "US_GL2_2024_2025_ssrd.csv",
                              package = "ERA5Flux")
 
-# List AmeriFlux variable(s) to be merged with ERA5
+# List AmeriFlux variable(s) to be merged with ERA5-Land
 varname_FLUX <- c("SW_IN")
-# List ERA5 variable(s) to be merged with AmeriFlux
+# List ERA5-Land variable(s) to be merged with AmeriFlux
 varname_ERA5 <- c("ssrd")
 
 # Run the merge function first, because its output will be used as input for this blending function
-# Merge AmeriFlux and ERA5 data together
+# Merge AmeriFlux and ERA5-Land data together
 merged_data <- merge_ERA5_Flux(filename_FLUX, filename_ERA5, varname_FLUX, varname_ERA5)
 head(merged_data)
 #>                  time   ssrd SW_IN
@@ -122,7 +123,7 @@ head(merged_data)
 # Specify the blending rule(s)
 # If you have multiple variables, specify a rule for each variable
 blending_rule <- c("replace")
-# Blend AmeriFlux and ERA5 data together
+# Blend AmeriFlux and ERA5-Land data together
 merg_blend <- blend_ERA5_Flux(merged_data, varname_FLUX, varname_ERA5, blending_rule)
 #> Processing: SW_IN using rule: replace
 head(merg_blend)

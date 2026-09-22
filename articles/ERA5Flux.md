@@ -3,24 +3,24 @@
 ## Intro
 
 This package was designed to make it easier to work with both
-[ERA5](https://doi.org/10.24381/cds.e2161bac) and
+[ERA5-Land](https://doi.org/10.24381/cds.e2161bac) and
 [AmeriFlux](https://ameriflux.lbl.gov/) data, hence the name “ERA5Flux”.
 There may be instances where the AmeriFlux data contain gaps that you
-want to fill with ERA5 data to create a single time series for your
+want to fill with ERA5-Land data to create a single time series for your
 analysis.
 
 Please note that this package only merges and gap fills for solar
 radiation (long name: “surface_solar_radiation_downwards” / short name:
 “ssrd”), air temperature (long name: “2m_temperature” / short name:
 “t2m”), and precipitation (long name: “total_precipitation” / short
-name: “tp”). These variables are defined in the [ERA5 documentation
-here](https://confluence.ecmwf.int/display/CKB/ERA5%3A+data+documentation).
+name: “tp”). These variables are defined in the [ERA5-Land documentation
+here](https://confluence.ecmwf.int/spaces/CKB/pages/140385202/ERA5-Land+data+documentation).
 
 Here is a demonstration of the workflow needed to achieve that result.
 
 ## Workflow
 
-### Step 1: Get AmeriFlux data, AmeriFlux site metadata, and ERA5 Data
+### Step 1: Get AmeriFlux data, AmeriFlux site metadata, and ERA5-Land Data
 
 First we will need to download AmeriFlux data. Navigate to
 [AmeriFlux](https://ameriflux.lbl.gov/) and login to your account. Once
@@ -70,11 +70,12 @@ arrange your files like so:
 After arranging the files, you can now generate the AmeriFlux site
 metadata.
 
-Specify the name(s) of the ERA5 variable(s) you would like to get. Since
-we already got all the AmeriFlux variables, we need the corresponding
-names to the same variables in ERA5 that we’re interested in. In this
-example, we specified `surface_solar_radiation_downwards` as the ERA5
-variable we’re interested in.
+Specify the name(s) of the ERA5-Land variable(s) you would like to get.
+Since we already got all the AmeriFlux variables, we need the
+corresponding names to the same variables in ERA5-Land that we’re
+interested in. In this example, we specified
+`surface_solar_radiation_downwards` as the ERA5-Land variable we’re
+interested in.
 
 For the purposes of this vignette, the file path
 `system.file("extdata", "example_AmeriFlux", package = "ERA5Flux")`
@@ -91,7 +92,7 @@ The code below is a demonstration of what this part may look like.
 # Load the package
 library(ERA5Flux)
 
-# Specify the ERA5 variables you want to get
+# Specify the ERA5-Land variables you want to get
 my_variables <- c("surface_solar_radiation_downwards")
 
 # Point to the folder containing the unzipped site folders and requested files manifest
@@ -121,10 +122,10 @@ my_site_metadata
 
 The metadata data frame will have 5 columns: `site_codes`, `lat`, `lon`,
 `startdate`, `enddate`, and `variables`. We will need this metadata in
-order to build our ERA5 data requests.
+order to build our ERA5-Land data requests.
 
 After you generate the AmeriFlux site metadata data frame, you can now
-focus on getting the corresponding ERA5 data.
+focus on getting the corresponding ERA5-Land data.
 
 [`download_ERA5()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/download_ERA5.md)
 requires a land-sea mask so you must download that first with
@@ -156,8 +157,8 @@ copying the API key.
 Copy and paste your Climate Data Store API key into the `my_key`
 argument. Provide the AmeriFlux site metadata in the `site_metadata`
 argument, and set the file path to your land-sea mask as well. Finally,
-specify a folder to where you want to download your ERA5 data to. The
-folder should be an existing folder on your own machine.
+specify a folder to where you want to download your ERA5-Land data to.
+The folder should be an existing folder on your own machine.
 
 Please note that the download may take a while.
 
@@ -169,12 +170,12 @@ my_key <- "my_own_ECMWF_key"
 # Set the path to your land-sea mask
 my_path_to_mask <- "lsm_1279l4_0.1x0.1.grb_v4_unpack.nc"
 
-# Point to the folder where you want the ERA5 data to download to
+# Point to the folder where you want the ERA5-Land data to download to
 # For the purposes of this demo, some example placeholder text is shown
 # Please point to your own existing folder for your own workflow
 my_ERA5_download_path <- "my_own_path_to_ERA5_download_folder"
 
-# Download the ERA5 data
+# Download the ERA5-Land data
 download_ERA5(my_key = my_key,
               site_metadata = my_site_metadata,
               mask = my_path_to_mask,
@@ -191,16 +192,17 @@ its respective site.
 
 ### Step 2: Data Processing
 
-For this vignette, an example folder containing downloaded ERA5 data
-will be used
+For this vignette, an example folder containing downloaded ERA5-Land
+data will be used
 (`system.file("extdata", "example_path_to_ERA5_download_folder", package = "ERA5Flux")`).
-Please remember to point to your own folder of downloaded ERA5 data.
+Please remember to point to your own folder of downloaded ERA5-Land
+data.
 
-After downloading the ERA5 .nc files, we convert them into CSV files
-formatted to match AmeriFlux standards, enabling easy merging with
+After downloading the ERA5-Land .nc files, we convert them into CSV
+files formatted to match AmeriFlux standards, enabling easy merging with
 existing datasets. This conversion is handled by
 [`netcdf_df_formatter()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/netcdf_df_formatter.md),
-which adjusts ERA5 timestamps from UTC to local time (yyyyMMddHHmm)
+which adjusts ERA5-Land timestamps from UTC to local time (yyyyMMddHHmm)
 based on each site’s coordinates and converts solar radiation (ssrd),
 air temperature (t2m), and total precipitation (tp) to AmeriFlux units.
 
@@ -216,7 +218,7 @@ of this example, set `full_year = FALSE`.
 
 ``` r
 
-# Point to a folder containing ERA5 .nc files
+# Point to a folder containing ERA5-Land .nc files
 # For the purposes of this demo, an example data folder will be used
 # Please point to your own existing folder for your own workflow
 site_folder <- system.file("extdata", "example_path_to_ERA5_download_folder", package = "ERA5Flux")
@@ -249,22 +251,23 @@ head(data)
 
 ### Step 3: Merging and Blending AmeriFlux with ERA5 Data
 
-After you processed the ERA5 data, you can merge it with the AmeriFlux
-data. Remember to use your own file paths to your AmeriFlux and ERA5
-data. Example data is used in this vignette.
+After you processed the ERA5-Land data, you can merge it with the
+AmeriFlux data. Remember to use your own file paths to your AmeriFlux
+and ERA5-Land data. Example data is used in this vignette.
 
 The
 [`merge_ERA5_Flux()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/merge_ERA5_Flux.md)
-function synchronizes AmeriFlux tower observations with ERA5 reanalysis
-data, ensuring both datasets share consistent timestamps and comparable
-variable names. It first reads AmeriFlux BASE data, replaces missing
-values with `NA`, and imports the processed ERA5 CSV file generated from
+function synchronizes AmeriFlux tower observations with ERA5-Land
+reanalysis data, ensuring both datasets share consistent timestamps and
+comparable variable names. It first reads AmeriFlux BASE data, replaces
+missing values with `NA`, and imports the processed ERA5-Land CSV file
+generated from
 [`netcdf_to_csv()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/netcdf_to_csv.md).
-Because ERA5 data are typically hourly and AmeriFlux data are often
-half-hourly, the function linearly interpolates ERA5 variables to match
-the AmeriFlux time step. It then merges the datasets based on the
-aligned time column, adding corresponding AmeriFlux and ERA5 variables
-side by side. The resulting data frame provides a harmonized,
+Because ERA5-Land data are typically hourly and AmeriFlux data are often
+half-hourly, the function linearly interpolates ERA5-Land variables to
+match the AmeriFlux time step. It then merges the datasets based on the
+aligned time column, adding corresponding AmeriFlux and ERA5-Land
+variables side by side. The resulting data frame provides a harmonized,
 site-specific time series that researchers can use to compare reanalysis
 and in situ flux measurements, fill short data gaps, and prepare blended
 climate–flux inputs for ecosystem or hydrological modeling.
@@ -280,14 +283,14 @@ ameriflux_file <- system.file("extdata",
                               "AMF_US-GL2_BASE_HH_2-5.csv", 
                               package = "ERA5Flux")
 
-# Point to ERA5 CSV data
+# Point to ERA5-Land CSV data
 # For the purposes of this demo, an example data file will be used
 # Please point to your own existing file for your own workflow
 era5_file <- list.files(output_filepath, pattern = "US_GL2", full.names = TRUE)
 
 # List AmeriFlux variable(s) to be merged 
 ameriflux_var <- c("SW_IN")
-# List ERA5 variable(s) to be merged 
+# List ERA5-Land variable(s) to be merged 
 era5_var <- c("ssrd")
 
 # Merge them together
@@ -321,25 +324,25 @@ merged_data[3162:3182,]
 #> 3182 2025-03-08 01:30:00    0.000     NA
 ```
 
-As shown above, the merged data contains ERA5 data in `ssrd`, as well as
-AmeriFlux data in `SW_IN`.
+As shown above, the merged data contains ERA5-Land data in `ssrd`, as
+well as AmeriFlux data in `SW_IN`.
 
 Finally, you can blend the merged data.
 
 The
 [`blend_ERA5_Flux()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/blend_ERA5_Flux.md)
-function combines AmeriFlux and ERA5 datasets into a single, gap-filled
-time series by applying flexible blending rules that determine how
-missing or incomplete AmeriFlux data should be replaced or adjusted
-using ERA5 values. Building on the merged output from
+function combines AmeriFlux and ERA5-Land datasets into a single,
+gap-filled time series by applying flexible blending rules that
+determine how missing or incomplete AmeriFlux data should be replaced or
+adjusted using ERA5-Land values. Building on the merged output from
 [`merge_ERA5_Flux()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/merge_ERA5_Flux.md),
 this function allows users to select among four blending approaches:
 simple replacement, linear regression with or without an intercept, or
 an automatic rule that adapts based on data completeness. For example,
 when more than half of the AmeriFlux values are available, the function
 uses a regression-based correction to preserve site-specific patterns
-while filling gaps; otherwise, it substitutes ERA5 data directly. The
-blended output adds new columns (e.g. `SW_IN_f`) that contain the
+while filling gaps; otherwise, it substitutes ERA5-Land data directly.
+The blended output adds new columns (e.g. `SW_IN_f`) that contain the
 harmonized variables, producing a continuous, high-quality dataset
 suitable for modeling, data assimilation, or long-term flux-climate
 analysis.
@@ -385,4 +388,5 @@ blended_data[3162:3182,]
 ```
 
 In this example, the simple replacement blending rule was used, so a new
-`SW_IN_f` column was created with values from the ERA5 column, `ssrd`.
+`SW_IN_f` column was created with values from the ERA5-Land column,
+`ssrd`.
