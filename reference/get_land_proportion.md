@@ -49,7 +49,18 @@ Boya ("Paul") Zhang
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
-land_proportion <- get_land_proportion("file_path_to_the_nc_file", 25.2, -80.3)
-} # }
+# \donttest{
+# Create a temporary directory to download to
+temp_path <- tempdir()
+# Download the land-sea mask
+get_land_sea_mask(file_name = "lsm_1279l4_0.1x0.1.grb_v4_unpack.nc",
+                  download_path = temp_path)
+
+# Get land proportion for a given latitude and longitude
+get_land_proportion(nc_file = file.path(temp_path, "lsm_1279l4_0.1x0.1.grb_v4_unpack.nc"),
+                    lat = 25.2,
+                    lon = -80.3)
+#>          lsm
+#> 1 0.07158226
+# }
 ```

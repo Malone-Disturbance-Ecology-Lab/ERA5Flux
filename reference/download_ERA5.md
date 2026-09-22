@@ -62,17 +62,56 @@ David Reed
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
-# Specify your variables
-my_variables <- c("2m_temperature", "total_precipitation", "surface_solar_radiation_downwards")
-# Create the AmeriFlux site metadata
-site_metadata <- get_site_metadata(folder = "my_own_path_to_AmeriFlux_folder",
-                                   selected_variables = my_variables)
+# Specify the ERA5-Land variables you want to get
+# Choose any combination from:
+# 2m_temperature, total_precipitation, and surface_solar_radiation_downwards
+my_variables <- c("surface_solar_radiation_downwards")
 
+# Point to the folder containing the unzipped site folders and requested files manifest
+# For the purposes of this example, an example data folder is used
+# Please point to your own existing folder for your own workflow
+my_AmeriFlux_folder <- system.file("extdata", "example_AmeriFlux", package = "ERA5Flux")
+
+# Create the AmeriFlux site metadata
+my_site_metadata <- get_site_metadata(folder = my_AmeriFlux_folder,
+                                   selected_variables = my_variables)
+#> selected variables: surface_solar_radiation_downwards
+#> Now checking: US-GL2
+#> Rows: 2832 Columns: 1
+#> ── Column specification ────────────────────────────────────────────────────────
+#> Delimiter: ","
+#> dbl (1): TIMESTAMP_START
+#> 
+#> ℹ Use `spec()` to retrieve the full column specification for this data.
+#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+# Paste your own ECMWF API key
+# You can generate your own key by creating an account at the Copernicus Climate Data Store
+# Please see the vignette for more info
+my_key <- "my_own_ECMWF_key"
+
+# \donttest{
+# Download the land-sea mask with get_land_sea_mask() if you haven't done so already
+# Create a temporary directory to download to
+temp_path <- tempdir()
+# Download the land-sea mask
+get_land_sea_mask(file_name = "lsm_1279l4_0.1x0.1.grb_v4_unpack.nc",
+                  download_path = temp_path)
+
+# Set the path to your land-sea mask
+my_path_to_mask <- file.path(temp_path, "lsm_1279l4_0.1x0.1.grb_v4_unpack.nc")
+# }
+
+# Point to the folder where you want the ERA5-Land data to download to
+# For the purposes of this example, a temporary directory is used
+# Please point to your own existing folder for your own workflow
+my_ERA5_download_path <- tempdir()
+
+if (FALSE) { # \dontrun{
 # Download the corresponding ERA5-Land data
-download_ERA5(my_key = "my_own_ECMWF_key",
-              site_metadata = site_metadata,
-              mask = "my_own_path_to_ERA5_land_sea_mask",
-              download_path = "my_own_path_to_ERA5_download_folder")
+download_ERA5(my_key = my_key,
+              site_metadata = my_site_metadata,
+              mask = my_path_to_mask,
+              download_path = my_ERA5_download_path)
 } # }
 ```

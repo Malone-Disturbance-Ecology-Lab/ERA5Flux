@@ -39,11 +39,32 @@ David Reed
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
-# Specify your variables
-my_variables <- c("2m_temperature", "total_precipitation", "surface_solar_radiation_downwards")
+# Specify the ERA5-Land variables you want to get
+# Choose any combination from:
+# 2m_temperature, total_precipitation, and surface_solar_radiation_downwards
+my_variables <- c("surface_solar_radiation_downwards")
+
+# Point to the folder containing the unzipped site folders and requested files manifest
+# For the purposes of this example, an example data folder is used
+# Please point to your own existing folder for your own workflow
+my_AmeriFlux_folder <- system.file("extdata", "example_AmeriFlux", package = "ERA5Flux")
+
 # Create the AmeriFlux site metadata
-site_metadata <- get_site_metadata(folder = "my_own_path_to_AmeriFlux_folder",
+my_site_metadata <- get_site_metadata(folder = my_AmeriFlux_folder,
                                    selected_variables = my_variables)
-} # }
+#> selected variables: surface_solar_radiation_downwards
+#> Now checking: US-GL2
+#> Rows: 2832 Columns: 1
+#> ── Column specification ────────────────────────────────────────────────────────
+#> Delimiter: ","
+#> dbl (1): TIMESTAMP_START
+#> 
+#> ℹ Use `spec()` to retrieve the full column specification for this data.
+#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+my_site_metadata
+#>   site_codes     lat      lon   startdate      enddate
+#> 1     US-GL2 46.7167 -87.4000 2.02502e+11 202503312330
+#>                           variables
+#> 1 surface_solar_radiation_downwards
 ```

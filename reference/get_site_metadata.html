@@ -69,13 +69,34 @@ To get started with this metadata function, you must have AmeriFlux data downloa
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span><span class="co"># Specify your variables</span></span></span>
-<span class="r-in"><span><span class="va">my_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2m_temperature"</span>, <span class="st">"total_precipitation"</span>, <span class="st">"surface_solar_radiation_downwards"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Specify the ERA5-Land variables you want to get</span></span></span>
+<span class="r-in"><span><span class="co"># Choose any combination from:</span></span></span>
+<span class="r-in"><span><span class="co"># 2m_temperature, total_precipitation, and surface_solar_radiation_downwards</span></span></span>
+<span class="r-in"><span><span class="va">my_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"surface_solar_radiation_downwards"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Point to the folder containing the unzipped site folders and requested files manifest</span></span></span>
+<span class="r-in"><span><span class="co"># For the purposes of this example, an example data folder is used</span></span></span>
+<span class="r-in"><span><span class="co"># Please point to your own existing folder for your own workflow</span></span></span>
+<span class="r-in"><span><span class="va">my_AmeriFlux_folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"example_AmeriFlux"</span>, package <span class="op">=</span> <span class="st">"ERA5Flux"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Create the AmeriFlux site metadata</span></span></span>
-<span class="r-in"><span><span class="va">site_metadata</span> <span class="op">&lt;-</span> <span class="fu">get_site_metadata</span><span class="op">(</span>folder <span class="op">=</span> <span class="st">"my_own_path_to_AmeriFlux_folder"</span>,</span></span>
+<span class="r-in"><span><span class="va">my_site_metadata</span> <span class="op">&lt;-</span> <span class="fu">get_site_metadata</span><span class="op">(</span>folder <span class="op">=</span> <span class="va">my_AmeriFlux_folder</span>,</span></span>
 <span class="r-in"><span>                                   selected_variables <span class="op">=</span> <span class="va">my_variables</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> selected variables: surface_solar_radiation_downwards</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Now checking: US-GL2</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">2832</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">1</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Delimiter:</span> ","</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">dbl</span> (1): TIMESTAMP_START</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">my_site_metadata</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   site_codes     lat      lon   startdate      enddate</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1     US-GL2 46.7167 -87.4000 2.02502e+11 202503312330</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           variables</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 surface_solar_radiation_downwards</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
