@@ -45,13 +45,13 @@ Boya ("Paul") Zhang
 ``` r
 # Convert local to UTC
 utc_result_winter <- date_conversion(25.2, -80.4, "2018-01-16 22:02:37", 0)
-#> [1] "America/New_York"
+#> The timezone for the given coordinates is: America/New_York
 utc_result_winter
 #> [1] "2018-01-16 22:02:37 UTC"
 
 # Convert UTC to local
 local_result <- date_conversion(25.2, -80.4, "2018-01-16 22:02:37", 1)
-#> [1] "America/New_York"
+#> The timezone for the given coordinates is: America/New_York
 local_result
 #> [1] "2018-01-16 17:02:37 EST"
 ```

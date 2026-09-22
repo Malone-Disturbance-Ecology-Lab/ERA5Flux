@@ -28,6 +28,6 @@ utc_offset(lat = NULL, lon = NULL)
 
 ``` r
 # Get the UTC offset at latitude 25.4, longitude -80.5
-offset <- utc_offset(lat = 25.4, lon = -80.5)
+utc_offset(lat = 25.4, lon = -80.5)
 #> [1] -5
 ```
