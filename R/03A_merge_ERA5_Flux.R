@@ -6,7 +6,7 @@
 #' This function is used to merge data from AmeriFlux and data from ERA5-Land, ensuring they both have the same start and end timestamps.
 #'
 #' @param filename_FLUX (character) The file path to a CSV file of AmeriFlux BASE data downloaded from https://ameriflux.lbl.gov/.
-#' @param filename_ERA5 (character) The file path to a CSV file of ERA5-Land meterological data downloaded from https://doi.org/10.24381/cds.e2161bac. Please note that the original ERA5-Land files are in .nc format. You may want to convert these files into CSV format using the function `netcdf_to_csv()`.
+#' @param filename_ERA5 (character) The file path to a CSV file of ERA5-Land meterological data downloaded from https://cds.climate.copernicus.eu/datasets/reanalysis-era5-land. Please note that the original ERA5-Land files are in .nc format. You may want to convert these files into CSV format using the function `netcdf_to_csv()`.
 #' @param varname_FLUX (character) A vector of variable names in AmeriFlux BASE data to be merged with ERA5-Land data.
 #' @param varname_ERA5 (character) A vector of variable names in ERA5-Land data to be merged with AmeriFlux BASE data.
 #'

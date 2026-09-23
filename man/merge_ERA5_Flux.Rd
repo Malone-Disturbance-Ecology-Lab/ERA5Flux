@@ -14,7 +14,7 @@ merge_ERA5_Flux(
 \arguments{
 \item{filename_FLUX}{(character) The file path to a CSV file of AmeriFlux BASE data downloaded from https://ameriflux.lbl.gov/.}
 
-\item{filename_ERA5}{(character) The file path to a CSV file of ERA5-Land meterological data downloaded from https://doi.org/10.24381/cds.e2161bac. Please note that the original ERA5-Land files are in .nc format. You may want to convert these files into CSV format using the function \code{netcdf_to_csv()}.}
+\item{filename_ERA5}{(character) The file path to a CSV file of ERA5-Land meterological data downloaded from https://cds.climate.copernicus.eu/datasets/reanalysis-era5-land. Please note that the original ERA5-Land files are in .nc format. You may want to convert these files into CSV format using the function \code{netcdf_to_csv()}.}
 
 \item{varname_FLUX}{(character) A vector of variable names in AmeriFlux BASE data to be merged with ERA5-Land data.}
 
