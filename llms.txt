@@ -1,14 +1,14 @@
 # ERA5Flux: Improve the Utility of ERA5-Land Data at AmeriFlux Site Locations
 
 The primary objective of this package is to improve the utility of
-[ERA5-Land](https://doi.org/10.24381/cds.e2161bac) data at
-[AmeriFlux](https://ameriflux.lbl.gov/) site locations. This package
-comprises of a collection of tools useful for workflows involving
-ERA5-Land and AmeriFlux data. It includes functions for downloading
-ERA5-Land data based on AmeriFlux sites, formatting the downloaded data
-to match AmeriFlux standards, merging both datasets together to ensure
-consistent timestamps, and blending them to create a single gap-filled
-time series.
+[ERA5-Land](https://cds.climate.copernicus.eu/datasets/reanalysis-era5-land)
+data at [AmeriFlux](https://ameriflux.lbl.gov) site locations. This
+package comprises of a collection of tools useful for workflows
+involving ERA5-Land and AmeriFlux data. It includes functions for
+downloading ERA5-Land data based on AmeriFlux sites, formatting the
+downloaded data to match AmeriFlux standards, merging both datasets
+together to ensure consistent timestamps, and blending them to create a
+single gap-filled time series.
 
 ## Installation
 

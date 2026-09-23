@@ -3,11 +3,11 @@
 ## Intro
 
 This package was designed to make it easier to work with both
-[ERA5-Land](https://doi.org/10.24381/cds.e2161bac) and
-[AmeriFlux](https://ameriflux.lbl.gov/) data, hence the name “ERA5Flux”.
-There may be instances where the AmeriFlux data contain gaps that you
-want to fill with ERA5-Land data to create a single time series for your
-analysis.
+[ERA5-Land](https://cds.climate.copernicus.eu/datasets/reanalysis-era5-land)
+and [AmeriFlux](https://ameriflux.lbl.gov) data, hence the name
+“ERA5Flux”. There may be instances where the AmeriFlux data contain gaps
+that you want to fill with ERA5-Land data to create a single time series
+for your analysis.
 
 Please note that this package only merges and gap fills for solar
 radiation (long name: “surface_solar_radiation_downwards” / short name:
@@ -23,7 +23,7 @@ Here is a demonstration of the workflow needed to achieve that result.
 ### Step 1: Get AmeriFlux data, AmeriFlux site metadata, and ERA5-Land Data
 
 First we will need to download AmeriFlux data. Navigate to
-[AmeriFlux](https://ameriflux.lbl.gov/) and login to your account. Once
+[AmeriFlux](https://ameriflux.lbl.gov) and login to your account. Once
 you’re logged in, you can download data at the [Download
 page](https://ameriflux.lbl.gov/data/download-data/).
 

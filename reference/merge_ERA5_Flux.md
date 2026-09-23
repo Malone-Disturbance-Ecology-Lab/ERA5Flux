@@ -24,9 +24,10 @@ merge_ERA5_Flux(
 - filename_ERA5:
 
   (character) The file path to a CSV file of ERA5-Land meterological
-  data downloaded from https://doi.org/10.24381/cds.e2161bac. Please
-  note that the original ERA5-Land files are in .nc format. You may want
-  to convert these files into CSV format using the function
+  data downloaded from
+  https://cds.climate.copernicus.eu/datasets/reanalysis-era5-land.
+  Please note that the original ERA5-Land files are in .nc format. You
+  may want to convert these files into CSV format using the function
   [`netcdf_to_csv()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/netcdf_to_csv.md).
 
 - varname_FLUX:
