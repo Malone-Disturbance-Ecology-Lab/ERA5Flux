@@ -6,7 +6,7 @@
 #'
 #' @param folder (character) Path to the folder containing extracted AmeriFlux data and "requested_files_manifest" text file.
 #'
-#' @param selected_variables (character) A vector of variable names.
+#' @param selected_variables (character) A vector of variable names. The possible options are: `2m_temperature`, `total_precipitation`, and `surface_solar_radiation_downwards`.
 #'
 #' @return (data.frame) A data frame containing the site metadata.
 #'

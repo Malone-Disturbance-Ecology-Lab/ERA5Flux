@@ -9,7 +9,7 @@ get_site_metadata(folder = NULL, selected_variables = NULL)
 \arguments{
 \item{folder}{(character) Path to the folder containing extracted AmeriFlux data and "requested_files_manifest" text file.}
 
-\item{selected_variables}{(character) A vector of variable names.}
+\item{selected_variables}{(character) A vector of variable names. The possible options are: \verb{2m_temperature}, \code{total_precipitation}, and \code{surface_solar_radiation_downwards}.}
 }
 \value{
 (data.frame) A data frame containing the site metadata.
