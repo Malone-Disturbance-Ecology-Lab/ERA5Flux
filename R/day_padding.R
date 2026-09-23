@@ -5,7 +5,7 @@
 #'
 #' @param start_day (character) Start date in either %Y-%m-%d or %Y/%m/%d format.
 #' @param end_day (character) End date in either %Y-%m-%d or %Y/%m/%d format.
-#' @return (character) New start and end dates in either %Y-%m-%d or %Y/%m/%d format, padded by 1 day each.
+#' @return (list) A list containing the new start and end dates in either %Y-%m-%d or %Y/%m/%d format, padded by 1 day each.
 #'
 #' @export
 #'
