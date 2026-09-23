@@ -232,7 +232,7 @@ site_name <- "US_GL2"
 site_lat <- as.numeric(my_site_metadata$lat)
 site_lon <- as.numeric(my_site_metadata$lon)
 
-# Convert NetCDF data to a CSV file
+# Convert netCDF data to a CSV file
 netcdf_to_csv(site_folder, output_filepath, site_name, site_lat, site_lon, full_year = FALSE)
 #> Saved: US_GL2_2024_2025_ssrd.csv
 
@@ -249,7 +249,7 @@ head(data)
 #> 6 202501010000   0.00
 ```
 
-### Step 3: Merging and Blending AmeriFlux with ERA5 Data
+### Step 3: Merging and Blending AmeriFlux with ERA5-Land Data
 
 After you processed the ERA5-Land data, you can merge it with the
 AmeriFlux data. Remember to use your own file paths to your AmeriFlux

@@ -26,7 +26,9 @@ get_site_metadata(folder = NULL, selected_variables = NULL)
 
 - selected_variables:
 
-  (character) A vector of variable names.
+  (character) A vector of variable names. The possible options are:
+  `2m_temperature`, `total_precipitation`, and
+  `surface_solar_radiation_downwards`.
 
 ## Value
 

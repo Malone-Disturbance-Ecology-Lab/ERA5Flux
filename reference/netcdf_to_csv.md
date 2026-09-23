@@ -1,7 +1,7 @@
 # Export NetCDF to CSV
 
 Takes a directory of ERA5-Land .nc data as an argument and exports the
-data in CSV format. This function grabs each NetCDF file and runs
+data in CSV format. This function grabs each netCDF file and runs
 [`netcdf_df_formatter()`](https://malone-disturbance-ecology-lab.github.io/ERA5Flux/reference/netcdf_df_formatter.md)
 on it. It builds a list of variables across all data frames in the
 folder and joins data by time, with an option to filter to return only
@@ -24,7 +24,7 @@ netcdf_to_csv(
 
 - site_folder:
 
-  (character) A folder for one site with NetCDF data. The NetCDF files
+  (character) A folder for one site with netCDF data. The netCDF files
   can be of different variables and of different years so long as it is
   for one site.
 
@@ -53,7 +53,7 @@ netcdf_to_csv(
 
 ## Value
 
-.csv file of NetCDF data within the site folder. The .csv file has the
+.csv file of netCDF data within the site folder. The .csv file has the
 file name format: siteID_startYear_endYear_variableName.csv. For
 example, US_Ho1_2001_2020_tp_t2m.csv. Each CSV file starts from the
 first hour of a year (e.g., 2001-01-01 00:00) and ends with the last
@@ -73,7 +73,7 @@ site_name <- "US_GL2"
 site_lat <- 46.7167
 site_lon <- -87.4
 
-# Convert NetCDF data to a CSV file
+# Convert netCDF data to a CSV file
 netcdf_to_csv(site_folder, output_filepath, site_name, site_lat, site_lon, full_year = FALSE)
 #> Saved: US_GL2_2024_2025_ssrd.csv 
 

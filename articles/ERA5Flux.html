@@ -260,7 +260,7 @@ and end with the last. For the purposes of this example, set
 <span><span class="va">site_lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">my_site_metadata</span><span class="op">$</span><span class="va">lat</span><span class="op">)</span></span>
 <span><span class="va">site_lon</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">my_site_metadata</span><span class="op">$</span><span class="va">lon</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Convert NetCDF data to a CSV file</span></span>
+<span><span class="co"># Convert netCDF data to a CSV file</span></span>
 <span><span class="fu"><a href="../reference/netcdf_to_csv.html">netcdf_to_csv</a></span><span class="op">(</span><span class="va">site_folder</span>, <span class="va">output_filepath</span>, <span class="va">site_name</span>, <span class="va">site_lat</span>, <span class="va">site_lon</span>, full_year <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Saved: US_GL2_2024_2025_ssrd.csv</span></span>
 <span></span>
@@ -277,7 +277,7 @@ and end with the last. For the purposes of this example, set
 <span><span class="co">#&gt; 6 202501010000   0.00</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="step-3-merging-and-blending-ameriflux-with-era5-data">Step 3: Merging and Blending AmeriFlux with ERA5 Data<a class="anchor" aria-label="anchor" href="#step-3-merging-and-blending-ameriflux-with-era5-data"></a>
+<h3 id="step-3-merging-and-blending-ameriflux-with-era5-land-data">Step 3: Merging and Blending AmeriFlux with ERA5-Land Data<a class="anchor" aria-label="anchor" href="#step-3-merging-and-blending-ameriflux-with-era5-land-data"></a>
 </h3>
 <p>After you processed the ERA5-Land data, you can merge it with the
 AmeriFlux data. Remember to use your own file paths to your AmeriFlux

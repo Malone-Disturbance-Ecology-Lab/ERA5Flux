@@ -22,8 +22,8 @@ day_padding(start_day = NULL, end_day = NULL)
 
 ## Value
 
-(character) New start and end dates in either %Y-%m-%d or %Y/%m/%d
-format, padded by 1 day each.
+(list) A list containing the new start and end dates in either %Y-%m-%d
+or %Y/%m/%d format, padded by 1 day each.
 
 ## Author
 
