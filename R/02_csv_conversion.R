@@ -3,7 +3,7 @@
 #' @description
 #' Reformats ERA5-Land .nc data into a data frame.
 #'
-#' @param nc_file_path (character) File path to ERA5-Land NetCDF file.
+#' @param nc_file_path (character) File path to ERA5-Land netCDF file.
 #' @param site_lat (numeric) Latitude coordinate of site in decimal degrees.
 #' @param site_lon (numeric) Longitude coordinate of site in decimal degrees.
 #'
@@ -21,7 +21,7 @@
 #' @export
 #'
 #' @examples
-#' # Point to a NetCDF file
+#' # Point to a netCDF file
 #' nc_file_path <- system.file("extdata", "example_path_to_ERA5_download_folder",
 #'                             "ERA5-US-GL2-2025-1.nc", package = "ERA5Flux")
 #'
@@ -29,7 +29,7 @@
 #' site_lat <- 46.7167
 #' site_lon <- -87.4
 #'
-#' # Reformat the NetCDF
+#' # Reformat the netCDF
 #' result <- netcdf_df_formatter(nc_file_path, site_lat, site_lon)
 #' head(result)
 
@@ -49,7 +49,7 @@ netcdf_df_formatter <- function(nc_file_path = NULL, site_lat = NULL, site_lon =
   # Error out if site longitude is not numeric
   if (!base::is.numeric(site_lon)) stop("Site longitude must be numeric")
 
-  # Open NetCDF file
+  # Open netCDF file
   nc <- ncdf4::nc_open(nc_file_path)
 
   # Get all variable names, excluding metadata fields
@@ -63,7 +63,7 @@ netcdf_df_formatter <- function(nc_file_path = NULL, site_lat = NULL, site_lon =
     return(base::data.frame())
   }
 
-  # Convert NetCDF time to POSIXct in UTC
+  # Convert netCDF time to POSIXct in UTC
   time_units <- ncdf4::ncatt_get(nc, "valid_time", "units")$value
   time_origin <- base::sub("seconds since ", "", time_units)
   utc_time <- base::as.POSIXct(valid_time, origin = time_origin, tz = "UTC")
@@ -125,7 +125,7 @@ netcdf_df_formatter <- function(nc_file_path = NULL, site_lat = NULL, site_lon =
     df[[varname]] <- var_data
   }
 
-  # Close NetCDF file and return data frame
+  # Close netCDF file and return data frame
   ncdf4::nc_close(nc)
   return(df)
 }
@@ -134,9 +134,9 @@ netcdf_df_formatter <- function(nc_file_path = NULL, site_lat = NULL, site_lon =
 #' @title Export NetCDF to CSV
 #'
 #' @description
-#' Takes a directory of ERA5-Land .nc data as an argument and exports the data in CSV format. This function grabs each NetCDF file and runs `netcdf_df_formatter()` on it. It builds a list of variables across all data frames in the folder and joins data by time, with an option to filter to return only full years of data.
+#' Takes a directory of ERA5-Land .nc data as an argument and exports the data in CSV format. This function grabs each netCDF file and runs `netcdf_df_formatter()` on it. It builds a list of variables across all data frames in the folder and joins data by time, with an option to filter to return only full years of data.
 #'
-#' @param site_folder (character) A folder for one site with NetCDF data. The NetCDF files can be of different variables and of different years so long as it is for one site.
+#' @param site_folder (character) A folder for one site with netCDF data. The netCDF files can be of different variables and of different years so long as it is for one site.
 #'
 #' @param output_filepath (character) File path to where the output CSV should be written.
 #'
@@ -148,7 +148,7 @@ netcdf_df_formatter <- function(nc_file_path = NULL, site_lat = NULL, site_lon =
 #'
 #' @param full_year (bool) If TRUE, filter to include only complete years, such that the data will start with the first hour of year and end with the last hour of a year. Otherwise, return data as-is. The default is FALSE.
 #'
-#' @return .csv file of NetCDF data within the site folder. The .csv file has the file name format: siteID_startYear_endYear_variableName.csv. For example, US_Ho1_2001_2020_tp_t2m.csv. Each CSV file starts from the first hour of a year (e.g., 2001-01-01 00:00) and ends with the last hour of a year (e.g., 2020-12-31 23:00) if full_year == TRUE.
+#' @return .csv file of netCDF data within the site folder. The .csv file has the file name format: siteID_startYear_endYear_variableName.csv. For example, US_Ho1_2001_2020_tp_t2m.csv. Each CSV file starts from the first hour of a year (e.g., 2001-01-01 00:00) and ends with the last hour of a year (e.g., 2020-12-31 23:00) if full_year == TRUE.
 #'
 #' @export
 #'
@@ -164,7 +164,7 @@ netcdf_df_formatter <- function(nc_file_path = NULL, site_lat = NULL, site_lon =
 #' site_lat <- 46.7167
 #' site_lon <- -87.4
 #'
-#' # Convert NetCDF data to a CSV file
+#' # Convert netCDF data to a CSV file
 #' netcdf_to_csv(site_folder, output_filepath, site_name, site_lat, site_lon, full_year = FALSE)
 #'
 #' # Read the CSV back in
@@ -202,14 +202,14 @@ netcdf_to_csv <- function(site_folder = NULL,
   # Find .nc files
   nc_files <- list.files(site_folder, pattern = "\\.nc$", full.names = TRUE)
   if (length(nc_files) == 0) {
-    cat("No NetCDF files found in", site_folder, "\n")
+    cat("No netCDF files found in", site_folder, "\n")
     return(invisible(NULL))
   }
 
   df_list <- list()
   found_vars <- character()
 
-  # Loop through all NetCDF files
+  # Loop through all netCDF files
   for (f in nc_files) {
     df_part <- tryCatch({
       netcdf_df_formatter(nc_file_path = f, site_lat = site_lat, site_lon = site_lon)
@@ -225,7 +225,7 @@ netcdf_to_csv <- function(site_folder = NULL,
   }
 
   if (length(df_list) == 0) {
-    cat("No valid NetCDF data found.\n")
+    cat("No valid netCDF data found.\n")
     return(invisible(NULL))
   }
 

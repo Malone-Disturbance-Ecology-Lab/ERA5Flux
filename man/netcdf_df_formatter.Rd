@@ -7,7 +7,7 @@
 netcdf_df_formatter(nc_file_path = NULL, site_lat = NULL, site_lon = NULL)
 }
 \arguments{
-\item{nc_file_path}{(character) File path to ERA5-Land NetCDF file.}
+\item{nc_file_path}{(character) File path to ERA5-Land netCDF file.}
 
 \item{site_lat}{(numeric) Latitude coordinate of site in decimal degrees.}
 
@@ -32,7 +32,7 @@ netcdf_df_formatter(nc_file_path = NULL, site_lat = NULL, site_lon = NULL)
 Reformats ERA5-Land .nc data into a data frame.
 }
 \examples{
-# Point to a NetCDF file
+# Point to a netCDF file
 nc_file_path <- system.file("extdata", "example_path_to_ERA5_download_folder",
                             "ERA5-US-GL2-2025-1.nc", package = "ERA5Flux")
 
@@ -40,7 +40,7 @@ nc_file_path <- system.file("extdata", "example_path_to_ERA5_download_folder",
 site_lat <- 46.7167
 site_lon <- -87.4
 
-# Reformat the NetCDF
+# Reformat the netCDF
 result <- netcdf_df_formatter(nc_file_path, site_lat, site_lon)
 head(result)
 }

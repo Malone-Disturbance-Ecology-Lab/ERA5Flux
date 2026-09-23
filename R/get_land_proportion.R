@@ -59,7 +59,7 @@ get_land_proportion <- function(nc_file = NULL,
 
   land_sea_mask <- terra::rast(nc_file)
   if (base::is.null(land_sea_mask)) {
-    stop("Error: Failed to read the NetCDF file.")
+    stop("Error: Failed to read the netCDF file.")
   }
   land_value <- terra::extract(land_sea_mask, base::cbind(lon_nearest, lat_nearest))
 
