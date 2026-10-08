@@ -202,7 +202,7 @@ netcdf_to_csv <- function(site_folder = NULL,
   # Find .nc files
   nc_files <- list.files(site_folder, pattern = "\\.nc$", full.names = TRUE)
   if (length(nc_files) == 0) {
-    cat("No netCDF files found in", site_folder, "\n")
+    message("No netCDF files found in ", site_folder)
     return(invisible(NULL))
   }
 
@@ -225,7 +225,7 @@ netcdf_to_csv <- function(site_folder = NULL,
   }
 
   if (length(df_list) == 0) {
-    cat("No valid netCDF data found.\n")
+    message("No valid netCDF data found.")
     return(invisible(NULL))
   }
 
@@ -278,7 +278,7 @@ netcdf_to_csv <- function(site_folder = NULL,
   filename <- paste0(site_name, "_", start_year, "_", end_year, "_", var_suffix, ".csv")
 
   utils::write.csv(final_df, file.path(output_filepath, filename), row.names = FALSE)
-  cat("Saved:", filename, "\n")
+  message("Saved: ", filename)
 
   invisible(final_df)
 }
