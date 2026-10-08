@@ -1,5 +1,13 @@
 ## Resubmission
 
+### Second Attempt
+
+This is the second attempt at a resubmission. Thank you for the feedback. I have edited the package again. Please let me know if I missed anything else. In this version, I have:
+
+- Replaced instances of `cat()` with `message()`.
+
+### First Attempt
+
 This is a resubmission. Thank you for the initial feedback. I have edited the package according to the feedback received from the initial submission. In this version, I have:
 
 - Included links to the ERA5-Land and AmeriFlux webpages in the description field of the DESCRIPTION file.
