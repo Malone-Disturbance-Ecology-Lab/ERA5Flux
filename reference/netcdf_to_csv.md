@@ -75,7 +75,7 @@ site_lon <- -87.4
 
 # Convert netCDF data to a CSV file
 netcdf_to_csv(site_folder, output_filepath, site_name, site_lat, site_lon, full_year = FALSE)
-#> Saved: US_GL2_2024_2025_ssrd.csv 
+#> Saved: US_GL2_2024_2025_ssrd.csv
 
 # Read the CSV back in
 data <- read.csv(list.files(output_filepath, pattern = "US_GL2", full.names = TRUE))
