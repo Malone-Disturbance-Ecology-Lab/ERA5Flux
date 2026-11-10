@@ -30,7 +30,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/Malone-Disturbance-Ecology-Lab/ERA5Flux/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/Malone-Disturbance-Ecology-Lab/ERA5Flux/blob/v1.0.0/DESCRIPTION)
 
 Chen A, Jurado S, Reed D, Talib A, Wang J, Zhang B, Malone S (2026).
 *ERA5Flux: Improve the Utility of ERA5-Land Data at AmeriFlux Site
