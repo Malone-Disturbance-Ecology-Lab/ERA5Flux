@@ -9,3 +9,4 @@
 ^test$
 ^vig_prep$
 ^cran-comments\.md$
+^CRAN-SUBMISSION$
