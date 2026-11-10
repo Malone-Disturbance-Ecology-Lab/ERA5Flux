@@ -1,6 +1,8 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+<img src = "man/figures/Hexlogo_ERA5Flux_v2.png" align = "right" width = "15%"/>
+
 # ERA5Flux: Improve the Utility of ERA5-Land Data at AmeriFlux Site Locations
 
 <!-- badges: start -->
