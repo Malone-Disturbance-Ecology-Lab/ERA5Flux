@@ -1,5 +1,7 @@
 # ERA5Flux: Improve the Utility of ERA5-Land Data at AmeriFlux Site Locations
 
+![](reference/figures/Hexlogo_ERA5Flux_v2.png)
+
 The primary objective of this package is to improve the utility of
 [ERA5-Land](https://cds.climate.copernicus.eu/datasets/reanalysis-era5-land)
 data at [AmeriFlux](https://ameriflux.lbl.gov) site locations. This

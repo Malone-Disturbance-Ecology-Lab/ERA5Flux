@@ -30,17 +30,17 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/Malone-Disturbance-Ecology-Lab/ERA5Flux/blob/v1.0.0/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/Malone-Disturbance-Ecology-Lab/ERA5Flux/blob/main/DESCRIPTION)
 
 Chen A, Jurado S, Reed D, Talib A, Wang J, Zhang B, Malone S (2026).
 *ERA5Flux: Improve the Utility of ERA5-Land Data at AmeriFlux Site
-Locations*. R package version 1.0.0,
+Locations*. R package version 1.0.0.9000,
 <https://github.com/Malone-Disturbance-Ecology-Lab/ERA5Flux>.
 
     @Manual{,
       title = {ERA5Flux: Improve the Utility of ERA5-Land Data at AmeriFlux Site Locations},
       author = {Angel Chen and Sam Jurado and David E Reed and Ammara Talib and Junna Wang and Boya Zhang and Sparkle L Malone},
       year = {2026},
-      note = {R package version 1.0.0},
+      note = {R package version 1.0.0.9000},
       url = {https://github.com/Malone-Disturbance-Ecology-Lab/ERA5Flux},
     }
